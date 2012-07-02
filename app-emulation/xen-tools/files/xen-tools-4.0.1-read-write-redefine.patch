@@ -1,0 +1,249 @@
+--- xen-4.0.1.orig/tools/blktap/lib/blktaplib.h	2010-08-25 12:22:07.000000000 +0200
++++ xen-4.0.1/tools/blktap/lib/blktaplib.h	2011-06-14 13:59:12.000000000 +0200
+@@ -195,8 +195,8 @@
+ 	pid_t     pid;
+ } msg_pid_t;
+ 
+-#define READ 0
+-#define WRITE 1
++#define BLKTAP_READ 0
++#define BLKTAP_WRITE 1
+ 
+ /*Control Messages between manager and tapdev*/
+ #define CTLMSG_PARAMS      1
+--- xen-4.0.1.orig/tools/blktap/drivers/blktapctrl.c	2010-08-25 12:22:07.000000000 +0200
++++ xen-4.0.1/tools/blktap/drivers/blktapctrl.c	2011-06-14 14:09:30.000000000 +0200
+@@ -128,13 +128,13 @@
+ {
+ 	int ret;
+ 
+-	if ((ret = write_msg(blkif->fds[WRITE], CTLMSG_PID, blkif, NULL)) 
++	if ((ret = write_msg(blkif->fds[BLKTAP_WRITE], CTLMSG_PID, blkif, NULL)) 
+ 	    <= 0) {
+ 		DPRINTF("Write_msg failed - CTLMSG_PID(%d)\n", ret);
+ 		return -EINVAL;
+ 	}
+ 
+-	if ((ret = read_msg(blkif->fds[READ], CTLMSG_PID_RSP, blkif))
++	if ((ret = read_msg(blkif->fds[BLKTAP_READ], CTLMSG_PID_RSP, blkif))
+ 	     <= 0) {
+ 		DPRINTF("Read_msg failure - CTLMSG_PID(%d)\n", ret);
+ 		return -EINVAL;
+@@ -576,8 +576,8 @@
+ 		}
+ 
+ 		DPRINTF("Using tapdisk-ioemu connection\n");
+-		blkif->fds[READ] = dom0_readfd;
+-		blkif->fds[WRITE] = dom0_writefd;
++		blkif->fds[BLKTAP_READ] = dom0_readfd;
++		blkif->fds[BLKTAP_WRITE] = dom0_writefd;
+ 
+ 		if (refresh_pid) {
+ 			get_tapdisk_pid(blkif);
+@@ -587,8 +587,8 @@
+ 	} else if (access(rdctldev, R_OK | W_OK) == 0) {
+ 		/* Use existing pipe to the device model */
+ 		DPRINTF("Using qemu-dm connection\n");
+-		blkif->fds[READ] = open_ctrl_socket(wrctldev);
+-		blkif->fds[WRITE] = open_ctrl_socket(rdctldev);
++		blkif->fds[BLKTAP_READ] = open_ctrl_socket(wrctldev);
++		blkif->fds[BLKTAP_WRITE] = open_ctrl_socket(rdctldev);
+ 	} else {
+ 		/* No device model => try with tapdisk-ioemu */
+ 		DPRINTF("No device model\n");
+@@ -598,7 +598,7 @@
+ 	free(rdctldev);
+ 	free(wrctldev);
+ 	
+-	if (blkif->fds[READ] == -1 || blkif->fds[WRITE] == -1)
++	if (blkif->fds[BLKTAP_READ] == -1 || blkif->fds[BLKTAP_WRITE] == -1)
+ 		return -1;
+ 
+ 	DPRINTF("Attached to qemu blktap pipes\n");
+@@ -621,10 +621,10 @@
+ 		     "%s/tapctrlwrite%d", BLKTAP_CTRL_DIR, minor) == -1)
+ 		goto fail;
+ 	
+-	blkif->fds[READ] = open_ctrl_socket(rdctldev);
+-	blkif->fds[WRITE] = open_ctrl_socket(wrctldev);
++	blkif->fds[BLKTAP_READ] = open_ctrl_socket(rdctldev);
++	blkif->fds[BLKTAP_WRITE] = open_ctrl_socket(wrctldev);
+ 	
+-	if (blkif->fds[READ] == -1 || blkif->fds[WRITE] == -1)
++	if (blkif->fds[BLKTAP_READ] == -1 || blkif->fds[BLKTAP_WRITE] == -1)
+ 		goto fail;
+ 
+ 	/*launch the new process*/
+@@ -683,8 +683,8 @@
+ 
+ 		} else {
+ 			DPRINTF("Process exists!\n");
+-			blkif->fds[READ] = exist->fds[READ];
+-			blkif->fds[WRITE] = exist->fds[WRITE];
++			blkif->fds[BLKTAP_READ] = exist->fds[BLKTAP_READ];
++			blkif->fds[BLKTAP_WRITE] = exist->fds[BLKTAP_WRITE];
+ 		}
+ 
+ 		add_disktype(blkif, type);
+@@ -703,13 +703,13 @@
+ 
+ 		/* Both of the following read and write calls will block up to 
+ 		 * max_timeout val*/
+-		if (write_msg(blkif->fds[WRITE], CTLMSG_PARAMS, blkif, ptr) 
++		if (write_msg(blkif->fds[BLKTAP_WRITE], CTLMSG_PARAMS, blkif, ptr) 
+ 		    <= 0) {
+ 			DPRINTF("Write_msg failed - CTLMSG_PARAMS\n");
+ 			goto fail;
+ 		}
+ 
+-		if (read_msg(blkif->fds[READ], CTLMSG_IMG, blkif) <= 0) {
++		if (read_msg(blkif->fds[BLKTAP_READ], CTLMSG_IMG, blkif) <= 0) {
+ 			DPRINTF("Read_msg failure - CTLMSG_IMG\n");
+ 			goto fail;
+ 		}
+@@ -725,12 +725,12 @@
+ static int map_new_blktapctrl(blkif_t *blkif)
+ {
+ 	DPRINTF("Received a poll for a new devmap\n");
+-	if (write_msg(blkif->fds[WRITE], CTLMSG_NEWDEV, blkif, NULL) <= 0) {
++	if (write_msg(blkif->fds[BLKTAP_WRITE], CTLMSG_NEWDEV, blkif, NULL) <= 0) {
+ 		DPRINTF("Write_msg failed - CTLMSG_NEWDEV\n");
+ 		return -EINVAL;
+ 	}
+ 
+-	if (read_msg(blkif->fds[READ], CTLMSG_NEWDEV_RSP, blkif) <= 0) {
++	if (read_msg(blkif->fds[BLKTAP_READ], CTLMSG_NEWDEV_RSP, blkif) <= 0) {
+ 		DPRINTF("Read_msg failed - CTLMSG_NEWDEV_RSP\n");
+ 		return -EINVAL;
+ 	}
+@@ -743,15 +743,15 @@
+ {
+ 	DPRINTF("Unmapping vbd\n");
+ 
+-	if (write_msg(blkif->fds[WRITE], CTLMSG_CLOSE, blkif, NULL) <= 0) {
++	if (write_msg(blkif->fds[BLKTAP_WRITE], CTLMSG_CLOSE, blkif, NULL) <= 0) {
+ 		DPRINTF("Write_msg failed - CTLMSG_CLOSE\n");
+ 		return -EINVAL;
+ 	}
+ 
+ 	if (del_disktype(blkif)) {
+ 		DPRINTF("Closing communication pipe to pid %d\n", blkif->tappid);
+-		close(blkif->fds[WRITE]);
+-		close(blkif->fds[READ]);
++		close(blkif->fds[BLKTAP_WRITE]);
++		close(blkif->fds[BLKTAP_READ]);
+ 	}
+ 
+ 	return 0;
+--- xen-4.0.1.orig/tools/blktap/drivers/tapdisk.c	2010-08-25 12:22:07.000000000 +0200
++++ xen-4.0.1/tools/blktap/drivers/tapdisk.c	2011-06-14 14:11:25.000000000 +0200
+@@ -138,10 +138,10 @@
+ 		if (ptr->tap_fd) {
+ 			FD_SET(ptr->tap_fd, readfds);
+ 			td_for_each_disk(ptr->s, dd) {
+-				if (dd->io_fd[READ]) 
+-					FD_SET(dd->io_fd[READ], readfds);
+-				maxfds = (dd->io_fd[READ] > maxfds ? 
+-					  dd->io_fd[READ] : maxfds);
++				if (dd->io_fd[BLKTAP_READ]) 
++					FD_SET(dd->io_fd[BLKTAP_READ], readfds);
++				maxfds = (dd->io_fd[BLKTAP_READ] > maxfds ? 
++					  dd->io_fd[BLKTAP_READ] : maxfds);
+ 			}
+ 			maxfds = (ptr->tap_fd > maxfds ? ptr->tap_fd : maxfds);
+ 		}
+@@ -380,7 +380,7 @@
+ 	struct td_state *s = NULL;
+ 	fd_list_entry_t *entry;
+ 
+-	length = read(fds[READ], buf, MSG_SIZE);
++	length = read(fds[BLKTAP_READ], buf, MSG_SIZE);
+ 
+ 	if (length > 0 && length >= sizeof(msg_hdr_t)) 
+ 	{
+@@ -435,7 +435,7 @@
+ 				msg->type = CTLMSG_IMG_FAIL;
+ 				msg->len = msglen;
+ 			}
+-			len = write(fds[WRITE], buf, msglen);
++			len = write(fds[BLKTAP_WRITE], buf, msglen);
+ 			free(path);
+ 			return 1;
+ 			
+@@ -457,7 +457,7 @@
+ 				              : CTLMSG_NEWDEV_FAIL);
+ 			msg->len = msglen;
+ 
+-			len = write(fds[WRITE], buf, msglen);
++			len = write(fds[BLKTAP_WRITE], buf, msglen);
+ 			return 1;
+ 
+ 		case CTLMSG_CLOSE:
+@@ -479,7 +479,7 @@
+ 			process = getpid();
+ 			msg_pid->pid = process;
+ 
+-			len = write(fds[WRITE], buf, msglen);
++			len = write(fds[BLKTAP_WRITE], buf, msglen);
+ 			return 1;
+ 
+ 		default:
+@@ -782,12 +782,12 @@
+ 	signal (SIGINT, sig_handler);
+ 
+ 	/*Open the control channel*/
+-	fds[READ]  = open(argv[1],O_RDWR|O_NONBLOCK);
+-	fds[WRITE] = open(argv[2],O_RDWR|O_NONBLOCK);
++	fds[BLKTAP_READ]  = open(argv[1],O_RDWR|O_NONBLOCK);
++	fds[BLKTAP_WRITE] = open(argv[2],O_RDWR|O_NONBLOCK);
+ 
+-	if ( (fds[READ] < 0) || (fds[WRITE] < 0) ) 
++	if ( (fds[BLKTAP_READ] < 0) || (fds[BLKTAP_WRITE] < 0) ) 
+ 	{
+-		DPRINTF("FD open failed [%d,%d]\n", fds[READ], fds[WRITE]);
++		DPRINTF("FD open failed [%d,%d]\n", fds[BLKTAP_READ], fds[BLKTAP_WRITE]);
+ 		exit(-1);
+ 	}
+ 
+@@ -803,8 +803,8 @@
+         {
+ 		ret = 0;
+ 		FD_ZERO(&readfds);
+-		FD_SET(fds[READ], &readfds);
+-		maxfds = fds[READ];
++		FD_SET(fds[BLKTAP_READ], &readfds);
++		maxfds = fds[BLKTAP_READ];
+ 
+ 		/*Set all tap fds*/
+ 		LOCAL_FD_SET(&readfds);
+@@ -822,10 +822,10 @@
+ 				tapdev_info_t *info = ptr->s->ring_info;
+ 
+ 				td_for_each_disk(ptr->s, dd) {
+-					if (dd->io_fd[READ] &&
+-					    FD_ISSET(dd->io_fd[READ], 
++					if (dd->io_fd[BLKTAP_READ] &&
++					    FD_ISSET(dd->io_fd[BLKTAP_READ], 
+ 						     &readfds)) {
+-						io_done(dd, READ);
++						io_done(dd, BLKTAP_READ);
+ 						progress_made = 1;
+ 					}
+ 				}
+@@ -851,13 +851,13 @@
+ 				ptr = ptr->next;
+ 			}
+ 
+-			if (FD_ISSET(fds[READ], &readfds))
++			if (FD_ISSET(fds[BLKTAP_READ], &readfds))
+ 				read_msg(buf);
+ 		}
+ 	}
+ 	free(buf);
+-	close(fds[READ]);
+-	close(fds[WRITE]);
++	close(fds[BLKTAP_READ]);
++	close(fds[BLKTAP_WRITE]);
+ 
+ 	ptr = fd_start;
+ 	while (ptr != NULL) {

@@ -1,0 +1,10 @@
+move net-analyzer/hacking-snmp-mib			snmp-mibs/hacking-snmp-mib
+move net-analyzer/mdraid-snmp-mib			snmp-mibs/mdraid-snmp-mib
+move net-analyzer/ntp-snmp-mib				snmp-mibs/ntp-snmp-mib
+move net-analyzer/smartctl-snmp-mib			snmp-mibs/smartctl-snmp-mib
+move net-analyzer/sysappl-snmp-mib			snmp-mibs/sysappl-snmp-mib
+
+move net-analyzer/snmpd-mdraid-connector 	snmp-agents/snmpd-mdraid-connector
+move net-analyzer/snmpd-smartctl-connector	snmp-agents/snmpd-smartctl-connector
+
+move sys-kernel/r8168						net-misc/r8168
