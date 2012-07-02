@@ -1,0 +1,31 @@
+Title: Use of the hacking-gentoo overlay
+Author: Max Hacking <overlay.admin@hacking.co.uk>
+Content-Type: text/plain
+Posted: 2012-07-02
+Revision: 1
+News-Item-Format: 1.0
+
+The Hacking Networked Solutions overlay for Gentoo Linux may be used
+in two modes.  
+
+Mode One - Augment:
+
+This mode should be employed by users who simply wish to utilise the
+additional packages provided by this overlay.  No additional action is
+required to use the hacking-gentoo overlay in this mode.  Any package
+which is NOT a replacement for an "in tree" package is available.  Any
+package which IS a replacement for an "in tree" package is masked.
+
+Mode Two - Replace:
+
+This mode should be employed by users who wish to utilise the
+additional packages provided by this overlay AND who wish to ALWAYS use
+the hacking-gentoo replacements for certain "in tree" packages.  Users
+who wish to employ this mode should create symbolic links in their
+/etc/portage/package.{mask,unmask} directories, as shown below.
+
+ln -s ${OVERLAYS}/hacking-gentoo/masks/hacking-gentoo.package.mask \
+    /etc/portage/package/mask/hacking-gentoo.package.mask
+    
+ln -s ${OVERLAYS}/hacking-gentoo/masks/hacking-gentoo.package.unmask \
+    /etc/portage/package/unmask/hacking-gentoo.package.unmask

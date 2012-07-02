@@ -1,1 +1,2 @@
+app-portage/auto-patch-portage
 dev-libs/nss

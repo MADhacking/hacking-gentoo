@@ -1,0 +1,25 @@
+Title: Deprecation of the hacking-gentoo patch-set
+Author: Max Hacking <overlay.admin@hacking.co.uk>
+Content-Type: text/plain
+Posted: 2012-07-02
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: app-portage/auto-patch-portage
+
+The Hacking Networked Solutions patch-set for Gentoo Linux, and by
+association the app-portage/auto-patch-portage package, has been
+deprecated in favour of installing the Hacking Networked Solutions
+overlay for Gentoo Linux [hacking-gentoo] in replace mode.  
+
+Users of the Hacking Networked Solutions patch-set for Gentoo Linux
+should create symbolic links in their etc/portage/package.{mask,unmask}
+directories, as shown below...
+
+ln -s ${OVERLAYS}/hacking-gentoo/masks/hacking-gentoo.package.mask \
+    /etc/portage/package/mask/hacking-gentoo.package.mask
+    
+ln -s ${OVERLAYS}/hacking-gentoo/masks/hacking-gentoo.package.unmask \
+    /etc/portage/package/unmask/hacking-gentoo.package.unmask
+    
+...before removing the app-portage/auto-patch-portage package and
+performing a complete world update.
