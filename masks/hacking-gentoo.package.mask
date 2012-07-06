@@ -1,2 +1,6 @@
+# Masked due to obsolescence 2012-07-02 
 app-portage/auto-patch-portage
+
+# Masked unless overlay used in replace mode
+app-admin/syslog-ng
 dev-libs/nss

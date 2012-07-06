@@ -1,1 +1,3 @@
+# Un-mask Hacking Gentoo replacement packages.
+app-admin/syslog-ng::hacking-gentoo
 dev-libs/nss::hacking-gentoo

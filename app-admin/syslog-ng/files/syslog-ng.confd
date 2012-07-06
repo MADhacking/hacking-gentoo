@@ -1,0 +1,11 @@
+# Config file for /etc/init.d/syslog-ng
+
+# User and group settings
+
+SYSLOG_NG_USER="syslog"
+SYSLOG_NG_GROUP="syslog"
+
+# Put any additional options for syslog-ng here.
+# See syslog-ng(8) for more information.
+
+SYSLOG_NG_OPTS=""

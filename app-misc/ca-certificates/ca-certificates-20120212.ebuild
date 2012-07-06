@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/ca-certificates/ca-certificates-20120623.ebuild,v 1.1 2012/06/28 18:14:34 vapier Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-misc/ca-certificates/ca-certificates-20120212.ebuild,v 1.1 2012/05/11 00:39:05 vapier Exp $
 
 EAPI="3"
 
@@ -85,7 +85,7 @@ pkg_postinst() {
 		# --fresh is to clean up dangling symlinks
 		"${EROOT}"/usr/sbin/update-ca-certificates --root "${EROOT}"
 	fi
-
+	
 	local c badcerts=0
 	for c in $(find -L "${EROOT}"etc/ssl/certs/ -type l) ; do
 		ewarn "Broken symlink for a certificate at $c"
