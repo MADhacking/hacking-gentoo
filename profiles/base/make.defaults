@@ -1,0 +1,8 @@
+# Copyright 2012 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3
+#
+# System-wide defaults for the Portage system.
+# See portage(5) manpage
+
+# Env vars to expand into USE vars.
+USE_EXPAND="CERTIFICATE_AUTHORITIES"
