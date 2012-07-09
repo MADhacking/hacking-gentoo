@@ -29,6 +29,10 @@ RDEPEND="${DEPEND}
 
 S=${WORKDIR}
 
+for ca in ${IUSE_CERTIFICATE_AUTHORITIES}; do
+	IUSE="${IUSE} certificate_authorities_${ca}"
+done
+
 pkg_setup() {
 	# For the conversion to having it in CONFIG_PROTECT_MASK,
 	# we need to tell users about it once manually first.
