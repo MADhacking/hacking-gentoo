@@ -7,4 +7,5 @@
 # Env vars to expand into USE vars.
 USE_EXPAND="CERTIFICATE_AUTHORITIES"
 
-CERTIFICATE_AUTHORITIES="godaddy geotrust comodo verisign thawte netsol globalsign entrust digicert"
+# Most people will want at least the big ten so set it as a default.
+CERTIFICATE_AUTHORITIES="cacert comodo digicert entrust geotrust globalsign godaddy netsol thawte verisign"
