@@ -209,7 +209,7 @@ src_install () {
 	dodir /etc/pki/nssdb
 	insinto /etc/pki/nssdb
 	doins "${FILESDIR}/pkcs11.txt"
-
+	
 	# Install the setup-nsssysinit.sh script.
 	dobin "${FILESDIR}/setup-nsssysinit.sh"
 }
@@ -217,6 +217,20 @@ src_install () {
 pkg_postinst() {
 	# We must re-sign the libraries AFTER they are stripped.
 	generate_chk "${EROOT}"/usr/bin/shlibsign "${EROOT}"/usr/$(get_libdir)
+	
+	# Upgrade any old system database.
+
+	# Install a new empty database if none exists already.
+	if [ ! -f "${EROOT}/etc/pki/nssdb/cert9.db" ]; then
+		echo > empty.txt
+		certutil -N -d "${EROOT}/etc/pki/nssdb" -f empty.txt || die
+		rm empty.txt
+		einfo "An empty NSS system database has been installed, with no password."
+		einfo
+		einfo "You may wish to set a new system database password now using:"
+		einfo
+		einfo "certutil -W -d \"${EROOT}/etc/pki/nssdb\""
+	fi
 }
 
 pkg_postrm() {

@@ -28,8 +28,9 @@ DEPEND="kernel_AIX? ( app-arch/deb2targz )
 	!<sys-apps/portage-2.1.10.41"
 # openssl: we run `c_rehash`
 # debianutils: we run `run-parts`
-# app-admin/hacking-certificate-utilities: update-ca-certificates
+# app-admin/update-ca-certificates: update-ca-certificates (new version)
 RDEPEND="${DEPEND}
+	app-admin/update-ca-certificates
 	dev-libs/openssl
 	nss? ( dev-libs/nss[utils] )
 	sys-apps/debianutils"
@@ -70,14 +71,6 @@ src_install() {
 		fi
 	done < "${FILESDIR}/certindex-${PV}.txt"	
 	
-	# Get the openssl "fingerprint" of each cert and make a link.
-	while read cert; do
-		local fp=$(openssl x509 -fingerprint -noout -in "${ED}/usr/share/ca-certificates/${cert}")
-		fp="${fp##*=}"
-		fp="${fp//:}"
-		dosym "../${cert}" "usr/share/ca-certificates/by-fingerprint/${fp}" 
-	done < <(ls "${ED}/usr/share/ca-certificates")
-		
 	# Copy the docs.
 	dodoc usr/share/doc/ca-certificates/*
 
@@ -93,10 +86,14 @@ src_install() {
 pkg_postinst() {
 	# Update the certificate database
 	if use nss; then
-		"${EROOT}"/usr/sbin/update-ca-certificates --root "${EROOT}" nss
+		ebegin "Updating NSS system certificate database"
+		"${EROOT}"/usr/sbin/update-ca-certificates --fresh --root "${EROOT}" --db-type nss
+		eend $?
 	fi
 	if use openssl; then
-		"${EROOT}"/usr/sbin/update-ca-certificates --root "${EROOT}" openssl
+		ebegin "Updating OpenSSL certificate database"
+		"${EROOT}"/usr/sbin/update-ca-certificates --fresh --root "${EROOT}" --db-type openssl
+		eend $?
 	fi
 
 	# This should now be done automatically however it is worth checking.
