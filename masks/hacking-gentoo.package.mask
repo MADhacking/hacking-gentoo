@@ -2,7 +2,8 @@
 app-portage/auto-patch-portage
 <app-admin/buildserver-scripts-0.7
 
-
 # Masked unless overlay used in replace mode
 app-admin/syslog-ng
+app-admin/update-ca-certificates
+app-misc/ca-certificates
 dev-libs/nss
