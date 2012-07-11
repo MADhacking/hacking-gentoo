@@ -13,7 +13,7 @@ SRC_URI="mirror://debian/pool/main/c/${PN}/${PN}_${PV}${NMU_PR:++nmu}${NMU_PR}_a
 
 LICENSE="MPL-1.1"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
 
 IUSE="+nss +openssl"
 IUSE_CERTIFICATE_AUTHORITIES="atrust ac acedicom addtrust affirmtrust aol acf baltimore
@@ -87,12 +87,12 @@ pkg_postinst() {
 	# Update the certificate database
 	if use nss; then
 		ebegin "Updating NSS system certificate database"
-		"${EROOT}"/usr/sbin/update-ca-certificates --fresh --root "${EROOT}" --db-type nss
+		"${EROOT}"/usr/bin/update-ca-certificates --fresh --root "${EROOT}" --db-type nss
 		eend $?
 	fi
 	if use openssl; then
 		ebegin "Updating OpenSSL certificate database"
-		"${EROOT}"/usr/sbin/update-ca-certificates --fresh --root "${EROOT}" --db-type openssl
+		"${EROOT}"/usr/bin/update-ca-certificates --fresh --root "${EROOT}" --db-type openssl
 		eend $?
 	fi
 

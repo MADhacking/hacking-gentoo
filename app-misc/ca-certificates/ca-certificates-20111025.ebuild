@@ -87,12 +87,12 @@ pkg_postinst() {
 	# Update the certificate database
 	if use nss; then
 		ebegin "Updating NSS system certificate database"
-		"${EROOT}"/usr/sbin/update-ca-certificates --fresh --root "${EROOT}" --db-type nss
+		"${EROOT}"/usr/bin/update-ca-certificates --fresh --root "${EROOT}" --db-type nss
 		eend $?
 	fi
 	if use openssl; then
 		ebegin "Updating OpenSSL certificate database"
-		"${EROOT}"/usr/sbin/update-ca-certificates --fresh --root "${EROOT}" --db-type openssl
+		"${EROOT}"/usr/bin/update-ca-certificates --fresh --root "${EROOT}" --db-type openssl
 		eend $?
 	fi
 
