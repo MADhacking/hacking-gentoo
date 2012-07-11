@@ -97,7 +97,7 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
- 	echo
+	echo
 	ewarn "Please note that the standard location of the socket and PID file has changed from"
 	ewarn "/var/run/syslog-ng.* to /var/run/syslog-ng/syslog-ng.* and you have to be in the"
 	ewarn "'syslog' group to access the control socket or /var/log/messages."
@@ -108,8 +108,8 @@ pkg_postinst() {
 		chown syslog:syslog /var/log
 		[[ -e /var/log/messages ]] && chown syslog:syslog /var/log/messages
 		echo
-	fi 
-	
+	fi
+
 	# bug #355257
 	if ! has_version app-admin/logrotate ; then
 		echo

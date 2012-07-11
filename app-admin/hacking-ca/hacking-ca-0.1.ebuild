@@ -18,7 +18,7 @@ RDEPEND="dev-libs/hacking-certificate-functions"
 src_install() {
 	insinto /usr/bin
 	dobin usr/bin/*
-	
+
 	insinto /usr/share
 	doins usr/share/*
 }

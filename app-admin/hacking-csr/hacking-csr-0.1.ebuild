@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-DESCRIPTION="A simple utility for creating Certificate Signing Requests (CSR) with support for extended X.509 features"
+DESCRIPTION="Utility for creating Certificate Signing Requests (CSR) with support for extended X.509 features"
 HOMEPAGE="http://www.mad-hacking.net/software/linux/agnostic/hacking-csr/index.xml"
 SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
@@ -18,7 +18,7 @@ RDEPEND="dev-libs/hacking-certificate-functions"
 src_install() {
 	insinto /usr/bin
 	dobin usr/bin/*
-	
+
 	insinto /usr/share
 	doins usr/share/*
 }

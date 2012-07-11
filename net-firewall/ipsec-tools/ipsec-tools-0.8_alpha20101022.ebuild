@@ -24,8 +24,7 @@ DEPEND_COMMON="
 	>=dev-libs/openssl-0.9.8
 	iconv? ( virtual/libiconv )"
 
-RDEPEND="${DEPEND_COMMON}
-	selinux? ( sec-policy/selinux-ipsec-tools )"
+RDEPEND="${DEPEND_COMMON}"
 
 DEPEND="${DEPEND_COMMON}
 	>=sys-kernel/linux-headers-2.6.30"

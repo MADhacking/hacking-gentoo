@@ -66,18 +66,18 @@ src_install() {
 	# depending on the IUSE_CERTIFICATE_AUTHORITIES flag.
 	insinto /usr/share/ca-certificates
 	while read flag regex; do
-		if use "certificate_authorities_${flag}"; then 
+		if use "certificate_authorities_${flag}"; then
 			find . -type f -iname "${regex}" -exec doins '{}' \;
 		fi
-	done < "${FILESDIR}/certindex-${PV}.txt"	
-	
+	done < "${FILESDIR}/certindex-${PV}.txt"
+
 	# Copy the docs.
 	dodoc usr/share/doc/ca-certificates/*
 
 	# Create some /etc dirs.
 	dodir /etc/ca-certificates/update.d
 	dodir /etc/ssl/certs
-	
+
 	# Create CONFIG_PROTECT_MASK env.d file.
 	echo 'CONFIG_PROTECT_MASK="/etc/ca-certificates.conf"' > 98ca-certificates
 	doenvd 98ca-certificates
