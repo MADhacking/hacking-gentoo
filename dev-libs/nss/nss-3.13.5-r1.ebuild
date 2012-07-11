@@ -209,7 +209,7 @@ src_install () {
 	dodir /etc/pki/nssdb
 	insinto /etc/pki/nssdb
 	doins "${FILESDIR}/pkcs11.txt"
-	
+
 	# Install the setup-nsssysinit.sh script.
 	dobin "${FILESDIR}/setup-nsssysinit.sh"
 }
@@ -217,7 +217,7 @@ src_install () {
 pkg_postinst() {
 	# We must re-sign the libraries AFTER they are stripped.
 	generate_chk "${EROOT}"/usr/bin/shlibsign "${EROOT}"/usr/$(get_libdir)
-	
+
 	# Upgrade any old system database.
 
 	# Install a new empty database if none exists already.

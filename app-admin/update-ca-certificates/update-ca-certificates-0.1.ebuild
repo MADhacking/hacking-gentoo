@@ -19,3 +19,9 @@ src_install() {
 	exeinto /usr/sbin
 	doexe usr/sbin/*
 }
+
+pkg_preinst() {
+	# This is _really_ horrible but without controlling the main tree
+	# there is no better solution.
+	rm "${EROOT}/usr/sbin/update-ca-certificates"
+}

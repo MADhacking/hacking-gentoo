@@ -85,7 +85,7 @@ pkg_postinst() {
 		# --fresh is to clean up dangling symlinks
 		"${EROOT}"/usr/sbin/update-ca-certificates --root "${EROOT}"
 	fi
-	
+
 	local c badcerts=0
 	for c in $(find -L "${EROOT}"etc/ssl/certs/ -type l) ; do
 		ewarn "Broken symlink for a certificate at $c"
