@@ -1,7 +1,7 @@
 Title: Deprecation of the hacking-gentoo patch-set
 Author: Max Hacking <overlay.admin@hacking.co.uk>
 Content-Type: text/plain
-Posted: 2012-07-02
+Posted: 2012-07-11
 Revision: 1
 News-Item-Format: 1.0
 Display-If-Installed: app-portage/auto-patch-portage

@@ -1,7 +1,7 @@
 Title: Use of the hacking-gentoo overlay
 Author: Max Hacking <overlay.admin@hacking.co.uk>
 Content-Type: text/plain
-Posted: 2012-07-02
+Posted: 2012-07-11
 Revision: 1
 News-Item-Format: 1.0
 
