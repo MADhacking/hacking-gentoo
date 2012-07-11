@@ -14,7 +14,7 @@ KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-
 IUSE=""
 
 DEPEND="!<app-misc/ca-certificates-20120623-r1"
-RDEPEND="dev-libs/openssl"
+RDEPEND="dev-libs/openssl !<app-misc/ca-certificates-20120623-r1"
 
 src_install() {
 	exeinto /usr/sbin
