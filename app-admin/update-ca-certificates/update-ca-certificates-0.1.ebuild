@@ -23,5 +23,5 @@ src_install() {
 pkg_preinst() {
 	# This is _really_ horrible but without controlling the main tree
 	# there is no better solution.
-	rm "${EROOT}/usr/sbin/update-ca-certificates"
+	rm "/usr/sbin/update-ca-certificates"
 }
