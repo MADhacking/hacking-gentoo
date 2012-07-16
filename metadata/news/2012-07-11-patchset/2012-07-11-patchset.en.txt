@@ -16,10 +16,10 @@ should create symbolic links in their etc/portage/package.{mask,unmask}
 directories, as shown below...
 
 ln -s /var/lib/layman/hacking-gentoo/masks/hacking-gentoo.package.mask \
-      /etc/portage/package/mask/hacking-gentoo.package.mask
+      /etc/portage/package.mask/hacking-gentoo.package.mask
     
 ln -s /var/lib/layman/hacking-gentoo/masks/hacking-gentoo.package.unmask \
-      /etc/portage/package/unmask/hacking-gentoo.package.unmask
+      /etc/portage/package.unmask/hacking-gentoo.package.unmask
 
 NOTE: Replace /var/lib/layman with your overlay location in the above
       commands as required.
