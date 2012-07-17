@@ -27,13 +27,11 @@ tdc thawte turktrust twca tubitak utn valenciana valicert verisign visa wells xr
 DEPEND="kernel_AIX? ( app-arch/deb2targz )
 	!<sys-apps/portage-2.1.10.41"
 # openssl: we run `c_rehash`
-# debianutils: we run `run-parts`
 # app-admin/update-ca-certificates: update-ca-certificates (new version)
 RDEPEND="${DEPEND}
 	app-admin/update-ca-certificates
 	dev-libs/openssl
-	nss? ( dev-libs/nss[utils] )
-	sys-apps/debianutils"
+	nss? ( dev-libs/nss[utils] )"
 
 S=${WORKDIR}
 
