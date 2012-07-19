@@ -3,7 +3,7 @@
 
 EAPI="3"
 
-DESCRIPTION="Hacking Networked Solutions build-server meta-package"
+DESCRIPTION="Hacking Networked Solutions Web server meta-package"
 HOMEPAGE="http://www.hacking.co.uk/"
 
 LICENSE="GPL-3"

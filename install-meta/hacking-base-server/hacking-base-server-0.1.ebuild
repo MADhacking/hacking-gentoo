@@ -28,4 +28,5 @@ RDEPEND="${DEPEND}
 	sys-apps/less
 	sys-apps/timer_entropyd
 	sys-process/vixie-cron
-	virtual/mailx"
+	virtual/mailx
+	dev-libs/libgcrypt"
