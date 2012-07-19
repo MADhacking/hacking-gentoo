@@ -10,6 +10,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
+
 RDEPEND="${DEPEND}
 	app-admin/sudo
 	app-admin/syslog-ng
@@ -28,5 +29,12 @@ RDEPEND="${DEPEND}
 	sys-apps/less
 	sys-apps/timer_entropyd
 	sys-process/vixie-cron
-	virtual/mailx
-	dev-libs/libgcrypt"
+	virtual/mailx"
+
+# Forgotten dependencies
+#
+# 	dev-libs/libgcrypt	needed by net-fs/nfs-utils
+#	dev-db/libdbi		needed by net-analyzer/rrdtool (dep of net-analyzer/net-snmp)
+RDEPEND="${RDEPEND}
+	dev-libs/libgcrypt
+	dev-db/libdbi"
