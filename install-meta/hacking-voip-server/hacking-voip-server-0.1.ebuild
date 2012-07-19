@@ -13,4 +13,5 @@ IUSE=""
 RDEPEND="${DEPEND}
 	install-meta/hacking-base-server
 	net-misc/asterisk
-	net-misc/asterisk-sounds"
+	net-misc/asterisk-core-sounds
+	net-misc/asterisk-extra-sounds"
