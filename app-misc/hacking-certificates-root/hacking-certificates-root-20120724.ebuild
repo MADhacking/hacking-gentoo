@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
 IUSE="+nss +openssl +openssh"
 RDEPEND="${DEPEND}
-	app-admin/update-ca-certificates
+	>=app-admin/update-ca-certificates-0.4
 	dev-libs/openssl
 	nss? ( dev-libs/nss[utils] )
 	openssh? ( net-misc/openssh[X509] )"
@@ -31,17 +31,17 @@ pkg_postinst() {
 	# Update the certificate databases
 	if use nss; then
 		ebegin "Updating NSS system certificate database"
-		"${EROOT}"/usr/bin/update-ca-certificates --root "${EROOT}" --db-type nss
+		"${EROOT}"/usr/bin/update-ca-certificates --root "${EROOT}" --fresh --db-type nss
 		eend $?
 	fi
 	if use openssl; then
 		ebegin "Updating OpenSSL certificate database"
-		"${EROOT}"/usr/bin/update-ca-certificates --root "${EROOT}" --db-type openssl
+		"${EROOT}"/usr/bin/update-ca-certificates --root "${EROOT}" --fresh --db-type openssl
 		eend $?
 	fi
 	if use openssh; then
 		ebegin "Updating OpenSSH certificate database"
-		"${EROOT}"/usr/bin/update-ca-certificates --root "${EROOT}" --db-type openssh
+		"${EROOT}"/usr/bin/update-ca-certificates --root "${EROOT}" --fresh --db-type openssh
 		eend $?
 	fi
 }
