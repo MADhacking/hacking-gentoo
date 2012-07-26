@@ -1,6 +1,5 @@
-diff --git a/Makefile.am b/Makefile.am
---- a/Makefile.am
-+++ b/Makefile.am
+--- Makefile.am
++++ Makefile.am
 @@ -30,7 +30,7 @@
  
  openca_prefix		= @openca_prefix@
@@ -19,9 +18,8 @@ diff --git a/Makefile.am b/Makefile.am
  	scripts/ocspd-genreq.sh \
  	test/test.sh
  
-diff --git a/configure.in b/configure.in
---- a/configure.in
-+++ b/configure.in
+--- configure.in
++++ configure.in
 @@ -5,7 +5,7 @@
  AC_INIT(src/ocspd/ocspd.c)
  AC_PREREQ( 2.50)
@@ -51,9 +49,8 @@ diff --git a/configure.in b/configure.in
  
  AC_SUBST(ac_aux_dir)
  
-diff --git a/etc/Makefile.am b/etc/Makefile.am
---- a/etc/Makefile.am
-+++ b/etc/Makefile.am
+--- etc/Makefile.am
++++ etc/Makefile.am
 @@ -5,12 +5,11 @@
  
  CHMOD = @CHMOD@
