@@ -7,7 +7,7 @@ OCSPD_SERVICE=${OCSPD_SERVICE:-ocspd}
 
 OCSPD_CONFIGFILE=${OCSPD_CONFIGFILE:-/etc/ocspd/${OCSPD_SERVICE}.conf}
 OCSPD_PIDFILE=${OCSPD_PIDFILE:-/var/run/${SVCNAME}/${SVCNAME}.pid}
-#OCSPD_OPTS="--cfgfile ${OCSPD_CONFIGFILE} --pidfile ${OCSPD_PIDFILE} ${OCSPD_OPTS}"
+OCSPD_OPTS="-c ${OCSPD_CONFIGFILE} ${OCSPD_OPTS}"
 
 depend() {
 	need clock hostname localmount net
