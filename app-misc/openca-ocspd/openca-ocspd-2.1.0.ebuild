@@ -50,6 +50,8 @@ src_install() {
 	
 	insinto /etc/ocspd
 	doins "${FILESDIR}"/ocspd.conf*
-	
+}
+
+pkg_setup() {
 	enewuser ocspd
 }
