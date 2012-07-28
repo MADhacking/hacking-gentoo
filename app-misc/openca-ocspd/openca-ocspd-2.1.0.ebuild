@@ -37,7 +37,8 @@ src_prepare() {
 src_configure() {
 	local myeconfargs=(
 			--prefix=/
-			--libdir="${EPREFIX}"/usr/$(get_libdir)
+			--libdir=/usr/$(get_libdir)
+			--sbindir=/usr/sbin
 	)
 	autotools-utils_src_configure
 }
