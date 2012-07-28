@@ -4,9 +4,9 @@
 
 EAPI="4"
 
-inherit autotools-utils autotools
+inherit autotools autotools-utils eutils
 
-DESCRIPTION="The OCSP (OnLine Certificate Status Protocol) daemon"
+DESCRIPTION="An OCSP (Online Certificate Status Protocol) daemon"
 HOMEPAGE="http://www.openca.org/projects/ocspd/"
 SRC_URI="mirror://sourceforge/project/openca/${PN}/releases/v${PV}/sources/${P}.tar.gz"
 
@@ -36,15 +36,20 @@ src_prepare() {
 
 src_configure() {
 	local myeconfargs=(
-			--prefix=/
-			--libdir=/usr/$(get_libdir)
-			--sbindir=/usr/sbin
+		--prefix=/
+		--libdir=/usr/$(get_libdir)
+		--sbindir=/usr/sbin
 	)
 	autotools-utils_src_configure
 }
 
 src_install() {
 	autotools-utils_src_install
+	
 	newinitd "${FILESDIR}"/ocspd.rc ocspd
+	
+	insinto /etc/ocspd
+	doins "${FILESDIR}"/ocspd.conf*
+	
+	enewuser ocspd
 }
-
