@@ -28,14 +28,13 @@ src_prepare() {
 	epatch "${FILESDIR}"/*.patch
 	
 	autotools-utils_src_prepare
-	eautoreconf
 
 	cd "${S}"/src/ocspd
 	cp -f includes/*.h .
 }
 
 src_configure() {
-	local myeconfargs=( --prefix=/ )
+	#	local myeconfargs=( --prefix=/ )
 	autotools-utils_src_configure
 }
 
