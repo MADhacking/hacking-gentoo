@@ -41,6 +41,6 @@ src_configure() {
 
 src_install() {
 	autotools-utils_src_install
-	newinitd "${FILESDIR}"/openca-ocspd.init openca-ocspd
+	newinitd "${FILESDIR}"/ocspd.rc ocspd
 }
 

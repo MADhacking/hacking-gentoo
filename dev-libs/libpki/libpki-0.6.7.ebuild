@@ -57,6 +57,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	einfo "For more inf, see"
+	einfo "Information describing the configuration of LibPKI may be found at"
 	einfo "http://wiki.openca.org/wiki/index.php/LibPKI_configuration_files"
 }

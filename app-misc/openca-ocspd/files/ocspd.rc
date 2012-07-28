@@ -1,0 +1,28 @@
+#!/sbin/runscript
+# Copyright 2012 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3
+
+OCSPD_SERVICE=${SVCNAME#*.}
+OCSPD_SERVICE=${OCSPD_SERVICE:-ocspd}
+
+OCSPD_CONFIGFILE=${OCSPD_CONFIGFILE:-/etc/ocspd/${OCSPD_SERVICE}.conf}
+OCSPD_PIDFILE=${OCSPD_PIDFILE:-/var/run/${SVCNAME}/${SVCNAME}.pid}
+#OCSPD_OPTS="--cfgfile ${OCSPD_CONFIGFILE} --pidfile ${OCSPD_PIDFILE} ${OCSPD_OPTS}"
+
+depend() {
+	need clock hostname localmount net
+	provide ocspd
+}
+
+start() {
+	ebegin "Starting ${SVCNAME}"
+	start-stop-daemon --start --pidfile "${OCSPD_PIDFILE}" --exec /usr/bin/ocspd -- ${OCSPD_OPTS}
+	eend $? "Failed to start ${SVCNAME}"
+}
+
+stop() {
+	ebegin "Stopping ${SVCNAME}"
+	start-stop-daemon --stop --pidfile "${OCSPD_PIDFILE}"
+	eend $? "Failed to stop ${SVCNAME}"
+	sleep 1
+}
