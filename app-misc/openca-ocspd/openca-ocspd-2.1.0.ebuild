@@ -25,6 +25,7 @@ RESTRICT="test"
 AUTOTOOLS_IN_SOURCE_BUILD=1
 
 pkg_setup() {
+	enewgroup ocspd
 	enewuser ocspd
 }
 
@@ -57,4 +58,7 @@ src_install() {
 	
 	dodir /var/run/ocspd
 	fowners ocspd:root /var/run/ocspd
+	dodir /var/db/ocspd
+	fowners root:ocspd /var/db/ocspd
+	fperms 0775 /var/db/ocspd
 }
