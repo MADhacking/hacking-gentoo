@@ -24,6 +24,10 @@ DOCS=(AUTHORS ChangeLog INSTALL NEWS README)
 RESTRICT="test"
 AUTOTOOLS_IN_SOURCE_BUILD=1
 
+pkg_setup() {
+	enewuser ocspd
+}
+
 src_prepare() {
 	epatch "${FILESDIR}"/*.patch
 	
@@ -50,8 +54,7 @@ src_install() {
 	
 	insinto /etc/ocspd
 	doins "${FILESDIR}"/ocspd.conf*
-}
-
-pkg_setup() {
-	enewuser ocspd
+	
+	dodir /var/run/ocspd
+	fowners ocspd:root /var/run/ocspd
 }
