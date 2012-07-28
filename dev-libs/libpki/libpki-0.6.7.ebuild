@@ -31,7 +31,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/*.patch
 	
 	autotools-utils_src_prepare
-	eautoreconf
+	AT_NOELIBTOOLIZE=yes eautoreconf
 }
 
 src_configure () {
