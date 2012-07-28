@@ -35,7 +35,10 @@ src_prepare() {
 }
 
 src_configure() {
-	local myeconfargs=( --prefix=/ )
+	local myeconfargs=(
+			--prefix=/
+			--libdir="${EPREFIX}"/usr/$(get_libdir)
+	)
 	autotools-utils_src_configure
 }
 
