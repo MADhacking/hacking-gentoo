@@ -35,6 +35,7 @@ src_prepare() {
 }
 
 src_configure() {
+	local myeconfargs=( --prefix=/ )
 	autotools-utils_src_configure
 }
 
