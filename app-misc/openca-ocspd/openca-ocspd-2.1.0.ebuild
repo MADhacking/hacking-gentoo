@@ -16,6 +16,7 @@ KEYWORDS="~x86 ~amd64"
 IUSE="debug"
 
 DEPEND="dev-libs/libpki
+		dev-libs/libxml2
 		dev-libs/openssl"
 RDEPEND="${DEPEND}"
 
@@ -52,9 +53,6 @@ src_install() {
 	autotools-utils_src_install
 	
 	newinitd "${FILESDIR}"/ocspd.rc ocspd
-	
-	insinto /etc/ocspd
-	doins "${FILESDIR}"/ocspd.conf*
 	
 	dodir /var/run/ocspd
 	fowners ocspd:root /var/run/ocspd
