@@ -1,13 +1,18 @@
 --- src/ocspd/config.c	2011-02-11 18:32:32.000000000 +0100
-+++ src/ocspd/config.c	2012-07-31 16:23:27.182531730 +0200
-@@ -385,6 +385,18 @@
++++ src/ocspd/config.c	2012-07-31 16:43:37.100938971 +0200
+@@ -385,6 +385,23 @@
  		ca->ca_id = PKI_CONFIG_get_value( cnf, "/caConfig/name" );
  		ca->cid = CA_ENTRY_CERTID_new ( ca->ca_cert, handler->digest );
  
-+		/* Get the CRL signing parsed url */
++		/* Get the CRL signing certificate, if there is one */
 +		tmp_cert = NULL;
-+		if (tmp_url = URL_new( PKI_CONFIG_get_value( cnf, "/caConfig/caCRLSignUrl" ))) {
-+			if ((tmp_cert = PKI_X509_CERT_get_url ( tmp_url,	NULL, NULL )) == NULL) {
++		tmp_url = NULL;
++		if ((tmp_s = PKI_CONFIG_get_value( cnf, "/caConfig/caCRLSignUrl" )) != NULL ) {
++			if ((tmp_url = URL_new(tmp_s)) == NULL) {
++				PKI_log( PKI_LOG_ERR, "Can not parse CRL signing cert url (%s)", tmp_s );
++				continue;
++			}
++			if ((tmp_cert = PKI_X509_CERT_get_url ( tmp_url, NULL, NULL )) == NULL) {
 +				PKI_log( PKI_LOG_ERR, "Can not get CRL signing cert from (%s)", tmp_url );
 +				URL_free (tmp_url);
 +				continue;
@@ -19,7 +24,7 @@
  		/* Get the CRL URL and the CRL itself */
  		if((tmp_s = PKI_CONFIG_get_value(cnf, "/caConfig/crlUrl")) == NULL) {
  
-@@ -508,8 +520,8 @@
+@@ -508,8 +525,8 @@
  		return PKI_ERR;
  	}
  
