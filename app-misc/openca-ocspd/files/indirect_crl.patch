@@ -1,20 +1,20 @@
 --- src/ocspd/config.c	2011-02-11 18:32:32.000000000 +0100
-+++ src/ocspd/config.c	2012-07-31 15:57:43.831649822 +0200
++++ src/ocspd/config.c	2012-07-31 16:14:59.675479008 +0200
 @@ -385,6 +385,18 @@
  		ca->ca_id = PKI_CONFIG_get_value( cnf, "/caConfig/name" );
  		ca->cid = CA_ENTRY_CERTID_new ( ca->ca_cert, handler->digest );
  
 +		/* Get the CRL signing parsed url */
++		tmp_cert = NULL;
 +		if (tmp_url = URL_new( PKI_CONFIG_get_value( cnf, "/caConfig/caCRLSignUrl" ))) {
 +			if ((tmp_cert = PKI_X509_CERT_get_url ( tmp_url,	NULL, NULL )) == NULL) {
 +				PKI_log( PKI_LOG_ERR, "Can not get CRL signing cert from (%s)", tmp_url );
 +				URL_free (tmp_url);
 +				continue;
 +			}
-+			
-+			ca->crl_cert = tmp_cert;
-+			ca->crl_cert_url = tmp_url;
 +		}
++		ca->crl_cert = tmp_cert;
++		ca->crl_cert_url = tmp_url;
 +
  		/* Get the CRL URL and the CRL itself */
  		if((tmp_s = PKI_CONFIG_get_value(cnf, "/caConfig/crlUrl")) == NULL) {
@@ -32,7 +32,7 @@
  		return PKI_ERR;
  		
 --- src/ocspd/includes/general.h	2011-02-11 00:52:11.000000000 +0100
-+++ src/ocspd/includes/general.h	2012-07-31 15:42:18.532913691 +0200
++++ src/ocspd/includes/general.h	2012-07-31 16:02:43.544600952 +0200
 @@ -122,6 +122,12 @@
  		/* CA certificate URL */
  		URL *ca_url;
