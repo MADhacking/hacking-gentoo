@@ -1,5 +1,5 @@
 --- src/ocspd/config.c	2011-02-11 18:32:32.000000000 +0100
-+++ src/ocspd/config.c	2012-07-31 16:14:59.675479008 +0200
++++ src/ocspd/config.c	2012-07-31 16:23:27.182531730 +0200
 @@ -385,6 +385,18 @@
  		ca->ca_id = PKI_CONFIG_get_value( cnf, "/caConfig/name" );
  		ca->cid = CA_ENTRY_CERTID_new ( ca->ca_cert, handler->digest );
@@ -26,7 +26,7 @@
 -	/* Let's check the CRL against the CA certificate */
 -	if( (ret = check_crl( ca->crl, ca->ca_cert, conf )) < 1 ) {
 +	/* Let's check the CRL against the CRL signing or CA certificate */
-+	if( (ret = check_crl( ca->crl, (ca->crl_cert ? ca->crl_cert : ca->ca_cert), conf )) < 1 ) {
++	if( (ret = check_crl( ca->crl, (ca->crl_cert != NULL) ? ca->crl_cert : ca->ca_cert, conf )) < 1 ) {
  		PKI_log_err( "CRL/CA check error [ %s:%d ]",
  						ca->ca_id, ret );
  		return PKI_ERR;
