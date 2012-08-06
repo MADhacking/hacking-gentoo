@@ -76,6 +76,9 @@ src_install() {
 	dodir /etc/ca-certificates/update.d
 	dodir /etc/ssl/certs
 
+	# Make sure local certificate directory exists.
+	dodir /usr/local/share/ca-certificates
+
 	# Create CONFIG_PROTECT_MASK env.d file.
 	echo 'CONFIG_PROTECT_MASK="/etc/ca-certificates.conf"' > 98ca-certificates
 	doenvd 98ca-certificates
