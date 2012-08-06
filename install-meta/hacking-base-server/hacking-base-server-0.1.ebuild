@@ -28,6 +28,7 @@ RDEPEND="${DEPEND}
 	net-misc/ntp
 	sys-apps/less
 	sys-apps/timer_entropyd
+	sys-process/lsof
 	sys-process/vixie-cron
 	virtual/mailx"
 
