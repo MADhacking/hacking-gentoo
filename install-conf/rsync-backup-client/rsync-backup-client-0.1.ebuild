@@ -20,7 +20,7 @@ RDEPEND="${DEPEND}
 	net-misc/openssh
 	net-misc/rsync"
 
-pkg_postinst() {
+src_install() {
 	insinto /etc/sudoers.d
 	doins "${FILESDIR}/50_rsync_backup_client"
 }

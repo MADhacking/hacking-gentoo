@@ -20,7 +20,7 @@ RDEPEND="${DEPEND}
 	install-conf/backup-client-auth
 	net-misc/openssh"
 
-pkg_postinst() {
+src_install() {
 	insinto /etc/sudoers.d
 	doins "${FILESDIR}/50_rdiff_backup_client"
 }

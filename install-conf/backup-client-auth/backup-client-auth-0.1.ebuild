@@ -25,7 +25,7 @@ pkg_preinst() {
 	enewuser backup 900 /bin/bash /home/backup nogroup
 }
 
-pkg_postinst() {
+src_install() {
 	# Create and install ~/.ssh/authorized_keys
 	insinto /home/backup/.ssh
 	doins "${FILESDIR}/authorized_keys"
