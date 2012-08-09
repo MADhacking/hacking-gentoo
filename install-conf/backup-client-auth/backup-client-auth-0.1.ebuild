@@ -26,6 +26,8 @@ pkg_preinst() {
 }
 
 src_install() {
+	mkdir -p "${S}"
+	
 	# Create and install ~/.ssh/authorized_keys
 	insinto /home/backup/.ssh
 	doins "${FILESDIR}/authorized_keys"
