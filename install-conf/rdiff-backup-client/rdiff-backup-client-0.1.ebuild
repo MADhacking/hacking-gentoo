@@ -20,6 +20,11 @@ RDEPEND="${DEPEND}
 	install-conf/backup-client-auth
 	net-misc/openssh"
 
+src_unpack() {
+	# We have no sources to unpack so create an empty ${S} directory
+	mkdir -p "${S}"
+}
+
 src_install() {
 	insinto /etc/sudoers.d
 	doins "${FILESDIR}/50_rdiff_backup_client"

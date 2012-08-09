@@ -26,6 +26,7 @@ pkg_preinst() {
 }
 
 src_unpack() {
+	# We have no sources to unpack so create an empty ${S} directory
 	mkdir -p "${S}"
 }
 
