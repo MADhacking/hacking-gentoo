@@ -3,6 +3,8 @@
 
 EAPI="4"
 
+inherit eutils
+
 DESCRIPTION="Hacking Networked Solutions backup-client authentication configuration package"
 HOMEPAGE="http://www.hacking.co.uk/"
 
