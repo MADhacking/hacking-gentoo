@@ -12,5 +12,11 @@ KEYWORDS="amd64 x86"
 IUSE=""
 RDEPEND="${DEPEND}
 	install-meta/hacking-base-server
-	net-fs/samba
-	app-backup/rdiff-backup"
+	net-analyzer/tcpdump
+	net-dialup/ppp
+	net-dns/ddclient
+	net-firewall/ipsec-tools
+	net-firewall/iptables
+	net-misc/dhcpcd
+	sys-apps/ethtool
+	sys-apps/iproute2"

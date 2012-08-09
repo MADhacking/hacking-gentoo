@@ -1,0 +1,3 @@
+# Allow the backup user to execute rdiff-backup as root without a password.
+
+backup  ALL=(root)      NOPASSWD:       /usr/bin/rdiff-backup

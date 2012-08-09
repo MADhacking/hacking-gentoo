@@ -3,6 +3,7 @@ app-emulation
 app-misc
 app-portage
 dev-libs
+install-conf
 install-meta
 net-firewall
 snmp-agents

@@ -9,8 +9,10 @@ HOMEPAGE="http://www.hacking.co.uk/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE=""
+IUSE="+rsync-backup-client"
 
+# Package dependencies
+#
 RDEPEND="${DEPEND}
 	app-admin/sudo
 	app-admin/syslog-ng
@@ -31,6 +33,10 @@ RDEPEND="${DEPEND}
 	sys-process/lsof
 	sys-process/vixie-cron
 	virtual/mailx"
+
+# Configuration dependencies
+RDEPEND="${RDEPEND}
+	rsync-backup-client? ( install-conf/rsync-backup-client )"
 
 # Forgotten dependencies
 #
