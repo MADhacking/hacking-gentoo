@@ -11,7 +11,6 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
 RDEPEND="${DEPEND}
-	dev-util/lafilefixer
 	install-meta/hacking-base-server
 	app-admin/buildserver-scripts
 	app-portage/layman"
