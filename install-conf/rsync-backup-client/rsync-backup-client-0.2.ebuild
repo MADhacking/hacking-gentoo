@@ -28,4 +28,5 @@ src_unpack() {
 src_install() {
 	insinto /etc/sudoers.d
 	doins "${FILESDIR}/50_rsync_backup_client"
+	fperms 0440 "${FILESDIR}/50_rsync_backup_client"
 }

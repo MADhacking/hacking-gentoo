@@ -14,9 +14,11 @@ RDEPEND="${DEPEND}
 	install-meta/hacking-base-server
 	app-antivirus/clamav
 	dev-perl/IP-Country
+	dev-python/pydns
 	mail-filter/amavisd-new
 	mail-filter/maildrop
 	mail-filter/pypolicyd-spf
 	mail-filter/spamassassin
 	mail-mta/postfix
+	net-mail/courier-imap
 	net-mail/fetchmail"
