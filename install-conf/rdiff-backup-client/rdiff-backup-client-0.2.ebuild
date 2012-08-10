@@ -28,5 +28,5 @@ src_unpack() {
 src_install() {
 	insinto /etc/sudoers.d
 	doins "${FILESDIR}/50_rdiff_backup_client"
-	fperms 0440 "${FILESDIR}/50_rdiff_backup_client"
+	fperms 0440 "/etc/sudoers.d/50_rdiff_backup_client"
 }
