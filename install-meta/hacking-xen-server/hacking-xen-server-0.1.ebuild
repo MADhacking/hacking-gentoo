@@ -14,6 +14,7 @@ RDEPEND="${DEPEND}
 	install-meta/hacking-base-server
 	app-emulation/xen
 	app-emulation/xen-tools
+	net-firewall/iptables
 	snmp-agents/snmpd-mdraid-connector
 	snmp-agents/snmpd-smartctl-connector
 	sys-apps/gptfdisk

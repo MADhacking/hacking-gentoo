@@ -16,5 +16,6 @@ RDEPEND="${DEPEND}
 	www-apache/mod_jk
 	www-apache/mod_python
 	www-servers/apache
+	www-servers/tomcat
 	www-servers/tomcat:6
 	www-servers/tomcat:7"
