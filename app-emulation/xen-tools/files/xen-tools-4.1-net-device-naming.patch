@@ -1,0 +1,136 @@
+diff -ur xen-4.1.2.orig/tools/hotplug/Linux/vif-common.sh xen-4.1.2/tools/hotplug/Linux/vif-common.sh
+--- xen-4.1.2.orig/tools/hotplug/Linux/vif-common.sh	2011-10-20 19:05:42.000000000 +0200
++++ xen-4.1.2/tools/hotplug/Linux/vif-common.sh	2012-08-23 00:04:38.051067225 +0200
+@@ -85,12 +85,23 @@
+     : ${INTERFACE:?}
+ 
+     # Get xenbus_path from device name.
+-    # The name is built like that: "tap${domid}.${devid}".
+-    dev_=${dev#tap}
++    # The name is built like that: "vif${domid}.${devid}-emu".
++    dev_=${dev#vif}
++    dev_=${dev_%-emu}
+     domid=${dev_%.*}
+     devid=${dev_#*.}
+ 
+     XENBUS_PATH="/local/domain/0/backend/vif/$domid/$devid"
++    vifname=$(xenstore_read_default "$XENBUS_PATH/vifname" "")
++    if [ "$vifname" ]
++    then
++        vifname="${vifname}-emu"
++        if [ "$command" == "add" ] && ! ip link show "$vifname" >&/dev/null
++        then
++            do_or_die ip link set "$dev" name "$vifname"
++        fi
++        dev="$vifname"
++    fi
+ fi
+ 
+ ip=${ip:-}
+diff -ur xen-4.1.2.orig/tools/hotplug/Linux/xen-backend.rules xen-4.1.2/tools/hotplug/Linux/xen-backend.rules
+--- xen-4.1.2.orig/tools/hotplug/Linux/xen-backend.rules	2011-10-20 19:05:42.000000000 +0200
++++ xen-4.1.2/tools/hotplug/Linux/xen-backend.rules	2012-08-23 00:04:32.577803966 +0200
+@@ -13,4 +13,4 @@
+ KERNEL=="gntdev", NAME="xen/%k", MODE="0600"
+ KERNEL=="pci_iomul", NAME="xen/%k", MODE="0600"
+ KERNEL=="tapdev[a-z]*", NAME="xen/blktap-2/tapdev%m", MODE="0600"
+-SUBSYSTEM=="net", KERNEL=="tap*", ACTION=="add", RUN+="/etc/xen/scripts/vif-setup $env{ACTION} type_if=tap"
++SUBSYSTEM=="net", KERNEL=="vif*-emu", ACTION=="add", RUN+="/etc/xen/scripts/vif-setup $env{ACTION} type_if=tap"
+\ No newline at end of file
+diff -ur xen-4.1.2.orig/tools/libxl/libxl.c xen-4.1.2/tools/libxl/libxl.c
+--- xen-4.1.2.orig/tools/libxl/libxl.c	2011-10-20 19:05:42.000000000 +0200
++++ xen-4.1.2/tools/libxl/libxl.c	2012-08-23 00:09:24.740730649 +0200
+@@ -1559,6 +1559,21 @@
+     return libxl__device_del(ctx, &device, wait);
+ }
+ 
++const char *libxl__device_nic_devname(libxl__gc *gc,
++                                      uint32_t domid,
++                                      uint32_t devid,
++                                      libxl_nic_type type)
++{
++    switch (type) {
++    case LIBXL_NIC_TYPE_VIF:
++        return GCSPRINTF("vif%u.%d", domid, devid);
++    case LIBXL_NIC_TYPE_IOEMU:
++        return GCSPRINTF("vif%u.%d" TAP_DEVICE_SUFFIX, domid, devid);
++    default:
++        abort();
++    }
++}
++
+ 
+ /******************************************************************************/
+ int libxl_device_console_add(libxl_ctx *ctx, uint32_t domid, libxl_device_console *console)
+diff -ur xen-4.1.2.orig/tools/libxl/libxl_dm.c xen-4.1.2/tools/libxl/libxl_dm.c
+--- xen-4.1.2.orig/tools/libxl/libxl_dm.c	2011-10-20 19:05:42.000000000 +0200
++++ xen-4.1.2/tools/libxl/libxl_dm.c	2012-08-23 00:34:14.917294913 +0200
+@@ -134,11 +134,9 @@
+                 char *smac = libxl__sprintf(gc, "%02x:%02x:%02x:%02x:%02x:%02x",
+                                            vifs[i].mac[0], vifs[i].mac[1], vifs[i].mac[2],
+                                            vifs[i].mac[3], vifs[i].mac[4], vifs[i].mac[5]);
+-                char *ifname;
+-                if (!vifs[i].ifname)
+-                    ifname = libxl__sprintf(gc, "tap%d.%d", info->domid, vifs[i].devid);
+-                else
+-                    ifname = vifs[i].ifname;
++                const char *ifname = libxl__device_nic_devname(gc,
++                                                domid, vifs[i].devid,
++                                                LIBXL_NIC_TYPE_IOEMU);
+                 flexarray_vappend(dm_args,
+                                 "-net", libxl__sprintf(gc, "nic,vlan=%d,macaddr=%s,model=%s",
+                                                        vifs[i].devid, smac, vifs[i].model),
+@@ -271,12 +269,9 @@
+                 char *smac = libxl__sprintf(gc, "%02x:%02x:%02x:%02x:%02x:%02x",
+                                            vifs[i].mac[0], vifs[i].mac[1], vifs[i].mac[2],
+                                            vifs[i].mac[3], vifs[i].mac[4], vifs[i].mac[5]);
+-                char *ifname;
+-                if (!vifs[i].ifname) {
+-                    ifname = libxl__sprintf(gc, "tap%d.%d", info->domid, vifs[i].devid);
+-                } else {
+-                    ifname = vifs[i].ifname;
+-                }
++                const char *ifname = libxl__device_nic_devname(gc,
++                                                guest_domid, vifs[i].devid,
++                                                LIBXL_NIC_TYPE_IOEMU);
+                 flexarray_append(dm_args, "-net");
+                 flexarray_append(dm_args, libxl__sprintf(gc, "nic,vlan=%d,macaddr=%s,model=%s",
+                             vifs[i].devid, smac, vifs[i].model));
+diff -ur xen-4.1.2.orig/tools/libxl/libxl_internal.h xen-4.1.2/tools/libxl/libxl_internal.h
+--- xen-4.1.2.orig/tools/libxl/libxl_internal.h	2011-10-20 19:05:43.000000000 +0200
++++ xen-4.1.2/tools/libxl/libxl_internal.h	2012-08-23 00:41:49.410505783 +0200
+@@ -51,6 +51,7 @@
+ #define STUBDOM_CONSOLE_SERIAL 3
+ #define STUBDOM_SPECIAL_CONSOLES 3
+ #define SAVEFILE "/var/lib/xen/qemu-save"
++#define TAP_DEVICE_SUFFIX "-emu"
+ 
+ #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
+ 
+@@ -199,6 +200,10 @@
+                                                       void *userdata),
+                                 void *check_callback_userdata);
+ _hidden int libxl__wait_for_backend(libxl_ctx *ctx, char *be_path, char *state);
++_hidden const char *libxl__device_nic_devname(libxl__gc *gc,
++                                              uint32_t domid,
++                                              uint32_t devid,
++                                              libxl_nic_type type);
+ 
+ /* from libxl_pci */
+ 
+diff -ur xen-4.1.2.orig/tools/python/xen/xend/image.py xen-4.1.2/tools/python/xen/xend/image.py
+--- xen-4.1.2.orig/tools/python/xen/xend/image.py	2011-10-20 19:05:44.000000000 +0200
++++ xen-4.1.2/tools/python/xen/xend/image.py	2012-08-23 00:43:20.612487943 +0200
+@@ -917,11 +917,7 @@
+             ret.append("-net")
+             ret.append("nic,vlan=%d,macaddr=%s,model=%s" %
+                        (nics, mac, model))
+-            vifname = devinfo.get('vifname')
+-            if vifname:
+-                vifname = "tap-" + vifname
+-            else:
+-                vifname = "tap%d.%d" % (self.vm.getDomid(), nics-1)
++            vifname = "vif%d.%d-emu" % (self.vm.getDomid(), nics-1)
+             ret.append("-net")
+             ret.append("tap,vlan=%d,ifname=%s,bridge=%s" %
+                        (nics, vifname, bridge))

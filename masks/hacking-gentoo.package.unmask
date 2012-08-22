@@ -1,5 +1,7 @@
 # Un-mask Hacking Gentoo replacement packages.
 app-admin/syslog-ng::hacking-gentoo
 app-admin/update-ca-certificates::hacking-gentoo
+app-emulation/xen::hacking-gentoo
+app-emulation/xen-tools::hacking-gentoo
 app-misc/ca-certificates::hacking-gentoo
 dev-libs/nss::hacking-gentoo

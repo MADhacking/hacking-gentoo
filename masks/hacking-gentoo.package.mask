@@ -5,5 +5,7 @@ app-portage/auto-patch-portage
 # Masked unless overlay used in replace mode
 app-admin/syslog-ng
 app-admin/update-ca-certificates
+app-emulation/xen
+app-emulation/xen-tools
 app-misc/ca-certificates
 dev-libs/nss
