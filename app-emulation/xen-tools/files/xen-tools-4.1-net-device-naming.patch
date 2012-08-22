@@ -39,7 +39,7 @@ diff -ur xen-4.1.2.orig/tools/hotplug/Linux/xen-backend.rules xen-4.1.2/tools/ho
 \ No newline at end of file
 diff -ur xen-4.1.2.orig/tools/libxl/libxl.c xen-4.1.2/tools/libxl/libxl.c
 --- xen-4.1.2.orig/tools/libxl/libxl.c	2011-10-20 19:05:42.000000000 +0200
-+++ xen-4.1.2/tools/libxl/libxl.c	2012-08-23 00:09:24.740730649 +0200
++++ xen-4.1.2/tools/libxl/libxl.c	2012-08-23 01:45:02.567941473 +0200
 @@ -1559,6 +1559,21 @@
      return libxl__device_del(ctx, &device, wait);
  }
@@ -50,9 +50,9 @@ diff -ur xen-4.1.2.orig/tools/libxl/libxl.c xen-4.1.2/tools/libxl/libxl.c
 +                                      libxl_nic_type type)
 +{
 +    switch (type) {
-+    case LIBXL_NIC_TYPE_VIF:
++    case NICTYPE_VIF:
 +        return GCSPRINTF("vif%u.%d", domid, devid);
-+    case LIBXL_NIC_TYPE_IOEMU:
++    case NICTYPE_IOEMU:
 +        return GCSPRINTF("vif%u.%d" TAP_DEVICE_SUFFIX, domid, devid);
 +    default:
 +        abort();
@@ -64,7 +64,7 @@ diff -ur xen-4.1.2.orig/tools/libxl/libxl.c xen-4.1.2/tools/libxl/libxl.c
  int libxl_device_console_add(libxl_ctx *ctx, uint32_t domid, libxl_device_console *console)
 diff -ur xen-4.1.2.orig/tools/libxl/libxl_dm.c xen-4.1.2/tools/libxl/libxl_dm.c
 --- xen-4.1.2.orig/tools/libxl/libxl_dm.c	2011-10-20 19:05:42.000000000 +0200
-+++ xen-4.1.2/tools/libxl/libxl_dm.c	2012-08-23 00:34:14.917294913 +0200
++++ xen-4.1.2/tools/libxl/libxl_dm.c	2012-08-23 01:43:42.395810853 +0200
 @@ -134,11 +134,9 @@
                  char *smac = libxl__sprintf(gc, "%02x:%02x:%02x:%02x:%02x:%02x",
                                             vifs[i].mac[0], vifs[i].mac[1], vifs[i].mac[2],
@@ -75,8 +75,8 @@ diff -ur xen-4.1.2.orig/tools/libxl/libxl_dm.c xen-4.1.2/tools/libxl/libxl_dm.c
 -                else
 -                    ifname = vifs[i].ifname;
 +                const char *ifname = libxl__device_nic_devname(gc,
-+                                                domid, vifs[i].devid,
-+                                                LIBXL_NIC_TYPE_IOEMU);
++                                                info->domid, vifs[i].devid,
++                                                NICTYPE_IOEMU);
                  flexarray_vappend(dm_args,
                                  "-net", libxl__sprintf(gc, "nic,vlan=%d,macaddr=%s,model=%s",
                                                         vifs[i].devid, smac, vifs[i].model),
@@ -91,8 +91,8 @@ diff -ur xen-4.1.2.orig/tools/libxl/libxl_dm.c xen-4.1.2/tools/libxl/libxl_dm.c
 -                    ifname = vifs[i].ifname;
 -                }
 +                const char *ifname = libxl__device_nic_devname(gc,
-+                                                guest_domid, vifs[i].devid,
-+                                                LIBXL_NIC_TYPE_IOEMU);
++                                                info->domid, vifs[i].devid,
++                                                NICTYPE_IOEMU);
                  flexarray_append(dm_args, "-net");
                  flexarray_append(dm_args, libxl__sprintf(gc, "nic,vlan=%d,macaddr=%s,model=%s",
                              vifs[i].devid, smac, vifs[i].model));
