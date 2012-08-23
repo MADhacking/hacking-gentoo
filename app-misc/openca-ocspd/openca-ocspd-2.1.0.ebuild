@@ -32,7 +32,7 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}"/*.patch
-	
+
 	autotools-utils_src_prepare
 	AT_NOELIBTOOLIZE=yes eautoreconf
 
@@ -51,9 +51,9 @@ src_configure() {
 
 src_install() {
 	autotools-utils_src_install
-	
+
 	newinitd "${FILESDIR}"/ocspd.rc ocspd
-	
+
 	dodir /var/run/ocspd
 	fowners ocspd:root /var/run/ocspd
 	dodir /var/db/ocspd

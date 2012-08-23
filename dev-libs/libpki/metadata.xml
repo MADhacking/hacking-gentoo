@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+
+<pkgmetadata>
+	<!-- <herd>no-herd</herd> -->
+	<maintainer>
+		<email>default-package-maintainer@mad-hacking.net</email>
+	</maintainer>
+	<use>
+		<flag name='examples'>Build examples</flag>
+		<flag name='mysql'>Include support for MySQL databases</flag>
+		<flag name='postgres'>Include support for PostgreSQL databases</flag>
+		<flag name='ssl'>Include SSL support</flag>
+		<flag name='static-libs'>Build static libraries</flag>
+		<flag name='ldap'>Include support for LDAP</flag>
+	</use>
+</pkgmetadata>

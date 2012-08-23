@@ -14,5 +14,7 @@
 		<flag name='ioemu'>Enable IOEMU support</flag>
 		<flag name='pygrub'>Install the pygrub boot loader</flag>
 		<flag name='screen'>Enable support for running domain U console in an <pkg>app-misc/screen</pkg> session</flag>
+		<flag name='qemu'>Enable IOEMU support via the use of qemu-dm</flag>
+		<flag name='xend'>Build xend (and xm to manage xen)</flag>
 	</use>
 </pkgmetadata>

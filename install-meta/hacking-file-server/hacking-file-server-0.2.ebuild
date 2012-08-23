@@ -13,8 +13,7 @@ IUSE="+rdiff-backup-client"
 RDEPEND="${DEPEND}
 	install-meta/hacking-base-server
 	net-fs/samba"
-	
+
 # Configuration dependencies
 RDEPEND="${RDEPEND}
 	rdiff-backup-client? ( install-conf/rdiff-backup-client )"
-	

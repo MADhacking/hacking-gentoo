@@ -22,6 +22,6 @@ RDEPEND="${DEPEND}
 	sys-apps/lm_sensors
 	sys-apps/pciutils
 	sys-apps/smartmontools
-	sys-boot/grub				
+	sys-boot/grub
 	sys-fs/lvm2
 	sys-fs/mdadm"
