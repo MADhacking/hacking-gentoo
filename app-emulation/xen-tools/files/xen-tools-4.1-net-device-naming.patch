@@ -39,8 +39,20 @@ diff -ur xen-4.1.2.orig/tools/hotplug/Linux/xen-backend.rules xen-4.1.2/tools/ho
 \ No newline at end of file
 diff -ur xen-4.1.2.orig/tools/libxl/libxl.c xen-4.1.2/tools/libxl/libxl.c
 --- xen-4.1.2.orig/tools/libxl/libxl.c	2011-10-20 19:05:42.000000000 +0200
-+++ xen-4.1.2/tools/libxl/libxl.c	2012-08-23 02:07:03.074878389 +0200
-@@ -1559,6 +1559,21 @@
++++ xen-4.1.2/tools/libxl/libxl.c	2012-08-23 03:21:20.338141394 +0200
+@@ -1237,6 +1237,11 @@
+         flexarray_append(back, "ip");
+         flexarray_append(back, libxl__strdup(&gc, nic->ip));
+     }
++    if (nic->ifname) {
++        flexarray_append(back, "vifname");
++        flexarray_append(back, libxl__strdup(&gc, nic->ifname));
++    }
++
+ 
+     flexarray_append(back, "bridge");
+     flexarray_append(back, libxl__strdup(&gc, nic->bridge));
+@@ -1559,6 +1564,21 @@
      return libxl__device_del(ctx, &device, wait);
  }
  
