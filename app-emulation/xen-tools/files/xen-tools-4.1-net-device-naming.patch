@@ -39,7 +39,7 @@ diff -ur xen-4.1.2.orig/tools/hotplug/Linux/xen-backend.rules xen-4.1.2/tools/ho
 \ No newline at end of file
 diff -ur xen-4.1.2.orig/tools/libxl/libxl.c xen-4.1.2/tools/libxl/libxl.c
 --- xen-4.1.2.orig/tools/libxl/libxl.c	2011-10-20 19:05:42.000000000 +0200
-+++ xen-4.1.2/tools/libxl/libxl.c	2012-08-23 01:52:20.498048992 +0200
++++ xen-4.1.2/tools/libxl/libxl.c	2012-08-23 02:07:03.074878389 +0200
 @@ -1559,6 +1559,21 @@
      return libxl__device_del(ctx, &device, wait);
  }
@@ -51,9 +51,9 @@ diff -ur xen-4.1.2.orig/tools/libxl/libxl.c xen-4.1.2/tools/libxl/libxl.c
 +{
 +    switch (type) {
 +    case NICTYPE_VIF:
-+        return libxl__sprintf(&gc, "vif%u.%d", domid, devid);
++        return libxl__sprintf(gc, "vif%u.%d", domid, devid);
 +    case NICTYPE_IOEMU:
-+        return libxl__sprintf(&gc, "vif%u.%d" TAP_DEVICE_SUFFIX, domid, devid);
++        return libxl__sprintf(gc, "vif%u.%d" TAP_DEVICE_SUFFIX, domid, devid);
 +    default:
 +        abort();
 +    }
