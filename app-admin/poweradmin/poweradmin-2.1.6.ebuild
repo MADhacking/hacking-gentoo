@@ -11,12 +11,13 @@ HOMEPAGE="http://www.poweradmin.org/"
 SRC_URI="http://github.com/downloads/poweradmin/poweradmin/${P}.tgz"
 
 LICENSE="GPL-2"
-KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd ~x86 ~x86-fbsd"
+KEYWORDS="~alpha amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd x86 ~x86-fbsd"
 IUSE="mysql postgres vhosts"
 
 RDEPEND="mysql? ( || ( dev-php/PEAR-MDB2[mysql] dev-php/PEAR-MDB2[mysqli] ) )
+	mysql? ( || ( dev-lang/php[mysql] dev-lang/php[mysqli] ) )
 	postgres? ( dev-php/PEAR-MDB2[postgres] )
-	dev-lang/php[session]"
+	dev-lang/php[session,postgres?,crypt]"
 
 S="${WORKDIR}/${PN}.tmp"
 
@@ -24,8 +25,8 @@ need_httpd_cgi
 need_php_httpd
 
 pkg_setup() {
- 	webapp_pkg_setup
- 	confutils_require_any mysql postgres
+	webapp_pkg_setup
+	confutils_require_any mysql postgres
 }
 
 src_install() {
