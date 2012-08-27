@@ -14,8 +14,9 @@ LICENSE="GPL-2"
 KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd ~x86 ~x86-fbsd"
 IUSE="mysql postgres vhosts"
 
-RDEPEND="mysql? ( || ( dev-lang/php[mysql] dev-lang/php[mysqli] ) )
-	dev-lang/php[session,pdo,postgres?]"
+RDEPEND="mysql? ( || ( dev-php/PEAR-MDB2[mysql] dev-php/PEAR-MDB2[mysqli] ) )
+	postgres? ( dev-php/PEAR-MDB2[postgres] )
+	dev-lang/php[session]"
 
 S="${WORKDIR}/${PN}.tmp"
 
