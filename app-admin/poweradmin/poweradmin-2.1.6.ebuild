@@ -15,7 +15,7 @@ KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sp
 IUSE="mysql postgres vhosts"
 
 RDEPEND="mysql? ( || ( dev-lang/php[mysql] dev-lang/php[mysqli] ) )
-	dev-lang/php[session,postgres?]"
+	dev-lang/php[session,pdo,postgres?]"
 
 S="${WORKDIR}/${PN}.tmp"
 
