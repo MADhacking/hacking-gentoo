@@ -12,4 +12,9 @@
 		</maintainer>
 		<doc>http://www.poweradmin.org/trac/wiki/Documentation</doc>
 	</upstream>
+	<use>
+		<flag name="vhosts">Adds support for installing web-based applications into a virtual-hosting environment</flag>
+		<flag name="postgres">Adds support for the PostgreSQL database</flag>
+		<flag name="mysql">Adds support for the MySQL database</flag>
+	</use>
 </pkgmetadata>

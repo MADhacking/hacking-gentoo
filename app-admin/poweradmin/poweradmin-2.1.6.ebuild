@@ -12,9 +12,10 @@ SRC_URI="http://github.com/downloads/poweradmin/poweradmin/${P}.tgz"
 
 LICENSE="GPL-2"
 KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd ~x86 ~x86-fbsd"
-IUSE=""
+IUSE="mysql postgres vhosts"
 
-RDEPEND="dev-lang/php"
+RDEPEND="mysql? ( || ( dev-lang/php[mysql] dev-lang/php[mysqli] ) )
+	dev-lang/php[session,postgres?]"
 
 S="${WORKDIR}/${PN}.tmp"
 
