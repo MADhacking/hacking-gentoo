@@ -11,12 +11,15 @@ HOMEPAGE="http://www.poweradmin.org/"
 SRC_URI="http://github.com/downloads/poweradmin/poweradmin/${P}.tgz"
 
 LICENSE="GPL-2"
-SLOT="0"
 KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd ~x86 ~x86-fbsd"
 IUSE=""
 
-RDEPEND="dev-lang/php
-	www-servers/apache"
+RDEPEND="dev-lang/php"
+
+S="${WORKDIR}/${PN}.tmp"
+
+need_httpd_cgi
+need_php_httpd
 
 pkg_setup() {
  	webapp_pkg_setup
