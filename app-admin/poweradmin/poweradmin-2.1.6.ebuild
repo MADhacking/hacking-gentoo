@@ -30,6 +30,8 @@ pkg_setup() {
 src_install() {
 	webapp_src_preinst
 
+	cd "${P}"
+
 	rm -f README.markdown LICENSE .gitignore
 
 	insinto "${MY_HTDOCSDIR}"
