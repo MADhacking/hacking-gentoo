@@ -82,7 +82,9 @@ cadb_pkg_postinst() {
 # packages which use them. 
 
 cadb_pkg_postrm() {
-	cadb_update_ca_databases $@
+	# If we are removing the last instance of a package then we need to
+	# update the database again, we've just done it if this was an upgrade.
+	has_version "${CATEGORY}/${PN}" || cadb_update_ca_databases $@
 }
 
 EXPORT_FUNCTIONS src_install pkg_postinst pkg_postrm
