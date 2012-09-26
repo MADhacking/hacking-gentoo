@@ -6,8 +6,8 @@
 	<maintainer>
 		<email>default-package-maintainer@mad-hacking.net</email>
 	</maintainer>
-	<use>
+	<!-- <use>
 		<flag name='nss'>Add certificates to the NSS system database</flag>
 		<flag name='openssl'>Add certificates to the OpenSSL system database</flag>
-	</use>
+	</use> -->
 </pkgmetadata>

@@ -2,6 +2,7 @@ app-admin
 app-emulation
 app-misc
 app-portage
+dev-java
 dev-libs
 install-conf
 install-meta

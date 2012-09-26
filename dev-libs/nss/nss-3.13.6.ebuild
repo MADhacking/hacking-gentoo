@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/dev-libs/nss/nss-3.13.6.ebuild,v 1.4 2012/09/15 12:12:45 nativemad Exp $
 
 EAPI=3
-inherit eutils flag-o-matic multilib toolchain-funcs
+inherit eutils cadb flag-o-matic multilib toolchain-funcs
 
 NSPR_VER="4.9.2"
 RTM_NAME="NSS_${PV//./_}_RTM"
@@ -173,8 +173,8 @@ src_install () {
 	done
 
 	local nssutils
-	# Always enabled because we need it for chk generation.
-	nssutils="shlibsign"
+	# Always enabled because we need them for db manipulation and chk generation.
+	nssutils="certutil shlibsign"
 	if use utils; then
 		# The tests we do not need to install.
 		#nssutils_test="bltest crmftest dbtest dertimetest
@@ -231,6 +231,9 @@ pkg_postinst() {
 		einfo
 		einfo "certutil -W -d \"${EROOT}/etc/pki/nssdb\""
 	fi
+
+	# Populate the certificate DB.
+	cadb_pkg_postinst nss
 }
 
 pkg_postrm() {

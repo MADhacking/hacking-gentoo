@@ -15,7 +15,7 @@ LICENSE="MPL-1.1"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
 
-IUSE="+nss +openssl"
+IUSE=""
 IUSE_CERTIFICATE_AUTHORITIES="atrust ac acedicom addtrust affirmtrust aol acf baltimore
 buypass cacert camerfirma certigna certinomis certplus certum cnnic comodo comsign
 cybertrust dt digicert dst ebg ec entrust equifax geotrust globalsign godaddy hari
@@ -26,12 +26,6 @@ tdc thawte turktrust twca tubitak utn valenciana valicert verisign visa wells xr
 # platforms like AIX don't have a good ar
 DEPEND="kernel_AIX? ( app-arch/deb2targz )
 	!<sys-apps/portage-2.1.10.41"
-# openssl: we run `c_rehash`
-# app-admin/update-ca-certificates: update-ca-certificates (new version)
-RDEPEND="${DEPEND}
-	app-admin/update-ca-certificates
-	dev-libs/openssl
-	nss? ( dev-libs/nss[utils] )"
 
 S=${WORKDIR}
 
@@ -60,6 +54,9 @@ src_unpack() {
 }
 
 src_install() {
+	# Don't forget to call the eclass src_install function too.
+	cadb_src_install
+
 	# Loop through the certindex installing the appropriate certificates
 	# depending on the IUSE_CERTIFICATE_AUTHORITIES flag.
 	insinto /usr/share/ca-certificates
@@ -76,37 +73,7 @@ src_install() {
 	dodir /etc/ca-certificates/update.d
 	dodir /etc/ssl/certs
 
-	# Make sure local certificate directory exists.
-	dodir /usr/local/share/ca-certificates
-
 	# Create CONFIG_PROTECT_MASK env.d file.
 	echo 'CONFIG_PROTECT_MASK="/etc/ca-certificates.conf"' > 98ca-certificates
 	doenvd 98ca-certificates
-}
-
-pkg_postinst() {
-	# Update the certificate database
-	if use nss; then
-		ebegin "Updating NSS system certificate database"
-		"${EROOT}"/usr/bin/update-ca-certificates --fresh --root "${EROOT}" --db-type nss
-		eend $?
-	fi
-	if use openssl; then
-		ebegin "Updating OpenSSL certificate database"
-		"${EROOT}"/usr/bin/update-ca-certificates --fresh --root "${EROOT}" --db-type openssl
-		eend $?
-	fi
-
-	# This should now be done automatically however it is worth checking.
-	local c badcerts=0
-	for c in $(find -L "${EROOT}"etc/ssl/certs/ -type l) ; do
-		ewarn "Broken symlink for a certificate at $c"
-		badcerts=1
-	done
-	if [ $badcerts -eq 1 ]; then
-		ewarn "You MUST remove the above broken symlinks"
-		ewarn "Otherwise any SSL validation that use the directory may fail!"
-		ewarn "To batch-remove them, run:"
-		ewarn "find -L ${EROOT}etc/ssl/certs/ -type l -exec rm {} +"
-	fi
 }
