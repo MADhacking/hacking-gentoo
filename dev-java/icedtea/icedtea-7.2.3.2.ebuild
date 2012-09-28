@@ -300,7 +300,7 @@ src_install() {
 	java-vm_set-pax-markings "${ddest}"
 
 	# We no longer generate the keystore, see pkg_postinst.
-	dosym "/usr/share/java-cert-db/cacerts" "${dest}/jre/lib/security/cacerts"
+	dosym /usr/share/java-cert-db/cacerts "${dest}"/jre/lib/security/cacerts
 
 	# OpenJDK7 should be able to use fontconfig instead, but wont hurt to
 	# install it anyway. Bug 390663
