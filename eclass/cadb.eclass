@@ -16,6 +16,7 @@ inherit eutils
 
 DEPEND="dev-libs/openssl
 		 >=app-admin/update-ca-certificates-0.6"
+RDEPEND="${DEPEND}"
 
 # @FUNCTION: cadb_src_install
 # @DESCRIPTION:
