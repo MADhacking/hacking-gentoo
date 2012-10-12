@@ -9,3 +9,4 @@ install-meta
 net-firewall
 snmp-agents
 snmp-mibs
+www-apache
