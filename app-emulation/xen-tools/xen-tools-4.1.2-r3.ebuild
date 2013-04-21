@@ -13,7 +13,7 @@ if [[ $PV == *9999 ]]; then
 	S="${WORKDIR}/${REPO}"
 	live_eclass="mercurial"
 else
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 x86"
 	XEN_EXTFILES_URL="http://xenbits.xensource.com/xen-extfiles"
 	SRC_URI="http://bits.xensource.com/oss-xen/release/${PV}/xen-${PV}.tar.gz \
 	$XEN_EXTFILES_URL/ipxe-git-v1.0.0.tar.gz"

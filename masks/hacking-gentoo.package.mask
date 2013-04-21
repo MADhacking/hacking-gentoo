@@ -10,3 +10,8 @@ app-emulation/xen-tools
 app-misc/ca-certificates
 dev-java/icedtea
 dev-libs/nss
+media-gfx/blender
+sys-devel/binutils
+sys-devel/crossdev
+www-apache/mod_depends
+www-apache/mod_transform

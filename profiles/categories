@@ -4,9 +4,12 @@ app-misc
 app-portage
 dev-java
 dev-libs
+dev-php
 install-conf
 install-meta
+media-gfx
 net-firewall
 snmp-agents
 snmp-mibs
+sys-devel
 www-apache

@@ -1,6 +1,72 @@
 # ChangeLog for dev-java/icedtea
-# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/icedtea/ChangeLog,v 1.83 2012/09/28 10:41:09 sera Exp $
+# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/dev-java/icedtea/ChangeLog,v 1.94 2013/03/17 15:26:36 hwoarang Exp $
+
+  17 Mar 2013; Markos Chandras <hwoarang@gentoo.org> metadata.xml:
+  Add proxy-maintainers to metadata.xml
+
+*icedtea-7.2.3.8 (14 Mar 2013)
+*icedtea-6.1.12.4 (14 Mar 2013)
+
+  14 Mar 2013; Ralph Sennhauser <sera@gentoo.org> -icedtea-6.1.12.2.ebuild,
+  -icedtea-6.1.12.3.ebuild, +icedtea-6.1.12.4.ebuild, -icedtea-7.2.3.6.ebuild,
+  +icedtea-7.2.3.8.ebuild:
+  Security bump. #461714
+
+*icedtea-6.1.12.3 (20 Feb 2013)
+
+  20 Feb 2013; Ralph Sennhauser <sera@gentoo.org> +icedtea-6.1.12.3.ebuild:
+  Security bump #458410
+
+*icedtea-7.2.3.6 (13 Feb 2013)
+*icedtea-6.1.12.2 (13 Feb 2013)
+
+  13 Feb 2013; Ralph Sennhauser <sera@gentoo.org> -icedtea-6.1.11.5.ebuild,
+  -icedtea-6.1.12.0.ebuild, -files/icedtea-6.1.12.0-parallel-unpack.patch,
+  -icedtea-6.1.12.1.ebuild, +icedtea-6.1.12.2.ebuild,
+  -files/icedtea-6-pass_javac_memory_args_to_vm.patch,
+  -files/icedtea-6_pax_kernel_support.patch,
+  -files/icedtea-7.2.3.2-pax_mark_rmic_java.patch,
+  -files/icedtea-7.2.3.3-pax_mark_rmic_java.patch, -icedtea-7.2.3.4.ebuild,
+  -files/icedtea-7.2.3.4-parallel-unpack.patch, +icedtea-7.2.3.6.ebuild:
+  Bump, security fixes for 7, regression fixes for 6
+  Remove vulnerable
+
+*icedtea-6.1.12.1 (11 Feb 2013)
+
+  11 Feb 2013; Ralph Sennhauser <sera@gentoo.org> +icedtea-6.1.12.1.ebuild:
+  Security bump
+
+  05 Feb 2013; Rick Farina <zerochaos@gentoo.org> icedtea-6.1.12.0.ebuild:
+  adding ~arm
+
+  01 Feb 2013; Ralph Sennhauser <sera@gentoo.org> icedtea-6.1.12.0.ebuild,
+  +files/icedtea-6.1.12.0-parallel-unpack.patch, icedtea-7.2.3.4.ebuild,
+  +files/icedtea-7.2.3.4-parallel-unpack.patch:
+  Fix parallel unpacking for cacao and jamvm. #453608
+
+*icedtea-6.1.12.0 (31 Jan 2013)
+
+  31 Jan 2013; Ralph Sennhauser <sera@gentoo.org> -icedtea-6.1.11.4.ebuild,
+  +icedtea-6.1.12.0.ebuild, -icedtea-7.2.3.2.ebuild, -icedtea-7.2.3.3.ebuild:
+  Version bump, import from java-overlay
+  Remove old /vulnerable
+
+  23 Jan 2013; Ralph Sennhauser <sera@gentoo.org> icedtea-6.1.11.5.ebuild,
+  icedtea-7.2.3.4.ebuild:
+  Use jamvm and replace -Os with -O2 on arm. #IT1266 #IT1267
+
+*icedtea-7.2.3.4 (16 Jan 2013)
+
+  16 Jan 2013; Ralph Sennhauser <sera@gentoo.org> +icedtea-7.2.3.4.ebuild:
+  Security bump. #452432
+
+*icedtea-7.2.3.3 (18 Oct 2012)
+*icedtea-6.1.11.5 (18 Oct 2012)
+
+  18 Oct 2012; Ralph Sennhauser <sera@gentoo.org> +icedtea-6.1.11.5.ebuild,
+  +icedtea-7.2.3.3.ebuild, +files/icedtea-7.2.3.3-pax_mark_rmic_java.patch:
+  Security bump. #438750
 
   28 Sep 2012; Ralph Sennhauser <sera@gentoo.org> icedtea-6.1.11.4.ebuild,
   icedtea-7.2.3.2.ebuild:
@@ -466,4 +532,3 @@
   +files/generate-cacerts.pl, +files/icedtea.env, +metadata.xml:
   Import of ebuild by Andrew John Hughes (gnu_andrew@member.fsf.org) from
   java-overlay.
-

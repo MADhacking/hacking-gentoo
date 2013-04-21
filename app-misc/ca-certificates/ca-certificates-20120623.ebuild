@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-inherit eutils
+inherit eutils cadb
 
 DESCRIPTION="Common CA Certificates PEM files"
 HOMEPAGE="http://packages.debian.org/sid/ca-certificates"
@@ -14,20 +14,20 @@ SRC_URI="mirror://debian/pool/main/c/${PN}/${PN}_${PV}${NMU_PR:++nmu}${NMU_PR}_a
 LICENSE="MPL-1.1"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
-
 IUSE=""
-IUSE_CERTIFICATE_AUTHORITIES="atrust ac acedicom addtrust affirmtrust aol acf baltimore
-buypass cacert camerfirma certigna certinomis certplus certum cnnic comodo comsign
-cybertrust dt digicert dst ebg ec entrust equifax geotrust globalsign godaddy hari
-hkp igc izenpe japgov juur microsec netlock netsol nl oiste poste quovadis securesign
-securetrust seccomm sonera spi strust starfield startcom swisscom swisssign taiwan tc
-tdc thawte turktrust twca tubitak utn valenciana valicert verisign visa wells xramp"
 
 # platforms like AIX don't have a good ar
 DEPEND="kernel_AIX? ( app-arch/deb2targz )
 	!<sys-apps/portage-2.1.10.41"
 
 S=${WORKDIR}
+
+IUSE_CERTIFICATE_AUTHORITIES="atrust ac acedicom addtrust affirmtrust aol acf baltimore
+buypass cacert camerfirma certigna certinomis certplus certum cnnic comodo comsign
+cybertrust dt digicert dst ebg ec entrust equifax geotrust globalsign godaddy hari
+hkp igc izenpe japgov juur microsec netlock netsol nl oiste poste quovadis securesign
+securetrust seccomm sonera spi strust starfield startcom swisscom swisssign taiwan tc
+tdc thawte turktrust twca tubitak utn valenciana valicert verisign visa wells xramp"
 
 for ca in ${IUSE_CERTIFICATE_AUTHORITIES}; do
 	IUSE="${IUSE} certificate_authorities_${ca}"

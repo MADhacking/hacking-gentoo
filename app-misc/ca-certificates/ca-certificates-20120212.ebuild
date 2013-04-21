@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-inherit eutils
+inherit eutils cadb
 
 DESCRIPTION="Common CA Certificates PEM files"
 HOMEPAGE="http://packages.debian.org/sid/ca-certificates"

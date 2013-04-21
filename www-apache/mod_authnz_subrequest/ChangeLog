@@ -1,0 +1,6 @@
+# ChangeLog for www-apache/mod_authnz_subrequest
+
+*mod_authnz_subrequest-0.1 (9 Nov 2012)
+
+  9 Nov 2012; Max Hacking <max@hacking.co.uk> metadata.xml
+  mod_authnz_subrequest-0.1.ebuild, files/08_mod_authnz_subrequest.conf

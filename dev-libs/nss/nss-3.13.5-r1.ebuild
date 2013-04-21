@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
-# $Header$
+# Copyright 2012 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3
+# $Header: /mnt/cvs/repos/mad-hacking/hacking-gentoo-patchset/header.txt,v 1.1 2013/04/19 14:53:19 max Exp $
 
 EAPI=3
 inherit eutils cadb flag-o-matic multilib toolchain-funcs
@@ -142,7 +142,7 @@ cleanup_chk() {
 	done
 }
 
-src_install () {
+src_install() {
 	MINOR_VERSION=12
 	cd "${S}"/mozilla/security/dist || die
 
@@ -186,7 +186,7 @@ src_install () {
 		symkeyutil tstclnt vfychain vfyserv"
 	fi
 	cd "${S}"/mozilla/security/dist/*/bin/ || die
-	for f in $nssutils; do
+	for f in ${nssutils}; do
 		dobin ${f} || die
 	done
 
