@@ -1,6 +1,6 @@
 # Copyright 2012 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
-# $Header$
+# $Header: $
 
 # TODO:
 #   bundled-deps: eigen:3 is too old
@@ -94,7 +94,7 @@ pkg_setup() {
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2.66-{unbundle,cmake,doxyfile}.patch
 	epatch "${FILESDIR}"/dupligroup_depth.patch
-	
+
 	# remove some bundled deps
 	rm -r \
 		extern/libopenjpeg \

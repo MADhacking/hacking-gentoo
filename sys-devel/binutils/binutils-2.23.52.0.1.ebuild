@@ -1,6 +1,6 @@
 # Copyright 2012 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
-# $Header$
+# $Header: $
 
 PATCHVER="1.0"
 ELF2FLT_VER=""

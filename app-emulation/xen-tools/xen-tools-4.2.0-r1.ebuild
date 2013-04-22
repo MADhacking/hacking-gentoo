@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/xen-tools/xen-tools-4.2.0-r1.ebuild,v 1.3 2012/12/11 09:06:27 ssuominen Exp $
+# $Header: $
 
 EAPI="4"
 PYTHON_DEPEND="2"
@@ -39,14 +39,14 @@ CDEPEND="<dev-libs/yajl-2
 	dev-python/pypam
 	dev-python/pyxml
 	sys-libs/zlib
-	sys-devel/bin86
-	sys-devel/dev86
 	sys-power/iasl
 	dev-ml/findlib
 	hvm? ( media-libs/libsdl )
 	api? ( dev-libs/libxml2 net-misc/curl )"
 
 DEPEND="${CDEPEND}
+	sys-devel/bin86
+	sys-devel/dev86
 	sys-devel/gcc
 	dev-lang/perl
 	app-misc/pax-utils

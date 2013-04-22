@@ -1,6 +1,6 @@
 # Copyright 2012 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
-# $Header$
+# $Header: $
 
 # *********************************************************
 # * IF YOU CHANGE THIS EBUILD, CHANGE ICEDTEA-6.* AS WELL *

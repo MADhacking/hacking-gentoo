@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/xen-tools/xen-tools-4.1.2-r3.ebuild,v 1.1 2012/07/10 21:59:27 prometheanfire Exp $
+# $Header: $
 
 EAPI="4"
 PYTHON_DEPEND="2"

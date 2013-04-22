@@ -1,6 +1,6 @@
 # Copyright 2012 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
-# $Header: /mnt/cvs/repos/mad-hacking/hacking-gentoo-patchset/header.txt,v 1.1 2013/04/19 14:53:19 max Exp $
+# $Header: $
 
 EAPI=3
 inherit eutils cadb flag-o-matic multilib toolchain-funcs

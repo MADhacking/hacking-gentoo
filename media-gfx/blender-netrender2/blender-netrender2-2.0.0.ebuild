@@ -1,5 +1,6 @@
 # Copyright 2013 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
+# $Header: $
 
 EAPI="3"
 
@@ -16,5 +17,5 @@ RDEPEND="${DEPEND}
 		media-gfx/blender"
 
 src_install() {
-	doins -r ${WORKDIR}/netrender2-${PV}/*
+	doins -r "${WORKDIR}/netrender2-${PV}"/*
 }

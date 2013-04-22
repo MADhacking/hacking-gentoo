@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/xen/xen-4.2.0.ebuild,v 1.1 2012/12/04 12:35:44 idella4 Exp $
+# $Header: $
 
 EAPI="4"
 

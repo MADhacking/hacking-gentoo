@@ -1,6 +1,7 @@
 # Copyright 2010 Hacking Networked Solutions
 # Based on the original ebuild provided by Gentoo Linux 
 # Distributed under the terms of the GNU General Public License v2
+# $Header: $
 
 inherit eutils flag-o-matic autotools linux-info
 

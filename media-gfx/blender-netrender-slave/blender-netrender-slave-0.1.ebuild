@@ -1,4 +1,6 @@
 # Copyright 2013 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3
+# $Header: $
 
 EAPI="3"
 
@@ -26,10 +28,10 @@ pkg_setup() {
 }
 
 src_install() {
-	doinitd ${WORKDIR}/${P}/etc/init.d/blender.slave
+	doinitd "${WORKDIR}/${P}"/etc/init.d/blender.slave
 
 	insinto /usr
-	doins -r ${WORKDIR}/${P}/usr/*
+	doins -r "${WORKDIR}/${P}"/usr/*
 
 	dodir ${logdir}
 	fowners root:blender ${logdir}

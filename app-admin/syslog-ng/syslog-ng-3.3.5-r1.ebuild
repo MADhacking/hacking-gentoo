@@ -1,6 +1,6 @@
 # Copyright 2012 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
-# $Header$
+# $Header: $
 
 EAPI=2
 inherit autotools eutils multilib
@@ -133,7 +133,7 @@ pkg_preinst() {
 pkg_postinst() {
 	elog "For detailed documentation please see the upstream website:"
 	elog "http://www.balabit.com/sites/default/files/documents/syslog-ng-ose-3.3-guides/syslog-ng-ose-v3.3-guide-admin-en.html/index.html"
- 	echo
+	echo
 	ewarn "Please note that the standard location of the socket and PID file has changed from"
 	ewarn "/var/run/syslog-ng.* to /var/run/syslog-ng/syslog-ng.* and you have to be in the"
 	ewarn "'syslog' group to access the control socket or /var/log/messages."
@@ -144,7 +144,7 @@ pkg_postinst() {
 		chown syslog:syslog /var/log
 		[[ -e /var/log/messages ]] && chown syslog:syslog /var/log/messages
 		echo
-	fi 
+	fi
 
 	# bug #355257
 	if ! has_version app-admin/logrotate ; then

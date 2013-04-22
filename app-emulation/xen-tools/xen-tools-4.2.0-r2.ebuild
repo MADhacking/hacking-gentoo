@@ -1,6 +1,6 @@
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/xen-tools/xen-tools-4.2.0-r2.ebuild,v 1.3 2012/12/20 23:37:50 mgorny Exp $
+# $Header: $
 
 EAPI=5
 
@@ -40,8 +40,6 @@ CDEPEND="<dev-libs/yajl-2
 	dev-python/pypam[${PYTHON_USEDEP}]
 	dev-python/pyxml[${PYTHON_USEDEP}]
 	sys-libs/zlib
-	sys-devel/bin86
-	sys-devel/dev86
 	sys-power/iasl
 	dev-ml/findlib
 	hvm? ( media-libs/libsdl )
@@ -50,6 +48,8 @@ CDEPEND="<dev-libs/yajl-2
 	pygrub? ( ${PYTHON_DEPS//${PYTHON_REQ_USE}/ncurses} )"
 
 DEPEND="${CDEPEND}
+	sys-devel/bin86
+	sys-devel/dev86
 	sys-devel/gcc
 	dev-lang/perl
 	app-misc/pax-utils

@@ -26,9 +26,9 @@ src_install() {
 	# We want to install the geshi subdirectory and the geshi.php file
 	# to /usr/share/php/geshi
 	insinto /usr/share/php/${PN}
-	doins -r ${S}/${PN}
-	doins ${S}/${PN}.php
+	doins -r "${S}/${PN}"
+	doins "${S}/${PN}.php"
 
-	dodoc ${S}/docs/{BUGS,CHANGES,README,THANKS,*.txt}
-	dohtml ${S}/docs/*.html
+	dodoc "${S}"/docs/{BUGS,CHANGES,README,THANKS,*.txt}
+	dohtml "${S}"/docs/*.html
 }

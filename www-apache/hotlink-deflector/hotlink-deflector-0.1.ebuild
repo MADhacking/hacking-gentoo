@@ -1,6 +1,6 @@
 # Copyright 2010 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
-# $Header$
+# $Header: $
 
 EAPI="3"
 
@@ -16,5 +16,5 @@ IUSE=""
 RDEPEND="www-servers/apache"
 
 src_install() {
-	cp -a ${WORKDIR}/${P}/* ${ED}/
+	cp -a "${WORKDIR}/${P}"/* "${ED}"/
 }

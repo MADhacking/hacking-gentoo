@@ -1,6 +1,7 @@
 # Copyright 2012 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
 # Based on a previous version found at http://code.google.com/p/slepnoga/
+# $Header: $
 
 EAPI="4"
 
