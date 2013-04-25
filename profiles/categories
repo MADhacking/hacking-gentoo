@@ -11,5 +11,6 @@ media-gfx
 net-firewall
 snmp-agents
 snmp-mibs
+sys-apps
 sys-devel
 www-apache

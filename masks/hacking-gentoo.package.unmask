@@ -7,6 +7,7 @@ app-misc/ca-certificates::hacking-gentoo
 dev-java/icedtea::hacking-gentoo
 dev-libs/nss::hacking-gentoo
 <media-gfx/blender-2.66::hacking-gentoo
+sys-apps/openrc::hacking-gentoo
 sys-devel/binutils::hacking-gentoo
 sys-devel/crossdev::hacking-gentoo
 www-apache/mod_depends::hacking-gentoo

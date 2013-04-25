@@ -11,6 +11,7 @@ app-misc/ca-certificates
 dev-java/icedtea
 dev-libs/nss
 media-gfx/blender
+sys-apps/openrc
 sys-devel/binutils
 sys-devel/crossdev
 www-apache/mod_depends
