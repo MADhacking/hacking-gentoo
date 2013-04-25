@@ -1,6 +1,6 @@
 --- openrc-0.11.8.orig/src/librc/librc.c	2012-12-07 16:53:28.000000000 +0100
-+++ openrc-0.11.8/src/librc/librc.c	2013-04-25 21:02:05.999571834 +0200
-@@ -892,12 +892,10 @@
++++ openrc-0.11.8/src/librc/librc.c	2013-04-26 01:23:02.450136416 +0200
+@@ -892,12 +892,9 @@
  	list = rc_services_in_runlevel(runlevel);
  	stacks = rc_runlevel_stacks(runlevel);
  	TAILQ_FOREACH(stack, stacks, entries) {
@@ -10,7 +10,6 @@
 -			free(sl);
 -		} else
 -			list = sl;
-+		fprintf(stderr, "%s\n", stack->value);
 +		sl = rc_services_in_runlevel_stacked(stack->value);
 +		TAILQ_CONCAT(list, sl, entries);
 +		free(sl);
