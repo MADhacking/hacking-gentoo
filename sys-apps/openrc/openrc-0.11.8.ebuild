@@ -48,6 +48,8 @@ src_prepare() {
 		sed -i "/^GITVER[[:space:]]*=/s:=.*:=${ver}:" mk/git.mk || die
 	fi
 
+	epatch "${FILESDIR}"/${P}-runlevel_chaining.patch
+
 	# Allow user patches to be applied without modifying the ebuild
 	epatch_user
 }
