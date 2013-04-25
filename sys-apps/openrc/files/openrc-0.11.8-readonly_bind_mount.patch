@@ -1,0 +1,26 @@
+--- openrc-0.11.8.orig/init.d/localmount.in	2012-12-07 16:53:28.000000000 +0100
++++ openrc-0.11.8/init.d/localmount.in	2013-04-25 19:15:42.043727697 +0200
+@@ -30,6 +30,23 @@
+ 	mount -at "$types" $no_netdev
+ 	eend $? "Some local filesystem failed to mount"
+ 
++	# Remount any read-only bind-mounts so that they actually become read-only!
++	for m in `awk '/^\//   {
++		split($4,opts,",");
++		bm = ro = na = 0;
++		for (i in opts)
++		{
++			ro = ro || (opts[i] == "ro");
++			bm = bm || ((opts[i] == "bind") || (opts[i] == "rbind"));
++			na = na || (opts[i] == "noauto");
++		}
++		if (bm && ro && !na)
++			print $2;
++		}' /etc/fstab`
++	do
++		mount -o remount "${m}"
++	done
++
+ 	# Always return 0 - some local mounts may not be critical for boot
+ 	return 0
+ }
