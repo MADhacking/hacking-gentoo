@@ -19,7 +19,7 @@
  }
 
 --- openrc-0.11.8.orig/src/rc/rc-status.c	2012-12-07 16:53:28.000000000 +0100
-+++ openrc-0.11.8/src/rc/rc-status.c	2013-04-26 00:46:33.295281963 +0200
++++ openrc-0.11.8/src/rc/rc-status.c	2013-04-26 01:09:29.992884405 +0200
 @@ -171,6 +171,26 @@
  	rc_stringlist_free(l);
  }
@@ -67,3 +67,25 @@
  		rc_stringlist_free(services);
  		services = NULL;
  	}
+@@ -312,7 +321,7 @@
+ 		}
+ 		rc_stringlist_add(levels, RC_LEVEL_SYSINIT);
+ 		rc_stringlist_add(levels, RC_LEVEL_BOOT);
+-		services = rc_services_in_runlevel(NULL);
++		services = rc_services_in_runlevel_stacked(NULL);
+ 		sservices = rc_stringlist_new();
+ 		TAILQ_FOREACH(l, levels, entries) {
+ 			nservices = rc_services_in_runlevel(l->value);
+@@ -321,10 +330,8 @@
+ 		}
+ 		TAILQ_FOREACH_SAFE(s, services, entries, t) {
+ 			if (rc_stringlist_find(sservices, s->value) ||
+-			    rc_service_state(s->value) &
+-			    (RC_SERVICE_STOPPED | RC_SERVICE_HOTPLUGGED))
+-		{
+-			TAILQ_REMOVE(services, s, entries);
++			    (rc_service_state(s->value) & (RC_SERVICE_STOPPED | RC_SERVICE_HOTPLUGGED))) {
++				TAILQ_REMOVE(services, s, entries);
+ 				free(s->value);
+ 				free(s);
+ 			}
