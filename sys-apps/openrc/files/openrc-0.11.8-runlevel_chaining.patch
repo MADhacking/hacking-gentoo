@@ -17,7 +17,7 @@
  	return list;
  }
 --- openrc-0.11.8.orig/src/rc/rc-status.c	2012-12-07 16:53:28.000000000 +0100
-+++ openrc-0.11.8/src/rc/rc-status.c	2013-04-26 18:49:30.657539597 +0200
++++ openrc-0.11.8/src/rc/rc-status.c	2013-04-26 18:54:33.447089330 +0200
 @@ -171,6 +171,26 @@
  	rc_stringlist_free(l);
  }
@@ -141,8 +141,8 @@
 +				l->value = s->value;
 +				unsetenv("RC_SVCNAME");
 +				char *tmps = strdup(l->value);
-+/*				setenv("RC_SVCNAME", tmps, 1);
-+				tmp = rc_deptree_depends(deptree, needsme, alist, level->value, RC_DEP_TRACE);
++				setenv("RC_SVCNAME", tmps, 1);
++/*				tmp = rc_deptree_depends(deptree, needsme, alist, level->value, RC_DEP_TRACE);
 +				if (TAILQ_FIRST(tmp)) {
 +					TAILQ_REMOVE(services, s, entries);
 +					TAILQ_INSERT_TAIL(nservices, s, entries);
