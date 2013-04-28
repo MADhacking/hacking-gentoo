@@ -1,6 +1,43 @@
 --- openrc-0.11.8.orig/src/librc/librc.c	2012-12-07 16:53:28.000000000 +0100
-+++ openrc-0.11.8/src/librc/librc.c	2013-04-26 01:23:02.450136416 +0200
-@@ -892,12 +892,9 @@
++++ openrc-0.11.8/src/librc/librc.c	2013-04-29 00:20:06.790409121 +0200
+@@ -433,6 +433,36 @@
+ }
+ librc_hidden_def(rc_runlevel_stacks)
+ 
++/* Returns a list of all the chained runlevels used by the
++ * specified runlevel in dependency order, including the
++ * specified runlevel. */
++void
++rc_get_runlevel_chain(const char *runlevel, RC_STRINGLIST *level_list)
++{
++	// If we haven't been passed a runlevel or a level list, or
++	// if the passed runlevel doesn't exist then we're done already!
++	if (!runlevel || !level_list || !rc_runlevel_exists(runlevel))
++		return;
++
++	// We want to add this runlevel to the list but if
++	// it is already in the list it needs to go at the
++	// end again.
++	if (rc_stringlist_find(level_list, runlevel))
++		rc_stringlist_delete(level_list, runlevel);
++	rc_stringlist_add(level_list, runlevel);
++
++	// We can now do exactly the above procedure for our chained
++	// runlevels.
++	char path[PATH_MAX];
++	RC_STRINGLIST *dirs;
++	RC_STRING *d, *dn;
++	snprintf(path, sizeof(path), "%s/%s", RC_RUNLEVELDIR, runlevel);
++	dirs = ls_dir(path, LS_DIR);
++	TAILQ_FOREACH_SAFE(d, dirs, entries, dn)
++		rc_get_runlevel_chain(d->value, level_list);
++}
++librc_hidden_def(rc_get_runlevel_chain)
++
+ /* Resolve a service name to its full path */
+ char *
+ rc_service_resolve(const char *service)
+@@ -892,12 +922,9 @@
  	list = rc_services_in_runlevel(runlevel);
  	stacks = rc_runlevel_stacks(runlevel);
  	TAILQ_FOREACH(stack, stacks, entries) {
@@ -16,6 +53,277 @@
  	}
  	return list;
  }
+--- openrc-0.11.8.orig/src/librc/librc.h	2012-12-07 16:53:28.000000000 +0100
++++ openrc-0.11.8/src/librc/librc.h	2013-04-29 00:08:04.496291864 +0200
+@@ -95,6 +95,7 @@
+ librc_hidden_proto(rc_runlevel_set)
+ librc_hidden_proto(rc_runlevel_stack)
+ librc_hidden_proto(rc_runlevel_stacks)
++librc_hidden_proto(rc_get_runlevel_chain)
+ librc_hidden_proto(rc_runlevel_starting)
+ librc_hidden_proto(rc_runlevel_stopping)
+ librc_hidden_proto(rc_runlevel_unstack)
+--- openrc-0.11.8.orig/src/librc/rc.h.in	2012-12-07 16:53:28.000000000 +0100
++++ openrc-0.11.8/src/librc/rc.h.in	2013-04-29 00:19:52.017263503 +0200
+@@ -111,6 +111,10 @@
+  * @return a NULL terminated list of runlevels */
+ RC_STRINGLIST *rc_runlevel_stacks(const char *);
+ 
++/*! Return a NULL terminated list of runlevels in the runlevel chain
++ * @return a NULL terminated list of runlevels */
++void rc_get_runlevel_chain(const char *, RC_STRINGLIST *);
++
+ /*! Return a NULL terminated list of runlevels
+  * @return a NULL terminated list of runlevels */
+ RC_STRINGLIST *rc_runlevel_list(void);
+--- openrc-0.11.8.orig/src/librc/rc.map	2012-12-07 16:53:28.000000000 +0100
++++ openrc-0.11.8/src/librc/rc.map	2013-04-29 00:18:01.532001704 +0200
+@@ -25,6 +25,7 @@
+ 	rc_runlevel_set;
+ 	rc_runlevel_stack;
+ 	rc_runlevel_stacks;
++	rc_get_runlevel_chain;
+ 	rc_runlevel_starting;
+ 	rc_runlevel_stopping;
+ 	rc_runlevel_unstack;
+--- openrc-0.11.8.orig/src/rc/rc.c	2012-12-07 16:53:28.000000000 +0100
++++ openrc-0.11.8/src/rc/rc.c	2013-04-29 00:49:05.158633076 +0200
+@@ -79,16 +79,8 @@
+ 
+ const char *applet = NULL;
+ static char *runlevel;
+-static RC_STRINGLIST *hotplugged_services;
+-static RC_STRINGLIST *stop_services;
+-static RC_STRINGLIST *start_services;
+-static RC_STRINGLIST *types_n;
+-static RC_STRINGLIST *types_nua;
+-static RC_DEPTREE *deptree;
+ static RC_HOOK hook_out;
+-
+ struct termios *termios_orig = NULL;
+-
+ RC_PIDLIST service_pids;
+ 
+ static void
+@@ -113,8 +105,7 @@
+ 			snprintf(path, l, RC_SVCDIR "/failed/%s", d->d_name);
+ 			if (path) {
+ 				if (unlink(path))
+-					eerror("%s: unlink `%s': %s",
+-					    applet, path, strerror(errno));
++					eerror("%s: unlink `%s': %s", applet, path, strerror(errno));
+ 				free(path);
+ 			}
+ 		}
+@@ -524,7 +515,9 @@
+ }
+ 
+ static void
+-do_stop_services(const char *newlevel, bool parallel, bool going_down)
++do_stop_services(const RC_STRINGLIST *types_n, const RC_STRINGLIST *start_services,
++				 const RC_STRINGLIST *stop_services, const RC_DEPTREE *deptree,
++				 const char *newlevel, bool parallel, bool going_down)
+ {
+ 	pid_t pid;
+ 	RC_STRING *service, *svc1, *svc2;
+@@ -581,8 +574,8 @@
+ 				 * be stopped if we have a runlevel
+ 				 * configuration file for either the current
+ 				 * or next so we use the correct one. */
+-				if (!runlevel_config(service->value,runlevel) &&
+-				    !runlevel_config(service->value,newlevel))
++				if (!runlevel_config(service->value, runlevel) &&
++				    !runlevel_config(service->value, newlevel))
+ 					continue;
+ 			}
+ 			else
+@@ -627,7 +620,7 @@
+ }
+ 
+ static void
+-do_start_services(bool parallel)
++do_start_services(const RC_STRINGLIST *start_services, bool parallel)
+ {
+ 	RC_STRING *service;
+ 	pid_t pid;
+@@ -750,6 +743,13 @@
+ {
+ 	const char *bootlevel = NULL;
+ 	char *newlevel = NULL;
++	static RC_STRINGLIST *hotplugged_services;
++	static RC_STRINGLIST *stop_services;
++	static RC_STRINGLIST *start_services;
++	static RC_STRINGLIST *types_n;
++	static RC_STRINGLIST *types_nua;
++	static RC_DEPTREE *deptree;
++
+ 	RC_STRINGLIST *deporder = NULL;
+ 	RC_STRINGLIST *tmplist;
+ 	RC_STRING *service;
+@@ -885,6 +885,7 @@
+ 	/* Now we start handling our children */
+ 	signal_setup(SIGCHLD, handle_signal);
+ 
++	/* Are we heading for a shutdown or a transition to single user mode? */
+ 	if (newlevel &&
+ 	    (strcmp(newlevel, RC_LEVEL_SHUTDOWN) == 0 ||
+ 		strcmp(newlevel, RC_LEVEL_SINGLE) == 0))
+@@ -964,8 +965,13 @@
+ 		    applet, RC_STOPPING, strerror(errno));
+ 	}
+ 
+-	/* Build a list of all services to stop and then work out the
+-	 * correct order for stopping them */
++	/* Create a list of all services which we could stop (assuming
++	 * they won't be active in the new or current runlevel) including
++	 * all those services which have been started, are inactive or
++	 * are currently starting.  Clearly, some of these will be listed
++	 * in the new or current runlevel so we won't actually be stopping
++	 * them all.
++	 */
+ 	stop_services = rc_services_in_state(RC_SERVICE_STARTED);
+ 	tmplist = rc_services_in_state(RC_SERVICE_INACTIVE);
+ 	TAILQ_CONCAT(stop_services, tmplist, entries);
+@@ -982,37 +988,37 @@
+ 	rc_stringlist_add(types_nua, "iafter");
+ 
+ 	if (stop_services) {
+-		tmplist = rc_deptree_depends(deptree, types_nua, stop_services,
+-		    runlevel, depoptions | RC_DEP_STOP);
++		tmplist = rc_deptree_depends(deptree, types_nua, stop_services, runlevel, depoptions | RC_DEP_STOP);
+ 		rc_stringlist_free(stop_services);
+ 		stop_services = tmplist;
+ 	}
+ 
+-	/* Load our list of start services */
++	/* Create a list of all services which should be started for the new or
++	 * current runlevel including those in boot, sysinit and hotplugged
++	 * runlevels.  Clearly, some of these will already be started so we
++	 * won't actually be starting them all.
++	 */
+ 	hotplugged_services = rc_services_in_state(RC_SERVICE_HOTPLUGGED);
+-	start_services = rc_services_in_runlevel_stacked(newlevel ?
+-	    newlevel : runlevel);
++	start_services = rc_services_in_runlevel_stacked(newlevel ? newlevel : runlevel);
+ 	if (strcmp(newlevel ? newlevel : runlevel, RC_LEVEL_SHUTDOWN) != 0 &&
+ 	    strcmp(newlevel ? newlevel : runlevel, RC_LEVEL_SYSINIT) != 0)
+ 	{
+ 		tmplist = rc_services_in_runlevel(RC_LEVEL_SYSINIT);
+ 		TAILQ_CONCAT(start_services, tmplist, entries);
+ 		free(tmplist);
+-		if (strcmp(newlevel ? newlevel : runlevel,
+-			RC_LEVEL_SINGLE) != 0)
++		// If we are NOT headed for the single-user runlevel...
++		if (strcmp(newlevel ? newlevel : runlevel, RC_LEVEL_SINGLE) != 0)
+ 		{
+-			if (strcmp(newlevel ? newlevel : runlevel,
+-				bootlevel) != 0)
++			// If we are NOT headed for the boot runlevel...
++			if (strcmp(newlevel ? newlevel : runlevel, bootlevel) != 0)
+ 			{
+ 				tmplist = rc_services_in_runlevel(bootlevel);
+ 				TAILQ_CONCAT(start_services, tmplist, entries);
+ 				free(tmplist);
+ 			}
+ 			if (hotplugged_services) {
+-				TAILQ_FOREACH(service, hotplugged_services,
+-				    entries)
+-				    rc_stringlist_addu(start_services,
+-					service->value);
++				TAILQ_FOREACH(service, hotplugged_services, entries)
++				    rc_stringlist_addu(start_services, service->value);
+ 			}
+ 		}
+ 	}
+@@ -1021,14 +1027,13 @@
+ 
+ 	/* Now stop the services that shouldn't be running */
+ 	if (stop_services)
+-		do_stop_services(newlevel, parallel, going_down);
++		do_stop_services(types_n, start_services, stop_services, deptree, newlevel, parallel, going_down);
+ 
+ 	/* Wait for our services to finish */
+ 	wait_for_services();
+ 
+ 	/* Notify the plugins we have finished */
+-	rc_plugin_run(RC_HOOK_RUNLEVEL_STOP_OUT,
+-	    going_down ? newlevel : runlevel);
++	rc_plugin_run(RC_HOOK_RUNLEVEL_STOP_OUT, going_down ? newlevel : runlevel);
+ 	hook_out = 0;
+ 
+ 	rmdir(RC_STOPPING);
+@@ -1057,18 +1062,10 @@
+ 		TAILQ_FOREACH(service, hotplugged_services, entries)
+ 		    rc_service_mark(service->value, RC_SERVICE_HOTPLUGGED);
+ 
+-	/* Order the services to start */
+-	if (start_services) {
+-		rc_stringlist_sort(&start_services);
+-		deporder = rc_deptree_depends(deptree, types_nua,
+-		    start_services, runlevel,
+-		    depoptions | RC_DEP_START);
+-		rc_stringlist_free(start_services);
+-		start_services = deporder;
+-	}
+-
+ #ifdef __linux__
+-	/* mark any services skipped as started */
++	/* If the "noinit" parameter was passed on the kernel command line then
++	 * mark the specified services as started so they will not be started
++	 * by us. */
+ 	proc = p = rc_proc_getent("noinit");
+ 	if (proc) {
+ 		while ((token = strsep(&p, ",")))
+@@ -1077,19 +1074,40 @@
+ 	}
+ #endif
+ 
+-	if (start_services) {
+-		do_start_services(parallel);
+-		/* FIXME: If we skip the boot runlevel and go straight
+-		 * to default from sysinit, we should now re-evaluate our
+-		 * start services + hotplugged services and call
+-		 * do_start_services a second time. */
++	// If we have a list of services to start then...
++	if (start_services)
++	{
++		// Get a list of the chained runlevels which compose the target runlevel
++		RC_STRINGLIST *runlevel_chain = rc_stringlist_new();
++		rc_get_runlevel_chain(runlevel, runlevel_chain);
++
++		// Loop through them in reverse order.
++		RC_STRING *rlevel;
++		TAILQ_FOREACH_REVERSE(rlevel, runlevel_chain, rc_stringlist, entries)
++		{
++			// Get a list of all the services in that runlevel
++			RC_STRINGLIST *run_services = rc_services_in_runlevel(rlevel->value);
++
++			// Start those services.
++			rc_stringlist_sort(&run_services);
++			deporder = rc_deptree_depends(deptree, types_nua, run_services, rlevel->value, depoptions | RC_DEP_START);
++			rc_stringlist_free(run_services);
++			run_services = deporder;
++			do_start_services(run_services, parallel);
+ 
+-		/* Wait for our services to finish */
+-		wait_for_services();
++			/* Wait for our services to finish */
++			wait_for_services();
++
++			// Free the list of services, we're done with it.
++			rc_stringlist_free(run_services);
++		}
++		rc_stringlist_free(runlevel_chain);
+ 	}
+ 
+ #ifdef __linux__
+-	/* mark any services skipped as stopped */
++	/* If the "noinit" parameter was passed on the kernel command line then
++	 * mark the specified services as stopped so that our records reflect
++	 * reality.	 */
+ 	proc = p = rc_proc_getent("noinit");
+ 	if (proc) {
+ 		while ((token = strsep(&p, ",")))
 --- openrc-0.11.8.orig/src/rc/rc-status.c	2012-12-07 16:53:28.000000000 +0100
 +++ openrc-0.11.8/src/rc/rc-status.c	2013-04-26 19:23:39.995490728 +0200
 @@ -171,6 +171,26 @@
