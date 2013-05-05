@@ -30,4 +30,5 @@ src_configure() {
 src_install() {
 	autotools-utils_src_install
 	rm "${D}"/lib/rc/plugins/*.la
+	dodir /lib/rc.hooks
 }
