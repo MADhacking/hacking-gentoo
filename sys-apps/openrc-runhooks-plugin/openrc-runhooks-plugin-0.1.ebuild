@@ -15,7 +15,7 @@ SLOT="0"
 IUSE=""
 KEYWORDS="~amd64 ~x86"
 
-DEPEND=">sys-apps/openrc-0.11.8"
+DEPEND=">=sys-apps/openrc-0.11.8"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
