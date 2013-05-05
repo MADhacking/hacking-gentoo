@@ -1,0 +1,41 @@
+--- openrc-0.11.8.branch.r1/src/librc/rc.h	2013-05-05 01:54:24.403042703 +0200
++++ openrc-0.11.8/src/librc/rc.h	2013-05-05 15:49:27.540732741 +0200
+@@ -452,6 +452,10 @@
+ 	RC_HOOK_RUNLEVEL_STOP_OUT  = 4,
+ 	RC_HOOK_RUNLEVEL_START_IN  = 5,
+ 	RC_HOOK_RUNLEVEL_START_OUT = 8,
++
++	RC_HOOK_SYSTEM_START_FINISHED = 90,
++	RC_HOOK_SYSTEM_STOP_INITIATED = 91,
++
+ 	/*! We send the abort if an init script requests we abort and drop
+ 	 * into single user mode if system not fully booted */
+ 	RC_HOOK_ABORT              = 99,
+--- openrc-0.11.8.branch.r1/src/rc/rc.c	2013-04-29 00:49:05.158633076 +0200
++++ openrc-0.11.8/src/rc/rc.c	2013-05-05 15:56:32.299181101 +0200
+@@ -937,6 +937,7 @@
+ 		rc_logger_close();
+ #endif
+ 
++		rc_plugin_run(RC_HOOK_SYSTEM_STOP_INITIATED, runlevel);
+ 		rc_plugin_run(RC_HOOK_RUNLEVEL_STOP_IN, newlevel);
+ 	} else {
+ 		rc_plugin_run(RC_HOOK_RUNLEVEL_STOP_IN, runlevel);
+@@ -1120,6 +1121,17 @@
+ 	rc_plugin_run(RC_HOOK_RUNLEVEL_START_OUT, runlevel);
+ 	hook_out = 0;
+ 
++	/* If we aren't going down then let's check to see if we are
++	 * booting.  The easiest way is to check our parent pid.  If
++	 * it is 1 then we are being controlled by init.  If we are
++	 * also NOT entering the sysinit/boot runlevel then this the
++	 * end of the second phase of system startup.  If all of this
++	 * is true then run our plugin hooks with SYSTEM_START_FINISHED.
++	 */
++	if ((!going_down) && ((getppid() == 1) && (strcmp(runlevel, RC_LEVEL_SYSINIT) != 0)
++				&& (strcmp(runlevel, getenv("RC_BOOTLEVEL")) != 0)))
++		rc_plugin_run(RC_HOOK_SYSTEM_START_FINISHED, runlevel);
++
+ 	/* If we're in the boot runlevel and we regenerated our dependencies
+ 	 * we need to delete them so that they are regenerated again in the
+ 	 * default runlevel as they may depend on things that are now
