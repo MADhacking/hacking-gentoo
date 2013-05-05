@@ -50,6 +50,7 @@ src_prepare() {
 
 	epatch "${FILESDIR}"/${PN}-0.11.8-runlevel_chaining.patch
 	epatch "${FILESDIR}"/${PN}-0.11.8-readonly_bind_mount.patch
+	epatch "${FILESDIR}"/${PN}-0.11.8-default_runlevel.patch
 
 	# Allow user patches to be applied without modifying the ebuild
 	epatch_user

@@ -1,0 +1,88 @@
+--- openrc-0.11.8.orig/src/includes/rc-misc.h	2012-12-07 16:53:28.000000000 +0100
++++ openrc-0.11.8/src/includes/rc-misc.h	2013-05-05 02:55:51.017095355 +0200
+@@ -41,7 +41,6 @@
+ #include "helpers.h"
+ 
+ #define RC_LEVEL_BOOT           "boot"
+-#define RC_LEVEL_DEFAULT        "default"
+ 
+ #define RC_DEPTREE_CACHE        RC_SVCDIR "/deptree"
+ #define RC_DEPTREE_SKEWED	RC_SVCDIR "/clock-skewed"
+@@ -54,6 +53,8 @@
+ #define RC_SVCDIR_STARTED       RC_SVCDIR "/started"
+ #define RC_SVCDIR_COLDPLUGGED	RC_SVCDIR "/coldplugged"
+ 
++#define INITTAB					"/etc/inittab"
++
+ _unused static bool exists(const char *pathname)
+ {
+ 	struct stat buf;
+--- openrc-0.11.8.orig/src/rc/rc-misc.c	2012-12-07 16:53:28.000000000 +0100
++++ openrc-0.11.8/src/rc/rc-misc.c	2013-05-05 02:52:13.376331741 +0200
+@@ -139,6 +139,10 @@
+ 	char *tok;
+ 	const char *sys = rc_sys();
+ 	char buffer[PATH_MAX];
++	int done = 0;
++	char default_run_level = 0;
++	char *id, *rlevel, *action, *process;
++	char *dummy, *runlevelname;
+ 
+ 	/* Ensure our PATH is prefixed with the system locations first
+ 	   for a little extra security */
+@@ -176,17 +180,52 @@
+ 	setenv("RC_RUNLEVEL", e, 1);
+ 	free(e);
+ 
++	/* Set the RC_KRUNLEVEL variable to the runlevel specified on the
++	 * kernel command line, if any.	 */
+ 	if ((fp = fopen(RC_KRUNLEVEL, "r"))) {
+ 		memset(buffer, 0, sizeof (buffer));
+ 		if (fgets(buffer, sizeof (buffer), fp)) {
+ 			l = strlen (buffer) - 1;
+ 			if (buffer[l] == '\n')
+ 				buffer[l] = 0;
+-			setenv("RC_DEFAULTLEVEL", buffer, 1);
++			setenv("RC_KRUNLEVEL", buffer, 1);
+ 		}
+ 		fclose(fp);
+-	} else
+-		setenv("RC_DEFAULTLEVEL", RC_LEVEL_DEFAULT, 1);
++	}
++
++	/* Read the default runlevel from inittab */
++	if ((fp = fopen(INITTAB, "r")))	{
++		memset(buffer, 0, sizeof (buffer));
++
++		while ((!done) && (fgets(buffer, sizeof (buffer), fp)))	{
++			for(p = buffer; *p == ' ' || *p == '\t'; p++)
++				;
++			if (*p == '#' || *p == '\n') continue;
++
++			id =      strsep(&p, ":");
++			rlevel =  strsep(&p, ":");
++			action =  strsep(&p, ":");
++			process = strsep(&p, "\n");
++
++			if ((default_run_level == 0) && (action != NULL)) {
++				if (strcmp(action, "initdefault") == 0)
++					default_run_level = rlevel[0];
++			}
++			else {
++				if ((strchr(rlevel, default_run_level) != NULL) && (strcmp(action, "wait") == 0)) {
++
++					dummy = strsep(&process, " ");
++					runlevelname = strsep(&process, "\n");
++
++					if (runlevelname != NULL) {
++						done = 1;
++						setenv("RC_DEFAULTLEVEL", runlevelname, 1);
++					}
++				}
++			}
++		}
++		fclose(fp);
++	}
+ 
+ 	if (sys)
+ 		setenv("RC_SYS", sys, 1);
