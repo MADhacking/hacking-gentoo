@@ -1,5 +1,5 @@
---- openrc-0.11.8.branch.r1/src/librc/rc.h	2013-05-05 01:54:24.403042703 +0200
-+++ openrc-0.11.8/src/librc/rc.h	2013-05-05 15:49:27.540732741 +0200
+--- openrc-0.11.8/src/librc/rc.h.in	2013-05-05 01:54:24.403042703 +0200
++++ openrc-0.11.8/src/librc/rc.h.in	2013-05-05 15:49:27.540732741 +0200
 @@ -452,6 +452,10 @@
  	RC_HOOK_RUNLEVEL_STOP_OUT  = 4,
  	RC_HOOK_RUNLEVEL_START_IN  = 5,
@@ -11,7 +11,7 @@
  	/*! We send the abort if an init script requests we abort and drop
  	 * into single user mode if system not fully booted */
  	RC_HOOK_ABORT              = 99,
---- openrc-0.11.8.branch.r1/src/rc/rc.c	2013-04-29 00:49:05.158633076 +0200
+--- openrc-0.11.8/src/rc/rc.c	2013-04-29 00:49:05.158633076 +0200
 +++ openrc-0.11.8/src/rc/rc.c	2013-05-05 15:56:32.299181101 +0200
 @@ -937,6 +937,7 @@
  		rc_logger_close();
