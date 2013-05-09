@@ -9,7 +9,7 @@ HOMEPAGE="http://www.hacking.co.uk/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 RDEPEND="${DEPEND}
 	install-meta/hacking-base-server
@@ -24,5 +24,6 @@ RDEPEND="${DEPEND}
 	sys-apps/pciutils
 	sys-apps/smartmontools
 	sys-boot/grub
+	sys-boot/last-known-good
 	sys-fs/lvm2
 	sys-fs/mdadm"
