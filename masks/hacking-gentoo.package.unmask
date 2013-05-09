@@ -8,6 +8,9 @@ dev-java/icedtea::hacking-gentoo
 dev-libs/nss::hacking-gentoo
 <media-gfx/blender-2.66::hacking-gentoo
 sys-apps/openrc::hacking-gentoo
+sys-apps/openrc-runhooks-plugin::hacking-gentoo
+sys-boot/last-known-good::hacking-gentoo
+sys-boot/last-known-good-dracut-module::hacking-gentoo
 sys-devel/binutils::hacking-gentoo
 sys-devel/crossdev::hacking-gentoo
 www-apache/mod_depends::hacking-gentoo

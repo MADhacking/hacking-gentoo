@@ -12,6 +12,9 @@ dev-java/icedtea
 dev-libs/nss
 media-gfx/blender
 sys-apps/openrc
+sys-apps/openrc-runhooks-plugin
+sys-boot/last-known-good
+sys-boot/last-known-good-dracut-module
 sys-devel/binutils
 sys-devel/crossdev
 www-apache/mod_depends

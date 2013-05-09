@@ -13,7 +13,7 @@ SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 
 DEPEND=">=sys-apps/openrc-0.11.8"
 RDEPEND="${DEPEND}"
