@@ -62,6 +62,7 @@ start() {
 				${screen_cmd} screen -t ${name} xl create ${dom} -c
 			else
 				xl create --quiet ${dom}
+				sleep 10
 			fi
 			eend $?
 		else
