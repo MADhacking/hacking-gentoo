@@ -40,6 +40,7 @@ REQUIRED_USE="hvm? ( qemu )"
 CDEPEND="dev-libs/yajl
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/pypam[${PYTHON_USEDEP}]
+	dev-libs/libaio
 	sys-libs/zlib
 	sys-power/iasl
 	ocaml? ( dev-ml/findlib )
