@@ -53,6 +53,9 @@ start() {
 			eend
 		fi
 	fi
+	
+	svcrv=0
+	first=1
 	# Create all domains with config files in AUTODIR.
 	for dom in $(ls "${AUTODIR:=/etc/xen/auto}/"* 2>/dev/null | sort); do
 		name=$(get_domname ${dom})
@@ -62,13 +65,22 @@ start() {
 				${screen_cmd} screen -t ${name} xl create ${dom} -c
 			else
 				xl create --quiet ${dom}
+			fi
+			xlrv=$?
+			if [[ ${first} -ne 1 ]] ; then
 				sleep 10
 			fi
-			eend $?
+			eend ${xlrv}
+			if [[ ${xlrv} -gt 0 ]] ; then
+				svcrv=1
+			fi
 		else
 			einfo "  Not starting domain ${name} - already running"
 		fi
+		first=0
 	done
+	
+	return ${svcrv}
 }
 
 stop() {
