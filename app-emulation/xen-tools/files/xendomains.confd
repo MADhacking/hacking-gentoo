@@ -6,4 +6,7 @@ AUTODIR=/etc/xen/auto
 
 # Send shutdown commands to all domains in parallel instead of waiting for
 # each to shutdown individually
-PARALLEL_SHUTDOWN=yes
+PARALLEL_SHUTDOWN=no
+
+# Delay between starting domains.
+START_DELAY=10

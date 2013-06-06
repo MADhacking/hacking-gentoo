@@ -61,18 +61,19 @@ start() {
 		name=$(get_domname ${dom})
 		if ! is_running ${name} ; then
 			ebegin "  Starting domain ${name}"
+			if [[ ${first} -ne 1 ]] ; then
+				sleep ${START_DELAY:=10}
+			fi
 			if using_screen ; then
 				${screen_cmd} screen -t ${name} xl create ${dom} -c
 			else
 				xl create --quiet ${dom}
 			fi
-			xlrv=$?
-			if [[ ${first} -ne 1 ]] ; then
-				sleep 10
-			fi
-			eend ${xlrv}
-			if [[ ${xlrv} -gt 0 ]] ; then
+			if [[ $? -gt 0 ]] ; then
+				eend ${xlrv}
 				svcrv=1
+			else
+				eend
 			fi
 		else
 			einfo "  Not starting domain ${name} - already running"
