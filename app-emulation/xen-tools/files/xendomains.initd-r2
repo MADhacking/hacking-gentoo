@@ -70,7 +70,7 @@ start() {
 				xl create --quiet ${dom}
 			fi
 			if [[ $? -gt 0 ]] ; then
-				eend ${xlrv}
+				eend 1
 				svcrv=1
 			else
 				eend
