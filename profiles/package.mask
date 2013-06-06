@@ -13,6 +13,7 @@ dev-libs/nss
 media-gfx/blender
 sys-apps/openrc
 sys-apps/openrc-runhooks-plugin
+sys-block/iscsitarget
 sys-boot/last-known-good
 sys-boot/last-known-good-dracut-module
 sys-devel/binutils

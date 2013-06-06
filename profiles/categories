@@ -12,6 +12,7 @@ net-firewall
 snmp-agents
 snmp-mibs
 sys-apps
+sys-block
 sys-boot
 sys-devel
 www-apache

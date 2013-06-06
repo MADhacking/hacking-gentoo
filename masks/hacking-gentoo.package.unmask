@@ -9,6 +9,7 @@ dev-libs/nss::hacking-gentoo
 <media-gfx/blender-2.66::hacking-gentoo
 sys-apps/openrc::hacking-gentoo
 sys-apps/openrc-runhooks-plugin::hacking-gentoo
+sys-block/iscsitarget::hacking-gentoo
 sys-boot/last-known-good::hacking-gentoo
 sys-boot/last-known-good-dracut-module::hacking-gentoo
 sys-devel/binutils::hacking-gentoo
