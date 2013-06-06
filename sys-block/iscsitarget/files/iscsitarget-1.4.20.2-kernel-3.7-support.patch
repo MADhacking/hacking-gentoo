@@ -15,8 +15,8 @@
 --- 
 +++ patches/fwd-compat-3.7.patch
 @@ -0,0 +1,19 @@
-+--- kernel/event.c
-++++ kernel/event.c
++--- b/kernel/event.c
+++++ a/kernel/event.c
 +@@ -26,7 +26,7 @@
 + 		rlen = NLMSG_ALIGN(nlh->nlmsg_len);
 + 		if (rlen > skb->len)
