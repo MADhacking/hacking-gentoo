@@ -4,7 +4,7 @@
  # base first the earlier patch sets will not need to be modified.
  #
  
-+ifeq ($(call kver_ge,3,7,0),1)
++ifeq ($(call kver_lt,3,7,0),0)
 +	PATCHES := $(PATCHES) fwd-compat-3.7.patch
 +endif
 +
