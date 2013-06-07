@@ -183,9 +183,9 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-4.1.1-bridge.patch"
 
 	# Don't build ipxe with pie on hardened, Bug #360805
-#	if gcc-specs-pie; then
-#		epatch "${FILESDIR}"/ipxe-nopie.patch
-#	fi
+	if gcc-specs-pie; then
+		epatch "${FILESDIR}"/ipxe-nopie.patch
+	fi
 
 	# Prevent double stripping of files at install
 	epatch "${FILESDIR}"/${PN/-tools/}-4.2.0-nostrip.patch
