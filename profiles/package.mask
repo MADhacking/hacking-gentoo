@@ -16,6 +16,8 @@ sys-apps/openrc-runhooks-plugin
 sys-block/iscsitarget
 sys-boot/last-known-good
 sys-boot/last-known-good-dracut-module
+sys-cluster/cman
+sys-cluster/libdlm
 sys-devel/binutils
 sys-devel/crossdev
 www-apache/mod_depends
