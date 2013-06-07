@@ -1,5 +1,5 @@
-# Copyright 2012 Hacking Networked Solutions
-# Distributed under the terms of the GNU General Public License v3
+# Copyright 2013 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3+
 # $Header: $
 
 # TODO:
@@ -31,7 +31,7 @@ SLOT="0"
 LICENSE="|| ( GPL-2 BL )"
 KEYWORDS="~amd64 ~x86"
 IUSE="+boost +bullet collada colorio cycles +dds debug doc +elbeem ffmpeg fftw +game-engine jack jpeg2k ndof nls openal openmp +openexr player redcode sdl sndfile sse tiff"
-REQUIRED_USE="player? ( game-engine ) redcode? ( jpeg2k ) cycles? ( boost ) nls? ( boost )"
+REQUIRED_USE="${PYTHON_REQUIRED_USE} player? ( game-engine ) redcode? ( jpeg2k ) cycles? ( boost ) nls? ( boost )"
 
 RDEPEND="
 	${PYTHON_DEPS}
