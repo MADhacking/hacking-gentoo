@@ -1,5 +1,5 @@
-# Copyright 2012 Hacking Networked Solutions
-# Distributed under the terms of the GNU General Public License v3
+# Copyright 2013 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3+
 # $Header: $
 
 EAPI=2
@@ -52,6 +52,14 @@ src_prepare() {
 	sed -i \
 		-e '/libsyslog_ng_crypto_la_LIBADD/s/$/ -lssl -lcrypto/' \
 		lib/Makefile.am || die
+	sed -i \
+			-e 's/AM_PROG_CC_STDC/AC_PROG_CC/' \
+			-e 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' \
+			configure.in || die
+	sed -i \
+			-e 's/AM_PROG_CC_STDC/AC_PROG_CC/' \
+			-e 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' \
+			modules/afmongodb/libmongo-client/configure.ac || die
 	eautoreconf
 }
 
@@ -133,7 +141,7 @@ pkg_preinst() {
 pkg_postinst() {
 	elog "For detailed documentation please see the upstream website:"
 	elog "http://www.balabit.com/sites/default/files/documents/syslog-ng-ose-3.3-guides/syslog-ng-ose-v3.3-guide-admin-en.html/index.html"
-	echo
+ 	echo
 	ewarn "Please note that the standard location of the socket and PID file has changed from"
 	ewarn "/var/run/syslog-ng.* to /var/run/syslog-ng/syslog-ng.* and you have to be in the"
 	ewarn "'syslog' group to access the control socket or /var/log/messages."
@@ -144,7 +152,7 @@ pkg_postinst() {
 		chown syslog:syslog /var/log
 		[[ -e /var/log/messages ]] && chown syslog:syslog /var/log/messages
 		echo
-	fi
+	fi 
 
 	# bug #355257
 	if ! has_version app-admin/logrotate ; then
