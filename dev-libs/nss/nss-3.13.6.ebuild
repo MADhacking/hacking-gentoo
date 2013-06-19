@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=3
-inherit eutils flag-o-matic multilib toolchain-funcs
+inherit eutils cadb flag-o-matic multilib toolchain-funcs
 
 NSPR_VER="4.9.2"
 RTM_NAME="NSS_${PV//./_}_RTM"
@@ -231,6 +231,12 @@ pkg_postinst() {
 		einfo
 		einfo "certutil -W -d \"${EROOT}/etc/pki/nssdb\""
 	fi
+
+	# Set sensible permissions 0644 on the certificate database.
+	fperms 0644 "${EROOT}"/etc/pki/nssdb/*
+
+	# Populate the certificate DB.
+	cadb_pkg_postinst nss
 }
 
 pkg_postrm() {

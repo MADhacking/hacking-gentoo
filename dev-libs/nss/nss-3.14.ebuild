@@ -232,6 +232,9 @@ pkg_postinst() {
 		einfo "certutil -W -d \"${EROOT}/etc/pki/nssdb\""
 	fi
 
+	# Set sensible permissions 0644 on the certificate database.
+	fperms 0644 "${EROOT}"/etc/pki/nssdb/*
+
 	# Populate the certificate DB.
 	cadb_pkg_postinst nss
 }
