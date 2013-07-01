@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=5
-inherit eutils flag-o-matic multilib toolchain-funcs
+inherit eutils cadb flag-o-matic multilib toolchain-funcs
 
 NSPR_VER="4.10"
 RTM_NAME="NSS_${PV//./_}_RTM"
@@ -229,7 +229,7 @@ src_install() {
 
 	local f nssutils
 	# Always enabled because we need it for chk generation.
-	nssutils="shlibsign"
+	nssutils="certutil shlibsign"
 	if use utils; then
 		# The tests we do not need to install.
 		#nssutils_test="bltest crmftest dbtest dertimetest
@@ -255,6 +255,18 @@ src_install() {
 	echo -e "PRELINK_PATH_MASK=${liblist}" >"${T}/90nss"
 	unset libs liblist
 	doenvd "${T}/90nss"
+
+	# Set NSS_DEFAULT_DB_TYPE in environment.
+	echo "NSS_DEFAULT_DB_TYPE=\"sql\"" >"${T}/90nss_default_db_type" || die
+	doenvd "${T}/90nss_default_db_type" || die
+
+	# Install the default configuration file.
+	dodir /etc/pki/nssdb
+	insinto /etc/pki/nssdb
+	doins "${FILESDIR}/pkcs11.txt"
+
+	# Install the setup-nsssysinit.sh script.
+	dobin "${FILESDIR}/setup-nsssysinit.sh"
 }
 
 pkg_postinst() {
@@ -266,6 +278,26 @@ pkg_postinst() {
 		shlibsign="shlibsign"
 	fi
 	generate_chk "${shlibsign}" "${EROOT}"/usr/$(get_libdir)
+
+	# TODO: Upgrade any old system database.
+
+	# Install a new empty database if none exists already.
+	if [ ! -f "${EROOT}/etc/pki/nssdb/cert9.db" ]; then
+		echo > empty.txt
+		certutil -N -d "sql:${EROOT}/etc/pki/nssdb" -f empty.txt || die
+		rm empty.txt
+		einfo "An empty NSS system database has been installed, with no password."
+		einfo
+		einfo "You may wish to set a new system database password now using:"
+		einfo
+		einfo "certutil -W -d \"sql:${EROOT}/etc/pki/nssdb\""
+	fi
+
+	# Set sensible permissions 0644 on the certificate database.
+	fperms 0644 "${EROOT}"/etc/pki/nssdb/*
+
+	# Populate the certificate DB.
+	cadb_pkg_postinst nss
 }
 
 pkg_postrm() {
