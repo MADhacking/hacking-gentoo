@@ -1,22 +1,22 @@
-# Copyright 2012 Hacking Networked Solutions
-# Distributed under the terms of the GNU General Public License v3
+# Copyright 2013 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3+
 # $Header: $
 
-EAPI=3
-inherit eutils cadb flag-o-matic multilib toolchain-funcs
+EAPI=5
+inherit eutils flag-o-matic multilib toolchain-funcs
 
-NSPR_VER="4.9.5"
+NSPR_VER="4.10"
 RTM_NAME="NSS_${PV//./_}_RTM"
 
 DESCRIPTION="Mozilla's Network Security Services library that implements PKI support"
 HOMEPAGE="http://www.mozilla.org/projects/security/pki/nss/"
 SRC_URI="ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${RTM_NAME}/src/${P}.tar.gz
 	http://dev.gentoo.org/~anarchy/patches/${PN}-3.14.1-add_spi+cacerts_ca_certs.patch
-	http://dev.gentoo.org/~anarchy/patches/${PN}-3.13.3_pem.support"
+	http://dev.gentoo.org/~anarchy/patches/${PN}-3.15-pem-support-20130617.patch.xz"
 
 LICENSE="|| ( MPL-2.0 GPL-2 LGPL-2.1 )"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
 IUSE="utils"
 
 DEPEND="virtual/pkgconfig
@@ -26,37 +26,37 @@ RDEPEND=">=dev-libs/nspr-${NSPR_VER}
 	>=dev-db/sqlite-3.5
 	sys-libs/zlib"
 
+S="${WORKDIR}/${P}/${PN}"
+
 src_setup() {
 	export LC_ALL="C"
 }
 
 src_prepare() {
 	# Custom changes for gentoo
-	epatch "${FILESDIR}/${PN}-3.14.1-gentoo-fixups-r1.patch"
-	epatch "${FILESDIR}/${PN}-3.12.6-gentoo-fixup-warnings.patch"
+	epatch "${FILESDIR}/${PN}-3.15-gentoo-fixups.patch"
+	epatch "${FILESDIR}/${PN}-3.15-gentoo-fixup-warnings.patch"
 	epatch "${DISTDIR}/${PN}-3.14.1-add_spi+cacerts_ca_certs.patch"
-	epatch "${DISTDIR}/${PN}-3.13.3_pem.support"
-	epatch "${FILESDIR}/${PN}-3.14.2-x32.patch"
-	epatch "${FILESDIR}/${PN}-3.14.3_sync_with_upstream_softokn_changes.patch"
-
-	cd "${S}"/mozilla/security/coreconf || die
+	epatch "${DISTDIR}/${PN}-3.15-pem-support-20130617.patch.xz"
+	epatch "${FILESDIR}/${PN}-3.15-x32.patch"
+	cd coreconf
 	# hack nspr paths
 	echo 'INCLUDES += -I$(DIST)/include/dbm' \
 		>> headers.mk || die "failed to append include"
 
 	# modify install path
 	sed -e 's:SOURCE_PREFIX = $(CORE_DEPTH)/\.\./dist:SOURCE_PREFIX = $(CORE_DEPTH)/dist:' \
-		-i source.mk || die
+		-i source.mk
 
 	# Respect LDFLAGS
-	sed -i -e 's/\$(MKSHLIB) -o/\$(MKSHLIB) \$(LDFLAGS) -o/g' rules.mk || die
+	sed -i -e 's/\$(MKSHLIB) -o/\$(MKSHLIB) \$(LDFLAGS) -o/g' rules.mk
 
 	# Ensure we stay multilib aware
-	sed -i -e "s:gentoo\/nss:$(get_libdir):" "${S}"/mozilla/security/nss/config/Makefile || die "Failed to fix for multilib"
+	sed -i -e "s:gentoo\/nss:$(get_libdir):" "${S}"/config/Makefile
 
 	# Fix pkgconfig file for Prefix
 	sed -i -e "/^PREFIX =/s:= /usr:= ${EPREFIX}/usr:" \
-		"${S}"/mozilla/security/nss/config/Makefile || die
+		"${S}"/config/Makefile
 
 	epatch "${FILESDIR}/nss-3.14.2-solaris-gcc.patch"
 
@@ -64,15 +64,15 @@ src_prepare() {
 	if tc-is-cross-compiler ; then
 		sed -i \
 			-e 's:"${2}"/shlibsign:shlibsign:' \
-			"${S}"/mozilla/security/nss/cmd/shlibsign/sign.sh || die
+			"${S}"/cmd/shlibsign/sign.sh
 	fi
 
 	# dirty hack
-	cd "${S}"/mozilla/security/nss || die
+	cd "${S}"
 	sed -i -e "/CRYPTOLIB/s:\$(SOFTOKEN_LIB_DIR):../freebl/\$(OBJDIR):" \
-		lib/ssl/config.mk || die
+		lib/ssl/config.mk
 	sed -i -e "/CRYPTOLIB/s:\$(SOFTOKEN_LIB_DIR):../../lib/freebl/\$(OBJDIR):" \
-		cmd/platlibs.mk || die
+		cmd/platlibs.mk
 }
 
 nssarch() {
@@ -138,15 +138,15 @@ src_compile() {
 	# Build the host tools first.
 	LDFLAGS="${BUILD_LDFLAGS}" \
 	XCFLAGS="${BUILD_CFLAGS}" \
-	emake -j1 -C mozilla/security/coreconf \
+	emake -j1 -C coreconf \
 		CC="${BUILD_CC}" \
 		$(nssbits BUILD_) \
 		|| die
 	makeargs+=( NSINSTALL="${PWD}/$(find -type f -name nsinstall)" )
 
 	# Then build the target tools.
-	for d in dbm nss ; do
-		emake -j1 "${makeargs[@]}" -C mozilla/security/${d} || die "${d} make failed"
+	for d in . lib/dbm ; do
+		emake -j1 "${makeargs[@]}" -C ${d} || die "${d} make failed"
 	done
 }
 
@@ -199,29 +199,29 @@ cleanup_chk() {
 
 src_install() {
 	MINOR_VERSION=12
-	cd "${S}"/mozilla/security/dist || die
+	cd "${S}"/dist
 
-	dodir /usr/$(get_libdir) || die
+	dodir /usr/$(get_libdir)
 	cp -L */lib/*$(get_libname) "${ED}"/usr/$(get_libdir) || die "copying shared libs failed"
 	# We generate these after stripping the libraries, else they don't match.
 	#cp -L */lib/*.chk "${ED}"/usr/$(get_libdir) || die "copying chk files failed"
 	cp -L */lib/libcrmf.a "${ED}"/usr/$(get_libdir) || die "copying libs failed"
 
 	# Install nss-config and pkgconfig file
-	dodir /usr/bin || die
-	cp -L */bin/nss-config "${ED}"/usr/bin || die
-	dodir /usr/$(get_libdir)/pkgconfig || die
-	cp -L */lib/pkgconfig/nss.pc "${ED}"/usr/$(get_libdir)/pkgconfig || die
+	dodir /usr/bin
+	cp -L */bin/nss-config "${ED}"/usr/bin
+	dodir /usr/$(get_libdir)/pkgconfig
+	cp -L */lib/pkgconfig/nss.pc "${ED}"/usr/$(get_libdir)/pkgconfig
 
 	# all the include files
 	insinto /usr/include/nss
-	doins public/nss/*.h || die
-	cd "${ED}"/usr/$(get_libdir) || die
+	doins public/nss/*.h
+	cd "${ED}"/usr/$(get_libdir)
 	local n file
 	for file in *$(get_libname); do
 		n=${file%$(get_libname)}$(get_libname ${MINOR_VERSION})
-		mv ${file} ${n} || die
-		ln -s ${n} ${file} || die
+		mv ${file} ${n}
+		ln -s ${n} ${file}
 		if [[ ${CHOST} == *-darwin* ]]; then
 			install_name_tool -id "${EPREFIX}/usr/$(get_libdir)/${n}" ${n} || die
 		fi
@@ -229,7 +229,7 @@ src_install() {
 
 	local f nssutils
 	# Always enabled because we need it for chk generation.
-	nssutils="certutil shlibsign"
+	nssutils="shlibsign"
 	if use utils; then
 		# The tests we do not need to install.
 		#nssutils_test="bltest crmftest dbtest dertimetest
@@ -240,9 +240,9 @@ src_install() {
 		pk12util pp rsaperf selfserv shlibsign signtool signver ssltap strsclnt
 		symkeyutil tstclnt vfychain vfyserv"
 	fi
-	cd "${S}"/mozilla/security/dist/*/bin/ || die
+	cd "${S}"/dist/*/bin/
 	for f in ${nssutils}; do
-		dobin ${f} || die
+		dobin ${f}
 	done
 
 	# Prelink breaks the CHK files. We don't have any reliable way to run
@@ -252,21 +252,9 @@ src_install() {
 		libs+=("${EPREFIX}/usr/$(get_libdir)/lib${l}.so")
 	done
 	OLD_IFS="${IFS}" IFS=":" ; liblist="${libs[*]}" ; IFS="${OLD_IFS}"
-	echo -e "PRELINK_PATH_MASK=${liblist}" >"${T}/90nss" || die
+	echo -e "PRELINK_PATH_MASK=${liblist}" >"${T}/90nss"
 	unset libs liblist
-	doenvd "${T}/90nss" || die
-
-	# Set NSS_DEFAULT_DB_TYPE in environment.
-	echo "NSS_DEFAULT_DB_TYPE=\"sql\"" >"${T}/90nss_default_db_type" || die
-	doenvd "${T}/90nss_default_db_type" || die
-
-	# Install the default configuration file.
-	dodir /etc/pki/nssdb
-	insinto /etc/pki/nssdb
-	doins "${FILESDIR}/pkcs11.txt"
-
-	# Install the setup-nsssysinit.sh script.
-	dobin "${FILESDIR}/setup-nsssysinit.sh"
+	doenvd "${T}/90nss"
 }
 
 pkg_postinst() {
@@ -278,26 +266,6 @@ pkg_postinst() {
 		shlibsign="shlibsign"
 	fi
 	generate_chk "${shlibsign}" "${EROOT}"/usr/$(get_libdir)
-
-	# TODO: Upgrade any old system database.
-
-	# Install a new empty database if none exists already.
-	if [ ! -f "${EROOT}/etc/pki/nssdb/cert9.db" ]; then
-		echo > empty.txt
-		certutil -N -d "sql:${EROOT}/etc/pki/nssdb" -f empty.txt || die
-		rm empty.txt
-		einfo "An empty NSS system database has been installed, with no password."
-		einfo
-		einfo "You may wish to set a new system database password now using:"
-		einfo
-		einfo "certutil -W -d \"sql:${EROOT}/etc/pki/nssdb\""
-	fi
-
-	# Set sensible permissions 0644 on the certificate database.
-	fperms 0644 "${EROOT}"/etc/pki/nssdb/*
-
-	# Populate the certificate DB.
-	cadb_pkg_postinst nss
 }
 
 pkg_postrm() {
