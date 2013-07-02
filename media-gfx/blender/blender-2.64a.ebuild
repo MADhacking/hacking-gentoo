@@ -98,7 +98,7 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${WORKDIR}"/${PV}/*.patch
-	epatch "${FILESDIR}"/*.patch
+	epatch "${FILESDIR}"/dupligroup_depth.patch
 
 	# remove some bundled deps
 	rm -r \
