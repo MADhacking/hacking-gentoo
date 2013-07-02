@@ -1,4 +1,4 @@
-# Copyright 2012 Hacking Networked Solutions
+# Copyright 2013 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
@@ -15,7 +15,8 @@ IUSE=""
 
 RDEPEND="app-portage/gentoolkit
 		 app-portage/portage-utils
-		 >=dev-libs/bash-outlogger-0.2"
+		 >=dev-libs/bash-outlogger-0.2
+		 app-admin/buildserver-client-scripts"
 
 src_install() {
 	exeinto /usr/bin

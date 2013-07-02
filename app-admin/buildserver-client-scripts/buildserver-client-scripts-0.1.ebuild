@@ -1,10 +1,10 @@
-# Copyright 2012 Hacking Networked Solutions
+# Copyright 2013 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
 EAPI="3"
 
-DESCRIPTION="A collection of scripts to automatically build updated packages inside a \"build-space\""
+DESCRIPTION="A collection of scripts to automatically install updated packages from a \"build-server\""
 HOMEPAGE="http://www.mad-hacking.net/software/linux/gentoo/buildspace-scripts/index.xml"
 SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
