@@ -36,6 +36,7 @@ DEPEND=">=dev-libs/libpcre-3.4
 	ssl? ( >=dev-libs/openssl-0.9.6g )"
 
 RDEPEND="${DEPEND}
+	app-admin/eselect-sendmail
 	dovecot-sasl? ( net-mail/dovecot )
 	memcached? ( net-misc/memcached )
 	net-mail/mailbase

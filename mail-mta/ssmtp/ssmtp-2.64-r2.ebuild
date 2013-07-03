@@ -27,6 +27,7 @@ DEPEND="ssl? (
 RDEPEND="${DEPEND}
 	net-mail/mailbase
 	mta? (
+		app-admin/eselect-sendmail
 		!net-mail/mailwrapper
 		!mail-mta/courier
 		!mail-mta/esmtp
