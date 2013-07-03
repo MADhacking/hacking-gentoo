@@ -185,8 +185,8 @@ src_install () {
 		config_directory="/etc/postfix" \
 		manpage_directory="/usr/share/man" \
 		command_directory="/usr/sbin" \
-		mailq_path="/usr/bin/mailq" \
-		newaliases_path="/usr/bin/newaliases" \
+		mailq_path="/usr/bin/mailq.postfix" \
+		newaliases_path="/usr/bin/newaliases.postfix" \
 		sendmail_path="/usr/sbin/sendmail.postfix" \
 		${myconf} \
 		|| die "postfix-install failed"
