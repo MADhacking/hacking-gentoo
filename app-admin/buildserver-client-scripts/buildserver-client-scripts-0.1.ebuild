@@ -15,7 +15,7 @@ IUSE=""
 
 RDEPEND="app-portage/gentoolkit
 		 app-portage/portage-utils
-		 >=dev-libs/bash-outlogger-0.2
+		 >=dev-libs/bash-outlogger-0.4
 		 !<app-admin/buildspace-scripts-0.15"
 
 src_install() {
