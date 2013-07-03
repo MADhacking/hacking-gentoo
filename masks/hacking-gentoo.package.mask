@@ -10,6 +10,8 @@ app-emulation/xen-tools
 app-misc/ca-certificates
 dev-java/icedtea
 dev-libs/nss
+mail-mta/postfix
+mail-mta/ssmtp
 media-gfx/blender
 sys-apps/openrc
 sys-apps/openrc-runhooks-plugin

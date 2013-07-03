@@ -6,6 +6,8 @@ app-emulation/xen-tools::hacking-gentoo
 app-misc/ca-certificates::hacking-gentoo
 dev-java/icedtea::hacking-gentoo
 dev-libs/nss::hacking-gentoo
+mail-mta/postfix::hacking-gentoo
+mail-mta/ssmtp::hacking-gentoo
 <media-gfx/blender-2.66::hacking-gentoo
 sys-apps/openrc::hacking-gentoo
 sys-apps/openrc-runhooks-plugin::hacking-gentoo
