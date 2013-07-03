@@ -115,3 +115,28 @@ src_install() {
 		dosym ../sbin/ssmtp /usr/bin/newaliases.ssmtp
 	fi
 }
+
+pkg_postinst() {
+	if [[ ! -L "${ROOT}"/usr/sbin/sendmail ]]; then
+		ewarn
+		ewarn "You do not currently have a sendmail replacement selected!"
+		ewarn
+		ewarn "Setting ssmtp as the sendmail replacement"
+		ewarn
+		eselect sendmail set ssmtp
+		ewarn "To use an alternative sendmail replacement use \"eselect sendmail\""
+		ewarn
+	fi
+
+	if ! eselect sendmail show | grep ssmtp &>/dev/null; then
+		ewarn
+		ewarn "You do not currently have ssmtp selected as a sendmail replacement."
+		ewarn
+		ewarn "You MUST run"
+		ewarn
+		ewarn "# eselect sendmail set ssmtp"
+		ewarn
+		ewarn "if you wish to use ssmtp as a replacement for sendmail."
+		ewarn
+	fi
+}

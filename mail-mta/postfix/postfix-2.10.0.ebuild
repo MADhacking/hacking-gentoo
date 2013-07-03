@@ -298,6 +298,29 @@ pkg_postinst() {
 		chown postfix:mail "${ROOT}"/etc/ssl/postfix/server.{key,pem}
 	fi
 
+	if [[ ! -L "${ROOT}"/usr/sbin/sendmail ]]; then
+		ewarn
+		ewarn "You do not currently have a sendmail replacement selected!"
+		ewarn
+		ewarn "Setting postfix as the sendmail replacement"
+		ewarn
+		eselect sendmail set postfix
+		ewarn "To use an alternative sendmail replacement use \"eselect sendmail\""
+		ewarn
+	fi
+
+	if ! eselect sendmail show | grep postfix &>/dev/null; then
+		ewarn
+		ewarn "You do not currently have postfix selected as a sendmail replacement."
+		ewarn
+		ewarn "You MUST run"
+		ewarn
+		ewarn "# eselect sendmail set postfix"
+		ewarn
+		ewarn "if you wish to use postfix as a replacement for sendmail."
+		ewarn
+	fi
+
 	if [[ ! -e /etc/mail/aliases.db ]] ; then
 		ewarn
 		ewarn "You must edit /etc/mail/aliases to suit your needs"
