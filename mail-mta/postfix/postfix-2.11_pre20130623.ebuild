@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/mail-mta/postfix/postfix-2.11_pre20130623.ebuild,v 1.1 2013/06/25 05:59:51 eras Exp $
+# Copyright 2013 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3+
+# $Header: $
 
 EAPI=5
 inherit eutils flag-o-matic multilib pam ssl-cert toolchain-funcs user versionator
@@ -36,6 +36,7 @@ DEPEND=">=dev-libs/libpcre-3.4
 	ssl? ( >=dev-libs/openssl-0.9.6g )"
 
 RDEPEND="${DEPEND}
+	app-admin/eselect-sendmail
 	dovecot-sasl? ( net-mail/dovecot )
 	memcached? ( net-misc/memcached )
 	net-mail/mailbase
@@ -189,9 +190,9 @@ src_install () {
 		config_directory="/etc/postfix" \
 		manpage_directory="/usr/share/man" \
 		command_directory="/usr/sbin" \
-		mailq_path="/usr/bin/mailq" \
-		newaliases_path="/usr/bin/newaliases" \
-		sendmail_path="/usr/sbin/sendmail" \
+		mailq_path="/usr/bin/mailq.postfix" \
+		newaliases_path="/usr/bin/newaliases.postfix" \
+		sendmail_path="/usr/sbin/sendmail.postfix" \
 		${myconf} \
 		|| die "postfix-install failed"
 
@@ -201,9 +202,6 @@ src_install () {
 
 	# Install rmail for UUCP, closes bug #19127
 	dobin auxiliary/rmail/rmail
-
-	# Provide another link for legacy FSH
-	dosym /usr/sbin/sendmail /usr/$(get_libdir)/sendmail
 
 	# Install qshape tool
 	dobin auxiliary/qshape/qshape.pl
@@ -286,6 +284,29 @@ pkg_postinst() {
 		SSL_ORGANIZATION="${SSL_ORGANIZATION:-Postfix SMTP Server}"
 		install_cert /etc/ssl/postfix/server
 		chown postfix:mail "${ROOT}"/etc/ssl/postfix/server.{key,pem}
+	fi
+
+	if [[ ! -L "${ROOT}"/usr/sbin/sendmail ]]; then
+		ewarn
+		ewarn "You do not currently have a sendmail replacement selected!"
+		ewarn
+		ewarn "Setting postfix as the sendmail replacement"
+		ewarn
+		eselect sendmail set postfix
+		ewarn "To use an alternative sendmail replacement use \"eselect sendmail\""
+		ewarn
+	fi
+
+	if ! eselect sendmail show | grep postfix &>/dev/null; then
+		ewarn
+		ewarn "You do not currently have postfix selected as a sendmail replacement."
+		ewarn
+		ewarn "You MUST run"
+		ewarn
+		ewarn "# eselect sendmail set postfix"
+		ewarn
+		ewarn "if you wish to use postfix as a replacement for sendmail."
+		ewarn
 	fi
 
 	if [[ ! -e /etc/mail/aliases.db ]] ; then
