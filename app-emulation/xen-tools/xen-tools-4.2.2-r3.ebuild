@@ -17,7 +17,7 @@ if [[ $PV == *9999 ]]; then
 	S="${WORKDIR}/${REPO}"
 	live_eclass="mercurial"
 else
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 x86"
 	SRC_URI="http://bits.xensource.com/oss-xen/release/${PV}/xen-${PV}.tar.gz
 	$IPXE_TARBALL_URL
 	$XEN_SEABIOS_URL
@@ -42,7 +42,6 @@ CDEPEND="dev-libs/lzo:2
 	dev-libs/libaio
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/pypam[${PYTHON_USEDEP}]
-	dev-python/pyxml[${PYTHON_USEDEP}]
 	sys-libs/zlib
 	sys-power/iasl
 	dev-ml/findlib
