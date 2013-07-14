@@ -1,6 +1,6 @@
-# Copyright 1999-2013 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-admin/mcollective/mcollective-2.2.0.ebuild,v 1.3 2013/03/25 20:52:59 ago Exp $
+# Copyright 2013 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3
+# $Header: $
 
 EAPI="4"
 
@@ -34,7 +34,7 @@ all_ruby_install() {
 pkg_postinst() {
 	einfo "MCollective requires a functional message queue server be available on"
 	einfo "your local network before you can use it. The recommended message queue"
-	eingo "server to use on Gentoo Linux is RabbitMQ."
+	einfo "server to use on Gentoo Linux is RabbitMQ."
 	einfo
 	einfo "It is recommended you read the \'getting started\' guide [2] if this"
 	einfo "is a new installation"
