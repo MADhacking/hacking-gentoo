@@ -24,13 +24,13 @@ src_compile() {
 }
 
 all_ruby_install() {
-	dosbin bin/mcollectived
+	dosbin mcollective-${PV}/bin/mcollectived
 	newinitd "${FILESDIR}"/mcollectived.initd mcollectived
 	
 	insinto /etc/mcollective
 	doins ${FILESDIR}/client.cfg
 	doins ${FILESDIR}/facts.yaml
-	doins cfg/*.erb
+	doins mcollective-${PV}/cfg/*.erb
 }
 
 pkg_postinst() {
