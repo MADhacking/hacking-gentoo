@@ -15,7 +15,6 @@ SRC_URI="http://puppetlabs.com/downloads/mcollective/mcollective-${PV}.tgz"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc"
 
 DEPEND=""
 RDEPEND="dev-libs/mcollective"
