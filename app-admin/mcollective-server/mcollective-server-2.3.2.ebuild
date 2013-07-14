@@ -28,7 +28,7 @@ all_ruby_install() {
 	newinitd "${FILESDIR}"/mcollectived.initd mcollectived
 	
 	insinto /etc/mcollective
-	doins ${FILESDIR}/client.cfg
+	doins ${FILESDIR}/server.cfg
 	doins ${FILESDIR}/facts.yaml
 	doins mcollective-${PV}/cfg/*.erb
 }
