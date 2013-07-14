@@ -25,7 +25,7 @@ src_compile() {
 }
 
 each_ruby_install() {
-	doruby -r lib/*
+	doruby -r mcollective-${PV}/lib/*
 
 	if use doc ; then
 		dohtml -r doc/*
