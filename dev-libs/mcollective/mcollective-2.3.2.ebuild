@@ -10,7 +10,7 @@ inherit ruby-ng
 
 DESCRIPTION="Framework to implement server orchestration or parallel job execution systems"
 HOMEPAGE="http://marionette-collective.org/"
-SRC_URI="http://puppetlabs.com/downloads/mcollective/mcollective-${PV}.tgz"
+SRC_URI="http://puppetlabs.com/downloads/mcollective/${P}.tgz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -25,7 +25,7 @@ src_compile() {
 }
 
 each_ruby_install() {
-	doruby -r mcollective-${PV}/lib/*
+	doruby -r lib/*
 }
 
 all_ruby_install() {
