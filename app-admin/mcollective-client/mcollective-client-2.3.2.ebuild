@@ -25,7 +25,7 @@ src_compile() {
 
 all_ruby_install() {
 	insinto /usr/bin
-	doins mcollective-${PV}/bin/mco
+	dobin mcollective-${PV}/bin/mco
 }
 
 pkg_postinst() {
