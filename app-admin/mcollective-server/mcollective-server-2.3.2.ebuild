@@ -18,7 +18,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
 DEPEND=""
-RDEPEND=""
+RDEPEND="dev-libs/mcollective"
 
 src_compile() {
 	einfo "nothing to compile"
@@ -37,7 +37,7 @@ each_ruby_install() {
 pkg_postinst() {
 	einfo "MCollective requires a functional message queue server be available on"
 	einfo "your local network before you can use it. The recommended server to use"
-	eingo "on Gentoo is RabbitMQ."
+	einfo "on Gentoo is RabbitMQ."
 	einfo
 	einfo "It is recommended you read the \'getting started\' guide [2] if this"
 	einfo "is a new installation"
