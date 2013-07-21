@@ -3,11 +3,11 @@
 # $Header: $
 
 EAPI=5
-inherit eutils multilib ssl-cert toolchain-funcs flag-o-matic pam user versionator systemd
+inherit eutils flag-o-matic multilib pam ssl-cert systemd toolchain-funcs user versionator
 
 MY_PV="${PV/_pre/-}"
 MY_SRC="${PN}-${MY_PV}"
-MY_URI="ftp://ftp.porcupine.org/mirrors/postfix-release/official"
+MY_URI="ftp://ftp.porcupine.org/mirrors/postfix-release/experimental"
 VDA_PV="2.10.0"
 VDA_P="${PN}-vda-v13-${VDA_PV}"
 RC_VER="2.7"
@@ -19,7 +19,7 @@ SRC_URI="${MY_URI}/${MY_SRC}.tar.gz
 
 LICENSE="IBM"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
 IUSE="+berkdb cdb doc dovecot-sasl hardened ldap ldap-bind memcached mbox mysql nis pam postgres sasl selinux sqlite ssl vda"
 
 DEPEND=">=dev-libs/libpcre-3.4
@@ -67,6 +67,10 @@ pkg_setup() {
 src_prepare() {
 	if use vda; then
 		epatch "${DISTDIR}"/${VDA_P}.patch
+	fi
+
+	if ! use berkdb; then
+		epatch "${FILESDIR}/${PN}_no-berkdb.patch"
 	fi
 
 	sed -i -e "/^#define ALIAS_DB_MAP/s|:/etc/aliases|:/etc/mail/aliases|" \
