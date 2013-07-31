@@ -16,7 +16,8 @@
 if [[ ${___ECLASS_ONCE_USER} != "recur -_+^+_- spank" ]] ; then
 ___ECLASS_ONCE_USER="recur -_+^+_- spank"
 
-DEPEND="sys-apps/shadow"
+DEPEND="pam? ( sys-auth/pambase )
+		sys-apps/shadow"
 RDEPEND="${DEPEND}"
 
 # @FUNCTION: _assert_pkg_ebuild_phase
