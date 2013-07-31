@@ -29,6 +29,7 @@ COMMON_DEPEND="virtual/init
 	>=sys-apps/baselayout-2.1-r1
 	kernel_linux? (
 		sys-process/psmisc
+		sys-process/procps
 	)
 	selinux? ( sec-policy/selinux-openrc )
 	!<sys-fs/udev-init-scripts-17
