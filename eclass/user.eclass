@@ -16,7 +16,7 @@
 if [[ ${___ECLASS_ONCE_USER} != "recur -_+^+_- spank" ]] ; then
 ___ECLASS_ONCE_USER="recur -_+^+_- spank"
 
-DEPEND="pam? ( sys-auth/pambase )
+DEPEND="sys-auth/pambase
 		sys-apps/shadow"
 RDEPEND="${DEPEND}"
 
