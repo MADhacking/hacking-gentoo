@@ -95,7 +95,7 @@ egetent() {
 		# If we are installing to a root other than / the normal getent
 		# won't work so we'll have to grep the database instead.
 		if [[ -n ${ROOT} ]] && [[ ${ROOT} != "/" ]]; then
-			grep "${key}:*:" ${ROOT}/etc/${db}
+			[[ -f ${ROOT}/etc/${db} ]] && grep "${key}:*:" ${ROOT}/etc/${db}
 		else
 			# ignore output if nscd doesn't exist, or we're not running as root
 			nscd -i "${db}" 2>/dev/null
