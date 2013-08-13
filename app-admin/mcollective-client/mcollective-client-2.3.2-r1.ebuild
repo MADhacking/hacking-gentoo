@@ -30,6 +30,7 @@ all_ruby_install() {
 		
 	insinto /etc/mcollective
 	doins ${FILESDIR}/client.cfg
+	doins mcollective-${PV}/etc/*.erb
 }
 
 pkg_postinst() {
