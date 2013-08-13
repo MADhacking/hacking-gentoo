@@ -13,6 +13,7 @@ SLOT="0"
 KEYWORDS="~alpha amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd x86 ~x86-fbsd"
 IUSE=""
 
+DEPEND=""
 RDEPEND=""
 
 src_install() {
