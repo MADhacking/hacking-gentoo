@@ -19,4 +19,6 @@ RDEPEND=""
 src_install() {
 	insinto /usr/share/mcollective/plugins/mcollective/agent
 	doins usr/share/mcollective/plugins/mcollective/agent/*
+	
+	dosbin usr/sbin/*
 }
