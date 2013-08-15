@@ -5,7 +5,7 @@
 EAPI="3"
 
 DESCRIPTION="MCollective plug-in that lets you stop, start, restart and query the statuses of services."
-HOMEPAGE="https://github.com/puppetlabs/mcollective-puppet-agent"
+HOMEPAGE="https://github.com/puppetlabs/mcollective-service-agent"
 SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
 LICENSE="GPL-3"
