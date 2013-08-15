@@ -17,12 +17,18 @@ DEPEND=""
 RDEPEND=""
 
 src_install() {
+	# Remove these spec/ files as they will collide with other packages.
+	for d in spec/spec.opts spec/spec_helper.rb; do
+		[[ -f ${d} ]] && rm ${d}
+	done
+
+	# Install any directories.
 	insinto /usr/share/mcollective/plugins/mcollective
-	
 	for d in agent aggregate application data spec util validator; do
 		[[ -d ${d} ]] && doins -r ${d}
 	done
-	
+
+	# Install any files.
 	for d in LICENSE LICENSE.md ChangeLog CHANGELOG CHANGELOG.md ReadMe readme README.md; do
 		[[ -f ${d} ]] && dodoc ${d}
 	done
