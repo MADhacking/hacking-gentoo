@@ -1,14 +1,16 @@
 app-admin
 app-emulation
 app-misc
-app-portage
 dev-java
 dev-libs
 dev-php
 install-conf
 install-meta
+mail-mta
+mcollective-plugin
 media-gfx
 net-firewall
+net-mail
 snmp-agents
 snmp-mibs
 sys-apps

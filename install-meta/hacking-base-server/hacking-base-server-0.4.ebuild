@@ -38,7 +38,7 @@ RDEPEND="${RDEPEND}
 							net-fs/nfs-utils )
 	hacking-certificates? ( app-misc/hacking-certificates )
 	ipsec?				  ( net-firewall/ipsec-tools )
-	mcollective?		  (	app-admin/mcollective-plugin-update-system
+	mcollective?		  (	mcollective-plugin/mcollective-plugin-update-system
 							app-admin/mcollective-server )
 	puppet?				  (	app-admin/puppet )
 	rsync-backup-client?  (	install-conf/rsync-backup-client )
