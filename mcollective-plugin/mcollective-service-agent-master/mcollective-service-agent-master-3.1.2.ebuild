@@ -1,0 +1,29 @@
+# Copyright 2013 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3
+# $Header: $
+
+EAPI="3"
+
+DESCRIPTION="MCollective plug-in that lets you stop, start, restart and query the statuses of services."
+HOMEPAGE="https://github.com/puppetlabs/mcollective-puppet-agent"
+SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
+
+LICENSE="GPL-3"
+SLOT="0"
+KEYWORDS="~amd64 ~x86"
+IUSE=""
+
+DEPEND=""
+RDEPEND=""
+
+src_install() {
+	insinto /usr/share/mcollective/plugins/mcollective
+	
+	for d in agent aggregate application data spec util validator; do
+		[[ -d ${d} ]] && doins -r ${d}
+	done
+	
+	for d in LICENSE LICENSE.md ChangeLog CHANGELOG CHANGELOG.md ReadMe readme README.md; do
+		[[ -f ${d} ]] && dodoc ${d}
+	done
+}
