@@ -291,10 +291,10 @@ pkg_postinst() {
 		einfo "You may wish to set a new system database password now using:"
 		einfo
 		einfo "certutil -W -d \"sql:${EROOT}/etc/pki/nssdb\""
-	fi
 
-	# Set sensible permissions 0644 on the certificate database.
-	fperms 0644 "${EROOT}"/etc/pki/nssdb/*
+		# Set sensible permissions 0644 on the certificate database.
+		fperms 0644 "${EROOT}"/etc/pki/nssdb/*		
+	fi
 
 	# Populate the certificate DB.
 	cadb_pkg_postinst nss
