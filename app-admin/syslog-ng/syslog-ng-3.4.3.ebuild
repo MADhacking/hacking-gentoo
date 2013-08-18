@@ -12,7 +12,7 @@ SRC_URI="http://www.balabit.com/downloads/files/syslog-ng/sources/${MY_PV}/sourc
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 ~sh ~sparc x86 ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
 IUSE="caps dbi geoip ipv6 json mongodb +pcre smtp spoof-source ssl tcpd"
 RESTRICT="test"
 
@@ -35,9 +35,7 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${PN}-${MY_PV}
 
 src_prepare() {
-	epatch \
-		"${FILESDIR}"/${PV%.*}/${P}-compile.patch \
-		"${FILESDIR}"/${PV%.*}/${P}-autotools.patch
+	epatch "${FILESDIR}"/${PV%.*}/${P}-autotools.patch
 	mv configure.in configure.ac || die
 	eautoreconf
 }
@@ -67,7 +65,7 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" install
 
-	dodoc AUTHORS ChangeLog NEWS contrib/syslog-ng.conf* contrib/syslog2ng \
+	dodoc AUTHORS NEWS contrib/syslog-ng.conf* contrib/syslog2ng \
 		"${FILESDIR}/${PV%.*}/syslog-ng.conf.gentoo.hardened" \
 		"${FILESDIR}/syslog-ng.logrotate.hardened" \
 		"${FILESDIR}/README.hardened"
