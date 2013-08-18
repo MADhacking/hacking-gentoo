@@ -104,13 +104,13 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/01-${P}-doxyfile.patch \
-		"${FILESDIR}"/02-${P}-unbundle-colamd.patch \
-		"${FILESDIR}"/03-${P}-remove-binreloc.patch \
-		"${FILESDIR}"/04-${P}-unbundle-glog.patch \
-		"${FILESDIR}"/05-${P}-unbundle-eigen3.patch \
-		"${FILESDIR}"/06-${P}-fix-install-rules.patch \
-		"${FILESDIR}"/07-${P}-sse2.patch \
+	epatch "${FILESDIR}"/01-${PN}-2.68-doxyfile.patch \
+		"${FILESDIR}"/02-${PN}-2.68-unbundle-colamd.patch \
+		"${FILESDIR}"/03-${PN}-2.68-remove-binreloc.patch \
+		"${FILESDIR}"/04-${PN}-2.68-unbundle-glog.patch \
+		"${FILESDIR}"/05-${PN}-2.68-unbundle-eigen3.patch \
+		"${FILESDIR}"/06-${PN}-2.68-fix-install-rules.patch \
+		"${FILESDIR}"/07-${PN}-2.68-sse2.patch \
 		"${FILESDIR}"/dupligroup_depth.patch
 
 	# remove some bundled deps
