@@ -8,7 +8,9 @@
 
 EAPI="5"
 
-inherit cadb java-pkg-2 java-vm-2 pax-utils prefix versionator virtualx flag-o-matic
+CHECKREQS_DISK_BUILD="9G"
+
+inherit cadb check-reqs java-pkg-2 java-vm-2 pax-utils prefix versionator virtualx flag-o-matic
 
 ICEDTEA_VER=$(get_version_component_range 2-)
 ICEDTEA_BRANCH=$(get_version_component_range 2-3)
@@ -144,12 +146,18 @@ DEPEND="${COMMON_DEP} ${ALSA_COMMON_DEP} ${CUPS_COMMON_DEP} ${X_COMMON_DEP}
 	${X_DEPEND}
 	pax_kernel? ( sys-apps/paxctl )"
 
-PDEPEND="webstart? ( dev-java/icedtea-web:7 )
-	nsplugin? ( dev-java/icedtea-web:7[nsplugin] )"
+PDEPEND="webstart? ( >=dev-java/icedtea-web-1.3.2:7 )
+	nsplugin? ( >=dev-java/icedtea-web-1.3.2:7[nsplugin] )"
 
 S="${WORKDIR}"/${ICEDTEA_PKG}
 
+pkg_pretend() {
+	check-reqs_pkg_pretend
+}
+
 pkg_setup() {
+	check-reqs_pkg_setup
+
 	JAVA_PKG_WANT_BUILD_VM="
 		icedtea-7 icedtea-bin-7 icedtea7
 		gcj-jdk"
@@ -218,7 +226,7 @@ src_configure() {
 			config+=" --enable-zero"
 			HOTSPOT_GENTOO_TARBALL=${ZERO_GENTOO_TARBALL}
 			;;
-	esac 
+	esac
 
 	# OpenJDK-specific parallelism support. Bug #389791, #337827
 	# Implementation modified from waf-utils.eclass
