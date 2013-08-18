@@ -17,7 +17,7 @@ if [[ $PV == *9999 ]]; then
 	S="${WORKDIR}/${REPO}"
 	live_eclass="mercurial"
 else
-	KEYWORDS="amd64 x86"
+	KEYWORDS="~amd64 ~x86"
 	SRC_URI="http://bits.xensource.com/oss-xen/release/${PV}/xen-${PV}.tar.gz
 	$IPXE_TARBALL_URL
 	$XEN_SEABIOS_URL
@@ -69,7 +69,8 @@ DEPEND="${CDEPEND}
 		dev-texlive/texlive-pictures
 		dev-texlive/texlive-latexrecommended
 	)
-	hvm? (  x11-proto/xproto )"
+	hvm? (  x11-proto/xproto
+		!net-libs/libiscsi )"
 RDEPEND="${CDEPEND}
 	sys-apps/iproute2
 	net-misc/bridge-utils
@@ -202,6 +203,9 @@ src_prepare() {
 	# Set dom0-min-mem to kb; Bug #472982
 	epatch "${FILESDIR}"/${PN/-tools/}-4.2-configsxp.patch
 
+	# Bug #
+	epatch "${FILESDIR}"/${P}-install.patch
+
 	#Security patches, currently valid
 	epatch "${FILESDIR}"/xen-4-CVE-2012-6075-XSA-41.patch \
 		"${FILESDIR}"/xen-4-CVE-2013-1922-XSA-48.patch \
@@ -228,6 +232,9 @@ src_prepare() {
 	sed -e 's:^BASH_COMPLETION_DIR ?= $(CONFIG_DIR)/bash_completion.d:BASH_COMPLETION_DIR ?= $(SHARE_DIR)/bash-completion:' \
 		-i Config.mk || die
 
+	# Bug 445986
+	sed -e 's:$(MAKE) PYTHON=$(PYTHON) subdirs-$@:LC_ALL=C "$(MAKE)" PYTHON=$(PYTHON) subdirs-$@:' -i tools/firmware/Makefile || die
+
 	epatch_user
 }
 
@@ -243,7 +250,7 @@ src_compile() {
 
 	unset LDFLAGS
 	unset CFLAGS
-	emake CC="$(tc-getCC)" LD="$(tc-getLD)" -C tools ${myopt}
+	emake V=1 CC="$(tc-getCC)" LD="$(tc-getLD)" AR="$(tc-getAR)" RANLIB="$(tc-getRANLIB)" -C tools ${myopt}
 
 	use doc && emake -C docs txt html
 	emake -C docs man-pages
@@ -258,13 +265,13 @@ src_install() {
 	local PYTHONDONTWRITEBYTECODE
 	export PYTHONDONTWRITEBYTECODE
 
-	emake DESTDIR="${ED}" DOCDIR="/usr/share/doc/${PF}" \
+	emake DESTDIR="${ED}" DOCDIR="/usr/share/doc/${PF}" install-tools \
 		XEN_PYTHON_NATIVE_INSTALL=y install-tools
 	# Fix the remaining Python shebangs.
 	python_fix_shebang "${ED}"
 
 	# Remove RedHat-specific stuff
-	rm -rf "${ED}"tmp || die
+	rm -rf "${D}"tmp || die
 
 	# uncomment lines in xl.conf
 	sed -e 's:^#autoballoon=1:autoballoon=1:' \
@@ -310,7 +317,7 @@ src_install() {
 
 	# For -static-libs wrt Bug 384355
 	if ! use static-libs; then
-		rm -f "${ED}"usr/$(get_libdir)/*.a "${ED}"usr/$(get_libdir)/ocaml/*/*.a
+		rm -f "${D}"usr/$(get_libdir)/*.a "${D}"usr/$(get_libdir)/ocaml/*/*.a
 	fi
 
 	# xend expects these to exist
@@ -321,17 +328,17 @@ src_install() {
 
 	# Temp QA workaround
 	dodir "$(udev_get_udevdir)"
-	mv "${ED}"/etc/udev/* "${ED}/$(udev_get_udevdir)"
-	rm -rf "${ED}"/etc/udev
+	mv "${D}"/etc/udev/* "${D}/$(udev_get_udevdir)"
+	rm -rf "${D}"/etc/udev
 
 	# Remove files failing QA AFTER emake installs them, avoiding seeking absent files
-	find "${ED}" \( -name openbios-sparc32 -o -name openbios-sparc64 \
+	find "${D}" \( -name openbios-sparc32 -o -name openbios-sparc64 \
 		-o -name openbios-ppc -o -name palcode-clipper \) -delete || die
 }
 
 pkg_postinst() {
 	elog "Official Xen Guide and the unoffical wiki page:"
-	elog " http://www.gentoo.org/doc/en/xen-guide.xml"
+	elog " http://www.gentoo.org/doc/en/xen-gu"${D}"usr/ide.xml"
 	elog " http://gentoo-wiki.com/HOWTO_Xen_and_Gentoo"
 
 	if [[ "$(scanelf -s __guard -q "${PYTHON}")" ]] ; then
@@ -359,8 +366,6 @@ pkg_postinst() {
 		elog "HVM (VT-x and AMD-V) support has been disabled. If you need hvm"
 		elog "support enable the hvm use flag."
 		elog "An x86 or amd64 multilib system is required to build HVM support."
-		echo
-		elog "The qemu use flag has been removed and replaced with hvm."
 	fi
 
 	if use xend; then

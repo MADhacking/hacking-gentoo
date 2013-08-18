@@ -1,6 +1,135 @@
 # ChangeLog for app-emulation/xen-tools
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/xen-tools/ChangeLog,v 1.165 2013/07/02 16:15:40 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/xen-tools/ChangeLog,v 1.192 2013/08/04 12:22:18 idella4 Exp $
+
+  04 Aug 2013; Ian Delaney <idella4@gentoo.org> +files/xenstoredorig.confd,
+  files/xenstored.confd, xen-tools-4.3.0.ebuild:
+  Upgrade to IUSE ocaml with shift of findlib behind IUSE ocaml and consequent
+  upgrade to configure, substitute xenstored conf.d script resultant of Bug
+  #478776, orginal conf.d script retained by rename to xenstoredorig.confd
+
+  01 Aug 2013; Ian Delaney <idella4@gentoo.org> xen-tools-4.3.0.ebuild:
+  Reverting transfig to previous place behind IUSE doc, fixes Bug #479226 by
+  Sven
+
+  31 Jul 2013; Ian Delaney <idella4@gentoo.org> xen-tools-4.2.2-r4.ebuild:
+  upgrade emake in complile phase to match 4.3.0
+
+  30 Jul 2013; Ian Delaney <idella4@gentoo.org> files/xend.initd-r1,
+  files/xend.initd-r2:
+  Add var extra_commands matching xendomain init scripts, requested by mva
+
+  30 Jul 2013; Ian Delaney <idella4@gentoo.org>
+  files/xen-tools-4.2.2-install.patch:
+  extend xen-tools-4.2.2-install.patch with patch by D. Lan via Bug 478708,
+  hopefully fixes the bug
+
+  30 Jul 2013; Ian Delaney <idella4@gentoo.org> files/xendomains-screen.confd:
+  Take out duplicate AUTODIR && PARALLEL_SHUTDOWN from xendomains-screen.confd
+  wrt Bug #478234
+
+  30 Jul 2013; Ian Delaney <idella4@gentoo.org>
+  +files/xen-tools-4.2.2-install.patch, xen-tools-4.2.2-r4.ebuild:
+  alternate fix to Bug #472976 by patch by Andreas Kinzler wrt to Bug #472976 by
+  Andreas Kinzler
+
+  30 Jul 2013; Ian Delaney <idella4@gentoo.org> xen-tools-4.3.0.ebuild:
+  verbosity level hard set in src_compile, fixes Bug #477678 by hasufell
+
+  30 Jul 2013; Ian Delaney <idella4@gentoo.org> xen-tools-4.2.2-r4.ebuild,
+  xen-tools-4.3.0.ebuild:
+  previous mentioned fix to #445986 appears not to have gone through, repeat +
+  applied to 4.2.2-r4
+
+  27 Jul 2013; Ian Delaney <idella4@gentoo.org> xen-tools-4.3.0.ebuild:
+  Add dep markdown, make dep transfig unconditional, sed statement to correct
+  locale failure in build of seabios, fixes Bug #445986
+
+  27 Jul 2013; Ian Delaney <idella4@gentoo.org> +files/xen-4.3-jserver.patch,
+  files/xenconsoled.initd, files/xend.initd-r1, files/xend.initd-r2,
+  files/xenstored.initd, xen-tools-4.3.0.ebuild:
+  for 4.3.0; upgrade jserver.patch, substitute with correct code to set IUSE
+  api, flask capable builds, rm whitespace in init script, thanks for support
+  from mva
+
+  27 Jul 2013; Ian Delaney <idella4@gentoo.org> files/xendomains.initd-r1,
+  files/xendomains.initd-r2:
+  Correction to xendomains.initd scripts wrt Bug #477824
+
+  26 Jul 2013; Ian Delaney <idella4@gentoo.org> +files/qemu-bridge.patch,
+  xen-tools-4.3.0.ebuild:
+  Alternate fix of file collision with qemu-bridge-helper with corresponding
+  patch wrt Bug #478064
+
+  25 Jul 2013; Ian Delaney <idella4@gentoo.org> files/xenstored.initd,
+  xen-tools-4.3.0.ebuild:
+  Correction to xenstored.initd fix, set app-emulation/qemu as an antagonist dep
+  to IUSE qemu wrt Bug #478064 by uen
+
+  25 Jul 2013; Ian Delaney <idella4@gentoo.org> files/xenstored.initd:
+  Edit to xenstored.initd wrt Bug #476572 & #475204
+
+  24 Jul 2013; Ian Delaney <idella4@gentoo.org> xen-tools-4.3.0.ebuild:
+  Add dep for IUSE qemu build, fixes Bug #477878 by 'a.m.', again
+
+  24 Jul 2013; Ian Delaney <idella4@gentoo.org> xen-tools-4.3.0.ebuild:
+  Correction to install with IUSE qemu, fixes Bug #477884, fixes Bug #477884
+
+  24 Jul 2013; Ian Delaney <idella4@gentoo.org> xen-tools-4.3.0.ebuild:
+  correct tools' Makefile re IUSE pygrub, add python use flag and corresponding
+  sed to Makefile, fixes Bug #477880 by 'a.m'
+
+  23 Jul 2013; Ian Delaney <idella4@gentoo.org>
+  +files/xen-tools-4.3-ar-cc.patch, -files/xen-tools-4.3-ar.patch,
+  xen-tools-4.3.0.ebuild:
+  renamed patch to capture ar & cc, extended the patch to honour tc-getCC,
+  almost fixes Bug #477676
+
+  23 Jul 2013; Ian Delaney <idella4@gentoo.org> +files/xen-tools-4.3-ar.patch,
+  xen-tools-4.3.0.ebuild:
+  patch to correct AR use wrt Bug #477676
+
+  23 Jul 2013; Ian Delaney <idella4@gentoo.org> files/xendomains.initd-r1,
+  files/xendomains.initd-r2:
+  Correct xendomains.init(s) to POSIX compliant, fixes Bug #477824
+
+  22 Jul 2013; Ian Delaney <idella4@gentoo.org>
+  files/xen-4.3-fix_dotconfig-gcc.patch, xen-tools-4.3.0.ebuild:
+  Extend purging of Werror CFLAG in xen-4.3-fix_dotconfig-gcc.patch, fixes Bug
+  #477674
+
+  22 Jul 2013; Ian Delaney <idella4@gentoo.org>
+  files/xen-4-fix_dotconfig-gcc.patch, files/xen-4.2.0-anti-download.patch,
+  xen-tools-4.3.0.ebuild:
+  Add vars AR, RANLIB to build, addresses Bug #477676
+
+  21 Jul 2013; Ian Delaney <idella4@gentoo.org>
+  files/xen-4-fix_dotconfig-gcc.patch, files/xen-4.2.0-anti-download.patch,
+  xen-tools-4.2.2-r4.ebuild, xen-tools-4.3.0.ebuild:
+  Rm antiquated line from elog, add antagonist dep behind IUSE hvm, fixes Bug
+  #475634
+
+*xen-tools-4.2.2-r4 (21 Jul 2013)
+
+  21 Jul 2013; Ian Delaney <idella4@gentoo.org> +xen-tools-4.2.2-r4.ebuild,
+  files/xen-4-fix_dotconfig-gcc.patch, files/xen-4.2.0-anti-download.patch,
+  xen-tools-4.2.2-r3.ebuild, xen-tools-4.3.0.ebuild:
+  revbump; correct install of qemu files folders with IUSE qemu, fixes Bug
+  #472976, upgrade instances of ED to D in revbumped & 4.3.0
+
+*xen-tools-4.3.0 (20 Jul 2013)
+
+  20 Jul 2013; Ian Delaney <idella4@gentoo.org>
+  +files/xen-4.3-fix_dotconfig-gcc.patch, +files/xen-4.3.0-anti-download.patch,
+  +xen-tools-4.3.0.ebuild, files/xen-4-fix_dotconfig-gcc.patch,
+  files/xen-4.2.0-anti-download.patch, files/xenstored.initd:
+  bump; required culling sec patches, edit to configure and upgrading 2 patches,
+  correction to xenstored.initd wrt Bug #476572 by Spooky Ghost
+
+  04 Jul 2013; Ian Delaney <idella4@gentoo.org> -xen-tools-4.2.1-r3.ebuild,
+  -xen-tools-4.2.1-r4.ebuild, -xen-tools-4.2.2-r1.ebuild,
+  -xen-tools-4.2.2-r2.ebuild, files/xenstored.initd:
+  correction
 
   02 Jul 2013; Agostino Sarubbo <ago@gentoo.org> xen-tools-4.2.2-r3.ebuild:
   Stable for x86, wrt bug #472214
