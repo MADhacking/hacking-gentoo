@@ -23,6 +23,7 @@ RDEPEND="${DEPEND}
 	app-portage/portage-utils
 	app-shells/bash-completion
 	app-shells/gentoo-bashcomp
+	net-analyzer/traceroute
 	net-misc/ntp
 	sys-apps/less
 	sys-apps/timer_entropyd
