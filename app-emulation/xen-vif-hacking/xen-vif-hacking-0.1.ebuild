@@ -17,7 +17,6 @@ DEPEND=""
 RDEPEND="app-emulation/xen-tools"
 
 src_install() {
-	insinto /etc/xen/scripts
-	chmod +x etc/xen/scripts/*
-	doins etc/xen/scripts/*
+	exeinto /etc/xen/scripts
+	doexe etc/xen/scripts/*
 }
