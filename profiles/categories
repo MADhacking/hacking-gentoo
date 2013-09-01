@@ -4,6 +4,7 @@ app-misc
 dev-java
 dev-libs
 dev-php
+dev-python
 install-conf
 install-meta
 mail-mta
