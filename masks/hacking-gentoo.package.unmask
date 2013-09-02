@@ -13,6 +13,7 @@ sys-apps/openrc-runhooks-plugin::hacking-gentoo
 sys-block/iscsitarget::hacking-gentoo
 sys-boot/last-known-good::hacking-gentoo
 sys-boot/last-known-good-dracut-module::hacking-gentoo
+sys-cluster/ceph::hacking-gentoo
 sys-cluster/cman::hacking-gentoo
 sys-cluster/libdlm::hacking-gentoo
 sys-devel/binutils::hacking-gentoo

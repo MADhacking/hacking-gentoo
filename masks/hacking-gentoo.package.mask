@@ -20,6 +20,7 @@ sys-apps/openrc-runhooks-plugin
 sys-block/iscsitarget
 sys-boot/last-known-good
 sys-boot/last-known-good-dracut-module
+sys-cluster/ceph
 sys-cluster/cman
 sys-cluster/libdlm
 sys-devel/binutils
