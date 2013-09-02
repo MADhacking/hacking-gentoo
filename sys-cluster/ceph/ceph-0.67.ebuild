@@ -56,7 +56,7 @@ RDEPEND="${CDEPEND}
 STRIP_MASK="/usr/lib*/rados-classes/*"
 
 PATCHES=(
-	"${FILESDIR}/ceph-0.61.7-install.patch"
+	"${FILESDIR}/${P}-install.patch"
 )
 
 src_prepare() {
