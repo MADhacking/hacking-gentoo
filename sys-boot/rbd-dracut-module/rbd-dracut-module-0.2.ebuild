@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-DESCRIPTION="Dracut module to boot from RBD device (Ceph)"
+DESCRIPTION="Dracut module to boot from Rados Block Device (RBD - Ceph)"
 HOMEPAGE="http://www.mad-hacking.net/software/"
 SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
