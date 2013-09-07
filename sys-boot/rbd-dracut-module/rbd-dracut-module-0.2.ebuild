@@ -13,7 +13,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="sys-kernel/dracut"
+RDEPEND="sys-cluster/ceph
+		 sys-kernel/dracut"
 
 src_install() {
 	cp -a ${WORKDIR}/${P}/* ${D}/
