@@ -12,6 +12,7 @@ mcollective-plugin
 media-gfx
 net-firewall
 net-mail
+net-misc
 snmp-agents
 snmp-mibs
 sys-apps
