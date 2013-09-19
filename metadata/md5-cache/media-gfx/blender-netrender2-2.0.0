@@ -1,0 +1,10 @@
+DEFINED_PHASES=install
+DESCRIPTION=Blender network rendering service (master)
+EAPI=3
+HOMEPAGE=http://www.hacking.co.uk/
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=media-gfx/blender
+SLOT=0
+SRC_URI=http://downloads.mad-hacking.net/software/netrender2-2.0.0.tar.bz2
+_md5_=b6437355931693843ae09c215ee933a2

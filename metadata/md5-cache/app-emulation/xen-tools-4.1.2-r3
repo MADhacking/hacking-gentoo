@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile install postinst postrm prepare setup
+DEPEND=<dev-libs/yajl-2 dev-python/lxml dev-python/pypam dev-python/pyxml sys-libs/zlib hvm? ( media-libs/libsdl sys-power/iasl ) api? ( dev-libs/libxml2 net-misc/curl ) sys-devel/gcc dev-lang/perl app-misc/pax-utils dev-ml/findlib doc? ( app-doc/doxygen dev-tex/latex2html[png,gif] media-gfx/transfig media-gfx/graphviz dev-tex/xcolor dev-texlive/texlive-latexextra virtual/latex-base dev-tex/latexmk dev-texlive/texlive-latex dev-texlive/texlive-pictures dev-texlive/texlive-latexrecommended ) hvm? ( x11-proto/xproto sys-devel/dev86 ) pygrub? ( dev-lang/python[ncurses] ) sys-apps/shadow sys-auth/pambase =dev-lang/python-2* =dev-lang/python-2*[xml,threads]
+DESCRIPTION=Xend daemon and tools
+EAPI=4
+HOMEPAGE=http://xen.org/
+IUSE=api custom-cflags debug doc flask hvm qemu pygrub screen selinux xend
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=<dev-libs/yajl-2 dev-python/lxml dev-python/pypam dev-python/pyxml sys-libs/zlib hvm? ( media-libs/libsdl sys-power/iasl ) api? ( dev-libs/libxml2 net-misc/curl ) sys-apps/iproute2 net-misc/bridge-utils >=dev-lang/ocaml-3.12.0 screen? ( app-misc/screen app-admin/logrotate ) || ( sys-fs/udev sys-apps/hotplug ) selinux? ( sec-policy/selinux-xen ) sys-apps/shadow sys-auth/pambase =dev-lang/python-2* =dev-lang/python-2*[xml,threads]
+REQUIRED_USE=hvm? ( qemu )
+RESTRICT=test
+SLOT=0
+SRC_URI=http://bits.xensource.com/oss-xen/release/4.1.2/xen-4.1.2.tar.gz http://xenbits.xensource.com/xen-extfiles/ipxe-git-v1.0.0.tar.gz
+_eclasses_=eutils	63afaaed8aa819fdcb814c7cd39495a2	flag-o-matic	2ff578fb151da221e1797f12e2990e72	multilib	892e597faee02a5b94eb02ab512e7622	python	7aff825f110c83fa8c77f14ba3c71c47	toolchain-funcs	7ffd28a8c7eea27218865352bfd3ab2f	user	f7084a6d9d1caf321808d6d5a0c69e9b
+_md5_=a3c3811dbf889961066f67f019a0ac3a

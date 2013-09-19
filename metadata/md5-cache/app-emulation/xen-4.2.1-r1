@@ -1,0 +1,16 @@
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare prerm setup
+DEPEND=sys-apps/shadow sys-auth/pambase
+DESCRIPTION=The Xen virtual machine monitor
+EAPI=5
+HOMEPAGE=http://xen.org/
+IUSE=custom-cflags debug flask pae xsm python_targets_python2_6 python_targets_python2_7 python_single_target_python2_6 python_single_target_python2_7
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+PDEPEND=~app-emulation/xen-tools-4.2.1
+RDEPEND=sys-apps/shadow sys-auth/pambase
+REQUIRED_USE=flask? ( xsm )
+RESTRICT=test
+SLOT=0
+SRC_URI=http://bits.xensource.com/oss-xen/release/4.2.1/xen-4.2.1.tar.gz
+_eclasses_=eutils	63afaaed8aa819fdcb814c7cd39495a2	flag-o-matic	2ff578fb151da221e1797f12e2990e72	mount-boot	02dd3bb4c5f025fef0fc3ade0f27c217	multilib	892e597faee02a5b94eb02ab512e7622	python-single-r1	b13f5baea5da0da5a5dcc6b8b79706a2	python-utils-r1	5d822763b5668548984ff7132eec9ad0	toolchain-funcs	7ffd28a8c7eea27218865352bfd3ab2f	user	f7084a6d9d1caf321808d6d5a0c69e9b
+_md5_=851b2a0c01b9e5df77b09668331b1fa1

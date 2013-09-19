@@ -1,0 +1,9 @@
+DEFINED_PHASES=install
+DESCRIPTION=MCollective plug-in that provides fine grained action level authorisation for agents.
+EAPI=3
+HOMEPAGE=https://github.com/puppetlabs/mcollective-actionpolicy-auth
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+SLOT=0
+SRC_URI=http://downloads.mad-hacking.net/software/mcollective-actionpolicy-auth-master-20130624.tar.bz2
+_md5_=899a0450304660073c506a7a09808e36

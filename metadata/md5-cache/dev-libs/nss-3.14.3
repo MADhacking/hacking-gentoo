@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm prepare
+DEPEND=virtual/pkgconfig >=dev-libs/nspr-4.9.5 sys-apps/shadow sys-auth/pambase dev-libs/openssl >=app-admin/update-ca-certificates-0.7
+DESCRIPTION=Mozilla's Network Security Services library that implements PKI support
+EAPI=3
+HOMEPAGE=http://www.mozilla.org/projects/security/pki/nss/
+IUSE=utils
+KEYWORDS=alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris
+LICENSE=|| ( MPL-2.0 GPL-2 LGPL-2.1 )
+RDEPEND=>=dev-libs/nspr-4.9.5 >=dev-db/sqlite-3.5 sys-libs/zlib sys-apps/shadow sys-auth/pambase dev-libs/openssl >=app-admin/update-ca-certificates-0.7
+SLOT=0
+SRC_URI=ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_14_3_RTM/src/nss-3.14.3.tar.gz http://dev.gentoo.org/~anarchy/patches/nss-3.14.1-add_spi+cacerts_ca_certs.patch http://dev.gentoo.org/~anarchy/patches/nss-3.13.3_pem.support
+_eclasses_=cadb	ef5d444be26c9278fa3ae1fd54b37618	eutils	63afaaed8aa819fdcb814c7cd39495a2	flag-o-matic	2ff578fb151da221e1797f12e2990e72	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	7ffd28a8c7eea27218865352bfd3ab2f	user	f7084a6d9d1caf321808d6d5a0c69e9b
+_md5_=d84e718094e4cfe1b3773063d814c43d

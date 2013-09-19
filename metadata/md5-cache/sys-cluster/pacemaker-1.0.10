@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare setup unpack
+DEPEND=dev-libs/libxslt sys-cluster/cluster-glue sys-cluster/resource-agents ais? ( sys-cluster/openais ) heartbeat? ( >=sys-cluster/heartbeat-3.0.0 ) smtp? ( net-libs/libesmtp ) snmp? ( net-analyzer/net-snmp ) !heartbeat? ( !ais? ( sys-cluster/openais ) ) !=dev-libs/glib-2.32* =dev-lang/python-2* || ( >=sys-devel/automake-1.12:1.12 >=sys-devel/automake-1.13:1.13 ) >=sys-devel/autoconf-2.68 sys-devel/libtool sys-apps/shadow sys-auth/pambase
+DESCRIPTION=Pacemaker CRM
+EAPI=2
+HOMEPAGE=http://www.clusterlabs.org/
+IUSE=+ais heartbeat smtp snmp static-libs
+KEYWORDS=amd64 hppa x86
+LICENSE=GPL-2
+RDEPEND=dev-libs/libxslt sys-cluster/cluster-glue sys-cluster/resource-agents ais? ( sys-cluster/openais ) heartbeat? ( >=sys-cluster/heartbeat-3.0.0 ) smtp? ( net-libs/libesmtp ) snmp? ( net-analyzer/net-snmp ) !heartbeat? ( !ais? ( sys-cluster/openais ) ) =dev-lang/python-2* sys-apps/shadow sys-auth/pambase
+SLOT=0
+SRC_URI=http://hg.clusterlabs.org/pacemaker/stable-1.0/archive/Pacemaker-1.0.10.tar.bz2
+_eclasses_=autotools	16761a2f972abd686713e5967ff3c754	base	ec46b36a6f6fd1d0b505a33e0b74e413	eutils	63afaaed8aa819fdcb814c7cd39495a2	flag-o-matic	2ff578fb151da221e1797f12e2990e72	libtool	b1c8688e60f9580bcb9bb46e08737eb1	multilib	892e597faee02a5b94eb02ab512e7622	multiprocessing	a2130e6fc4aa4c6a24b265ca0cbcc2b6	python	7aff825f110c83fa8c77f14ba3c71c47	toolchain-funcs	7ffd28a8c7eea27218865352bfd3ab2f	user	f7084a6d9d1caf321808d6d5a0c69e9b
+_md5_=4509934c1d55729ca2615de47d55aaf7

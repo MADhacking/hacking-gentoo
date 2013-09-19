@@ -1,0 +1,9 @@
+DEFINED_PHASES=install
+DESCRIPTION=MCollective plug-in that manages the puppet agent daemon.
+EAPI=3
+HOMEPAGE=https://github.com/puppetlabs/mcollective-puppet-agent
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+SLOT=0
+SRC_URI=http://downloads.mad-hacking.net/software/mcollective-puppet-agent-master-1.6.0.tar.bz2
+_md5_=bac3bf80aecc86acced86bf651219d22
