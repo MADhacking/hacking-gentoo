@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst prepare setup
+DEPEND=media-libs/alsa-lib flac? ( media-libs/flac ) vorbis? ( media-libs/libvorbis ) mad? ( media-libs/libmad ) mpg123? ( media-sound/mpg123 ) aac? ( media-libs/faad2 ) sys-apps/shadow sys-auth/pambase
+DESCRIPTION=Squeezelite is a small headless Squeezebox emulator for Linux using ALSA audio output
+EAPI=5
+HOMEPAGE=https://code.google.com/p/squeezelite
+IUSE=flac vorbis mad mpg123 aac
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=media-libs/alsa-lib flac? ( media-libs/flac ) vorbis? ( media-libs/libvorbis ) mad? ( media-libs/libmad ) mpg123? ( media-sound/mpg123 ) aac? ( media-libs/faad2 ) media-sound/alsa-utils sys-apps/shadow sys-auth/pambase
+SLOT=0
+SRC_URI=https://squeezelite.googlecode.com/archive/7c64f298b78e9d3ef69ab29fc33c455a55dfe9ec.zip
+_eclasses_=eutils	63afaaed8aa819fdcb814c7cd39495a2	flag-o-matic	2ff578fb151da221e1797f12e2990e72	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	7ffd28a8c7eea27218865352bfd3ab2f	user	f7084a6d9d1caf321808d6d5a0c69e9b
+_md5_=931971557da440d8f98bc048ac5206b2

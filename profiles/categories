@@ -10,6 +10,7 @@ install-meta
 mail-mta
 mcollective-plugin
 media-gfx
+media-sound
 net-firewall
 net-mail
 net-misc
