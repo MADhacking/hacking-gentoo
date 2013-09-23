@@ -46,10 +46,12 @@ start() {
     done
     echo
 
-	ebegin "Restoring cluster node to active state"
-	sleep 5
-	/usr/sbin/crm -w node online
-	eend $?
+	if yesno ${PACEMAKER_AUTO_JOIN_CLUSTER}; then
+		ebegin "Restoring cluster node to active state"
+		sleep 5
+		/usr/sbin/crm -w node online
+		eend $?
+	fi
 }
 
 stop() {
