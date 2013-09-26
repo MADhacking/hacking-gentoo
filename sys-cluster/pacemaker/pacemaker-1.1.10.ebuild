@@ -79,7 +79,7 @@ src_install() {
 	base_src_install
 	rm -rf "${D}"/var/run "${D}"/etc/init.d
 	newinitd "${FILESDIR}/${PN}.initd" ${PN} || die
-	newinitd "${FILESDIR}/${PN}.confd" ${PN} || die
+	newconfd "${FILESDIR}/${PN}.confd" ${PN} || die
 	if has_version "<sys-cluster/corosync-2.0"; then
 		insinto /etc/corosync/service.d
 		newins "${FILESDIR}/${PN}.service" ${PN} || die
