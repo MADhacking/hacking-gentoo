@@ -24,6 +24,7 @@ IUSE="acl cman heartbeat smtp snmp static-libs"
 DEPEND="
 	app-text/docbook-xsl-stylesheets
 	dev-libs/libxslt
+	sys-cluster/crmsh
 	sys-cluster/cluster-glue
 	>=sys-cluster/libqb-0.14.0
 	sys-cluster/resource-agents
@@ -84,10 +85,4 @@ src_install() {
 		insinto /etc/corosync/service.d
 		newins "${FILESDIR}/${PN}.service" ${PN} || die
 	fi
-}
-
-pkg_postinst() {
-	elog " "
-	elog "Looking for the crm CLI ? emerge sys-cluster/crmsh !"
-	elog " "
 }
