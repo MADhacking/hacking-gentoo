@@ -23,10 +23,11 @@
          {"fma4",         0x80000001, NA, CPUID_REG_ECX, 16,  1},
          {"lwp",          0x80000001, NA, CPUID_REG_ECX, 15,  1},
          {"wdt",          0x80000001, NA, CPUID_REG_ECX, 13,  1},
-@@ -178,6 +184,7 @@
+@@ -178,6 +184,8 @@
          {"nx",           0x80000001, NA, CPUID_REG_EDX, 20,  1},
          {"syscall",      0x80000001, NA, CPUID_REG_EDX, 11,  1},
          {"procpkg",      0x00000004,  0, CPUID_REG_EAX, 26,  6},
++        {"eff_freq_ro",  0x80000007, NA, CPUID_REG_EDX, 10,  1},
 +        {"cpb",          0x80000007, NA, CPUID_REG_EDX,  9,  1},
          {"apicidsize",   0x80000008, NA, CPUID_REG_ECX, 12,  4},
          {"nc",           0x80000008, NA, CPUID_REG_ECX,  0,  8},
