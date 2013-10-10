@@ -25,6 +25,4 @@ src_install() {
 
 	insinto /etc
 	doins etc/*
-
-	keepdir /var/cache/snmp
 }
