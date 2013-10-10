@@ -26,6 +26,11 @@ start() {
 }
 
 stop() {
+	ebegin "Stopping any remaining Xen guest domains..."
+	xl shutdown --all --wait &>/dev/null &
+	wait
+	eend $?
+	
 	ebegin "Stopping xenstored daemon"
 	start-stop-daemon --stop --exec /usr/sbin/xenstored \
 		--pidfile /var/run/xenstored.pid
