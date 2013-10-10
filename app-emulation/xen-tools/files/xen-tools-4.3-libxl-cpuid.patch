@@ -9,13 +9,12 @@
          {"cntxid",       0x00000001, NA, CPUID_REG_ECX, 10,  1},
          {"ssse3",        0x00000001, NA, CPUID_REG_ECX,  9,  1},
          {"tm2",          0x00000001, NA, CPUID_REG_ECX,  8,  1},
-@@ -148,10 +149,15 @@
-         {"pse",          0x00000001, NA, CPUID_REG_EDX,  3,  1},
+@@ -149,9 +150,14 @@
          {"de",           0x00000001, NA, CPUID_REG_EDX,  2,  1},
          {"vme",          0x00000001, NA, CPUID_REG_EDX,  1,  1},
+         {"fpu",          0x00000001, NA, CPUID_REG_EDX,  0,  1},
 +        {"arat",         0x00000006, NA, CPUID_REG_EAX,  2,  1},
 +        {"bmi1",         0x00000007, NA, CPUID_REG_EBX,  3,  1},
-         {"fpu",          0x00000001, NA, CPUID_REG_EDX,  0,  1},
 +        {"perfctr_nb",   0x80000001, NA, CPUID_REG_ECX, 24,  1},
 +        {"perfctr_core", 0x80000001, NA, CPUID_REG_ECX, 23,  1},
          {"topoext",      0x80000001, NA, CPUID_REG_ECX, 22,  1},
