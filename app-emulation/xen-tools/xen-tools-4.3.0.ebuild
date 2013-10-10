@@ -215,6 +215,9 @@ src_prepare() {
 	# Bug 477676
 	epatch "${FILESDIR}"/${PN}-4.3-ar-cc.patch
 
+	# Add some extra CPUID bits
+	epatch "${FILESDIR}"/${PN}-4.3-libxl-cpuid.patch
+	
 	# Prevent file collision with qemu package Bug 478064
 	if use qemu; then
 		epatch "${FILESDIR}"/qemu-bridge.patch
