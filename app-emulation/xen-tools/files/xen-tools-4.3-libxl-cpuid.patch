@@ -1,7 +1,6 @@
 --- tools/libxl/libxl_cpuid.c	2013-07-09 12:46:56.000000000 +0200
 +++ tools/libxl/libxl_cpuid.c	2013-10-10 21:02:27.051816002 +0200
 @@ -108,6 +108,7 @@
-@@ -108,6 +108,7 @@
          {"pdcm",         0x00000001, NA, CPUID_REG_ECX, 15,  1},
          {"xtpr",         0x00000001, NA, CPUID_REG_ECX, 14,  1},
          {"cmpxchg16",    0x00000001, NA, CPUID_REG_ECX, 13,  1},
