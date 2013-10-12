@@ -23,7 +23,7 @@ HOMEPAGE="http://ceph.com/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-IUSE="debug fuse gtk libatomic radosgw static-libs tcmalloc"
+IUSE="debug fuse gtk +libatomic +radosgw static-libs +tcmalloc"
 
 CDEPEND="
 	app-arch/snappy
@@ -98,7 +98,7 @@ src_install() {
 	newexe src/init-ceph ceph_init.sh
 
 	insinto /etc/logrotate.d/
-	newins src/logrotate.conf ${PN}
+	newins "${FILESDIR}/${PN}.logrotate" ${PN}
 
 	chmod 644 "${ED}"/usr/share/doc/${PF}/sample.*
 

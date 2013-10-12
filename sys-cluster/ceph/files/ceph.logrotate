@@ -1,0 +1,10 @@
+/var/log/ceph/*.log {
+    rotate 7
+    daily
+    compress
+    sharedscripts
+    postrotate
+        /etc/init.d/ceph reload >/dev/null
+    endscript
+    missingok
+}
