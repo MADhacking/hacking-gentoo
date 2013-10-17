@@ -8,5 +8,5 @@ LICENSE=GPL-2
 RDEPEND=>=sys-apps/portage-2.1 app-shells/bash !sys-devel/crossdev-wrappers sys-apps/shadow sys-auth/pambase
 SLOT=0
 SRC_URI=mirror://gentoo/crossdev-20120913.tar.xz http://dev.gentoo.org/~vapier/dist/crossdev-20120913.tar.xz
-_eclasses_=eutils	63afaaed8aa819fdcb814c7cd39495a2	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	7ffd28a8c7eea27218865352bfd3ab2f	user	f7084a6d9d1caf321808d6d5a0c69e9b
+_eclasses_=eutils	4878e7f88afc0ba0866ac112190b0fd4	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	3e30ef439a720915f8f4fd4fe75f704c	user	f7084a6d9d1caf321808d6d5a0c69e9b
 _md5_=b9545b1263c810c197942ca9ce820b90

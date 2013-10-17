@@ -9,5 +9,5 @@ LICENSE=GPL-2
 RDEPEND=dev-lang/python sys-libs/zlib hvm? ( media-libs/libsdl sys-power/iasl ) acm? ( dev-libs/libxml2 ) api? ( dev-libs/libxml2 net-misc/curl ) sys-apps/iproute2 net-misc/bridge-utils dev-python/pyxml screen? ( app-misc/screen app-admin/logrotate ) || ( sys-fs/udev sys-apps/hotplug ) sys-apps/shadow sys-auth/pambase
 SLOT=0
 SRC_URI=http://bits.xensource.com/oss-xen/release/4.0.2/xen-4.0.2.tar.gz
-_eclasses_=eutils	63afaaed8aa819fdcb814c7cd39495a2	flag-o-matic	2ff578fb151da221e1797f12e2990e72	multilib	892e597faee02a5b94eb02ab512e7622	python	7aff825f110c83fa8c77f14ba3c71c47	toolchain-funcs	7ffd28a8c7eea27218865352bfd3ab2f	user	f7084a6d9d1caf321808d6d5a0c69e9b
+_eclasses_=eutils	4878e7f88afc0ba0866ac112190b0fd4	flag-o-matic	46e34faf3660a9fa3d374b042130fb20	multilib	892e597faee02a5b94eb02ab512e7622	python	305197b0aa1194fa3ef67ca21f6faa7e	toolchain-funcs	3e30ef439a720915f8f4fd4fe75f704c	user	f7084a6d9d1caf321808d6d5a0c69e9b
 _md5_=3d486c5593435d9c4a071bb4c775ae71
