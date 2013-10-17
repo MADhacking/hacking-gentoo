@@ -15,7 +15,7 @@ IUSE=""
 
 RDEPEND=">=dev-libs/snmpd-connector-lib-0.3
 		 dev-libs/hacking-bash-lib
-		 >=snmp-mibs/smartctl-snmp-mib-0.2
+		 >=snmp-mibs/smartctl-snmp-mib-0.3
 		 net-analyzer/net-snmp
 		 sys-apps/smartmontools"
 
