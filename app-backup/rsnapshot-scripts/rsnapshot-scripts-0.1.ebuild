@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="alpha amd64 ppc ppc64 sparc x86"
 IUSE=""
 
-RDEPEND="app-backup/rdiff-backup"
+RDEPEND="app-backup/rsnapshot"
 
 src_install() {
 	exeinto /usr/sbin
