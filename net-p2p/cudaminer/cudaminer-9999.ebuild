@@ -1,9 +1,9 @@
 EAPI=4
 inherit autotools git-2
 
-DESCRIPTION="a CUDA accelerated litecoin mining application based on pooler's CPU miner"
-HOMEPAGE="https://github.com/cbuchner1/CudaMiner"
-EGIT_REPO_URI="https://github.com/cbuchner1/CudaMiner.git"
+DESCRIPTION="A CUDA accelerated litecoin mining application based on pooler's CPU miner"
+HOMEPAGE="http://github.com/cbuchner1/CudaMiner"
+EGIT_REPO_URI="http://github.com/cbuchner1/CudaMiner.git"
 
 LICENSE="GPL-3"
 SLOT="0"
