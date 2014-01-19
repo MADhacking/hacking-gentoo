@@ -1,9 +1,10 @@
 EAPI=4
-inherit autotools git-2
+inherit autotools
 
 DESCRIPTION="A CUDA accelerated litecoin mining application based on pooler's CPU miner"
 HOMEPAGE="http://github.com/cbuchner1/CudaMiner"
-EGIT_REPO_URI="http://github.com/cbuchner1/CudaMiner.git"
+SRC_URI="http://downloads.mad-hacking.net/software/${P}.zip"
+
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -16,7 +17,7 @@ DEPEND="${RDEPEND} >=dev-util/nvidia-cuda-sdk-5.5.0"
 DOCS=( README.txt LICENSE.txt )
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-9999-nvcc-flags.patch
+	epatch "${FILESDIR}"/${PN}-nvcc-flags.patch
 	eautoreconf
 }
 
