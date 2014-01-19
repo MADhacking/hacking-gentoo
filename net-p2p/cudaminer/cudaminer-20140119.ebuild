@@ -5,7 +5,6 @@ DESCRIPTION="A CUDA accelerated litecoin mining application based on pooler's CP
 HOMEPAGE="http://github.com/cbuchner1/CudaMiner"
 SRC_URI="http://downloads.mad-hacking.net/software/${P}.zip"
 
-
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
