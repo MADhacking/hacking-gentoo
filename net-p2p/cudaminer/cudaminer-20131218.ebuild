@@ -11,7 +11,9 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 RDEPEND=">=dev-util/nvidia-cuda-toolkit-5.5.0"
-DEPEND="${RDEPEND} >=dev-util/nvidia-cuda-sdk-5.5.0"
+DEPEND="${RDEPEND}
+		>=dev-util/nvidia-cuda-sdk-5.5.0
+		>=dev-libs/jansson-2.4"
 
 DOCS=( README.txt LICENSE.txt )
 
