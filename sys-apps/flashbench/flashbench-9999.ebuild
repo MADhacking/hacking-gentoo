@@ -24,7 +24,7 @@ HOMEPAGE="https://github.com/bradfa/flashbench"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 src_prepare() {
