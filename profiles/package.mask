@@ -11,10 +11,12 @@ app-emulation/xen
 app-emulation/xen-tools
 app-misc/ca-certificates
 dev-java/icedtea
+dev-libs/klibc
 dev-libs/nss
 mail-mta/postfix
 mail-mta/ssmtp
 media-gfx/blender
+sys-apps/fbset
 sys-apps/openrc
 sys-apps/openrc-runhooks-plugin
 sys-block/iscsitarget

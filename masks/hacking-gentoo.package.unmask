@@ -4,10 +4,12 @@ app-emulation/xen::hacking-gentoo
 app-emulation/xen-tools::hacking-gentoo
 app-misc/ca-certificates::hacking-gentoo
 dev-java/icedtea::hacking-gentoo
+dev-libs/klibc::hacking-gentoo
 dev-libs/nss::hacking-gentoo
 mail-mta/postfix::hacking-gentoo
 mail-mta/ssmtp::hacking-gentoo
 media-gfx/blender::hacking-gentoo
+sys-apps/fbset::hacking-gentoo
 sys-apps/openrc::hacking-gentoo
 sys-apps/openrc-runhooks-plugin::hacking-gentoo
 sys-block/iscsitarget::hacking-gentoo
