@@ -1,100 +1,164 @@
-# Copyright 2012 Hacking Networked Solutions
-# Distributed under the terms of the GNU General Public License v3
+# Copyright 2013 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3+
 # $Header: $
 
-EAPI=3
+EAPI=5
 inherit eutils cadb flag-o-matic multilib toolchain-funcs
 
-NSPR_VER="4.9.2"
+NSPR_VER="4.10"
 RTM_NAME="NSS_${PV//./_}_RTM"
+# Rev of https://git.fedorahosted.org/cgit/nss-pem.git
+PEM_GIT_REV="3ade37c5c4ca5a6094e3f4b2e4591405db1867dd"
+PEM_P="${PN}-pem-${PEM_GIT_REV}"
 
 DESCRIPTION="Mozilla's Network Security Services library that implements PKI support"
 HOMEPAGE="http://www.mozilla.org/projects/security/pki/nss/"
 SRC_URI="ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${RTM_NAME}/src/${P}.tar.gz
-	http://dev.gentoo.org/~anarchy/patches/${PN}-3.13.6-add_spi+cacerts_ca_certs.patch
-	http://dev.gentoo.org/~anarchy/patches/${PN}-3.13.3_pem.support"
+	cacert? ( http://dev.gentoo.org/~anarchy/patches/${PN}-3.14.1-add_spi+cacerts_ca_certs.patch )
+	nss-pem? ( https://git.fedorahosted.org/cgit/nss-pem.git/snapshot/${PEM_P}.tar.bz2 )"
 
-LICENSE="|| ( MPL-1.1 GPL-2 LGPL-2.1 )"
+LICENSE="|| ( MPL-2.0 GPL-2 LGPL-2.1 )"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
-IUSE="utils"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+IUSE="+cacert +nss-pem utils"
 
 DEPEND="virtual/pkgconfig
 	>=dev-libs/nspr-${NSPR_VER}"
-
 RDEPEND=">=dev-libs/nspr-${NSPR_VER}
 	>=dev-db/sqlite-3.5
 	sys-libs/zlib"
+
+RESTRICT="test"
+
+S="${WORKDIR}/${P}/${PN}"
 
 src_setup() {
 	export LC_ALL="C"
 }
 
+src_unpack() {
+	unpack ${A}
+	if use nss-pem ; then
+		mv "${PEM_P}"/nss/lib/ckfw/pem/ "${S}"/lib/ckfw/ || die
+	fi
+}
+
 src_prepare() {
 	# Custom changes for gentoo
-	epatch "${FILESDIR}/${PN}-3.13-gentoo-fixup.patch"
-	epatch "${FILESDIR}/${PN}-3.12.6-gentoo-fixup-warnings.patch"
-	epatch "${DISTDIR}/${PN}-3.13.6-add_spi+cacerts_ca_certs.patch"
-	epatch "${DISTDIR}/${PN}-3.13.3_pem.support"
-	epatch "${FILESDIR}/${PN}-3.13.5-x32.patch"
-
-	cd "${S}"/mozilla/security/coreconf || die
+	epatch "${FILESDIR}/${PN}-3.15-gentoo-fixups.patch"
+	epatch "${FILESDIR}/${PN}-3.15-gentoo-fixup-warnings.patch"
+	use cacert && epatch "${DISTDIR}/${PN}-3.14.1-add_spi+cacerts_ca_certs.patch"
+	use nss-pem && epatch "${FILESDIR}/${PN}-3.15.4-enable-pem.patch"
+	epatch "${FILESDIR}/${PN}-3.15-x32.patch"
+	epatch "${FILESDIR}/nss-3.14.2-solaris-gcc.patch"
+	cd coreconf
 	# hack nspr paths
-	echo 'INCLUDES += -I'"${EPREFIX}"'/usr/include/nspr -I$(DIST)/include/dbm' \
+	echo 'INCLUDES += -I$(DIST)/include/dbm' \
 		>> headers.mk || die "failed to append include"
 
 	# modify install path
 	sed -e 's:SOURCE_PREFIX = $(CORE_DEPTH)/\.\./dist:SOURCE_PREFIX = $(CORE_DEPTH)/dist:' \
-		-i source.mk || die
+		-i source.mk
 
 	# Respect LDFLAGS
-	sed -i -e 's/\$(MKSHLIB) -o/\$(MKSHLIB) \$(LDFLAGS) -o/g' rules.mk || die
+	sed -i -e 's/\$(MKSHLIB) -o/\$(MKSHLIB) \$(LDFLAGS) -o/g' rules.mk
 
 	# Ensure we stay multilib aware
-	sed -i -e "s:gentoo\/nss:$(get_libdir):" "${S}"/mozilla/security/nss/config/Makefile || die "Failed to fix for multilib"
+	sed -i -e "/@libdir@/ s:lib64:$(get_libdir):" "${S}"/config/Makefile
 
 	# Fix pkgconfig file for Prefix
 	sed -i -e "/^PREFIX =/s:= /usr:= ${EPREFIX}/usr:" \
-		"${S}"/mozilla/security/nss/config/Makefile || die
+		"${S}"/config/Makefile
 
-	epatch "${FILESDIR}/nss-3.13.1-solaris-gcc.patch"
+	# use host shlibsign if need be #436216
+	if tc-is-cross-compiler ; then
+		sed -i \
+			-e 's:"${2}"/shlibsign:shlibsign:' \
+			"${S}"/cmd/shlibsign/sign.sh
+	fi
 
 	# dirty hack
-	cd "${S}"/mozilla/security/nss || die
+	cd "${S}"
 	sed -i -e "/CRYPTOLIB/s:\$(SOFTOKEN_LIB_DIR):../freebl/\$(OBJDIR):" \
-		lib/ssl/config.mk || die
+		lib/ssl/config.mk
 	sed -i -e "/CRYPTOLIB/s:\$(SOFTOKEN_LIB_DIR):../../lib/freebl/\$(OBJDIR):" \
-		cmd/platlibs.mk || die
+		cmd/platlibs.mk
+}
+
+nssarch() {
+	# Most of the arches are the same as $ARCH
+	local t=${1:-${CHOST}}
+	case ${t} in
+	aarch64*)echo "aarch64";;
+	hppa*)   echo "parisc";;
+	i?86*)   echo "i686";;
+	x86_64*) echo "x86_64";;
+	*)       tc-arch ${t};;
+	esac
+}
+
+nssbits() {
+	local cc="${1}CC" cppflags="${1}CPPFLAGS" cflags="${1}CFLAGS"
+	echo > "${T}"/test.c || die
+	${!cc} ${!cppflags} ${!cflags} -c "${T}"/test.c -o "${T}"/test.o || die
+	case $(file "${T}"/test.o) in
+	*32-bit*x86-64*) echo USE_x32=1;;
+	*64-bit*|*ppc64*|*x86_64*) echo USE_64=1;;
+	*32-bit*|*ppc*|*i386*) ;;
+	*) die "Failed to detect whether your arch is 64bits or 32bits, disable distcc if you're using it, please";;
+	esac
 }
 
 src_compile() {
 	strip-flags
 
-	echo > "${T}"/test.c || die
-	$(tc-getCC) ${CFLAGS} -c "${T}"/test.c -o "${T}"/test.o || die
-	case $(file "${T}"/test.o) in
-	*32-bit*x86-64*) export USE_x32=1;;
-	*64-bit*|*ppc64*|*x86_64*) export USE_64=1;;
-	*32-bit*|*ppc*|*i386*) ;;
-	*) die "Failed to detect whether your arch is 64bits or 32bits, disable distcc if you're using it, please";;
-	esac
+	tc-export AR RANLIB {BUILD_,}{CC,PKG_CONFIG}
+	local makeargs=(
+		CC="${CC}"
+		AR="${AR} rc \$@"
+		RANLIB="${RANLIB}"
+		OPTIMIZER=
+		$(nssbits)
+	)
 
-	export NSPR_INCLUDE_DIR=`nspr-config --includedir`
-	export NSPR_LIB_DIR=`nspr-config --libdir`
+	# Take care of nspr settings #436216
+	append-cppflags $(${PKG_CONFIG} nspr --cflags)
+	append-ldflags $(${PKG_CONFIG} nspr --libs-only-L)
+	unset NSPR_INCLUDE_DIR
+	export NSPR_LIB_DIR=${T}/fake-dir
+
+	# Do not let `uname` be used.
+	if use kernel_linux ; then
+		makeargs+=(
+			OS_TARGET=Linux
+			OS_RELEASE=2.6
+			OS_TEST="$(nssarch)"
+		)
+	fi
+
 	export BUILD_OPT=1
 	export NSS_USE_SYSTEM_SQLITE=1
 	export NSDISTMODE=copy
 	export NSS_ENABLE_ECC=1
-	export XCFLAGS="${CFLAGS}"
+	export XCFLAGS="${CFLAGS} ${CPPFLAGS}"
 	export FREEBL_NO_DEPEND=1
 	export ASFLAGS=""
 
-	cd "${S}"/mozilla/security/coreconf || die
-	emake -j1 CC="$(tc-getCC)" || die "coreconf make failed"
-	cd "${S}"/mozilla/security/dbm || die
-	emake -j1 CC="$(tc-getCC)" || die "dbm make failed"
-	cd "${S}"/mozilla/security/nss || die
-	emake -j1 CC="$(tc-getCC)" || die "nss make failed"
+	local d
+
+	# Build the host tools first.
+	LDFLAGS="${BUILD_LDFLAGS}" \
+	XCFLAGS="${BUILD_CFLAGS}" \
+	emake -j1 -C coreconf \
+		CC="${BUILD_CC}" \
+		$(nssbits BUILD_) \
+		|| die
+	makeargs+=( NSINSTALL="${PWD}/$(find -type f -name nsinstall)" )
+
+	# Then build the target tools.
+	for d in . lib/dbm ; do
+		emake -j1 "${makeargs[@]}" -C ${d} || die "${d} make failed"
+	done
 }
 
 # Altering these 3 libraries breaks the CHK verification.
@@ -118,6 +182,7 @@ generate_chk() {
 	local libdir="$2"
 	einfo "Resigning core NSS libraries for FIPS validation"
 	shift 2
+	local i
 	for i in ${NSS_CHK_SIGN_LIBS} ; do
 		local libname=lib${i}.so
 		local chkname=lib${i}.chk
@@ -134,6 +199,7 @@ generate_chk() {
 cleanup_chk() {
 	local libdir="$1"
 	shift 1
+	local i
 	for i in ${NSS_CHK_SIGN_LIBS} ; do
 		local libfname="${libdir}/lib${i}.so"
 		# If the major version has changed, then we have old chk files.
@@ -143,38 +209,27 @@ cleanup_chk() {
 }
 
 src_install() {
-	MINOR_VERSION=12
-	cd "${S}"/mozilla/security/dist || die
+	cd "${S}"/dist
 
-	dodir /usr/$(get_libdir) || die
+	dodir /usr/$(get_libdir)
 	cp -L */lib/*$(get_libname) "${ED}"/usr/$(get_libdir) || die "copying shared libs failed"
 	# We generate these after stripping the libraries, else they don't match.
 	#cp -L */lib/*.chk "${ED}"/usr/$(get_libdir) || die "copying chk files failed"
 	cp -L */lib/libcrmf.a "${ED}"/usr/$(get_libdir) || die "copying libs failed"
 
 	# Install nss-config and pkgconfig file
-	dodir /usr/bin || die
-	cp -L */bin/nss-config "${ED}"/usr/bin || die
-	dodir /usr/$(get_libdir)/pkgconfig || die
-	cp -L */lib/pkgconfig/nss.pc "${ED}"/usr/$(get_libdir)/pkgconfig || die
+	dodir /usr/bin
+	cp -L */bin/nss-config "${ED}"/usr/bin
+	dodir /usr/$(get_libdir)/pkgconfig
+	cp -L */lib/pkgconfig/nss.pc "${ED}"/usr/$(get_libdir)/pkgconfig
 
 	# all the include files
 	insinto /usr/include/nss
-	doins public/nss/*.h || die
-	cd "${ED}"/usr/$(get_libdir) || die
-	local n=
-	for file in *$(get_libname); do
-		n=${file%$(get_libname)}$(get_libname ${MINOR_VERSION})
-		mv ${file} ${n} || die
-		ln -s ${n} ${file} || die
-		if [[ ${CHOST} == *-darwin* ]]; then
-			install_name_tool -id "${EPREFIX}/usr/$(get_libdir)/${n}" ${n} || die
-		fi
-	done
+	doins public/nss/*.h
 
-	local nssutils
+	local f nssutils
 	# Always enabled because we need it for chk generation.
-	nssutils="shlibsign"
+	nssutils="certutil shlibsign"
 	if use utils; then
 		# The tests we do not need to install.
 		#nssutils_test="bltest crmftest dbtest dertimetest
@@ -185,21 +240,20 @@ src_install() {
 		pk12util pp rsaperf selfserv shlibsign signtool signver ssltap strsclnt
 		symkeyutil tstclnt vfychain vfyserv"
 	fi
-	cd "${S}"/mozilla/security/dist/*/bin/ || die
+	cd "${S}"/dist/*/bin/
 	for f in ${nssutils}; do
-		dobin ${f} || die
+		dobin ${f}
 	done
 
 	# Prelink breaks the CHK files. We don't have any reliable way to run
 	# shlibsign after prelink.
-	declare -a libs
+	local l libs=() liblist
 	for l in ${NSS_CHK_SIGN_LIBS} ; do
 		libs+=("${EPREFIX}/usr/$(get_libdir)/lib${l}.so")
 	done
-	OLD_IFS="${IFS}" IFS=":" ; liblist="${libs[*]}" ; IFS="${OLD_IFS}"
-	echo -e "PRELINK_PATH_MASK=${liblist}" >"${T}/90nss" || die
-	unset libs liblist
-	doenvd "${T}/90nss" || die
+	liblist=$(printf '%s:' "${libs[@]}")
+	echo -e "PRELINK_PATH_MASK=${liblist%:}" > "${T}/90nss"
+	doenvd "${T}/90nss"
 
 	# Set NSS_DEFAULT_DB_TYPE in environment.
 	echo "NSS_DEFAULT_DB_TYPE=\"sql\"" >"${T}/90nss_default_db_type" || die
@@ -216,24 +270,30 @@ src_install() {
 
 pkg_postinst() {
 	# We must re-sign the libraries AFTER they are stripped.
-	generate_chk "${EROOT}"/usr/bin/shlibsign "${EROOT}"/usr/$(get_libdir)
+	local shlibsign="${EROOT}/usr/bin/shlibsign"
+	# See if we can execute it (cross-compiling & such). #436216
+	"${shlibsign}" -h >&/dev/null
+	if [[ $? -gt 1 ]] ; then
+		shlibsign="shlibsign"
+	fi
+	generate_chk "${shlibsign}" "${EROOT}"/usr/$(get_libdir)
 
-	# Upgrade any old system database.
+	# TODO: Upgrade any old system database.
 
 	# Install a new empty database if none exists already.
 	if [ ! -f "${EROOT}/etc/pki/nssdb/cert9.db" ]; then
 		echo > empty.txt
-		certutil -N -d "${EROOT}/etc/pki/nssdb" -f empty.txt || die
+		certutil -N -d "sql:${EROOT}/etc/pki/nssdb" -f empty.txt || die
 		rm empty.txt
 		einfo "An empty NSS system database has been installed, with no password."
 		einfo
 		einfo "You may wish to set a new system database password now using:"
 		einfo
-		einfo "certutil -W -d \"${EROOT}/etc/pki/nssdb\""
-	fi
+		einfo "certutil -W -d \"sql:${EROOT}/etc/pki/nssdb\""
 
-	# Set sensible permissions 0644 on the certificate database.
-	fperms 0644 "${EROOT}"/etc/pki/nssdb/*
+		# Set sensible permissions 0644 on the certificate database.
+		fperms 0644 "${EROOT}"/etc/pki/nssdb/*
+	fi
 
 	# Populate the certificate DB.
 	cadb_pkg_postinst nss
