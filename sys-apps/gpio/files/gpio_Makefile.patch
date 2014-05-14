@@ -1,0 +1,18 @@
+--- wiringPi-2.13/gpio/Makefile	2013-08-04 00:53:35.000000000 +0200
++++ wiringPi-2.13/gpio/Makefile	2014-05-14 15:55:29.765780426 +0200
+@@ -65,11 +65,10 @@
+ .PHONEY:	install
+ install:
+ 	@echo "[Install]"
+-	@cp gpio		$(DESTDIR)$(PREFIX)/bin
+-	@chown root.root	$(DESTDIR)$(PREFIX)/bin/gpio
+-	@chmod 4755		$(DESTDIR)$(PREFIX)/bin/gpio
+-	@mkdir -p		$(DESTDIR)$(PREFIX)/man/man1
+-	@cp gpio.1		$(DESTDIR)$(PREFIX)/man/man1
++	@install -m 0755 -d		$(DESTDIR)$(PREFIX)/bin
++	@install -m 4755 gpio	$(DESTDIR)$(PREFIX)/bin
++	@install -m 0755 -d		$(DESTDIR)$(PREFIX)/share/man/man1
++	@install -m 0644 gpio.1	$(DESTDIR)$(PREFIX)/share/man/man1
+ 
+ .PHONEY:	uninstall
+ uninstall:
