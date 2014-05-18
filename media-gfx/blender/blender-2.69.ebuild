@@ -32,7 +32,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="+boost +bullet collada colorio cycles +dds debug doc +elbeem ffmpeg fftw +game-engine jack jpeg2k ndof nls openal openmp +openexr player redcode sdl sndfile sse sse2 tiff"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	player? ( game-engine )
-	redcode? ( jpeg2k )
+	redcode? ( jpeg2k ffmpeg )
 	cycles? ( boost openexr tiff )
 	nls? ( boost )
 	game-engine? ( boost )"
@@ -55,7 +55,7 @@ RDEPEND="
 	virtual/opengl
 	x11-libs/libXi
 	x11-libs/libX11
-	boost? ( >=dev-libs/boost-1.44[threads(+)] )
+	boost? ( >=dev-libs/boost-1.44[nls?,threads(+)] )
 	collada? ( media-libs/opencollada )
 	colorio? ( media-libs/opencolorio )
 	cycles? (
@@ -69,6 +69,7 @@ RDEPEND="
 	)
 	fftw? ( sci-libs/fftw:3.0 )
 	jack? ( media-sound/jack-audio-connection-kit )
+	jpeg2k? ( media-libs/openjpeg:0 )
 	ndof? (
 		app-misc/spacenavd
 		dev-libs/libspnav
@@ -104,13 +105,13 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/01-${P}-doxyfile.patch \
-		"${FILESDIR}"/02-${P}-unbundle-colamd.patch \
-		"${FILESDIR}"/03-${P}-remove-binreloc.patch \
-		"${FILESDIR}"/04-${P}-unbundle-glog.patch \
-		"${FILESDIR}"/05-${P}-unbundle-eigen3.patch \
-		"${FILESDIR}"/06-${P}-fix-install-rules.patch \
-		"${FILESDIR}"/07-${P}-sse2.patch \
+	epatch "${FILESDIR}"/01-${PN}-2.68-doxyfile.patch \
+		"${FILESDIR}"/02-${PN}-2.68-unbundle-colamd.patch \
+		"${FILESDIR}"/03-${PN}-2.68-remove-binreloc.patch \
+		"${FILESDIR}"/04-${PN}-2.68-unbundle-glog.patch \
+		"${FILESDIR}"/05-${PN}-2.68-unbundle-eigen3.patch \
+		"${FILESDIR}"/06-${PN}-2.68-fix-install-rules.patch \
+		"${FILESDIR}"/07-${PN}-2.68-sse2.patch \
 		"${FILESDIR}"/dupligroup_depth.patch
 
 	# remove some bundled deps

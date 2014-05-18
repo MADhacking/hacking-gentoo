@@ -74,7 +74,7 @@ RDEPEND="
 	nls? ( virtual/libiconv )
 	openal? ( >=media-libs/openal-1.6.372 )
 	openexr? ( media-libs/openexr )
-	sdl? ( media-libs/libsdl[audio,joystick] )
+	sdl? ( media-libs/libsdl[sound,joystick] )
 	sndfile? ( media-libs/libsndfile )
 	tiff? ( media-libs/tiff:0 )"
 DEPEND="${RDEPEND}
