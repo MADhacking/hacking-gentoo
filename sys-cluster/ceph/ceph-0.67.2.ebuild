@@ -16,7 +16,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-inherit autotools eutils multilib udev ${scm_eclass}
+inherit autotools eutils multilib systemd udev ${scm_eclass}
 
 DESCRIPTION="Ceph distributed filesystem"
 HOMEPAGE="http://ceph.com/"
@@ -108,6 +108,11 @@ src_install() {
 
 	newinitd "${T}/${PN}.initd" ${PN}
 	newconfd "${FILESDIR}/${PN}.confd" ${PN}
+
+	systemd_newunit "${FILESDIR}/ceph-create-keys@.service" "ceph-create-keys@.service"
+	systemd_newunit "${FILESDIR}/ceph-mds@.service" "ceph-mds@.service"
+	systemd_newunit "${FILESDIR}/ceph-mon@.service" "ceph-mon@.service"
+	systemd_newunit "${FILESDIR}/ceph-osd@.service" "ceph-osd@.service"
 
 	#install udev rules
 	udev_dorules udev/50-rbd.rules
