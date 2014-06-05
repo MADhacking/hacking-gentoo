@@ -127,10 +127,10 @@ src_install() {
 	newinitd "${FILESDIR}/${PN}.initd-r1" ${PN}
 	newconfd "${FILESDIR}/${PN}.confd-r1" ${PN}
 
-	systemd_newunit "${FILESDIR}/ceph-create-keys@.service" "ceph-create-keys@.service"
-	systemd_newunit "${FILESDIR}/ceph-mds@.service" "ceph-mds@.service"
-	systemd_newunit "${FILESDIR}/ceph-mon@.service" "ceph-mon@.service"
-	systemd_newunit "${FILESDIR}/ceph-osd@.service" "ceph-osd@.service"
+	systemd_newunit "${FILESDIR}/ceph-create-keys.service" "ceph-create-keys@.service"
+	systemd_newunit "${FILESDIR}/ceph-mds.service" "ceph-mds@.service"
+	systemd_newunit "${FILESDIR}/ceph-mon.service" "ceph-mon@.service"
+	systemd_newunit "${FILESDIR}/ceph-osd.service" "ceph-osd@.service"
 
 	_python_rewrite_shebang \
 		"${ED}"/usr/sbin/{ceph-disk,ceph-create-keys} \
