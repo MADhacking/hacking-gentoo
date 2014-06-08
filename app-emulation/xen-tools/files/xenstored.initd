@@ -1,39 +1,44 @@
 #!/sbin/runscript
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/xen-tools/files/xenstored.initd,v 1.5 2013/07/01 05:42:01 idella4 Exp $
 
 depend() {
-	before xendomains xend sshd ntp-client ntpd nfs nfsmount rsyncd portmap dhcp 
+	before xendomains xend sshd ntp-client ntpd nfs nfsmount rsyncd portmap dhcp
+	need xencommons
+}
+
+xenstored_dir_check() {
+	# create dir dynamically
+	local i
+	for i in /var/lock/subsys /run/xen /run/xend/boot /run/xenstored; do
+		[ -x $i ] || mkdir -p $i
+	done
 }
 
 start() {
-	! [ -x /run/xen ] && mkdir -p /run/xen
 	ebegin "Starting xenstored daemon"
+	xenstored_dir_check
 	start-stop-daemon --start --exec /usr/sbin/xenstored \
-		--pidfile /var/run/xenstored.pid \
-		-- --pid-file=/var/run/xenstored.pid \
+		--pidfile /run/xenstored.pid \
+		-- --pid-file=/run/xenstored.pid \
 		$XENSTORED_OPTS
-	until xenstore-exists /
+	until xenstore-exists / || ((15 < ++i))
 	do
 		echo -n .
-		sleep .5
+		sleep 1
 	done
-	sleep 15
 	einfo "Setting domain0 name record"
 	/usr/bin/xenstore-write "/local/domain/0/name" "Domain-0"
+	local V=$(xl info| awk "/xen_minor/ { print \$3 }")
+	[ $V -ge 4 ] && /usr/bin/xenstore-write "/local/domain/0/domid" 0
+
 	eend $*
 }
 
 stop() {
-	ebegin "Stopping any remaining Xen guest domains..."
-	xl shutdown --all --wait &>/dev/null &
-	wait
-	eend $?
-	
 	ebegin "Stopping xenstored daemon"
 	start-stop-daemon --stop --exec /usr/sbin/xenstored \
-		--pidfile /var/run/xenstored.pid
+		--pidfile /run/xenstored.pid
 	eend $?
 }
 
