@@ -13,12 +13,11 @@ SRC_URI="mirror://debian/pool/main/c/${PN}/${PN}_${PV}${NMU_PR:++nmu}${NMU_PR}_a
 
 LICENSE="MPL-1.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
 IUSE=""
 
 # platforms like AIX don't have a good ar
-DEPEND="kernel_AIX? ( app-arch/deb2targz )
-	!<sys-apps/portage-2.1.10.41"
+
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}
@@ -62,14 +61,14 @@ src_install() {
 			find . -type f -iname "${regex}" -exec doins '{}' \;
 		fi
 	done < "${FILESDIR}/certindex-${PV}.txt"
-
+	
 	# Copy the docs.
 	dodoc usr/share/doc/ca-certificates/*
 
 	# Create some /etc dirs.
 	dodir /etc/ca-certificates/update.d
 	dodir /etc/ssl/certs
-
+ 
 	# Create CONFIG_PROTECT_MASK env.d file.
 	echo 'CONFIG_PROTECT_MASK="/etc/ca-certificates.conf"' > 98ca-certificates
 	doenvd 98ca-certificates

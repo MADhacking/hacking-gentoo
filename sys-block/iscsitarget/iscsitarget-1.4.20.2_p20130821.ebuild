@@ -10,8 +10,8 @@ if [ ${PV} == "9999" ] ; then
 	inherit subversion
 	ESVN_REPO_URI="http://svn.code.sf.net/p/iscsitarget/code/trunk"
 else
-	SRC_URI="http://dev.gentoo.org/~ryao/dist/${P}.tar.gz"
-	KEYWORDS="amd64 ~ppc x86"
+	SRC_URI="http://dev.gentoo.org/~ryao/dist/${P}.tar.xz"
+	KEYWORDS="~amd64 ~ppc ~x86"
 fi
 
 DESCRIPTION="Open Source iSCSI target with professional features"
@@ -33,7 +33,7 @@ pkg_setup() {
 	kernel_is ge 2 6 14 || die "Linux 2.6.14 or newer required"
 
 	[ ${PV} != "9999" ] && \
-		{ kernel_is le 3 7 || die "Linux 3.7 is the latest supported version."; }
+		{ kernel_is le 3 11 || die "Linux 3.11 is the latest supported version."; }
 
 	linux-mod_pkg_setup
 }
