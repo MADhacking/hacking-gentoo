@@ -63,7 +63,7 @@ src_install() {
 	done < "${FILESDIR}/certindex-${PV}.txt"
 	
 	# Copy the docs.
-	dodoc usr/share/doc/ca-certificates/*
+	mv "${ED}"/usr/share/doc/{ca-certificates,${PF}} || die
 
 	# Create some /etc dirs.
 	dodir /etc/ca-certificates/update.d
