@@ -1,0 +1,56 @@
+--- lib/test_readline.cc	2014-06-10 01:52:04.114866520 +0100
++++ lib/test_readline.cc	2014-06-10 01:52:40.867754907 +0100
+@@ -1,4 +1,6 @@
+ //testing=trivial 2006.07.17
++#include <iostream>
++#include <iomanip>
+ #include <readline/readline.h>
+ #include <readline/history.h>
+ int main()
+--- apps/test_readline.cc	2014-06-10 01:52:04.114866520 +0100
++++ apps/test_readline.cc	2014-06-10 01:52:40.867754907 +0100
+@@ -1,4 +1,6 @@
+ //testing=trivial 2006.07.17
++#include <iostream>
++#include <iomanip>
+ #include <readline/readline.h>
+ #include <readline/history.h>
+ int main()
+--- lib/configure	2014-06-10 16:49:51.708734132 +0100
++++ lib/configure	2014-06-10 16:50:36.441580584 +0100
+@@ -28,13 +28,13 @@
+ echo "LIBS =  \\" >Make.libs
+     
+ rm -f a.out
+-g++ -lreadline -ltermcap test_readline.cc
++g++ -lreadline -lncurses test_readline.cc
+ if [ -f a.out ] ; then
+     echo "using readline"
+     echo "-DHAVE_LIBREADLINE \\" >>Make.ccflags
+-    echo "-lreadline -ltermcap \\" >>Make.libs
++    echo "-lreadline -lncurses \\" >>Make.libs
+ else
+-    echo "either libtermcap or libreadline is missing - not using readline"
++    echo "either libncurses or libreadline is missing - not using readline"
+ fi
+ rm -f a.out
+ 
+--- apps/configure	2014-06-10 16:54:05.652633631 +0100
++++ apps/configure	2014-06-10 16:54:26.492406208 +0100
+@@ -28,13 +28,13 @@
+ echo "LIBS =  \\" >Make.libs
+     
+ rm -f a.out
+-g++ -lreadline -ltermcap test_readline.cc
++g++ -lreadline -lncurses test_readline.cc
+ if [ -f a.out ] ; then
+     echo "using readline"
+     echo "-DHAVE_LIBREADLINE \\" >>Make.ccflags
+-    echo "-lreadline -ltermcap \\" >>Make.libs
++    echo "-lreadline -lncurses \\" >>Make.libs
+ else
+-    echo "either libtermcap or libreadline is missing - not using readline"
++    echo "either libncurses or libreadline is missing - not using readline"
+ fi
+ rm -f a.out
+ 

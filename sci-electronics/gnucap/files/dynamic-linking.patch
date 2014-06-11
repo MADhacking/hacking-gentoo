@@ -1,0 +1,11 @@
+--- modelgen/Make2.g++	2014-06-10 00:09:57.080802287 +0100
++++ modelgen/Make2.g++	2014-06-10 00:10:10.337344829 +0100
+@@ -33,7 +33,7 @@
+ -lgnucap \
+ -lreadline -ltermcap 
+ 
+-LDFLAGS = -rdynamic \
++LDFLAGS = -rdynamic -ldl \
+ -L../../lib/O
+ 
+ .SUFFIXES:
