@@ -30,7 +30,7 @@ CDEPEND="
 	app-arch/snappy
 	dev-libs/boost:=[threads]
 	dev-libs/fcgi
-	dev-libs/libaio
+	libaio? ( dev-libs/libaio )
 	dev-libs/libedit
 	dev-libs/leveldb[snappy]
 	nss? ( dev-libs/nss )
