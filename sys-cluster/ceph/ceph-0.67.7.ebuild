@@ -14,7 +14,7 @@ if [[ $PV = *9999* ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="http://ceph.com/download/${P}.tar.bz2"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~arm ~arm64 amd64 x86"
 fi
 
 inherit autotools eutils multilib python-any-r1 systemd udev ${scm_eclass}
@@ -30,7 +30,7 @@ CDEPEND="
 	app-arch/snappy
 	dev-libs/boost:=[threads]
 	dev-libs/fcgi
-	dev-libs/libaio
+	libaio? ( dev-libs/libaio )
 	dev-libs/libedit
 	dev-libs/leveldb[snappy]
 	nss? ( dev-libs/nss )
