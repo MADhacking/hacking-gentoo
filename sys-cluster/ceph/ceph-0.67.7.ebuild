@@ -52,7 +52,6 @@ CDEPEND="
 	)
 	tcmalloc? ( dev-util/google-perftools )
 	$(python_gen_any_dep '
-	virtual/python-argparse[${PYTHON_USEDEP}]
 	' )
 	${PYTHON_DEPS}
 	"
