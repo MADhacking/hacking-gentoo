@@ -1,0 +1,11 @@
+--- CMakeLists.txt	2014-07-18 00:59:38.338661242 +0100
++++ CMakeLists.txt	2014-07-18 01:00:13.954917411 +0100
+@@ -737,7 +737,7 @@
+ ###
+ if( UNIX )
+     install( DIRECTORY scripts
+-        DESTINATION ${KICAD_DOCS}
++        DESTINATION ${KICAD_DATA}
+         COMPONENT resources
+         )
+ endif()

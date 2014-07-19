@@ -1,0 +1,11 @@
+--- CMakeLists.txt.old	2014-07-18 01:01:58.470380039 +0100
++++ CMakeLists.txt	2014-07-18 01:02:32.813317914 +0100
+@@ -724,7 +724,7 @@
+ # Installation
+ #================================================
+ 
+-install( FILES INSTALL.txt
++install( FILES AUTHORS.txt CHANGELOG.txt README.txt
+     DESTINATION ${KICAD_DOCS}
+     COMPONENT resources )
+ 
