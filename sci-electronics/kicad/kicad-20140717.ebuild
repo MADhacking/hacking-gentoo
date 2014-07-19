@@ -4,6 +4,7 @@
 
 #TODO:
 # - python and wxpython scripting
+# - GIThub plugin
 
 EAPI="5"
 
@@ -61,6 +62,7 @@ src_configure() {
 #		-DKICAD_SCRIPTING=ON
 #		-DKICAD_SCRIPTING_MODULES=ON
 #		-DKICAD_SCRIPTING_WXPYTHON=ON
+#		-DBUILD_GITHUB_PLUGIN=ON
 
 	cmake-utils_src_configure
 }
