@@ -7,7 +7,7 @@ EAPI="5"
 inherit eutils unpacker
 
 DESCRIPTION="Electronic Schematic and PCB design tools."
-HOMEPAGE="http://www.kicad-pcb.org"
+HOMEPAGE="http://smisioto.no-ip.org/elettronica/kicad/kicad-en.htm"
 
 SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
