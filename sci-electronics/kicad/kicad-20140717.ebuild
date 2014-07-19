@@ -24,7 +24,7 @@ SLOT="0"
 
 KEYWORDS="~amd64 ~x86"
 
-IUSE="debug"
+IUSE="debug doc"
 
 CDEPEND="x11-libs/wxGTK:${WX_GTK_VER}[gnome,opengl,X]
 	dev-python/wxpython:${WX_GTK_VER}[opengl]"
@@ -72,10 +72,11 @@ src_compile() {
 src_install() {
 	cmake-utils_src_install
 
-	insinto "/usr/share/doc/${PN}/development"
-	cd "${S}/Documentation"
-	doins -r *
-
+	if use doc ; then
+		insinto "/usr/share/doc/${PN}/development"
+		cd "${S}/Documentation"
+		doins -r *
+	fi
 }
 
 pkg_preinst() {
