@@ -42,21 +42,21 @@ src_install() {
 	insinto /usr/share/doc/${PN}
 	doins -r "${S}/doc/contrib"
 	
-	insinto /usr/share/doc/${PN}/help
+	insinto /usr/share/doc/kicad/help
 	for lang in $LANGS ; do
 		if [[ -d "${S}/doc/help/${lang}" ]] ; then
 			use linguas_$lang && doins "${S}"/doc/help/${lang}/*.pdf
 		fi
 	done
 
-	insinto /usr/share/doc/${PN}/tutorials
+	insinto /usr/share/doc/kicad/tutorials
 	for lang in $LANGS ; do
 		if [[ -d "${S}/doc/tutorials/${lang}" ]] ; then
 			use linguas_$lang && doins "${S}"/doc/tutorials/${lang}/*.pdf
 		fi
 	done
 
-	local dev_doc="/usr/share/doc/${PN}/development"
+	local dev_doc="/usr/share/doc/kicad/development"
 	insinto ${dev_doc}
 	doins GUI_Translation_HOWTO.pdf
 	doins "${S}/doc/help/file_formats/file_formats.pdf"
