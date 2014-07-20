@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit eutils unpacker cmake-utils 
 
-DESCRIPTION="Electronic Schematic and PCB design tools."
+DESCRIPTION="Electronic Schematic and PCB design tools documentation."
 HOMEPAGE="http://www.kicad-pcb.org"
 
 RELEASE_DATE="20140717"

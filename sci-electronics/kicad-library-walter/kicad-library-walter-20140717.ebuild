@@ -6,12 +6,12 @@ EAPI="5"
 
 inherit eutils unpacker
 
-DESCRIPTION="Electronic Schematic and PCB design tools."
+DESCRIPTION="Electronic Schematic and PCB design library."
 HOMEPAGE="http://smisioto.no-ip.org/elettronica/kicad/kicad-en.htm"
 
 SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
-LICENSE=""
+LICENSE="CC-BY-SA-3.0 GPL-3"
 SLOT="0"
 
 KEYWORDS="~amd64 ~x86"
