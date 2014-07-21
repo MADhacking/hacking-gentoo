@@ -24,7 +24,7 @@ RDEPEND=">=dev-lang/erlang-14[wxwidgets]
 DEPEND="${RDEPEND}"
 
 src_install() {
-rm c_src/*.o c_src/Makefile.*
+	rm c_src/*.o c_src/Makefile.*
 	
 	insinto "/usr/$(get_libdir)/erlang/lib/${P}"
 	
