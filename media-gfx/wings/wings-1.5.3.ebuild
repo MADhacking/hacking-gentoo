@@ -15,7 +15,8 @@ SLOT="0"
 KEYWORDS="~alpha amd64 ppc ppc64 x86"
 IUSE=""
 
-RDEPEND=">=dev-lang/erlang-14.0
+RDEPEND=">=dev-lang/erlang-17.0
+	dev-libs/erlang-cl
 	>=media-libs/esdl-1.3.1
 	media-libs/libsdl[opengl]"
 DEPEND="${RDEPEND}"
