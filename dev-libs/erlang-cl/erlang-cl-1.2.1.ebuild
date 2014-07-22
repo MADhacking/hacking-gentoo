@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-RDEPEND="virtual/opencl-sdk"
+RDEPEND="virtual/opencl"
 DEPEND="${RDEPEND}"
 
 pkg_setup() {
