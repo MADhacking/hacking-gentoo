@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit multilib eutils
+inherit erlang
 
 DESCRIPTION="Excellent 3D polygon mesh modeler"
 HOMEPAGE="http://www.wings3d.com/"
@@ -22,25 +22,7 @@ RDEPEND=">=dev-lang/erlang-17.0
 DEPEND="${RDEPEND}"
 
 pkg_setup() {
-	ERL_PATH="/usr/$(get_libdir)/erlang/lib/"
-	ESDL_PATH="${ERL_PATH}/$(best_version media-libs/esdl | cut -d/ -f2)"
-}
-
-src_compile() {
-	make ESDL_PATH="${ERL_PATH}/$(best_version media-libs/esdl | cut -d/ -f2)" || die
-}
-
-src_install() {
-	WINGS_PATH=${ERL_PATH}/${P}
-	dodir ${WINGS_PATH}
-
-	find -name 'Makefile*' -exec rm -f '{}' \;
-	for subdir in e3d ebin icons plugins plugins_src src fonts ; do
-		cp -r ${subdir} "${D}"/${WINGS_PATH}/ || die
-	done
-
-	dosym ${WINGS_PATH} ${ERL_PATH}/${PN}
-	dosym ${ESDL_PATH} ${ERL_PATH}/esdl
-	newbin "${FILESDIR}"/wings.sh wings
-	dodoc AUTHORS README
+	ESDL_PATH="${ERLANG_LIB_PATH}/esdl"
+	ERLANG_CLEAN_FILES="${ERLANG_CLEAN_FILES} WINGS-VERSION-GEN"
+	ERLANG_CLEAN_DIRS="${ERLANG_CLEAN_DIRS} fonts_src icons intl_tools macosx patches psd tools unix win32"
 }

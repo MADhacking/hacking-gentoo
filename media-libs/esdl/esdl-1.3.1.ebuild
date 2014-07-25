@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit fixheadtails multilib rebar eutils
+inherit rebar
 
 DESCRIPTION="Erlang bindings for the SDL library"
 HOMEPAGE="http://esdl.sourceforge.net/"
@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND=">=dev-lang/erlang-14[wxwidgets]
+RDEPEND=">=dev-lang/erlang-16[wxwidgets]
 	x11-libs/wxGTK[opengl]
 	media-libs/libsdl[opengl]
 	media-libs/sdl-image
@@ -23,14 +23,8 @@ RDEPEND=">=dev-lang/erlang-14[wxwidgets]
 	virtual/opengl"
 DEPEND="${RDEPEND}"
 
-src_install() {
-	rm c_src/*.o c_src/Makefile.*
-	
-	insinto "/usr/$(get_libdir)/erlang/lib/${P}"
-	
-	doins -r c_src ebin include priv src
-	doins vsn.mk
-	
-	dohtml doc/*.html
-	dodoc Readme license.terms
+pkg_setup() {
+	ERLANG_DOC_DIRS=""
+	ERLANG_HTML_DIRS="doc"
+	ERLANG_CLEAN_FILES="${ERLANG_CLEAN_FILES} README-SDL.txt"
 }
