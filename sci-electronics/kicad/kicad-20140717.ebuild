@@ -37,7 +37,8 @@ RDEPEND="${CDEPEND}
 	sys-libs/zlib
 	sci-electronics/electronics-menu
 	sci-electronics/kicad-doc
-	sci-electronics/kicad-library"
+	sci-electronics/kicad-library
+	sci-electronics/kicad-fp-library"
 
 S="${WORKDIR}/kicad-${RELEASE_DATE}+${BZR_REV}"
 
