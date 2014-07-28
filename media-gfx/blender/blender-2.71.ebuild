@@ -112,8 +112,7 @@ src_prepare() {
 		"${FILESDIR}"/04-${PN}-2.71-unbundle-glog.patch \
 		"${FILESDIR}"/05-${PN}-2.68-unbundle-eigen3.patch \
 		"${FILESDIR}"/06-${PN}-2.68-fix-install-rules.patch \
-		"${FILESDIR}"/07-${PN}-2.70-sse2.patch \
-		"${FILESDIR}"/dupligroup_depth.patch
+		"${FILESDIR}"/07-${PN}-2.70-sse2.patch 
 
 	# remove some bundled deps
 	rm -r \
