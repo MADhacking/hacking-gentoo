@@ -80,6 +80,8 @@ src_install() {
 		cd "${S}/Documentation"
 		doins -r *
 	fi
+	
+	doenvd "${FILESDIR}/95kicad"
 }
 
 pkg_preinst() {
