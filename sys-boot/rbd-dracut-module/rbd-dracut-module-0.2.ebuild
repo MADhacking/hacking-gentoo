@@ -14,7 +14,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="sys-cluster/ceph[cryptopp]
-		sys-kernel/dracut[net]"
+		sys-kernel/dracut"
 
 src_install() {
 	cp -a ${WORKDIR}/${P}/* ${D}/
