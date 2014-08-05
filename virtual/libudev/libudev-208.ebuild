@@ -17,7 +17,7 @@ IUSE="static-libs"
 DEPEND=""
 RDEPEND="
 	|| (
-		>=sys-fs/udev-208-r1:0/0[${MULTILIB_USEDEP},static-libs?]
+		>=sys-fs/udev-204:0/0[${MULTILIB_USEDEP},static-libs?]
 		>=sys-apps/systemd-212-r5:0/2[${MULTILIB_USEDEP},static-libs(-)?]
 		>=sys-apps/systemd-208-r3:0/1[${MULTILIB_USEDEP},static-libs(-)?]
 		>=sys-apps/systemd-208:0/0[${MULTILIB_USEDEP},static-libs(-)?]
