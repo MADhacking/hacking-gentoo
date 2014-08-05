@@ -21,6 +21,7 @@ sys-apps/openrc
     sys-apps/kmod
     sys-fs/udev
     virtual/udev
+    virtual/libudev
     sys-apps/hwids
 sys-apps/openrc-runhooks-plugin
 sys-block/iscsitarget
