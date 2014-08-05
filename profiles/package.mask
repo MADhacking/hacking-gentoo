@@ -20,6 +20,7 @@ sys-apps/fbset
 sys-apps/openrc
     sys-apps/kmod
     sys-fs/udev
+    virtual/udev
 sys-apps/openrc-runhooks-plugin
 sys-block/iscsitarget
 sys-boot/last-known-good
