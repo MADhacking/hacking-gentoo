@@ -14,6 +14,7 @@ sys-apps/openrc::hacking-gentoo
     sys-apps/kmod::hacking-gentoo
     sys-fs/udev::hacking-gentoo
     virtual/udev::hacking-gentoo
+    sys-apps/hwids::hacking-gentoo
 sys-apps/openrc-runhooks-plugin::hacking-gentoo
 sys-block/iscsitarget::hacking-gentoo
 sys-boot/last-known-good::hacking-gentoo
