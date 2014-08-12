@@ -1,0 +1,7 @@
+# Masked unless overlay used in replace mode
+sys-apps/openrc
+    sys-apps/kmod
+    sys-fs/udev
+    virtual/udev
+    virtual/libudev
+    sys-apps/hwids

@@ -1,0 +1,7 @@
+# Un-mask Hacking Gentoo replacement packages.
+sys-apps/openrc::hacking-gentoo
+    sys-apps/kmod::hacking-gentoo
+    sys-fs/udev::hacking-gentoo
+    virtual/udev::hacking-gentoo
+    virtual/libudev::hacking-gentoo
+    sys-apps/hwids::hacking-gentoo
