@@ -291,8 +291,8 @@ src_install() {
 	keepdir /etc/xen/auto
 
 	# Temp QA workaround
-	dodir "$(udev_get_udevdir)"
-	mv "${D}"/etc/udev/* "${D}/$(udev_get_udevdir)"
+	dodir "$(get_udevdir)"
+	mv "${D}"/etc/udev/* "${D}/$(get_udevdir)"
 	rm -rf "${D}"/etc/udev
 
 	# Remove files failing QA AFTER emake installs them, avoiding seeking absent files
