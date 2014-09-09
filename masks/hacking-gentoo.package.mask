@@ -17,6 +17,7 @@ mail-mta/postfix
 mail-mta/ssmtp
 media-gfx/blender
 sys-apps/fbset
+sys-apps/openrc
 sys-apps/openrc-runhooks-plugin
 sys-block/iscsitarget
 sys-boot/last-known-good

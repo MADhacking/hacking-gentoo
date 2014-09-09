@@ -10,6 +10,7 @@ mail-mta/postfix::hacking-gentoo
 mail-mta/ssmtp::hacking-gentoo
 media-gfx/blender::hacking-gentoo
 sys-apps/fbset::hacking-gentoo
+sys-apps/openrc::hacking-gentoo
 sys-apps/openrc-runhooks-plugin::hacking-gentoo
 sys-block/iscsitarget::hacking-gentoo
 sys-boot/last-known-good::hacking-gentoo
