@@ -77,7 +77,7 @@ cadb_pkg_postinst() {
 	cadb_update_ca_databases $@
 }
 
-# @FUNCTION: cadb_pkg_postinst
+# @FUNCTION: cadb_pkg_postrm
 # @DESCRIPTION:
 # Updates the Certificate Authority Databases (CADBs) for all installed
 # packages which use them. 
@@ -85,7 +85,8 @@ cadb_pkg_postinst() {
 cadb_pkg_postrm() {
 	# If we are removing the last instance of a package then we need to
 	# update the database again, we've just done it if this was an upgrade.
-	has_version "${CATEGORY}/${PN}" || cadb_update_ca_databases $@
+	# has_version "${CATEGORY}/${PN}" || cadb_update_ca_databases $@
+	cadb_update_ca_databases $@
 }
 
 EXPORT_FUNCTIONS src_install pkg_postinst pkg_postrm
