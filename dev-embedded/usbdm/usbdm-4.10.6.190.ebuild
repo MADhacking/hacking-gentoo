@@ -48,7 +48,7 @@ src_install() {
 	use debug || find ${BD}/ -iname "*debug*" -delete
 
 	# Fix the .desktop files
-	sed -i 's,\[en_AU\],,g' "${BD}"/MiscellaneousLinux/*.desktop || die "Unable to fix .desktop files"
+	# sed -i 's,\[en_AU\],,g' "${BD}"/MiscellaneousLinux/*.desktop || die "Unable to fix .desktop files"
 	sed -i 's,Categories=Development,Categories=Electronics,g' "${BD}"/MiscellaneousLinux/*.desktop || die "Unable to fix .desktop files"
 	
 	# Install binaries and libraries
