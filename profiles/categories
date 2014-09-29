@@ -2,6 +2,7 @@ app-admin
 app-backup
 app-emulation
 app-misc
+dev-embedded
 dev-java
 dev-libs
 dev-php
@@ -12,10 +13,12 @@ install-meta
 mail-mta
 mcollective-plugin
 media-gfx
+media-libs
 media-sound
 net-firewall
 net-mail
 net-misc
+net-p2p
 sci-electronics
 snmp-agents
 snmp-mibs
@@ -24,4 +27,7 @@ sys-block
 sys-boot
 sys-cluster
 sys-devel
+sys-fs
+sys-kernel
+virtual
 www-apache

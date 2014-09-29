@@ -1,0 +1,28 @@
+diff --git a/Usbdm_TCL/src/usbdmTcl.c b/Usbdm_TCL/src/usbdmTcl.c
+index 08b8686..3e0cf71 100644
+--- a/Usbdm_TCL/src/usbdmTcl.c
++++ b/Usbdm_TCL/src/usbdmTcl.c
+@@ -3388,7 +3388,11 @@
+ //         fprintf(fp, "createTclInterpreter() Closing stderr\n"); fflush(fp);
+          Tcl_UnregisterChannel(tclInterp, channel);
+       }
++#ifdef __WIN32__
+       channel = Tcl_MakeFileChannel(fileHandle, TCL_WRITABLE);
++#else
++      channel = Tcl_MakeFileChannel(fp, TCL_WRITABLE);
++#endif
+       if (channel != 0) {
+ //         fprintf(fp, "createTclInterpreter() Redirecting stdout\n"); fflush(fp);
+          Tcl_SetStdChannel(channel, TCL_STDOUT);
+@@ -3396,7 +3400,11 @@
+       else {
+          fprintf(fp, "createTclInterpreter() stdout == 0!!!!\n"); fflush(fp);
+       }
++#ifdef __WIN32__
+       channel = Tcl_MakeFileChannel(fileHandle, TCL_WRITABLE);
++#else
++      channel = Tcl_MakeFileChannel(fp, TCL_WRITABLE);
++#endif
+       if (channel != 0) {
+ //         fprintf(fp, "createTclInterpreter() Redirecting stderr\n"); fflush(fp);
+          Tcl_SetStdChannel(channel, TCL_STDERR);
