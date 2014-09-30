@@ -24,6 +24,8 @@ DEPEND="app-arch/unzip
 
 S="${WORKDIR}/usbdm-eclipse-makefiles-build-master"
 
+QA_WX_LOAD="usr/share/usbdm/Stationery/ARM/cmsis/LIB/ARM/*.o"
+
 src_prepare() {
 	epatch "${FILESDIR}"/unix_file_handles.patch
 
@@ -53,10 +55,11 @@ src_install() {
 	
 	# Install binaries and libraries
 	dobin "${BD}"/bin/${AS}/*
+	chmod +x "${BD}"/lib/${AS}/*
 	dolib "${BD}"/lib/${AS}/*
 	
 	# Install UDEV rules
-	insinto /etc/udev/rules.d/
+	insinto /lib/udev/rules.d/
 	newins "${BD}"/MiscellaneousLinux/usbdm.rules 80-usbdm.rules
 	
 	# Install shared files
