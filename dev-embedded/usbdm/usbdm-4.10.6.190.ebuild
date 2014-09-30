@@ -25,7 +25,7 @@ DEPEND="app-arch/unzip
 S="${WORKDIR}/usbdm-eclipse-makefiles-build-master"
 
 QA_WX_LOAD="usr/share/usbdm/Stationery/ARM/cmsis/LIB/ARM/*.lib"
-QA_PRESTRIPPED="usr/bin/*;usr/$(get_libdir)/*.so.*"
+QA_PRESTRIPPED="usr/bin/* usr/$(get_libdir)/*.so.* usr/share/usbdm/FlashImages/MKxx/BootLoopK*.elf"
 
 BD="${S}/PackageFiles"
 
