@@ -24,7 +24,10 @@ DEPEND="app-arch/unzip
 
 S="${WORKDIR}/usbdm-eclipse-makefiles-build-master"
 
-QA_WX_LOAD="usr/share/usbdm/Stationery/ARM/cmsis/LIB/ARM/*.o"
+QA_WX_LOAD="usr/share/usbdm/Stationery/ARM/cmsis/LIB/ARM/*.lib"
+QA_PRESTRIPPED="usr/bin/*;usr/$(get_libdir)/*.so.*"
+
+BD="${S}/PackageFiles"
 
 src_prepare() {
 	epatch "${FILESDIR}"/unix_file_handles.patch
@@ -33,6 +36,11 @@ src_prepare() {
 	JDK="$(java-config --jdk-home)"
 	sed -i "s,-I/usr/lib/jvm/default-java/include,-I${JDK}/include -I${JDK}/include/linux,g" "${S}"/Common.mk || \
 		die "Unable to fix JDK path!"
+		
+	# Fix the .desktop files.
+	sed -i "/^Name\[en_AU\].*/D" "${BD}"/MiscellaneousLinux/*.desktop || die "Unable to fix .desktop files!"
+	sed -i "/^Comment\[en_AU\].*/D" "${BD}"/MiscellaneousLinux/*.desktop || die "Unable to fix .desktop files!"
+	sed -i "s,GenericName\[en_AU\],GenericName,g" "${BD}"/MiscellaneousLinux/*.desktop || die "Unable to fix .desktop files!"
 }
 
 src_compile() {
@@ -42,7 +50,6 @@ src_compile() {
 
 src_install() {
 	# Work out the path to the files to install.
-	BD="${S}/PackageFiles"
 	use x86 && AS="i386-linux-gnu"
 	use amd64 && AS="x86_64-linux-gnu"
 
