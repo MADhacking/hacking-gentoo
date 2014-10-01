@@ -1,0 +1,19 @@
+--- Makefile.old	2014-10-01 16:10:02.772021025 +0100
++++ Makefile	2014-10-01 16:10:38.751639612 +0100
+@@ -18,7 +18,6 @@
+ all: $(ALLTARGETS)
+ 
+ docs: $(TEX2DOCTARGET) $(TEX2HTMLTARGET)
+-	cd doc_DE; $(MAKE) TEX2DOC=../$(TEX2DOCTARGET) TEX2HTML=../$(TEX2HTMLTARGET) RM="rm -f"
+ 	cd doc_EN; $(MAKE) TEX2DOC=../$(TEX2DOCTARGET) TEX2HTML=../$(TEX2HTMLTARGET) RM="rm -f"
+ 
+ $(ASLTARGET): $(AS_OBJECTS) $(ASM_OBJECTS) $(ST_OBJECTS) $(CODE_OBJECTS) $(NLS_OBJECTS)
+@@ -60,7 +59,7 @@
+ 	cd tests; ./testall
+ 
+ install: $(ALLTARGETS)
+-	./install.sh $(BINDIR) $(INCDIR) $(MANDIR) $(LIBDIR) $(DOCDIR)
++	./install.sh $(BINDIR) $(INCDIR) $(MANDIR) $(LIBDIR) $(DOCDIR) $(DESTDIR)
+ 
+ clean:
+ 	rm -f $(ALLTARGETS) $(RESCOMPTARGET) $(TEX2DOCTARGET) $(TEX2HTMLTARGET) *.$(OBJEXTENSION) *.p *.rsc tests/testlog

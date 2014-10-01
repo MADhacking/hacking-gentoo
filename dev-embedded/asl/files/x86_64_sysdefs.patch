@@ -1,0 +1,43 @@
+--- sysdefs.h.old	2014-10-01 11:12:20.088320017 +0100
++++ sysdefs.h	2014-10-01 15:43:48.088878360 +0100
+@@ -527,6 +527,40 @@
+ #endif /* __alpha */
+ 
+ /*===========================================================================*/
++/* Intel x86_64 platforms */
++
++#ifdef __x86_64
++
++#define ARCHPRNAME "x86_64"
++
++/*---------------------------------------------------------------------------*/
++/* x86_64 with Linux and GCC:
++   
++   principally, a normal 64-bit *NIX */
++
++#ifdef __linux__
++#define ARCHSYSNAME "unknown-linux"
++#define DEFSMADE
++#define OPENRDMODE "r"
++#define OPENWRMODE "w"
++#define OPENUPMODE "r+"
++#define IEEEFLOAT
++typedef __INT8_TYPE__ Integ8;
++typedef __UINT8_TYPE__ Card8;
++typedef __INT16_TYPE__ Integ16;
++typedef __UINT16_TYPE__ Card16;
++#define HAS16
++typedef __INT32_TYPE__ Integ32;
++typedef __UINT32_TYPE__ Card32;
++typedef __INT64_TYPE__ Integ64;
++typedef __UINT64_TYPE__ Card64;
++#define HAS64
++#define LOCALE_NLS
++#endif
++
++#endif
++
++/*===========================================================================*/
+ /* Intel i386 platforms */
+ 
+ #ifdef __i386 
