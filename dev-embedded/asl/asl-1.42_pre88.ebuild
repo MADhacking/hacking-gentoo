@@ -18,7 +18,7 @@ IUSE=""
 DEPEND="app-text/texlive"
 RDEPEND=""
 
-S="${WORKDIR}/asl-1.41r8"
+S="${WORKDIR}/asl-1.42_pre88"
 
 src_prepare() {
 	epatch "${FILESDIR}/${PV}"/*.patch
@@ -36,5 +36,9 @@ src_prepare() {
 src_compile() {
 	emake || die "Make failed!"
 
-	emake docs || die "Make doc failed!"
+	#emake docs || die "Make doc failed!"
+}
+
+src_install() {
+	make PREFIX="${D}" install
 }
