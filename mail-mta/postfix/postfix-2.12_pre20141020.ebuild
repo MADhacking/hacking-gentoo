@@ -20,7 +20,7 @@ SRC_URI="${MY_URI}/${MY_SRC}.tar.gz
 LICENSE="IBM"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86"
-IUSE="+berkdb cdb doc dovecot-sasl eai hardened ldap ldap-bind lmdb memcached mbox mysql nis pam postgres sasl selinux sqlite ssl vda"
+IUSE="+berkdb cdb doc dovecot-sasl +eai hardened ldap ldap-bind lmdb memcached mbox mysql nis pam postgres sasl selinux sqlite ssl vda"
 
 DEPEND=">=dev-libs/libpcre-3.4
 	dev-lang/perl
@@ -39,6 +39,7 @@ DEPEND=">=dev-libs/libpcre-3.4
 	ssl? ( >=dev-libs/openssl-0.9.6g )"
 
 RDEPEND="${DEPEND}
+	app-admin/eselect-sendmail
 	dovecot-sasl? ( net-mail/dovecot )
 	memcached? ( net-misc/memcached )
 	net-mail/mailbase
@@ -52,8 +53,6 @@ RDEPEND="${DEPEND}
 	!mail-mta/qmail-ldap
 	!mail-mta/sendmail
 	!mail-mta/opensmtpd
-	!<mail-mta/ssmtp-2.64-r2
-	!>=mail-mta/ssmtp-2.64-r2[mta]
 	!net-mail/fastforward"
 
 # No vda support for postfix-2.12
@@ -213,9 +212,9 @@ src_install () {
 		config_directory="/etc/postfix" \
 		manpage_directory="/usr/share/man" \
 		command_directory="/usr/sbin" \
-		mailq_path="/usr/bin/mailq" \
-		newaliases_path="/usr/bin/newaliases" \
-		sendmail_path="/usr/sbin/sendmail" \
+		mailq_path="/usr/bin/mailq.postfix" \
+		newaliases_path="/usr/bin/newaliases.postfix" \
+		sendmail_path="/usr/sbin/sendmail.postfix" \
 		${myconf} \
 		|| die "postfix-install failed"
 
@@ -225,9 +224,6 @@ src_install () {
 
 	# Install rmail for UUCP, closes bug #19127
 	dobin auxiliary/rmail/rmail
-
-	# Provide another link for legacy FSH
-	dosym /usr/sbin/sendmail /usr/$(get_libdir)/sendmail
 
 	# Install qshape tool and posttls-finger
 	dobin auxiliary/qshape/qshape.pl
@@ -285,6 +281,11 @@ src_install () {
 	rm -f "${D}"/etc/postfix/{*LICENSE,access,aliases,canonical,generic}
 	rm -f "${D}"/etc/postfix/{header_checks,relocated,transport,virtual}
 
+	if has_version mail-mta/postfix; then
+		# let the sysadmin decide when to change the compatibility_level
+		sed -i -e /^compatibility_level/"s/^/#/" "${D}"/etc/postfix/main.cf || die
+	fi
+
 	systemd_dounit "${FILESDIR}/${PN}.service"
 }
 
@@ -295,6 +296,29 @@ pkg_postinst() {
 		SSL_ORGANIZATION="${SSL_ORGANIZATION:-Postfix SMTP Server}"
 		install_cert /etc/ssl/postfix/server
 		chown postfix:mail "${ROOT}"/etc/ssl/postfix/server.{key,pem}
+	fi
+
+	if [[ ! -L "${ROOT}"/usr/sbin/sendmail ]]; then
+		ewarn
+		ewarn "You do not currently have a sendmail replacement selected!"
+		ewarn
+		ewarn "Setting postfix as the sendmail replacement"
+		ewarn
+		eselect sendmail set postfix
+		ewarn "To use an alternative sendmail replacement use \"eselect sendmail\""
+		ewarn
+	fi
+
+	if ! eselect sendmail show | grep postfix &>/dev/null; then
+		ewarn
+		ewarn "You do not currently have postfix selected as a sendmail replacement."
+		ewarn
+		ewarn "You MUST run"
+		ewarn
+		ewarn "# eselect sendmail set postfix"
+		ewarn
+		ewarn "if you wish to use postfix as a replacement for sendmail."
+		ewarn
 	fi
 
 	if [[ ! -e /etc/mail/aliases.db ]] ; then
