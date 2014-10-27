@@ -61,15 +61,14 @@ src_install() {
 			find . -type f -iname "${regex}" -exec doins '{}' \;
 		fi
 	done < "${FILESDIR}/certindex-${PV}.txt"
-	
+
 	# Copy the docs.
-	mv "${WORKDIR}"/usr/share/doc/{ca-certificates,${PF}} || die
-	cp -a "${WORKDIR}"/usr/share/doc "${ED}"/usr/share/
+	dodoc usr/share/doc/ca-certificates/*
 
 	# Create some /etc dirs.
 	dodir /etc/ca-certificates/update.d
 	dodir /etc/ssl/certs
- 
+
 	# Create CONFIG_PROTECT_MASK env.d file.
 	echo 'CONFIG_PROTECT_MASK="/etc/ca-certificates.conf"' > 98ca-certificates
 	doenvd 98ca-certificates

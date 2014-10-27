@@ -8,15 +8,12 @@ inherit eutils cadb unpacker
 
 DESCRIPTION="Common CA Certificates PEM files"
 HOMEPAGE="http://packages.debian.org/sid/ca-certificates"
-	#NMU_PR="1"
-	SRC_URI="mirror://debian/pool/main/c/${PN}/${PN}_${PV}${NMU_PR:++nmu}${NMU_PR}_all.deb"
+SRC_URI="mirror://debian/pool/main/c/${PN}/${PN}_${PV}_all.deb"
 
 LICENSE="MPL-1.1"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~x64-freebsd ~x86-freebsd ~hppa-hpux ~ia64-hpux ~x86-interix ~amd64-linux ~arm-linux ~ia64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
 IUSE=""
-
-	# platforms like AIX don't have a good ar
 
 RDEPEND="${DEPEND}"
 
@@ -63,6 +60,7 @@ src_install() {
 	done < "${FILESDIR}/certindex-${PV}.txt"
 	
 	# Copy the docs.
+	rm -rf usr/share/doc/ca-certificates/examples
 	dodoc usr/share/doc/ca-certificates/*
 
 	# Create some /etc dirs.
