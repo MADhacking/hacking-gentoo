@@ -57,6 +57,8 @@ pkg_setup() {
 }
 
 all_ruby_prepare() {
+	epatch "${FILESDIR}/${PV}"/*.patch
+	
 	rm -r log files/delete.me || die
 
 	# bug #406605
