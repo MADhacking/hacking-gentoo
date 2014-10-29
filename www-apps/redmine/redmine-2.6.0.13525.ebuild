@@ -25,6 +25,7 @@ ruby_add_rdepend "virtual/ruby-ssl
 	dev-ruby/actionpack-action_caching
 	>=dev-ruby/awesome_nested_set-3.0.0
 	>=dev-ruby/rails-3.2.19:3.2
+	dev-ruby/rbpdf
 	>=dev-ruby/jquery-rails-2.0.2
 	dev-ruby/protected_attributes
 	dev-ruby/i18n:0.6
