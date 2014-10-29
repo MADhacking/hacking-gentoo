@@ -24,10 +24,15 @@ ruby_add_rdepend "virtual/ruby-ssl
 	virtual/rubygems
 	dev-ruby/actionpack-action_caching
 	>=dev-ruby/awesome_nested_set-3.0.0
+	dev-ruby/capybara
 	>=dev-ruby/rails-3.2.19:3.2
 	dev-ruby/rbpdf
+	dev-ruby/redcarpet
+	dev-ruby/rmagick
 	>=dev-ruby/jquery-rails-2.0.2
 	dev-ruby/protected_attributes
+	dev-ruby/request_store
+	dev-ruby/shoulda-context
 	dev-ruby/i18n:0.6
 	>=dev-ruby/coderay-1.0.9
 	dev-ruby/builder:3
