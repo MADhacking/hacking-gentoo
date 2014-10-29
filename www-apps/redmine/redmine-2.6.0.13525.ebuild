@@ -22,6 +22,7 @@ IUSE="ldap imagemagick fastcgi passenger"
 
 ruby_add_rdepend "virtual/ruby-ssl
 	virtual/rubygems
+	>=dev-ruby/awesome_nested_set-3.0.0
 	>=dev-ruby/rails-3.2.19:3.2
 	>=dev-ruby/jquery-rails-2.0.2
 	dev-ruby/i18n:0.6
@@ -33,7 +34,9 @@ ruby_add_rdepend "virtual/ruby-ssl
 	>=dev-ruby/rack-openid-0.2.1
 	imagemagick? ( >=dev-ruby/rmagick-2 )
 	fastcgi? ( dev-ruby/fcgi )
-	passenger? ( www-apache/passenger )"
+	passenger? ( www-apache/passenger )
+	>=dev-ruby/mocha-1.0.0
+	dev-ruby/selenium-webdriver"
 #	ruby_targets_ruby19? (
 #		postgres? ( >=dev-ruby/pg-0.11 )
 #		sqlite3? ( dev-ruby/sqlite3 )
