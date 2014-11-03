@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-USE_RUBY="ruby18 ree18 ruby19"
+USE_RUBY="ruby19 ruby20"
 
 inherit ruby-ng
 
