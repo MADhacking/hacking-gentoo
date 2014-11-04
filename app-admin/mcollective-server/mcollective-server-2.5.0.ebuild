@@ -17,7 +17,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND=""
-RDEPEND="dev-libs/mcollective"
+RDEPEND=""
+
+ruby_add_rdepend "dev-libs/mcollective"
 
 src_compile() {
 	einfo "nothing to compile"

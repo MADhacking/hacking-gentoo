@@ -18,7 +18,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
 DEPEND=""
-RDEPEND="dev-ruby/stomp"
+RDEPEND=""
+
+ruby_add_rdepend "dev-ruby/stomp"
 
 src_compile() {
 	einfo "nothing to compile"
