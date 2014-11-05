@@ -1,7 +1,8 @@
 [Unit]
 Description=CephFS MDS %i
 Requires=network.target
-After=network.target
+Wants=ntpdate.service ntpd.service
+After=network.target ntpdate.service ntpd.service
 
 [Service]
 Type=simple

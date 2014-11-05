@@ -1,7 +1,8 @@
 [Unit]
 Description=CephFS MON %i
 Requires=network.target
-After=network.target
+Wants=ntpdate.service ntpd.service
+After=network.target ntpdate.service ntpd.service
 
 [Service]
 Type=simple
@@ -11,4 +12,3 @@ ExecStart=/usr/bin/ceph-mon -f -i %i
 
 [Install]
 WantedBy=multi-user.target
-
