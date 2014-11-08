@@ -5,7 +5,7 @@
  MOSTLYCLEANFILES += many_sections_define.h
  many_sections_define.h:
 -	(for i in `seq 1 70000`; do \
-+	(for i in `seq 1 7000`; do \
++	(for i in `seq 1 70`; do \
  	   echo "int var_$$i __attribute__((section(\"section_$$i\"))) = $$i;"; \
  	 done) > $@.tmp
  	mv -f $@.tmp $@
@@ -14,7 +14,7 @@
  MOSTLYCLEANFILES += many_sections_check.h
  many_sections_check.h:
 -	(for i in `seq 1 1000 70000`; do \
-+	(for i in `seq 1 100 7000`; do \
++	(for i in `seq 1 10 70`; do \
  	   echo "assert(var_$$i == $$i);"; \
  	 done) > $@.tmp
  	mv -f $@.tmp $@
@@ -25,13 +25,13 @@
  @FN_PTRS_IN_SO_WITHOUT_PIC_TRUE@@GCC_TRUE@@NATIVE_LINKER_TRUE@@TLS_TRUE@	$(CXXLINK) -Bgcctestdir/ -shared tls_test.o tls_test_file2.o tls_test_c.o -Wl,-z,notext
  @GCC_TRUE@@NATIVE_LINKER_TRUE@many_sections_define.h:
 -@GCC_TRUE@@NATIVE_LINKER_TRUE@	(for i in `seq 1 70000`; do \
-+@GCC_TRUE@@NATIVE_LINKER_TRUE@	(for i in `seq 1 7000`; do \
++@GCC_TRUE@@NATIVE_LINKER_TRUE@	(for i in `seq 1 70`; do \
  @GCC_TRUE@@NATIVE_LINKER_TRUE@	   echo "int var_$$i __attribute__((section(\"section_$$i\"))) = $$i;"; \
  @GCC_TRUE@@NATIVE_LINKER_TRUE@	 done) > $@.tmp
  @GCC_TRUE@@NATIVE_LINKER_TRUE@	mv -f $@.tmp $@
  @GCC_TRUE@@NATIVE_LINKER_TRUE@many_sections_check.h:
 -@GCC_TRUE@@NATIVE_LINKER_TRUE@	(for i in `seq 1 1000 70000`; do \
-+@GCC_TRUE@@NATIVE_LINKER_TRUE@	(for i in `seq 1 100 7000`; do \
++@GCC_TRUE@@NATIVE_LINKER_TRUE@	(for i in `seq 1 10 70`; do \
  @GCC_TRUE@@NATIVE_LINKER_TRUE@	   echo "assert(var_$$i == $$i);"; \
  @GCC_TRUE@@NATIVE_LINKER_TRUE@	 done) > $@.tmp
  @GCC_TRUE@@NATIVE_LINKER_TRUE@	mv -f $@.tmp $@
