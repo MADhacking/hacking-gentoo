@@ -11,5 +11,6 @@ KEYWORDS="~alpha ~amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh ~sparc 
 src_unpack() {
 	tc-binutils_unpack
 	cp "${FILESDIR}/97_all_binutils-scriptsdir.patch" ${EPATCH_SOURCE}
+	cp "${FILESDIR}/98_gold-testsuite-arg-length.patch" ${EPATCH_SOURCE}
 	tc-binutils_apply_patches
 }

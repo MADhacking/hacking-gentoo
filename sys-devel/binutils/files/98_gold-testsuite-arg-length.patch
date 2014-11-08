@@ -1,0 +1,20 @@
+--- gold/testsuite/Makefile.am.old	2014-11-08 17:42:48.768989971 +0000
++++ gold/testsuite/Makefile.am	2014-11-08 17:43:09.872075970 +0000
+@@ -918,7 +918,7 @@
+ BUILT_SOURCES += many_sections_define.h
+ MOSTLYCLEANFILES += many_sections_define.h
+ many_sections_define.h:
+-	(for i in `seq 1 70000`; do \
++	(for i in `seq 1 7000`; do \
+ 	   echo "int var_$$i __attribute__((section(\"section_$$i\"))) = $$i;"; \
+ 	 done) > $@.tmp
+ 	mv -f $@.tmp $@
+@@ -926,7 +926,7 @@
+ BUILT_SOURCES += many_sections_check.h
+ MOSTLYCLEANFILES += many_sections_check.h
+ many_sections_check.h:
+-	(for i in `seq 1 1000 70000`; do \
++	(for i in `seq 1 100 7000`; do \
+ 	   echo "assert(var_$$i == $$i);"; \
+ 	 done) > $@.tmp
+ 	mv -f $@.tmp $@
