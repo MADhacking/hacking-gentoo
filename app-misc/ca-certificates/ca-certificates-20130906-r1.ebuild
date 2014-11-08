@@ -63,6 +63,7 @@ src_install() {
 	done < "${FILESDIR}/certindex-${PV}.txt"
 
 	# Copy the docs.
+	rm -rf usr/share/doc/ca-certificates/examples
 	dodoc usr/share/doc/ca-certificates/*
 
 	# Create some /etc dirs.
