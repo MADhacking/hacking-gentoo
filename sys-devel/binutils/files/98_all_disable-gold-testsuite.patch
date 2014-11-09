@@ -1,0 +1,11 @@
+--- gold/Makefile.in.old	2014-11-09 11:54:09.169155517 +0000
++++ gold/Makefile.in	2014-11-09 11:54:23.582318923 +0000
+@@ -407,7 +407,7 @@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ AUTOMAKE_OPTIONS = foreign
+-SUBDIRS = po testsuite
++SUBDIRS = po
+ tooldir = $(exec_prefix)/$(target_alias)
+ ACLOCAL_AMFLAGS = -I ../bfd -I ../config
+ AM_CFLAGS = $(WARN_CFLAGS) $(LFS_CFLAGS) $(RANDOM_SEED_CFLAGS)
