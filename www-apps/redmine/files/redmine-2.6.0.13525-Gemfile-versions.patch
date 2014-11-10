@@ -1,0 +1,47 @@
+--- redmine-2.6.0.13525/Gemfile	2014-10-29 14:09:03.000000000 +0000
++++ redmine-2.6.0.13525/Gemfile	2014-11-10 01:15:02.095299092 +0000
+@@ -4,7 +4,7 @@
+ gem "jquery-rails", "~> 3.1.1"
+ gem "coderay", "~> 1.1.0"
+ gem "builder", ">= 3.0.4"
+-gem "request_store", "1.0.5"
++gem "request_store", ">= 1.0.5"
+ gem "mime-types"
+ gem "awesome_nested_set", "3.0.0"
+ gem "protected_attributes"
+@@ -16,12 +16,12 @@
+ 
+ # Optional gem for LDAP authentication
+ group :ldap do
+-  gem "net-ldap", "~> 0.3.1"
++  gem "net-ldap", ">= 0.3.1"
+ end
+ 
+ # Optional gem for OpenID authentication
+ group :openid do
+-  gem "ruby-openid", "~> 2.3.0", :require => "openid"
++  gem "ruby-openid", ">= 2.5.0", :require => "openid"
+   gem "rack-openid"
+ end
+ 
+@@ -33,7 +33,7 @@
+ 
+   # Optional Markdown support, not for JRuby
+   group :markdown do
+-    gem "redcarpet", "~> 3.1.2"
++    gem "redcarpet", ">= 3.1.2"
+   end
+ end
+ 
+@@ -87,9 +87,9 @@
+ group :test do
+   gem "minitest"
+   gem "shoulda-context"
+-  gem "mocha", "~> 1.0.0", :require => 'mocha/api'
++  gem "mocha", ">= 1.0.0", :require => 'mocha/api'
+   # For running UI tests
+-  gem "capybara", "~> 2.1.0"
++  gem "capybara", ">= 2.1.0"
+   gem "selenium-webdriver"
+ end
+ 

@@ -78,6 +78,12 @@ all_ruby_prepare() {
 
 	# remove ldap staff module if disabled to avoid #413779
 	use ldap || rm app/models/auth_source_ldap.rb || die
+	
+	# Apply patches
+	epatch "${FILESDIR}"/redmine-2.6.0.13525-Gemfile-versions.patch
+	
+	# Apply user
+	epatch_user
 }
 
 all_ruby_install() {
