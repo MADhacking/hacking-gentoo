@@ -11,6 +11,7 @@ app-emulation/xen
 app-emulation/xen-tools
 app-misc/ca-certificates
 dev-java/icedtea
+dev-libs/efl
 dev-libs/klibc
 dev-libs/nss
 mail-mta/postfix
