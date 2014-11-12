@@ -63,7 +63,7 @@ RDEPEND="
 	pulseaudio? ( media-sound/pulseaudio )
 	scim?	( app-i18n/scim )
 	sdl? (
-		media-libs/libsdl
+		media-libs/libsdl2
 		virtual/opengl
 	)
 	sound? ( media-libs/libsndfile )

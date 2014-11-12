@@ -1,0 +1,5 @@
+* Added neon use-flag to enable/disable NEON instruction set (profile masked on arm).
+
+  Fixes compile issue on armv6 when NEON is incorrectly enabled.
+
+* Updated dependencies to require dev-libs/libsdl2
