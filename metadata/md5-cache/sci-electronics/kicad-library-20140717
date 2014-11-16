@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile configure install prepare test unpack
+DEPEND=>=dev-util/cmake-2.6.4 sys-devel/make >=dev-util/cmake-2.8.12 userland_GNU? ( >=sys-apps/findutils-4.4.0 )
+DESCRIPTION=Electronic Schematic and PCB design tools library.
+EAPI=5
+HOMEPAGE=http://www.kicad-pcb.org
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2 kicad-doc
+RDEPEND=!<sci-electronics/kicad-20140717
+SLOT=0
+SRC_URI=http://downloads.mad-hacking.net/software/kicad-library-20140717+5006.tar.bz2
+_eclasses_=cmake-utils	9b9240b47b8dd08ad95a619ec16c39bd	eutils	32548a82e42dc26e3312581476d2f20c	flag-o-matic	75e24bac8423c515dd9c5717f08feb83	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	6ce35cb0d56d962486c858d41604c820	unpacker	f300a7ca9131b1024a79762e8edd3c52
+_md5_=040efabd3becbf5c3b90e1574bfc2f36

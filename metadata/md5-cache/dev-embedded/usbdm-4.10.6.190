@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile install prepare
+DEPEND=app-arch/unzip dev-libs/xerces-c virtual/libusb x11-libs/wxGTK:2.8[X]
+DESCRIPTION=USBDM interface for Freescale RS08, HCS08, HCS12, Coldfire & ARM-Kinetis devices
+EAPI=5
+HOMEPAGE=http://usbdm.sourceforge.net/
+IUSE=debug
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+SLOT=0
+SRC_URI=http://downloads.mad-hacking.net/software/usbdm-4.10.6.190.zip
+_eclasses_=eutils	32548a82e42dc26e3312581476d2f20c	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	6ce35cb0d56d962486c858d41604c820	wxwidgets	6d6eec2685256d35511e7b6d5461bec9
+_md5_=328ccd9883ce73431ab5007f0bf23dfe

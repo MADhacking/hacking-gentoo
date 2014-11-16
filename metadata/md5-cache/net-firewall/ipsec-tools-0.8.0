@@ -1,12 +1,12 @@
 DEFINED_PHASES=compile install postinst setup unpack
-DEPEND=selinux? ( sys-libs/libselinux ) readline? ( sys-libs/readline ) pam? ( sys-libs/pam ) ldap? ( net-nds/openldap ) kerberos? ( virtual/krb5 ) >=dev-libs/openssl-0.9.8 iconv? ( virtual/libiconv ) >=sys-kernel/linux-headers-2.6.30 sys-apps/shadow sys-auth/pambase || ( >=sys-devel/automake-1.12 >=sys-devel/automake-1.13 ) >=sys-devel/autoconf-2.68 sys-devel/libtool
+DEPEND=selinux? ( sys-libs/libselinux ) readline? ( sys-libs/readline ) pam? ( sys-libs/pam ) ldap? ( net-nds/openldap ) kerberos? ( virtual/krb5 ) >=dev-libs/openssl-0.9.8 iconv? ( virtual/libiconv ) >=sys-kernel/linux-headers-2.6.30 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.13 >=sys-devel/automake-1.14 ) >=sys-devel/autoconf-2.69 sys-devel/libtool
 DESCRIPTION=A port of KAME's IPsec utilities to the Linux-2.6 IPsec implementation
 HOMEPAGE=http://ipsec-tools.sourceforge.net/
 IUSE=idea ipv6 pam rc5 readline selinux ldap kerberos nat broken-natt hybrid iconv selinux
 KEYWORDS=~amd64 ~ppc ~sparc ~x86
 LICENSE=BSD
-RDEPEND=selinux? ( sys-libs/libselinux ) readline? ( sys-libs/readline ) pam? ( sys-libs/pam ) ldap? ( net-nds/openldap ) kerberos? ( virtual/krb5 ) >=dev-libs/openssl-0.9.8 iconv? ( virtual/libiconv ) sys-apps/shadow sys-auth/pambase
+RDEPEND=selinux? ( sys-libs/libselinux ) readline? ( sys-libs/readline ) pam? ( sys-libs/pam ) ldap? ( net-nds/openldap ) kerberos? ( virtual/krb5 ) >=dev-libs/openssl-0.9.8 iconv? ( virtual/libiconv )
 SLOT=0
 SRC_URI=mirror://sourceforge/ipsec-tools/ipsec-tools-0.8.0.tar.bz2
-_eclasses_=autotools	16761a2f972abd686713e5967ff3c754	eutils	4878e7f88afc0ba0866ac112190b0fd4	flag-o-matic	46e34faf3660a9fa3d374b042130fb20	libtool	b1c8688e60f9580bcb9bb46e08737eb1	linux-info	a9cbd6bbe2b28166e403321882f3c73c	multilib	892e597faee02a5b94eb02ab512e7622	multiprocessing	a2130e6fc4aa4c6a24b265ca0cbcc2b6	toolchain-funcs	3e30ef439a720915f8f4fd4fe75f704c	user	f7084a6d9d1caf321808d6d5a0c69e9b	versionator	6601b4c5b3f019a993db59a50e1854e4
+_eclasses_=autotools	ebea507d219855923e3438c953cf4ab8	eutils	32548a82e42dc26e3312581476d2f20c	flag-o-matic	75e24bac8423c515dd9c5717f08feb83	libtool	52d0e17251d04645ffaa61bfdd858944	linux-info	2b8c53f6065bdee2d757472215a3088f	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	multiprocessing	d7f2985a2c76c365ee20269db5261414	toolchain-funcs	6ce35cb0d56d962486c858d41604c820	versionator	cd0bcdb170807e4a1984115e9d53a26f
 _md5_=3af270f65cc48eb22d5ede1d987312fc

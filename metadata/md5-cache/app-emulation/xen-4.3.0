@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install postinst postrm preinst prepare prerm setup
-DEPEND=|| ( dev-lang/python:2.7 ) efi? ( >=sys-devel/binutils-2.22[multitarget] ) !efi? ( >=sys-devel/binutils-2.22[-multitarget] ) sys-apps/shadow sys-auth/pambase
+DEPEND=|| ( >=dev-lang/python-2.7.5-r2:2.7 ) efi? ( >=sys-devel/binutils-2.22[multitarget] ) !efi? ( >=sys-devel/binutils-2.22[-multitarget] )
 DESCRIPTION=The Xen virtual machine monitor
 EAPI=5
 HOMEPAGE=http://xen.org/
@@ -7,10 +7,9 @@ IUSE=custom-cflags debug efi flask pae xsm
 KEYWORDS=~amd64 ~x86
 LICENSE=GPL-2
 PDEPEND=~app-emulation/xen-tools-4.3.0
-RDEPEND=sys-apps/shadow sys-auth/pambase
 REQUIRED_USE=flask? ( xsm )
 RESTRICT=test
 SLOT=0
 SRC_URI=http://bits.xensource.com/oss-xen/release/4.3.0/xen-4.3.0.tar.gz
-_eclasses_=eutils	4878e7f88afc0ba0866ac112190b0fd4	flag-o-matic	46e34faf3660a9fa3d374b042130fb20	mount-boot	02dd3bb4c5f025fef0fc3ade0f27c217	multilib	892e597faee02a5b94eb02ab512e7622	python-any-r1	06dec86544a782db0a4fd8a90092565d	python-utils-r1	3b392f7373bcc74b7c97ae0acd9ec0e6	toolchain-funcs	3e30ef439a720915f8f4fd4fe75f704c	user	f7084a6d9d1caf321808d6d5a0c69e9b
+_eclasses_=eutils	32548a82e42dc26e3312581476d2f20c	flag-o-matic	75e24bac8423c515dd9c5717f08feb83	mount-boot	02dd3bb4c5f025fef0fc3ade0f27c217	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	python-any-r1	4560effd96d3d2a82e50af7cf87166da	python-utils-r1	14f70a8c0d896d1b016d17f108a6de74	toolchain-funcs	6ce35cb0d56d962486c858d41604c820
 _md5_=1f7480d937f0b4e6aaf82d340f6df823

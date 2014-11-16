@@ -1,12 +1,11 @@
 DEFINED_PHASES=install
-DEPEND=sys-apps/shadow sys-auth/pambase
 DESCRIPTION=GeSHi the Generic Syntax Highlighter converts code to HTML and supports a range of popular languages
 EAPI=4
 HOMEPAGE=http://qbnz.com/highlighter/
 KEYWORDS=~alpha amd64 ~arm hppa ~ia64 ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd amd64 x86
 LICENSE=GPL-2
-RDEPEND=>=dev-lang/php-5.2 sys-apps/shadow sys-auth/pambase
+RDEPEND=>=dev-lang/php-5.2
 SLOT=0
 SRC_URI=mirror://sourceforge/geshi/geshi/GeSHi%201.0.8.11/GeSHi-1.0.8.11.tar.gz -> geshi-1.0.8.11.tar.gz
-_eclasses_=eutils	4878e7f88afc0ba0866ac112190b0fd4	multilib	892e597faee02a5b94eb02ab512e7622	toolchain-funcs	3e30ef439a720915f8f4fd4fe75f704c	user	f7084a6d9d1caf321808d6d5a0c69e9b
+_eclasses_=eutils	32548a82e42dc26e3312581476d2f20c	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	6ce35cb0d56d962486c858d41604c820
 _md5_=0d5c120c1bc549839e0bec6639856219

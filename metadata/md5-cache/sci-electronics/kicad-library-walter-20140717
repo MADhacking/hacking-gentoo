@@ -1,0 +1,11 @@
+DEFINED_PHASES=install prepare unpack
+DESCRIPTION=Electronic Schematic and PCB design library.
+EAPI=5
+HOMEPAGE=http://smisioto.no-ip.org/elettronica/kicad/kicad-en.htm
+KEYWORDS=~amd64 ~x86
+LICENSE=CC-BY-SA-3.0 GPL-3
+RDEPEND=!<sci-electronics/kicad-20140717
+SLOT=0
+SRC_URI=http://downloads.mad-hacking.net/software/kicad-library-walter-20140717.tar.bz2
+_eclasses_=eutils	32548a82e42dc26e3312581476d2f20c	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	6ce35cb0d56d962486c858d41604c820	unpacker	f300a7ca9131b1024a79762e8edd3c52
+_md5_=aebf2379801053d08ac733fdffbc5d03

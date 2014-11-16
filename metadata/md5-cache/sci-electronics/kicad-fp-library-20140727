@@ -1,0 +1,11 @@
+DEFINED_PHASES=install
+DEPEND=>=dev-util/cmake-2.6.4
+DESCRIPTION=Electronic Schematic and PCB design tools footprint library.
+EAPI=5
+HOMEPAGE=http://www.kicad-pcb.org
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2 kicad-doc
+RDEPEND=!<sci-electronics/kicad-20140717
+SLOT=0
+SRC_URI=http://downloads.mad-hacking.net/software/kicad-fp-library-20140727.tar.bz2
+_md5_=7cca3c6900a34adbc3e107af8210db56

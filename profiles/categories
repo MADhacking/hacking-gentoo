@@ -2,6 +2,7 @@ app-admin
 app-backup
 app-emulation
 app-misc
+app-text
 dev-embedded
 dev-java
 dev-libs
