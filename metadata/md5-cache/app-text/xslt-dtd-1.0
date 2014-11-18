@@ -1,0 +1,9 @@
+DEFINED_PHASES=install unpack
+DESCRIPTION=An XML DTD for XSLT
+EAPI=3
+HOMEPAGE=http://www.w3.org/TR/xslt
+KEYWORDS=alpha amd64 arm arm64 hppa ia64 m68k mips ppc ppc64 s390 sh sparc sparc-fbsd x86 x86-fbsd
+LICENSE=W3C
+SLOT=1.0
+SRC_URI=http://www.w3.org/1999/11/xslt10.dtd
+_md5_=f3da9e3156c7fd9fc2dc9b31b549cb14
