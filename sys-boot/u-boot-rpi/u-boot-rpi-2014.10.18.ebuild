@@ -38,7 +38,7 @@ setup_boot_dir() {
 
 	mkdir -p "${dir}"
 	[[ ! -L ${dir}/boot ]] && ln -s . "${dir}/boot"
-	dir="${dir}/grub"
+	dir="${dir}/uboot"
 	if [[ ! -e ${dir} ]] ; then
 		mkdir "${dir}" || die
 	fi
