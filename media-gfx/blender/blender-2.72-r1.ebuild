@@ -115,8 +115,7 @@ src_prepare() {
 		"${FILESDIR}"/06-${PN}-2.68-fix-install-rules.patch \
 		"${FILESDIR}"/07-${PN}-2.70-sse2.patch \
 		"${FILESDIR}"/08-${PN}-2.71-gflags.patch \
-		"${FILESDIR}"/09-${PN}-2.72-unbundle-minilzo.patch \
-		"${FILESDIR}"/dupligroup_depth.patch
+		"${FILESDIR}"/09-${PN}-2.72-unbundle-minilzo.patch
 
 	epatch_user
 
