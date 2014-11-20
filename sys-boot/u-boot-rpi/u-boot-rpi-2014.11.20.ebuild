@@ -19,7 +19,7 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	emake rpi_b_defconfig
+	emake rpi_defconfig
 }
 
 src_compile() {
