@@ -27,7 +27,7 @@ src_compile() {
 }
 
 src_install() {
-	insinto /usr/share/u-boot-rpi
+	insinto /usr/share/${PN}
 	
 	doins u-boot.bin u-boot.map u-boot.srec
 }
@@ -38,12 +38,12 @@ setup_boot_dir() {
 
 	mkdir -p "${dir}"
 	[[ ! -L ${dir}/boot ]] && ln -s . "${dir}/boot"
-	dir="${dir}/u-boot-rpi"
+	dir="${dir}/${PN}"
 	if [[ ! -e ${dir} ]] ; then
 		mkdir "${dir}" || die
 	fi
 	
-	for x in "${ROOT}"/usr/share/u-boot-rpi/* ; do
+	for x in "${ROOT}"/usr/share/${PN}/* ; do
 		[[ -f ${x} ]] && cp -p "${x}" "${dir}"/
 	done
 }
