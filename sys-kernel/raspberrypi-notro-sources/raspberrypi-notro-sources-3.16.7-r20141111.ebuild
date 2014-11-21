@@ -12,7 +12,8 @@ K_SECURITY_UNSUPPORTED="1"
 UNIPATCH_LIST=" ${FILESDIR}/rpi-bcm2835-master-2014-11-10/*.patch
 				${FILESDIR}/fbtft-20141104.patch.bz2
 				${FILESDIR}/fdt_loader.patch
-				${FILESDIR}/bcm2708_pinctrl_driver.patch"
+				${FILESDIR}/bcm2708_pinctrl_driver.patch
+				${FILESDIR}/no-error-implicit-function-declaration.patch"
 CKV="3.16.7"
 
 inherit kernel-2
