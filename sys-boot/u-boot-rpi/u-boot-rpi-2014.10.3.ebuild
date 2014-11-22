@@ -6,8 +6,8 @@ EAPI="4"
 
 inherit eutils mount-boot
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="Das U-Boot -- the Universal Boot Loader (Raspberry Pi build)"
+HOMEPAGE="http://www.denx.de/wiki/U-Boot"
 SRC_URI="ftp://ftp.denx.de/pub/u-boot/u-boot-2014.10-rc3.tar.bz2"
 
 LICENSE="GPL-2"

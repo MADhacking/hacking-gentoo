@@ -6,8 +6,8 @@ EAPI="4"
 
 inherit eutils mount-boot
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="u-boot port for Raspberry Pi by Stephen Warren (swarren)"
+HOMEPAGE="https://github.com/swarren/u-boot"
 SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
 LICENSE="GPL-2"

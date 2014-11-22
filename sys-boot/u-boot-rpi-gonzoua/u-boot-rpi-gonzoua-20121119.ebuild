@@ -6,8 +6,8 @@ EAPI="4"
 
 inherit eutils mount-boot
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="u-boot port for Raspberry Pi by Oleksandr Tymoshenko (gonzoua)"
+HOMEPAGE="https://github.com/gonzoua/u-boot-pi"
 SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
 LICENSE="GPL-2"
@@ -17,6 +17,10 @@ KEYWORDS="~arm"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
+
+src_configure() {
+	emake rpi_b_config
+}
 
 src_compile() {
 	emake
