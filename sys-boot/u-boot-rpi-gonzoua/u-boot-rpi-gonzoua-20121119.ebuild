@@ -23,7 +23,8 @@ src_configure() {
 }
 
 src_compile() {
-	emake LDFLAGS="$(raw-ldflags)"
+	#emake LDFLAGS="$(raw-ldflags)"
+	emake LDFLAGS=""
 }
 
 src_install() {
