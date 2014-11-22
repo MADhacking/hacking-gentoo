@@ -4,7 +4,7 @@
 
 EAPI="4"
 
-inherit eutils mount-boot
+inherit flag-o-matic eutils mount-boot
 
 DESCRIPTION="u-boot port for Raspberry Pi by Oleksandr Tymoshenko (gonzoua)"
 HOMEPAGE="https://github.com/gonzoua/u-boot-pi"
@@ -23,7 +23,7 @@ src_configure() {
 }
 
 src_compile() {
-	emake
+	emake LDFLAGS="$(raw-ldflags)"
 }
 
 src_install() {
