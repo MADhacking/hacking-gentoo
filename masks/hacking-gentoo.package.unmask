@@ -7,6 +7,7 @@ dev-java/icedtea::hacking-gentoo
 dev-libs/efl::hacking-gentoo
 dev-libs/klibc::hacking-gentoo
 dev-libs/nss::hacking-gentoo
+dev-ruby/awesome_nested_set::hacking-gentoo
 mail-mta/postfix::hacking-gentoo
 mail-mta/ssmtp::hacking-gentoo
 media-gfx/blender::hacking-gentoo
