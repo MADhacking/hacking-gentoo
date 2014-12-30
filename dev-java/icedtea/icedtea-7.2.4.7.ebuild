@@ -8,9 +8,7 @@
 
 EAPI="5"
 
-CHECKREQS_DISK_BUILD="9G"
-
-inherit cadb check-reqs java-pkg-2 java-vm-2 pax-utils prefix versionator virtualx flag-o-matic
+inherit cadb java-pkg-2 java-vm-2 multiprocessing pax-utils prefix versionator virtualx
 
 ICEDTEA_VER=$(get_version_component_range 2-)
 ICEDTEA_BRANCH=$(get_version_component_range 2-3)
@@ -101,7 +99,6 @@ COMMON_DEP="
 	javascript? ( dev-java/rhino:1.6 )
 	nss? ( >=dev-libs/nss-3.12.5-r1 )
 	pulseaudio?  ( >=media-sound/pulseaudio-0.9.11:= )
-	selinux? ( sec-policy/selinux-java )
 	kerberos? ( virtual/krb5 )
 	>=dev-util/systemtap-1"
 
@@ -121,7 +118,8 @@ RDEPEND="${COMMON_DEP}
 		)
 	)
 	alsa? ( ${ALSA_COMMON_DEP} )
-	cups? ( ${CUPS_COMMON_DEP} )"
+	cups? ( ${CUPS_COMMON_DEP} )
+	selinux? ( sec-policy/selinux-java )"
 
 # Only ant-core-1.8.1 has fixed ant -diagnostics when xerces+xalan are not present.
 # ca-certificates, perl and openssl are used for the cacerts keystore generation
@@ -234,12 +232,7 @@ src_configure() {
 		zero_config="--enable-zero";
 	fi
 
-	# OpenJDK-specific parallelism support. Bug #389791, #337827
-	# Implementation modified from waf-utils.eclass
-	# Note that "-j" is converted to "-j1" as the system doesn't support --load-average
-	local procs=$(echo -j1 ${MAKEOPTS} | sed -r "s/.*(-j\s*|--jobs=)([0-9]+).*/\2/" )
-	config="${config} --with-parallel-jobs=${procs}";
-	einfo "Configuring using --with-parallel-jobs=${procs}"
+	config+=" --with-parallel-jobs=$(makeopts_jobs)"
 
 	if use javascript ; then
 		config="${config} --with-rhino=$(java-pkg_getjar rhino-1.6 js.jar)"
