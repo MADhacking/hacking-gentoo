@@ -22,8 +22,7 @@ SLOT="0"
 IUSE="debug elibc_glibc ncurses pam newnet prefix +netifrc selinux static-libs
 	tools unicode kernel_linux kernel_FreeBSD"
 
-COMMON_DEPEND=">=sys-apps/baselayout-2.1-r1
-	kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
+COMMON_DEPEND="kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-ubin-9.0_rc sys-process/fuser-bsd ) )
 	elibc_glibc? ( >=sys-libs/glibc-2.5 )
 	ncurses? ( sys-libs/ncurses )
 	pam? ( sys-auth/pambase )
@@ -32,9 +31,8 @@ COMMON_DEPEND=">=sys-apps/baselayout-2.1-r1
 		sys-process/psmisc
 		!<sys-process/procps-3.3.9-r2
 	)
-	selinux? ( sec-policy/selinux-base-policy
-		sec-policy/selinux-openrc
-		sys-libs/libselinux )
+	selinux? ( sys-libs/libselinux )
+	!<sys-apps/baselayout-2.1-r1
 	!<sys-fs/udev-init-scripts-27"
 DEPEND="${COMMON_DEPEND}
 	virtual/os-headers
@@ -43,7 +41,12 @@ RDEPEND="${COMMON_DEPEND}
 	!prefix? (
 		kernel_linux? ( || ( >=sys-apps/sysvinit-2.86-r6 sys-process/runit ) )
 		kernel_FreeBSD? ( sys-freebsd/freebsd-sbin )
-	)"
+	)
+	selinux? (
+		sec-policy/selinux-base-policy
+		sec-policy/selinux-openrc
+	)
+"
 
 PDEPEND="netifrc? ( net-misc/netifrc )"
 
