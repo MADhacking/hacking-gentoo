@@ -40,11 +40,6 @@ PATCHES=("${FILESDIR}"/pacemaker-1.1.10-tinfo.patch)
 
 S="${WORKDIR}/${PN}-${MY_P}"
 
-pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
-}
-
 src_prepare() {
 	base_src_prepare
 	sed -i -e "/ggdb3/d" configure.ac || die
