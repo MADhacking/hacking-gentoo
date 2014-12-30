@@ -1,6 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+# Copyright 2013 Hacking Networked Solutions
+# Distributed under the terms of the GNU General Public License v3+
 # $Header: $
+
+EAPI="4"
 
 PATCHVER="1.5"
 ELF2FLT_VER=""
