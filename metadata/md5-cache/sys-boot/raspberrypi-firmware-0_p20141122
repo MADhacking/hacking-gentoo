@@ -1,0 +1,11 @@
+DEFINED_PHASES=config install postinst postrm preinst prerm unpack
+DESCRIPTION=Raspberry PI boot loader and firmware
+EAPI=5
+HOMEPAGE=https://github.com/raspberrypi/firmware
+KEYWORDS=~arm
+LICENSE=GPL-2 raspberrypi-videocore-bin
+RESTRICT=binchecks strip
+SLOT=0
+SRC_URI=https://github.com/raspberrypi/firmware/raw/1513cf89c1/boot/bootcode.bin -> raspberrypi-firmware-1513cf89c1-bootcode.bin https://github.com/raspberrypi/firmware/raw/1513cf89c1/boot/fixup.dat -> raspberrypi-firmware-1513cf89c1-fixup.dat https://github.com/raspberrypi/firmware/raw/1513cf89c1/boot/fixup_cd.dat -> raspberrypi-firmware-1513cf89c1-fixup_cd.dat https://github.com/raspberrypi/firmware/raw/1513cf89c1/boot/fixup_x.dat -> raspberrypi-firmware-1513cf89c1-fixup_x.dat https://github.com/raspberrypi/firmware/raw/1513cf89c1/boot/start.elf -> raspberrypi-firmware-1513cf89c1-start.elf https://github.com/raspberrypi/firmware/raw/1513cf89c1/boot/start_cd.elf -> raspberrypi-firmware-1513cf89c1-start_cd.elf https://github.com/raspberrypi/firmware/raw/1513cf89c1/boot/start_x.elf -> raspberrypi-firmware-1513cf89c1-start_x.elf
+_eclasses_=mount-boot	02dd3bb4c5f025fef0fc3ade0f27c217
+_md5_=d57a8620b70dedd8efa18333d3070ace

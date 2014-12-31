@@ -10,4 +10,4 @@ RDEPEND=dev-libs/openssl >=app-admin/update-ca-certificates-0.7
 SLOT=0
 SRC_URI=mirror://debian/pool/main/c/ca-certificates/ca-certificates_20140223_all.deb
 _eclasses_=cadb	fe8dc4a35ac638a4ba572b375459422a	eutils	32548a82e42dc26e3312581476d2f20c	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	6ce35cb0d56d962486c858d41604c820	unpacker	f300a7ca9131b1024a79762e8edd3c52
-_md5_=1642c518d5b956a19922948d602bade4
+_md5_=b16b06372c9a8685a7cdb08b591e1dfa
