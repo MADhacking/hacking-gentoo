@@ -13,5 +13,5 @@ KEYWORDS="amd64 x86"
 IUSE=""
 RDEPEND="${DEPEND}
 	install-meta/hacking-base-server
-	dev-db/postgresql-server:9.0
-	dev-db/postgresql-server:9.1"
+	dev-db/postgresql:9.0
+	dev-db/postgresql:9.1"
