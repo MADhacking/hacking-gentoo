@@ -14,7 +14,7 @@ IUSE=""
 RDEPEND="${DEPEND}
 	install-meta/hacking-base-server
 	app-antivirus/clamav
-	dev-perl/IP-Country
+	dev-perl/Geo-IP
 	dev-python/pydns
 	mail-filter/amavisd-new
 	mail-filter/maildrop
