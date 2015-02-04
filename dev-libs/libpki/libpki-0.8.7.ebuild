@@ -29,7 +29,7 @@ RESTRICT="test"
 AUTOTOOLS_IN_SOURCE_BUILD=1
 
 src_prepare() {
-	epatch "${FILESDIR}"/*.patch
+	epatch "${FILESDIR}"/makefile.patch
 
 	autotools-utils_src_prepare
 	AT_NOELIBTOOLIZE=yes eautoreconf
