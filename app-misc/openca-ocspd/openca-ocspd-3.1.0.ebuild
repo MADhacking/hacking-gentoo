@@ -5,7 +5,7 @@
 
 EAPI="4"
 
-inherit autotools autotools-utils eutils
+inherit autotools autotools-utils eutils user
 
 DESCRIPTION="An OCSP (Online Certificate Status Protocol) daemon"
 HOMEPAGE="http://www.openca.org/projects/ocspd/"
@@ -32,7 +32,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/*.patch
+	epatch "${FILESDIR}/${PV}"/*.patch
 
 	autotools-utils_src_prepare
 	AT_NOELIBTOOLIZE=yes eautoreconf
@@ -53,7 +53,7 @@ src_configure() {
 src_install() {
 	autotools-utils_src_install
 
-	newinitd "${FILESDIR}"/ocspd.rc ocspd
+	newinitd "${FILESDIR}/${PV}"/ocspd.rc ocspd
 
 	dodir /var/run/ocspd
 	fowners ocspd:root /var/run/ocspd

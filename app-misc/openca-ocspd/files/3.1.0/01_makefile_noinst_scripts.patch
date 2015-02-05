@@ -1,0 +1,11 @@
+--- Makefile.am
++++ Makefile.am
+@@ -61,7 +61,7 @@
+ MAINTAINERCLEANFILES = Makefile.in aclocal.m4 configure \
+ 	$(AUX_DIST)
+ 
+-bin_SCRIPTS = \
++noinst_SCRIPTS = \
+ 	scripts/ocspd-genreq.sh \
+ 	test/test.sh
+ 
