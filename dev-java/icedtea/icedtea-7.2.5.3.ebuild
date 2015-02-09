@@ -7,23 +7,24 @@
 # *********************************************************
 
 EAPI="5"
+SLOT="7"
+
+inherit cadb check-reqs java-pkg-2 java-vm-2 multiprocessing pax-utils prefix versionator virtualx
 
 CHECKREQS_DISK_BUILD="9G"
-
-inherit cadb java-pkg-2 java-vm-2 multiprocessing pax-utils prefix versionator virtualx
 
 ICEDTEA_VER=$(get_version_component_range 2-)
 ICEDTEA_BRANCH=$(get_version_component_range 2-3)
 ICEDTEA_PKG=icedtea-${ICEDTEA_VER}
-CORBA_TARBALL="e6ad5b912691.tar.gz"
-JAXP_TARBALL="94b7e8e0d96f.tar.gz"
-JAXWS_TARBALL="bd9a50a78d04.tar.gz"
-JDK_TARBALL="9448fff93286.tar.gz"
-LANGTOOLS_TARBALL="8c26a3c39128.tar.gz"
-OPENJDK_TARBALL="13970e76b784.tar.gz"
-HOTSPOT_TARBALL="69b542696e5b.tar.gz"
+CORBA_TARBALL="4aed5efcd8df.tar.bz2"
+JAXP_TARBALL="c903902aadd7.tar.bz2"
+JAXWS_TARBALL="d3bef5fd93db.tar.bz2"
+JDK_TARBALL="6b81c7cc733e.tar.bz2"
+LANGTOOLS_TARBALL="a64b8bf851a9.tar.bz2"
+OPENJDK_TARBALL="49dc79ef05ab.tar.bz2"
+HOTSPOT_TARBALL="1d0d98e7c981.tar.bz2"
 CACAO_TARBALL="e215e36be9fc.tar.gz"
-JAMVM_TARBALL="jamvm-ac22c9948434e528ece451642b4ebde40953ee7e.tar.gz"
+JAMVM_TARBALL="jamvm-ec18fb9e49e62dce16c5094ef1527eed619463aa.tar.gz"
 
 CORBA_GENTOO_TARBALL="icedtea-${ICEDTEA_BRANCH}-corba-${CORBA_TARBALL}"
 JAXP_GENTOO_TARBALL="icedtea-${ICEDTEA_BRANCH}-jaxp-${JAXP_TARBALL}"
@@ -35,34 +36,29 @@ HOTSPOT_GENTOO_TARBALL="icedtea-${ICEDTEA_BRANCH}-hotspot-${HOTSPOT_TARBALL}"
 CACAO_GENTOO_TARBALL="icedtea-${ICEDTEA_BRANCH}-cacao-${CACAO_TARBALL}"
 JAMVM_GENTOO_TARBALL="icedtea-${ICEDTEA_BRANCH}-${JAMVM_TARBALL}"
 
+DROP_URL="http://icedtea.classpath.org/download/drops"
+ICEDTEA_URL="${DROP_URL}/icedtea${SLOT}/${ICEDTEA_VER}"
+
 DESCRIPTION="A harness to build OpenJDK using Free Software build tools and dependencies"
 HOMEPAGE="http://icedtea.classpath.org"
 SRC_PKG="${ICEDTEA_PKG}.tar.xz"
 SRC_URI="
 	http://icedtea.classpath.org/download/source/${SRC_PKG}
-	http://icedtea.classpath.org/hg/release/icedtea7-forest-${ICEDTEA_BRANCH}/archive/${OPENJDK_TARBALL}
-	 -> ${OPENJDK_GENTOO_TARBALL}
-	http://icedtea.classpath.org/hg/release/icedtea7-forest-${ICEDTEA_BRANCH}/corba/archive/${CORBA_TARBALL}
-	 -> ${CORBA_GENTOO_TARBALL}
-	http://icedtea.classpath.org/hg/release/icedtea7-forest-${ICEDTEA_BRANCH}/jaxp/archive/${JAXP_TARBALL}
-	 -> ${JAXP_GENTOO_TARBALL}
-	http://icedtea.classpath.org/hg/release/icedtea7-forest-${ICEDTEA_BRANCH}/jaxws/archive/${JAXWS_TARBALL}
-	 -> ${JAXWS_GENTOO_TARBALL}
-	http://icedtea.classpath.org/hg/release/icedtea7-forest-${ICEDTEA_BRANCH}/jdk/archive/${JDK_TARBALL}
-	 -> ${JDK_GENTOO_TARBALL}
-	http://icedtea.classpath.org/hg/release/icedtea7-forest-${ICEDTEA_BRANCH}/hotspot/archive/${HOTSPOT_TARBALL}
-	 -> ${HOTSPOT_GENTOO_TARBALL}
-	http://icedtea.classpath.org/hg/release/icedtea7-forest-${ICEDTEA_BRANCH}/langtools/archive/${LANGTOOLS_TARBALL}
-	 -> ${LANGTOOLS_GENTOO_TARBALL}
-	http://icedtea.classpath.org/download/drops/cacao/${CACAO_TARBALL} -> ${CACAO_GENTOO_TARBALL}
-	http://icedtea.classpath.org/download/drops/jamvm/${JAMVM_TARBALL} -> ${JAMVM_GENTOO_TARBALL}"
+	${ICEDTEA_URL}/openjdk.tar.bz2 -> ${OPENJDK_GENTOO_TARBALL}
+	${ICEDTEA_URL}/corba.tar.bz2 -> ${CORBA_GENTOO_TARBALL}
+	${ICEDTEA_URL}/jaxp.tar.bz2 -> ${JAXP_GENTOO_TARBALL}
+	${ICEDTEA_URL}/jaxws.tar.bz2 -> ${JAXWS_GENTOO_TARBALL}
+	${ICEDTEA_URL}/jdk.tar.bz2 -> ${JDK_GENTOO_TARBALL}
+	${ICEDTEA_URL}/hotspot.tar.bz2 -> ${HOTSPOT_GENTOO_TARBALL}
+	${ICEDTEA_URL}/langtools.tar.bz2 -> ${LANGTOOLS_GENTOO_TARBALL}
+	${DROP_URL}/cacao/${CACAO_TARBALL} -> ${CACAO_GENTOO_TARBALL}
+	${DROP_URL}/jamvm/${JAMVM_TARBALL} -> ${JAMVM_GENTOO_TARBALL}"
 
 LICENSE="Apache-1.1 Apache-2.0 GPL-1 GPL-2 GPL-2-with-linking-exception LGPL-2 MPL-1.0 MPL-1.1 public-domain W3C"
-SLOT="7"
-KEYWORDS="~amd64 ~ia64 ~x86"
+KEYWORDS="~amd64 ~x86"
 
-IUSE="+X +alsa cacao cjk +cups debug doc examples jamvm javascript +jbootstrap kerberos +nsplugin
-	+nss pax_kernel pulseaudio selinux +source test zero +webstart"
+IUSE="+X +alsa cacao cjk +cups debug doc examples infinality jamvm javascript +jbootstrap kerberos +nsplugin
+	+nss pax_kernel pulseaudio selinux smartcard +source sunec test zero +webstart"
 
 # Ideally the following were optional at build time.
 ALSA_COMMON_DEP="
@@ -73,7 +69,7 @@ X_COMMON_DEP="
 	>=dev-libs/atk-1.30.0
 	>=dev-libs/glib-2.26
 	media-libs/fontconfig
-	>=media-libs/freetype-2.3.5:2=
+	>=media-libs/freetype-2.5.3:2=[infinality?]
 	>=x11-libs/cairo-1.8.8:=
 	x11-libs/gdk-pixbuf:2
 	>=x11-libs/gtk+-2.8:2=
@@ -82,6 +78,7 @@ X_COMMON_DEP="
 	>=x11-libs/libXi-1.1.3
 	>=x11-libs/libXrender-0.9.4
 	>=x11-libs/libXtst-1.0.3
+	x11-libs/libXt
 	>=x11-libs/pango-1.24.5"
 X_DEPEND="
 	>=x11-libs/libXau-1.0.3
@@ -100,9 +97,11 @@ COMMON_DEP="
 	virtual/jpeg:0=
 	javascript? ( dev-java/rhino:1.6 )
 	nss? ( >=dev-libs/nss-3.12.5-r1 )
-	pulseaudio?  ( >=media-sound/pulseaudio-0.9.11:= )
 	kerberos? ( virtual/krb5 )
-	>=dev-util/systemtap-1"
+	>=dev-util/systemtap-1
+	smartcard? ( sys-apps/pcsc-lite )
+	sunec? ( >=dev-libs/nss-3.16.1-r1 )
+	!dev-java/icedtea-web:7"
 
 # cups is needed for X. #390945 #390975
 RDEPEND="${COMMON_DEP}
@@ -149,18 +148,35 @@ DEPEND="${COMMON_DEP} ${ALSA_COMMON_DEP} ${CUPS_COMMON_DEP} ${X_COMMON_DEP}
 	${X_DEPEND}
 	pax_kernel? ( sys-apps/elfix )"
 
-PDEPEND="webstart? ( || (
+PDEPEND="webstart? (
 			dev-java/icedtea-web:0[icedtea7]
-			>=dev-java/icedtea-web-1.3.2:7
-		) )
-		nsplugin? ( || (
+		)
+		nsplugin? (
 			dev-java/icedtea-web:0[icedtea7,nsplugin]
-			>=dev-java/icedtea-web-1.3.2:7[nsplugin]
-		) )"
+		)
+		pulseaudio? ( dev-java/icedtea-sound )"
 
 S="${WORKDIR}"/${ICEDTEA_PKG}
 
+icedtea_check_requirements() {
+	local CHECKREQS_DISK_BUILD
+
+	if use doc; then
+		CHECKREQS_DISK_BUILD="9000M"
+	else
+		CHECKREQS_DISK_BUILD="8500M"
+	fi
+
+	check-reqs_pkg_${EBUILD_PHASE}
+}
+
+pkg_pretend() {
+	icedtea_check_requirements
+}
+
 pkg_setup() {
+	icedtea_check_requirements
+
 	JAVA_PKG_WANT_BUILD_VM="
 		icedtea-7 icedtea-bin-7 icedtea7
 		icedtea-6 icedtea-bin-6 icedtea6 icedtea6-bin
@@ -185,7 +201,7 @@ java_prepare() {
 }
 
 src_configure() {
-	local config bootstrap use_zero zero_config
+	local bootstrap cacao_config config use_cacao use_zero zero_config
 	local vm=$(java-pkg_get-current-vm)
 
 	# Whether to bootstrap
@@ -199,47 +215,48 @@ src_configure() {
 		use jbootstrap || einfo "bootstrap is necessary when building with ${vm}, ignoring USE=\"-jbootstrap\""
 		bootstrap="enable"
 		local ecj_jar="$(readlink "${EPREFIX}"/usr/share/eclipse-ecj/ecj.jar)"
-		config="${config} --with-ecj-jar=${ecj_jar}"
+		config+=" --with-ecj-jar=${ecj_jar}"
 	fi
 
-	config="${config} --${bootstrap}-bootstrap"
+	config+=" --${bootstrap}-bootstrap"
 
 	# Use Zero if requested
 	if use zero; then
-		use_zero="yes";
+		use_zero="yes"
 	fi
 
 	# Use CACAO if requested
 	if use cacao; then
-		use_cacao="yes";
+		use_cacao="yes"
 	fi
 
 	# Always use HotSpot as the primary VM if available. #389521 #368669 #357633 ...
+	# In-tree JIT ports are available for arm, aarch64, amd64, ppc64, ppc64le, SPARC and x86.
 	# Otherwise use CACAO
-	if ! has "${ARCH}" amd64 sparc x86 ; then
-		if has "${ARCH}" ppc ppc64 arm ; then
-			use_cacao="yes";
+	if ! has "${ARCH}" arm aarch64 amd64 ppc64 ppc64le sparc x86 ; then
+		if has "${ARCH}" ppc ; then
+			use_cacao="yes"
 		else
-			use_zero="yes";
+			use_zero="yes"
 		fi
 	fi
 
 	# Turn on CACAO if needed (non-HS archs) or requested
 	if test "x${use_cacao}" = "xyes"; then
-		cacao_config="--enable-cacao";
+		cacao_config="--enable-cacao"
 	fi
 
 	# Turn on Zero if needed (non-HS/CACAO archs) or requested
 	if test "x${use_zero}" = "xyes"; then
-		zero_config="--enable-zero";
+		zero_config="--enable-zero"
 	fi
 
 	config+=" --with-parallel-jobs=$(makeopts_jobs)"
 
 	if use javascript ; then
-		config="${config} --with-rhino=$(java-pkg_getjar rhino-1.6 js.jar)"
+		config+=" --with-rhino=$(java-pkg_getjar rhino-1.6 js.jar)"
 	else
-		config="${config} --without-rhino"
+		config+=" --without-rhino"
 	fi
 
 	unset JAVA_HOME JDK_HOME CLASSPATH JAVAC JAVACFLAGS
@@ -255,16 +272,19 @@ src_configure() {
 		--with-cacao-src-zip="${DISTDIR}/${CACAO_GENTOO_TARBALL}" \
 		--with-jamvm-src-zip="${DISTDIR}/${JAMVM_GENTOO_TARBALL}" \
 		--with-jdk-home="$(java-config -O)" \
-		--with-abs-install-dir="${EPREFIX}/usr/$(get_libdir)/icedtea${SLOT}" \
+		--prefix="${EPREFIX}/usr/$(get_libdir)/icedtea${SLOT}" \
+		--with-pkgversion="Gentoo package ${PF}" \
 		--disable-downloading --disable-Werror \
 		--enable-system-lcms \
 		$(use_enable !debug optimizations) \
 		$(use_enable doc docs) \
 		$(use_enable nss) \
-		$(use_enable pulseaudio pulse-java) \
 		$(use_enable jamvm) \
 		$(use_enable kerberos system-kerberos) \
 		$(use_with pax_kernel pax "${EPREFIX}/usr/sbin/paxmark.sh") \
+		$(use_enable smartcard system-pcsc) \
+		$(use_enable sunec) \
+		$(use_enable infinality) \
 		${zero_config} ${cacao_config}
 }
 
@@ -315,16 +335,26 @@ src_install() {
 
 	if use doc; then
 		# java-pkg_dohtml needed for package-list #302654
-		java-pkg_dohtml -r ../docs/* || die
+		java-pkg_dohtml -A dtd -r ../docs/* || die
 	fi
 
 	if use examples; then
-		dodir "${dest}/share";
+		dodir "${dest}/share"
 		cp -vRP demo sample "${ddest}/share/" || die
 	fi
 
 	if use source; then
 		cp src.zip "${ddest}" || die
+	fi
+
+	# provided by icedtea-web but we need it in JAVA_HOME to work with run-java-tool
+	if use webstart || use nsplugin; then
+		dosym /usr/libexec/icedtea-web/itweb-settings ${dest}/bin/itweb-settings
+		dosym /usr/libexec/icedtea-web/itweb-settings ${dest}/jre/bin/itweb-settings
+	fi
+	if use webstart; then
+		dosym /usr/libexec/icedtea-web/javaws ${dest}/bin/javaws
+		dosym /usr/libexec/icedtea-web/javaws ${dest}/jre/bin/javaws
 	fi
 
 	# Fix the permissions.

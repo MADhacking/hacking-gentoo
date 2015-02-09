@@ -25,7 +25,7 @@ RDEPEND="dev-libs/libxml2
 	dev-libs/libxslt
 	dbus? ( sys-apps/dbus )
 	ldap? ( net-nds/openldap )
-	>=sys-cluster/corosync-1.4.7
+	sys-cluster/corosync
 	sys-cluster/openais
 	~sys-cluster/libccs-${PV}
 	~sys-cluster/libfence-${PV}

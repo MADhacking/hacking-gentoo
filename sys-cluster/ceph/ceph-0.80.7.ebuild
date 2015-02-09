@@ -1,4 +1,4 @@
-# Copyright 2014 Hacking Networked Solutions
+# Copyright 2013 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3+
 # $Header: $
 
@@ -14,23 +14,23 @@ if [[ $PV = *9999* ]]; then
 	KEYWORDS=""
 else
 	SRC_URI="http://ceph.com/download/${P}.tar.bz2"
-	KEYWORDS="amd64 x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
-inherit autotools eutils multilib python-any-r1 systemd udev ${scm_eclass}
+inherit autotools eutils multilib python-any-r1 udev readme.gentoo ${scm_eclass}
 
 DESCRIPTION="Ceph distributed filesystem"
 HOMEPAGE="http://ceph.com/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-IUSE="cryptopp debug fuse gtk +libatomic +libaio +nss +radosgw static-libs +tcmalloc"
+IUSE="+cryptopp debug fuse gtk +libatomic +libaio nss +radosgw static-libs +tcmalloc xfs zfs"
 
 CDEPEND="
 	app-arch/snappy
-	dev-libs/boost:=[threads]
+	<dev-libs/boost-1.56.0:=[threads]
 	dev-libs/fcgi
-	libaio? ( dev-libs/libaio )
+	dev-libs/libaio
 	dev-libs/libedit
 	dev-libs/leveldb[snappy]
 	nss? ( dev-libs/nss )
@@ -40,6 +40,8 @@ CDEPEND="
 	dev-libs/libxml2
 	fuse? ( sys-fs/fuse )
 	libatomic? ( dev-libs/libatomic_ops )
+	xfs? ( sys-fs/xfsprogs )
+	zfs? ( sys-fs/zfs )
 	gtk? (
 		x11-libs/gtk+:2
 		dev-cpp/gtkmm:2.4
@@ -69,17 +71,17 @@ REQUIRED_USE="
 
 STRIP_MASK="/usr/lib*/rados-classes/*"
 
+PATCHES=(
+	"${FILESDIR}"/${PN}-fix-gnustack.patch
+	"${FILESDIR}"/${PN}-0.79-libzfs.patch
+)
+
 pkg_setup() {
 	python-any-r1_pkg_setup
 }
 
 src_prepare() {
-	if [ ! -z ${PATCHES[@]} ]; then
-		epatch ${PATCHES[@]}
-	fi
-	sed -e "/bin=/ s:lib:$(get_libdir):" "${FILESDIR}"/${PN}.initd \
-		> "${T}"/${PN}.initd || die
-	sed -e '/^ceph_sbindir =/s:$(exec_prefix)::' -i src/Makefile.am || die
+	[[ ${PATCHES[@]} ]] && epatch "${PATCHES[@]}"
 
 	epatch_user
 	eautoreconf
@@ -99,7 +101,9 @@ src_configure() {
 		$(use_with radosgw) \
 		$(use_with gtk gtk2) \
 		$(use_enable static-libs static) \
-		$(use_with tcmalloc)
+		$(use_with tcmalloc) \
+		$(use_with xfs libxfs) \
+		$(use_with zfs libzfs)
 }
 
 src_install() {
@@ -111,7 +115,7 @@ src_install() {
 	newexe src/init-ceph ceph_init.sh
 
 	insinto /etc/logrotate.d/
-	newins src/logrotate.conf ${PN}
+	newins "${FILESDIR}"/ceph.logrotate ${PN}
 
 	chmod 644 "${ED}"/usr/share/doc/${PF}/sample.*
 
@@ -119,26 +123,21 @@ src_install() {
 	keepdir /var/lib/${PN}/tmp
 	keepdir /var/log/${PN}/stat
 
-	newinitd "${T}/${PN}.initd" ${PN}
-	newconfd "${FILESDIR}/${PN}.confd" ${PN}
+	newinitd "${FILESDIR}/${PN}.initd-r1" ${PN}
+	newconfd "${FILESDIR}/${PN}.confd-r1" ${PN}
 
 	systemd_newunit "${FILESDIR}/ceph-create-keys.service" "ceph-create-keys@.service"
 	systemd_newunit "${FILESDIR}/ceph-mds.service" "ceph-mds@.service"
 	systemd_newunit "${FILESDIR}/ceph-mon.service" "ceph-mon@.service"
 	systemd_newunit "${FILESDIR}/ceph-osd.service" "ceph-osd@.service"
 
-	_python_rewrite_shebang \
+	python_fix_shebang \
 		"${ED}"/usr/sbin/{ceph-disk,ceph-create-keys} \
 		"${ED}"/usr/bin/{ceph,ceph-rest-api}
 
 	#install udev rules
 	udev_dorules udev/50-rbd.rules
 	udev_dorules udev/95-ceph-osd.rules
-}
 
-pkg_postinst() {
-	elog "We suggest to install following packages"
-	elog " sys-block/parted		to manage disk partions"
-	elog " sys-fs/btrfs-progs	to use btrfs filesytem"
-	elog " sys-fs/cryptsetup	to use encrypted devices with dm-crypt"
+	readme.gentoo_create_doc
 }
