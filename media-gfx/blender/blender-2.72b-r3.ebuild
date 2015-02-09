@@ -156,6 +156,7 @@ src_configure() {
 	# shadows, see bug #276338 for reference
 	append-flags -funsigned-char
 	append-lfs-flags
+	append-ldflags -ldl
 
 	# WITH_PYTHON_SECURITY
 	# WITH_PYTHON_SAFETY
