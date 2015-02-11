@@ -1,0 +1,180 @@
+# This file is deprecated as per GLEP 56 in favor of metadata.xml. Please add
+# your descriptions to your package's metadata.xml ONLY.
+# * generated automatically using egencache *
+
+app-admin/mcollective-server:client - Install client utilities
+app-admin/poweradmin:mysql - Adds support for the MySQL database
+app-admin/poweradmin:postgres - Adds support for the PostgreSQL database
+app-admin/poweradmin:vhosts - Adds support for installing web-based applications into a virtual-hosting environment
+app-emulation/xen:acm - Enable the ACM/sHype XSM module from IBM
+app-emulation/xen:efi - Adds efi boot support, requires LDFLAG melf_x86_64 for amd64
+app-emulation/xen:flask - Enable the Flask XSM module from NSA
+app-emulation/xen:pae - Enable support for PAE kernels (usually x86-32 with >4GB memory)
+app-emulation/xen:xsm - Enable the Xen Security Modules (XSM)
+app-emulation/xen-tools:acm - Enable the ACM/sHype XSM module from IBM for xen-3
+app-emulation/xen-tools:api - Build the C libxenapi bindings
+app-emulation/xen-tools:flask - Enable the Flask XSM module from NSA
+app-emulation/xen-tools:hvm - Enable support for hardware based virtualisation (VT-x,AMD-v)
+app-emulation/xen-tools:ioemu - Enable IOEMU support
+app-emulation/xen-tools:pygrub - Install the pygrub boot loader
+app-emulation/xen-tools:qemu - Enable IOEMU support via the use of qemu-dm
+app-emulation/xen-tools:screen - Enable support for running domain U console in an app-misc/screen session
+app-emulation/xen-tools:xend - Build xend (and xm to manage xen)
+app-misc/ca-certificates:certificate_authorities_ac - Add root certificate for "ac"
+app-misc/ca-certificates:certificate_authorities_acedicom - Add root certificate for "acedicom"
+app-misc/ca-certificates:certificate_authorities_acf - Add root certificate for "acf"
+app-misc/ca-certificates:certificate_authorities_addtrust - Add root certificate for "addtrust"
+app-misc/ca-certificates:certificate_authorities_affirmtrust - Add root certificate for "affirmtrust"
+app-misc/ca-certificates:certificate_authorities_aol - Add root certificate for "aol"
+app-misc/ca-certificates:certificate_authorities_atrust - Add root certificates for "atrust"
+app-misc/ca-certificates:certificate_authorities_baltimore - Add root certificate for "baltimore"
+app-misc/ca-certificates:certificate_authorities_buypass - Add root certificate for "buypass"
+app-misc/ca-certificates:certificate_authorities_cacert - Add root certificate for "cacert"
+app-misc/ca-certificates:certificate_authorities_camerfirma - Add root certificate for "camerfirma"
+app-misc/ca-certificates:certificate_authorities_certigna - Add root certificate for "certigna"
+app-misc/ca-certificates:certificate_authorities_certinomis - Add root certificate for "certinomis"
+app-misc/ca-certificates:certificate_authorities_certplus - Add root certificate for "certplus"
+app-misc/ca-certificates:certificate_authorities_certum - Add root certificate for "certum"
+app-misc/ca-certificates:certificate_authorities_cnnic - Add root certificate for "cnnic"
+app-misc/ca-certificates:certificate_authorities_comodo - Add root certificate for "comodo"
+app-misc/ca-certificates:certificate_authorities_comsign - Add root certificate for "comsign"
+app-misc/ca-certificates:certificate_authorities_cybertrust - Add root certificate for "cybertrust"
+app-misc/ca-certificates:certificate_authorities_digicert - Add root certificate for "digicert"
+app-misc/ca-certificates:certificate_authorities_dst - Add root certificate for "dst"
+app-misc/ca-certificates:certificate_authorities_dt - Add root certificate for "dt"
+app-misc/ca-certificates:certificate_authorities_ebg - Add root certificate for "ebg"
+app-misc/ca-certificates:certificate_authorities_ec - Add root certificate for "ec"
+app-misc/ca-certificates:certificate_authorities_entrust - Add root certificate for "entrust"
+app-misc/ca-certificates:certificate_authorities_equifax - Add root certificate for "equifax"
+app-misc/ca-certificates:certificate_authorities_geotrust - Add root certificate for "geotrust"
+app-misc/ca-certificates:certificate_authorities_globalsign - Add root certificate for "globalsign"
+app-misc/ca-certificates:certificate_authorities_godaddy - Add root certificate for "godaddy"
+app-misc/ca-certificates:certificate_authorities_hari - Add root certificate for "hari"
+app-misc/ca-certificates:certificate_authorities_hkp - Add root certificate for "hkp"
+app-misc/ca-certificates:certificate_authorities_igc - Add root certificate for "igc"
+app-misc/ca-certificates:certificate_authorities_izenpe - Add root certificate for "izenpe"
+app-misc/ca-certificates:certificate_authorities_japgov - Add root certificate for "japgov"
+app-misc/ca-certificates:certificate_authorities_juur - Add root certificate for "juur"
+app-misc/ca-certificates:certificate_authorities_microsec - Add root certificate for "microsec"
+app-misc/ca-certificates:certificate_authorities_netlock - Add root certificate for "netlock"
+app-misc/ca-certificates:certificate_authorities_netsol - Add root certificate for "netsol"
+app-misc/ca-certificates:certificate_authorities_nl - Add root certificate for "nl"
+app-misc/ca-certificates:certificate_authorities_oiste - Add root certificate for "oiste"
+app-misc/ca-certificates:certificate_authorities_poste - Add root certificate for "poste"
+app-misc/ca-certificates:certificate_authorities_quovadis - Add root certificate for "quovadis"
+app-misc/ca-certificates:certificate_authorities_seccomm - Add root certificate for "seccomm"
+app-misc/ca-certificates:certificate_authorities_securesign - Add root certificate for "securesign"
+app-misc/ca-certificates:certificate_authorities_securetrust - Add root certificate for "securetrust"
+app-misc/ca-certificates:certificate_authorities_sonera - Add root certificate for "sonera"
+app-misc/ca-certificates:certificate_authorities_spi - Add root certificate for "spi"
+app-misc/ca-certificates:certificate_authorities_starfield - Add root certificate for "starfield"
+app-misc/ca-certificates:certificate_authorities_startcom - Add root certificate for "startcom"
+app-misc/ca-certificates:certificate_authorities_strust - Add root certificate for "strust"
+app-misc/ca-certificates:certificate_authorities_swisscom - Add root certificate for "swisscom"
+app-misc/ca-certificates:certificate_authorities_swisssign - Add root certificate for "swisssign"
+app-misc/ca-certificates:certificate_authorities_taiwan - Add root certificate for "taiwan"
+app-misc/ca-certificates:certificate_authorities_tc - Add root certificate for "tc"
+app-misc/ca-certificates:certificate_authorities_tdc - Add root certificate for "tdc"
+app-misc/ca-certificates:certificate_authorities_thawte - Add root certificate for "thawte"
+app-misc/ca-certificates:certificate_authorities_tubitak - Add root certificate for "tubitak"
+app-misc/ca-certificates:certificate_authorities_turktrust - Add root certificate for "turktrust"
+app-misc/ca-certificates:certificate_authorities_twca - Add root certificate for "twca"
+app-misc/ca-certificates:certificate_authorities_utn - Add root certificate for "utn"
+app-misc/ca-certificates:certificate_authorities_valenciana - Add root certificate for "valenciana"
+app-misc/ca-certificates:certificate_authorities_valicert - Add root certificate for "valicert"
+app-misc/ca-certificates:certificate_authorities_verisign - Add root certificate for "verisign"
+app-misc/ca-certificates:certificate_authorities_visa - Add root certificate for "visa"
+app-misc/ca-certificates:certificate_authorities_wells - Add root certificate for "wells"
+app-misc/ca-certificates:certificate_authorities_xramp - Add root certificate for "xramp"
+app-misc/openca-ocspd:debug - Create a debug build
+dev-java/icedtea:X - Make X buildtime-only depenency.
+dev-java/icedtea:alsa - Make alsa buildtime-only dependency.
+dev-java/icedtea:cups - Make CUPS build-only dependency.
+dev-java/icedtea:jbootstrap - If possible, recompile the final IcedTea executables with itself.
+dev-java/icedtea:nsplugin - Enable browser plugin (NPPlugin), requires also the webstart flag to be enabled.
+dev-java/icedtea:nss - Enable NSS security provider support.
+dev-java/icedtea:pax_kernel - For building when running a PaX enabled kernel.
+dev-java/icedtea:systemtap - Enable SystemTap probes in HotSpot.
+dev-java/icedtea:webstart - Enable Web Start support (via NetX).
+dev-libs/apr:older-kernels-compatibility - Enable binary compatibility with older kernels
+dev-libs/apr:urandom - Use /dev/urandom instead of /dev/random
+dev-libs/apr:uuid - Enable UUID support
+dev-libs/efl:bmp - Enable WBMP image loader.
+dev-libs/efl:drm - Enable DRM engine.
+dev-libs/efl:eet - Enable Eet image loader.
+dev-libs/efl:egl - Enable EGL rendering.
+dev-libs/efl:fribidi - Enable bidirectional text support.
+dev-libs/efl:gles - Enable the OpenGL ES GL implementation.
+dev-libs/efl:glib - Enable dev-libs/glib support.
+dev-libs/efl:harfbuzz - Enable complex text shaping and layout support.
+dev-libs/efl:ibus - Enable Intelligent Input Bus.
+dev-libs/efl:ico - Enable Ico image loader.
+dev-libs/efl:jp2k - Enable JPEG 2000 image loader.
+dev-libs/efl:oldlua - USE dev-lang/lua instead of dev-lang/luajit
+dev-libs/efl:physics - Enable Bullet physics effects and support.
+dev-libs/efl:pixman - Enable PixMan for software rendering.
+dev-libs/efl:ppm - Enable PMAPS image loader.
+dev-libs/efl:psd - Enable PSD image loader.
+dev-libs/efl:scim - Enable Smart Common Input Method.
+dev-libs/efl:tga - Enable Tga image loader.
+dev-libs/efl:tslib - Enable x11-libs/tslib for touchscreen events.
+dev-libs/efl:v4l2 - Enable Video4Linux2 support.
+dev-libs/efl:webp - Enable WebP image loader.
+dev-libs/efl:xim - Enable X Input Method.
+dev-libs/libpki:examples - Build examples
+dev-libs/libpki:ldap - Include support for LDAP
+dev-libs/libpki:mysql - Include support for MySQL databases
+dev-libs/libpki:postgres - Include support for PostgreSQL databases
+dev-libs/libpki:ssl - Include SSL support
+dev-libs/libpki:static-libs - Build static libraries
+dev-libs/nss:utils - Install utilities included with the library
+install-meta/hacking-base-server:buildserver-client - Installs build-server client
+install-meta/hacking-base-server:hacking-certificates - Installs MAD Hackig certificate bundles
+install-meta/hacking-base-server:ipsec - Enable support of IPsec
+install-meta/hacking-base-server:mcollective - Enable remote control using MCollective
+install-meta/hacking-base-server:puppet - Enable remote configuration using Puppet
+install-meta/hacking-base-server:rsync-backup-client - Installs rsync backup-client
+install-meta/hacking-file-server:rdiff-backup-client - Installs rdiff backup-client support
+mail-mta/postfix:dovecot-sasl - Enable net-mail/dovecot protocol version 1 (server only) SASL implementation
+mail-mta/postfix:ldap-bind - Adds support for binding to LDAP backend using dev-libs/cyrus-sasl
+mail-mta/postfix:memcached - Adds support for using net-misc/memcached for lookup tables
+mail-mta/postfix:vda - Adds support for virtual delivery agent quota enforcing
+mail-mta/ssmtp:mta - Install symlinks for sendmail-compatible MTA.
+media-gfx/blender:3dmouse - Adds support for space navigator devices through package dev-libs/libspnav .
+media-gfx/blender:boost - Enable features depending on boost.
+media-gfx/blender:bullet - Enable Bullet (Physics Engine).
+media-gfx/blender:collada - Add support for Collada interchange format through media-libs/opencollada .
+media-gfx/blender:colorio - Enable OpenColorIO color management.
+media-gfx/blender:cycles - Build cycles renderer (requires media-libs/openimageio and dev-libs/boost ).
+media-gfx/blender:dds - Adds DDS textures support to Blender.
+media-gfx/blender:doc - Build C and Python API documentation directly from the source code.
+media-gfx/blender:elbeem - Adds surface fluid simulation to Blender using El'Beem library.
+media-gfx/blender:game-engine - Adds Game Engine support to Blender.
+media-gfx/blender:ndof - Enable NDOF input devices (SpaceNavigator and friends).
+media-gfx/blender:player - Build the Blender Player. THis requires the Game engine.
+media-gfx/blender:redcode - This flag add support for RED CODE camera digital format (5K HD images *.r3d) - EXPERIMENTAL.
+media-gfx/blender:tweak-mode - This flag allows you to model without confirming each translation, in particular it lets you grab with left mouse button (LMB) and not having to confirm by another click. Blender 'Tweak Mode' is similar to the 'Tweak Mode' of the Wings modeller ( media-gfx/wings ).
+media-libs/esdl:image - Enable image support
+media-sound/squeezelite:aac - Supports streaming AAC from the server, utilising media-libs/faad2
+media-sound/squeezelite:flac - Supports streaming FLAC from the server, utilising media-libs/flac
+media-sound/squeezelite:mad - (post-0.9) Supports streaming MP3 from the server, utilising media-libs/libmad
+media-sound/squeezelite:mp3 - (pre-0.9) Supports streaming MP3 from the server, utilising media-libs/libmad
+media-sound/squeezelite:mpg123 - (post-0.9) Supports streaming MP3 from the server, utilising media-sound/mpg123
+media-sound/squeezelite:vorbis - Supports streaming Ogg/Vorbis from the server, utilising media-libs/libvorbis
+net-firewall/ipsec-tools:broken-natt - Enable "broken" kernel NAT-Traversal
+net-firewall/ipsec-tools:hybrid - Makes available both mode-cfg and xauth support
+net-firewall/ipsec-tools:idea - Enable support for the patented IDEA algorithm
+net-firewall/ipsec-tools:nat - Enable NAT-Traversal
+net-firewall/ipsec-tools:rc5 - Enable support for the patented RC5 algorithm
+sys-apps/openrc:newnet - enable the new network stack (experimental)
+sys-apps/openrc:tools - build optional tools
+sys-cluster/ceph:fuse - Build fuse client
+sys-cluster/ceph:libatomic - Use libatomic instead of builtin atomic operations
+sys-cluster/ceph:radosgw - Add radosgw support
+sys-cluster/pacemaker:ais - Enable sys-cluster/openais support.
+sys-cluster/pacemaker:cman - Enable sys-cluster/cman support.
+sys-cluster/pacemaker:heartbeat - Enable sys-cluster/heartbeat support.
+sys-cluster/pacemaker:smtp - Enable SMTP support via net-libs/libsmtp
+sys-devel/binutils:multislot - Allow for multiple versions of binutils to be emerged at once for same CTARGET
+sys-devel/binutils:multitarget - Adds support to binutils for cross compiling (does not work with gas)
+www-apps/redmine:passenger - Enable support for www-apache/passenger

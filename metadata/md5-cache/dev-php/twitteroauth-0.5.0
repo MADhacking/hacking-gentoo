@@ -1,0 +1,10 @@
+DEFINED_PHASES=install
+DESCRIPTION=The most popular PHP library for Twitter's OAuth REST API
+EAPI=4
+HOMEPAGE=https://github.com/abraham/twitteroauth
+KEYWORDS=~alpha amd64 ~arm hppa ~ia64 ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd amd64 x86
+RDEPEND=>=dev-lang/php-5.4
+SLOT=0
+SRC_URI=https://github.com/abraham/twitteroauth/archive/0.5.0.tar.gz -> twitteroauth-0.5.0.tar.gz
+_eclasses_=eutils	6faef4c127028ccbba3a11400d24ae34	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac
+_md5_=bec8cee51059e9386f90f85090f224ad

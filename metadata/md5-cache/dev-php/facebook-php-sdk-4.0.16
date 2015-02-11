@@ -1,0 +1,11 @@
+DEFINED_PHASES=install
+DESCRIPTION=The Facebook SDK for PHP provides a native interface to the Graph API and Facebook Login.
+EAPI=4
+HOMEPAGE=https://developers.facebook.com/docs/php
+KEYWORDS=~alpha amd64 ~arm hppa ~ia64 ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd amd64 x86
+LICENSE=Facebook
+RDEPEND=>=dev-lang/php-5.4
+SLOT=4
+SRC_URI=https://github.com/facebook/facebook-php-sdk-v4/archive/4.0.16.tar.gz -> facebook-php-sdk-4.0.16.tar.gz
+_eclasses_=eutils	6faef4c127028ccbba3a11400d24ae34	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac
+_md5_=04b592c1764b0299b3246a10f1cb57e5
