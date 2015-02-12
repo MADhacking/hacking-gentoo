@@ -20,7 +20,8 @@ DEPEND="${REDPEND}"
 
 src_install() {
 	insinto /usr/share/php/${PN}
-	doins -r "${S}/src/"*
+	doins -r "${S}"/src
+	doins -r "${S}"/{autoloader.php,composer.json,phpunit.xml}
 
 	dodoc "${S}"/{LICENSE.md,README.md}
 }
