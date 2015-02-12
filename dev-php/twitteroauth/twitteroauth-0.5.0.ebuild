@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~alpha amd64 ~arm hppa ~ia64 ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~amd64-fbsd amd64 x86"
 IUSE=""
 
-RDEPEND=">=dev-lang/php-5.4"
+RDEPEND=">=dev-lang/php-5.4[curl]"
 DEPEND="${REDPEND}"
 
 src_install() {
