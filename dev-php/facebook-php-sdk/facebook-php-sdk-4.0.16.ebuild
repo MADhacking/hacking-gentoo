@@ -23,7 +23,8 @@ S="${WORKDIR}/${PN}-v${SLOT}-${PV}"
 
 src_install() {
 	insinto /usr/share/php/${PN}-v${SLOT}
-	doins -r "${S}/src/Facebook/"*
+	doins -r "${S}"/src
+	doins -r "${S}"/{autoload.php,composer.json}
 
 	dodoc "${S}"/{CONTRIBUTING.md,LICENSE,README.md}
 }
