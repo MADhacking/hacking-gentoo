@@ -7,5 +7,5 @@ LICENSE=Facebook
 RDEPEND=>=dev-lang/php-5.4
 SLOT=4
 SRC_URI=https://github.com/facebook/facebook-php-sdk-v4/archive/4.0.16.tar.gz -> facebook-php-sdk-4.0.16.tar.gz
-_eclasses_=eutils	6faef4c127028ccbba3a11400d24ae34	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac
-_md5_=04b592c1764b0299b3246a10f1cb57e5
+_eclasses_=eutils	998e5931fb95b10a6a11ec796ada2759	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac
+_md5_=4450a351d4dc1a3cab1df1e91cbc8335
