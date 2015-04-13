@@ -7,5 +7,5 @@ LICENSE=CC-BY-SA-3.0 GPL-3
 RDEPEND=!<sci-electronics/kicad-20140717
 SLOT=0
 SRC_URI=http://downloads.mad-hacking.net/software/kicad-library-walter-20140717.tar.bz2
-_eclasses_=eutils	998e5931fb95b10a6a11ec796ada2759	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac	unpacker	f300a7ca9131b1024a79762e8edd3c52
+_eclasses_=eutils	9fb270e417e0e83d64ca52586c4a79de	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	79b635d29abf0572d6a1b0dc8e63c0e4	unpacker	f300a7ca9131b1024a79762e8edd3c52
 _md5_=aebf2379801053d08ac733fdffbc5d03

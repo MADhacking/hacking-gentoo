@@ -8,5 +8,5 @@ LICENSE=GPL-3
 RDEPEND=>=dev-util/nvidia-cuda-toolkit-5.5.0 >=dev-libs/jansson-2.4
 SLOT=0
 SRC_URI=http://downloads.mad-hacking.net/software/cudaminer-20131218.zip
-_eclasses_=autotools	8fc2dd333ef9346c906ffd9a523d8211	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	0dfbfa13f57c6184f4728d12ac002aac
+_eclasses_=autotools	999c8f6cf5d91495cb0779588f20716c	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	79b635d29abf0572d6a1b0dc8e63c0e4
 _md5_=437e93295eed1e950960106de5c0f816
