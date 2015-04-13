@@ -17,7 +17,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-inherit autotools eutils multilib python-any-r1 udev readme.gentoo ${scm_eclass}
+inherit autotools eutils multilib python-any-r1 systemd udev readme.gentoo ${scm_eclass}
 
 DESCRIPTION="Ceph distributed filesystem"
 HOMEPAGE="http://ceph.com/"

@@ -6,7 +6,7 @@ EAPI="4"
 
 USE_RUBY="ruby19 ruby20"
 
-inherit ruby-ng
+inherit systemd ruby-ng
 
 DESCRIPTION="Framework to build server orchestration or parallel job execution systems"
 HOMEPAGE="http://marionette-collective.org/"
@@ -28,6 +28,7 @@ src_compile() {
 all_ruby_install() {
 	dosbin mcollective-${PV}/bin/mcollectived
 	newinitd "${FILESDIR}"/mcollectived.initd mcollectived
+	systemd_newunit "${FILESDIR}/mcollectived.service" "mcollectived.service"
 	
 	insinto /etc/mcollective
 	doins ${FILESDIR}/server.cfg
