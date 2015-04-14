@@ -28,7 +28,7 @@ src_compile() {
 all_ruby_install() {
 	insinto /usr/bin
 	dobin mcollective-${PV}/bin/mco
-	dobin mcollective-${PV}/bin/mc-*
+	#dobin mcollective-${PV}/bin/mc-*
 		
 	insinto /etc/mcollective
 	doins ${FILESDIR}/client.cfg
