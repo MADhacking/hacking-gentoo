@@ -38,7 +38,7 @@ pkg_postinst() {
 	einfo "your local network before you can use it. The recommended message queue"
 	einfo "server to use on Gentoo Linux is RabbitMQ."
 	einfo
-	einfo "It is recommended you read the \'getting started\' guide [2] if this"
+	einfo "It is recommended you read the 'getting started' guide [2] if this"
 	einfo "is a new installation"
 	einfo
 	einfo "[1] http://www.rabbitmq.com/"
