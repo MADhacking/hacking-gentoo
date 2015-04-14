@@ -5,6 +5,8 @@
 # This eclass installs a puppet module.
 #
 
+inherit eutils
+
 PUPPET_PROVIDER="${PN%%-*}"
 PUPPET_MODULE="${PN#*-}"
 
@@ -23,10 +25,25 @@ RDEPEND="${DEPEND}
 # @DESCRIPTION:
 # Installs the puppet module. 
 
+puppet_src_prepare()
+{
+	for p in "${FILESDIR}"/*.patch; do
+		[ -e "${p}" ] && epatch "${FILESDIR}"/*.patch
+		break
+	done
+
+	for p in "${FILESDIR}"/${PN}/*.patch; do
+		[ -e "${p}" ] && epatch "${FILESDIR}"/${PN}/*.patch
+		break
+	done
+
+	epatch_user
+}
+
 puppet_src_install()
 {
-	insinto "/etc/puppet/modules/${PUPPET_MODULE}"
+	insinto "/usr/share/puppet/modules/${PUPPET_MODULE}"
 	doins -r *
 }
 
-EXPORT_FUNCTIONS src_install
+EXPORT_FUNCTIONS src_prepare src_install

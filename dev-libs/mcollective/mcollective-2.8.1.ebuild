@@ -32,7 +32,7 @@ each_ruby_install() {
 
 all_ruby_install() {
 	insinto /usr/share/mcollective
-	doins -r plugins
+	#doins -r plugins
 	
 	if use doc ; then
 		dohtml -r doc/*

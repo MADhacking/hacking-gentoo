@@ -1,0 +1,11 @@
+--- metadata.json	2015-04-14 18:27:55.371348173 +0100
++++ metadata.json	2015-04-14 18:27:15.151797780 +0100
+@@ -9,7 +9,7 @@
+   "project_page": "https://github.com/Flameeyes/puppet-gentoo",
+   "dependencies": [
+     {
+-      "name": "ripienaar/concat"
++      "name": "puppetlabs/concat"
+     }
+   ],
+   "types": [
