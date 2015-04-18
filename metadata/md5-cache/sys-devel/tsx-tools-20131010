@@ -1,0 +1,10 @@
+DEFINED_PHASES=install
+DESCRIPTION=The Xen virtual machine monitor
+EAPI=5
+HOMEPAGE=http://xen.org/
+LICENSE=GPL-2
+RESTRICT=test
+SLOT=0
+SRC_URI=https://github.com/andikleen/tsx-tools/archive/edc6bc1de73d116e96f89ec1425db75da3d4a98b.zip
+_eclasses_=eutils	9fb270e417e0e83d64ca52586c4a79de	multilib	3bf24e6abb9b76d9f6c20600f0b716bf	toolchain-funcs	79b635d29abf0572d6a1b0dc8e63c0e4
+_md5_=70c281b9b7ccd3826d6ff60861d8ca2a
