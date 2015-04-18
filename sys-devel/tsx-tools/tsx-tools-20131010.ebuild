@@ -12,6 +12,8 @@ SRC_URI="https://github.com/andikleen/tsx-tools/archive/edc6bc1de73d116e96f89ec1
 LICENSE="GPL-2"
 SLOT="0"
 
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd x86 ~x86-fbsd"
+
 DEPEND=""
 RDEPEND=""
 PDEPEND=""
