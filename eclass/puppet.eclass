@@ -32,8 +32,8 @@ puppet_src_prepare()
 		break
 	done
 
-	for p in "${FILESDIR}"/${PN}/*.patch; do
-		[ -e "${p}" ] && epatch "${FILESDIR}"/${PN}/*.patch
+	for p in "${FILESDIR}"/${PV}/*.patch; do
+		[ -e "${p}" ] && epatch "${FILESDIR}"/${PV}/*.patch
 		break
 	done
 
