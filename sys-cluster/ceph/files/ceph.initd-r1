@@ -10,7 +10,13 @@ pidfile="/run/ceph/${type}.${id}.pid"
 command_args="-i ${id} --pid-file ${pidfile} -c ${ceph_conf}"
 
 depend() {
-	after net ntpd ntp-client chronyd
+	ceph_after=""
+	case ${type} in
+		osd) ceph_after="ceph.mon.${id}";;
+		mds) ceph_after="ceph.osd.${id}";;
+	esac
+	
+	after net ntpd ntp-client chronyd ${ceph_after}
 	before netmount
 }
 

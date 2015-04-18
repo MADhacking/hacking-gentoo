@@ -120,8 +120,8 @@ src_install() {
 	keepdir /var/lib/${PN}/tmp
 	keepdir /var/log/${PN}/stat
 
-	newinitd "${T}/${PN}.initd" ${PN}
-	newconfd "${FILESDIR}/${PN}.confd" ${PN}
+	newinitd "${FILESDIR}/${PN}.initd-r1" ${PN}
+	newconfd "${FILESDIR}/${PN}.confd-r1" ${PN}
 
 	systemd_newunit "${FILESDIR}/ceph-create-keys.service" "ceph-create-keys@.service"
 	systemd_newunit "${FILESDIR}/ceph-mds.service" "ceph-mds@.service"
