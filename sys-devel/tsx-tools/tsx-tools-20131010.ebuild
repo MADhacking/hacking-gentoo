@@ -6,8 +6,8 @@ EAPI=5
 
 inherit eutils
 
-DESCRIPTION="The Xen virtual machine monitor"
-HOMEPAGE="http://xen.org/"
+DESCRIPTION="Useful TSX related tools"
+HOMEPAGE="https://github.com/andikleen/tsx-tools"
 SRC_URI="https://github.com/andikleen/tsx-tools/archive/edc6bc1de73d116e96f89ec1425db75da3d4a98b.zip"
 LICENSE="GPL-2"
 SLOT="0"
