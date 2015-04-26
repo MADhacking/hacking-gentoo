@@ -9,6 +9,7 @@ dev-libs
 dev-php
 dev-python
 dev-ruby
+dev-vcs
 gnome-extra
 install-conf
 install-meta

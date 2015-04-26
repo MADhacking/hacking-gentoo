@@ -1,0 +1,14 @@
+--- setup.cfg	2015-04-26 14:47:42.710122117 +0100
++++ setup.cfg	2015-04-26 14:48:11.096462381 +0100
+@@ -27,9 +27,9 @@
+ data_files=
+      =
+         gitchangelog.rc.reference
+-    templates/mustache =
++    share/gitchangelog/templates/mustache =
+         templates/mustache/restructuredtext.tpl
+-    templates/mako =
++    share/gitchangelog/templates/mako =
+         templates/mako/octobercms-plugin.tpl
+         templates/mako/restructuredtext.tpl
+ extra_files =
