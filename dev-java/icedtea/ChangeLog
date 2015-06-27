@@ -1,6 +1,52 @@
 # ChangeLog for dev-java/icedtea
-# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
-# $Header: /var/cvsroot/gentoo-x86/dev-java/icedtea/ChangeLog,v 1.130 2014/11/21 09:52:17 vapier Exp $
+# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/dev-java/icedtea/ChangeLog,v 1.137 2015/06/20 13:45:07 chewi Exp $
+
+  20 Jun 2015; James Le Cuirot <chewi@gentoo.org> icedtea-6.1.13.7.ebuild,
+  icedtea-7.2.5.5.ebuild:
+  Remove redundant --with-ecj-jar code as javac from gcj-jdk always takes
+  precedence. Remove redundant bootstrap_impossible code as this is no longer
+  relevant. Remove references to the old VM handles as the dependencies will
+  ensure that the new ones are always present anyway.
+
+  23 May 2015; James Le Cuirot <chewi@gentoo.org> icedtea-7.2.5.5.ebuild:
+  ~arm keyword but only for 7. We're phasing 6 out so I don't think we'll bother
+  for arm any more. Disallow building with icedtea-6 until bug #531082 is
+  resolved.
+
+  21 May 2015; James Le Cuirot <chewi@gentoo.org> +files/6-more-memory.patch,
+  +files/7-more-memory.patch, icedtea-6.1.13.7.ebuild, icedtea-7.2.5.5.ebuild:
+  Add memory patches for ppc/CACAO and keyword latest versions for ~ppc.
+
+  07 May 2015;  <chewi@gentoo.org> icedtea-6.1.13.5.ebuild,
+  icedtea-6.1.13.7.ebuild, icedtea-7.2.4.8.ebuild, icedtea-7.2.5.5.ebuild:
+  Fix libpng dependency as you can't build against the non-0 SLOTs.
+
+*icedtea-7.2.5.5 (06 May 2015)
+*icedtea-6.1.13.7 (06 May 2015)
+
+  06 May 2015; James Le Cuirot <chewi@gentoo.org> +icedtea-6.1.13.7.ebuild,
+  +icedtea-7.2.5.5.ebuild, -files/icedtea-7-ecj_jar.patch,
+  -icedtea-6.1.13.6.ebuild, -icedtea-7.2.5.4.ebuild,
+  files/fontconfig.Gentoo.properties.src:
+  Version bump. Closes #531686 and #541270. Also fix Asian font issue wrt bug
+  #390663. Address security bug #524560 but older versions currently remain due
+  to other keywords.
+
+  20 Mar 2015; James Le Cuirot <chewi@gentoo.org> -icedtea-6.1.12.7.ebuild,
+  -icedtea-6.1.13.3.ebuild, -icedtea-6.1.13.4.ebuild,
+  -icedtea-6.1.13.5-r1.ebuild, -icedtea-7.2.4.3.ebuild, -icedtea-7.2.4.7.ebuild,
+  -icedtea-7.2.5.3.ebuild, icedtea-6.1.13.6.ebuild, icedtea-7.2.5.4.ebuild:
+  Clear a raft of old versions at gnu_andrew's request. Can't clear them all due
+  to missing keywords on icedtea-web.
+
+*icedtea-7.2.5.4 (23 Feb 2015)
+*icedtea-6.1.13.6 (23 Feb 2015)
+
+  23 Feb 2015; Miroslav Šulc <fordfrog@gentoo.org> +icedtea-6.1.13.6.ebuild,
+  +icedtea-7.2.5.4.ebuild:
+  copied ebuilds (by Andrew John Hughes <gnu_andrew@member.fsf.org>) from
+  java-overlay
 
   21 Nov 2014; Mike Frysinger <vapier@gentoo.org> icedtea-6.1.12.7.ebuild,
   icedtea-6.1.13.3.ebuild, icedtea-6.1.13.4.ebuild, icedtea-7.2.4.3.ebuild,
