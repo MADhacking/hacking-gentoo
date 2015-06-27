@@ -11,10 +11,10 @@ if [[ "${PV}" == "9999" ]] ; then
 	EGIT_URI_APPEND="${PN}"
 elif [[ *"${PV}" == *"_pre"* ]] ; then
 	MY_P=${P%%_*}
-	SRC_URI="http://download.enlightenment.org/pre-releases/${MY_P}.tar.bz2"
+	SRC_URI="http://download.enlightenment.org/pre-releases/${MY_P}.tar.xz"
 	EKEY_STATE="snap"
 else
-	SRC_URI="http://download.enlightenment.org/rel/libs/${PN}/${MY_P}.tar.bz2"
+	SRC_URI="http://download.enlightenment.org/rel/libs/${PN}/${MY_P}.tar.xz"
 	EKEY_STATE="snap"
 fi
 
@@ -23,8 +23,7 @@ inherit enlightenment
 DESCRIPTION="Enlightenment Foundation Libraries all-in-one package"
 
 LICENSE="BSD-2 GPL-2 LGPL-2.1 ZLIB"
-KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+bmp debug drm +eet egl fbcon +fontconfig fribidi gif gles glib gnutls gstreamer harfbuzz +ico ibus +jpeg jpeg2k neon oldlua opengl ssl physics pixman +png +ppm +psd pulseaudio scim sdl sound systemd tga tiff tslib v4l2 wayland webp X xim xine xpm"
+IUSE="+bmp debug drm +eet egl fbcon +fontconfig fribidi gif gles glib gnutls gstreamer harfbuzz +ico ibus jpeg2k neon oldlua opengl ssl physics pixman +png +ppm +psd pulseaudio scim sdl sound systemd tga tiff tslib v4l2 valgrind wayland webp X xim xine xpm"
 
 REQUIRED_USE="
 	pulseaudio?	( sound )
@@ -38,22 +37,24 @@ REQUIRED_USE="
 "
 
 RDEPEND="
-	debug? ( dev-util/valgrind )
-	drm? ( >=x11-libs/libxkbcommon-0.3.0 )
+	drm? (
+		>=dev-libs/libinput-0.8
+		media-libs/mesa[gbm]
+		>=x11-libs/libdrm-2.4
+		>=x11-libs/libxkbcommon-0.3.0
+	)
 	fontconfig? ( media-libs/fontconfig )
 	fribidi? ( dev-libs/fribidi )
 	gif? ( media-libs/giflib )
-	glib? ( dev-libs/glib )
+	glib? ( dev-libs/glib:2 )
 	gnutls? ( net-libs/gnutls )
-	!gnutls? ( ssl? ( dev-libs/openssl ) )
+	!gnutls? ( ssl? ( dev-libs/openssl:0 ) )
 	gstreamer? (
-		=media-libs/gstreamer-0.10*
-		=media-libs/gst-plugins-good-0.10*
-		=media-plugins/gst-plugins-ffmpeg-0.10*
+		media-libs/gstreamer:1.0
+		media-libs/gst-plugins-base:1.0
 	)
 	harfbuzz? ( media-libs/harfbuzz )
 	ibus? ( app-i18n/ibus )
-	jpeg? ( virtual/jpeg )
 	jpeg2k? ( media-libs/openjpeg )
 	!oldlua? ( >=dev-lang/luajit-2.0.0 )
 	oldlua? ( dev-lang/lua )
@@ -61,15 +62,16 @@ RDEPEND="
 	pixman? ( x11-libs/pixman )
 	png? ( media-libs/libpng:0= )
 	pulseaudio? ( media-sound/pulseaudio )
-	scim?	( app-i18n/scim )
+	scim? ( app-i18n/scim )
 	sdl? (
 		media-libs/libsdl2
 		virtual/opengl
 	)
 	sound? ( media-libs/libsndfile )
 	systemd? ( sys-apps/systemd )
-	tiff? ( media-libs/tiff )
+	tiff? ( media-libs/tiff:0 )
 	tslib? ( x11-libs/tslib )
+	valgrind? ( dev-util/valgrind )
 	wayland? (
 		>=dev-libs/wayland-1.3.0
 		>=x11-libs/libxkbcommon-0.3.1
@@ -108,6 +110,7 @@ RDEPEND="
 	sys-apps/dbus
 	>=sys-apps/util-linux-2.20.0
 	sys-libs/zlib
+	virtual/jpeg
 
 	!dev-libs/ecore
 	!dev-libs/edbus
@@ -124,6 +127,8 @@ RDEPEND="
 	!media-libs/ethumb
 	!media-libs/evas
 "
+#external lz4 support currently broken because of unstable ABI/API
+#	app-arch/lz4
 
 #soft blockers added above for binpkg users
 #hard blocks are needed for building
@@ -154,105 +159,84 @@ DEPEND="
 S=${WORKDIR}/${MY_P}
 
 src_configure() {
-	use ssl && use gnutls && {
-		einfo "You enabled both USEssl and USE=gnutls, but only one can be used"
-		einfo "gnutls has been selected for you"
-	}
-	use opengl && use gles && {
-		einfo "You enabled both USE=opengl and USE=gles, but only one can be used"
-		einfo "opengl has been selected for you"
-	}
+	if use ssl && use gnutls ; then
+		einfo "You enabled both USEssl and USE=gnutls, but only one can be used;"
+		einfo "gnutls has been selected for you."
+	fi
+	if use opengl && use gles ; then
+		einfo "You enabled both USE=opengl and USE=gles, but only one can be used;"
+		einfo "opengl has been selected for you."
+	fi
 
-	local profile="release"
+	E_ECONF=(
+		--with-profile=$(usex debug debug release)
+		--with-crypto=$(usex gnutls gnutls $(usex ssl openssl none))
+		--with-x11=$(usex X xlib none)
+		$(use_with X x)
+		--with-opengl=$(usex opengl full $(usex gles es none))
+		--with-glib=$(usex glib)
+		--enable-i-really-know-what-i-am-doing-and-that-this-will-probably-break-things-and-i-will-fix-them-myself-and-send-patches-aba
 
-	use debug && profile="debug"
+		$(use_enable bmp image-loader-bmp)
+		$(use_enable bmp image-loader-wbmp)
+		$(use_enable drm)
+		$(use_enable doc)
+		$(use_enable eet image-loader-eet)
+		$(use_enable egl)
+		$(use_enable fbcon fb)
+		$(use_enable fontconfig)
+		$(use_enable fribidi)
+		$(use_enable gif image-loader-gif)
+		$(use_enable gstreamer gstreamer1)
+		$(use_enable harfbuzz)
+		$(use_enable ico image-loader-ico)
+		$(use_enable ibus)
+		$(use_enable jpeg2k image-loader-jp2k)
+		$(use_enable neon)
+		$(use_enable nls)
+		$(use_enable oldlua lua-old)
+		$(use_enable physics)
+		$(use_enable pixman)
+		$(use_enable pixman pixman-font)
+		$(use_enable pixman pixman-rect)
+		$(use_enable pixman pixman-line)
+		$(use_enable pixman pixman-poly)
+		$(use_enable pixman pixman-image)
+		$(use_enable pixman pixman-image-scale-sample)
+		$(use_enable png image-loader-png)
+		$(use_enable ppm image-loader-pmaps)
+		$(use_enable psd image-loader-psd)
+		$(use_enable pulseaudio)
+		$(use_enable scim)
+		$(use_enable sdl)
+		$(use_enable sound audio)
+		$(use_enable systemd)
+		$(use_enable tga image-loader-tga)
+		$(use_enable tiff image-loader-tiff)
+		$(use_enable tslib)
+		$(use_enable v4l2)
+		$(use_enable valgrind)
+		$(use_enable wayland)
+		$(use_enable webp image-loader-webp)
+		$(use_enable xim)
+		$(use_enable xine)
+		$(use_enable xpm image-loader-xpm)
+		--enable-cserve
+		--enable-gui
+		--enable-image-loader-generic
+		--enable-image-loader-jpeg
 
-	local crypto="none"
+		--disable-tizen
+		--disable-gesture
+		--disable-gstreamer
+		--enable-xinput2
+		--disable-xinput22
+		--disable-multisense
+		--enable-libmount
 
-	use gnutls && crypto="gnutls"
-	use ssl && crypto="openssl"
-
-	local x11="none"
-	local enable_graphics=""
-
-	use X && x11="xlib"
-
-	local MY_ECONF
-	 use X && MY_ECONF+=" --with-x"
-
-	local opengl="none"
-
-	use gles && opengl="es"
-	use opengl && opengl="full"
-
-	local glib="no"
-
-	use glib && glib="yes"
-
-	MY_ECONF+="
-	--with-profile=${profile}
-	--with-crypto=${crypto}
-	--with-x11=${x11}
-	--with-opengl=${opengl}
-	--with-glib=${glib}
-	--enable-i-really-know-what-i-am-doing-and-that-this-will-probably-break-things-and-i-will-fix-them-myself-and-send-patches-aba
-
-	$(use_enable bmp image-loader-bmp)
-	$(use_enable bmp image-loader-wbmp)
-	$(use_enable drm)
-	$(use_enable doc)
-	$(use_enable eet image-loader-eet)
-	$(use_enable egl)
-	$(use_enable fbcon fb)
-	$(use_enable fontconfig)
-	$(use_enable fribidi)
-	$(use_enable gif image-loader-gif)
-	$(use_enable gstreamer)
-	$(use_enable harfbuzz)
-	$(use_enable ico image-loader-ico)
-	$(use_enable ibus)
-	$(use_enable jpeg image-loader-jpeg)
-	$(use_enable jpeg2k image-loader-jp2k)
-	$(use_enable neon)
-	$(use_enable nls)
-	$(use_enable oldlua lua-old)
-	$(use_enable physics)
-	$(use_enable pixman)
-	$(use_enable pixman pixman-font)
-	$(use_enable pixman pixman-rect)
-	$(use_enable pixman pixman-line)
-	$(use_enable pixman pixman-poly)
-	$(use_enable pixman pixman-image)
-	$(use_enable pixman pixman-image-scale-sample)
-	$(use_enable png image-loader-png)
-	$(use_enable ppm image-loader-pmaps)
-	$(use_enable psd image-loader-psd)
-	$(use_enable pulseaudio)
-	$(use_enable scim)
-	$(use_enable sdl)
-	$(use_enable sound audio)
-	$(use_enable systemd)
-	$(use_enable tga image-loader-tga)
-	$(use_enable tiff image-loader-tiff)
-	$(use_enable tslib)
-	$(use_enable v4l2)
-	$(use_enable wayland)
-	$(use_enable webp image-loader-webp)
-	$(use_enable xim)
-	$(use_enable xine)
-	$(use_enable xpm image-loader-xpm)
-	--enable-cserve
-	--enable-image-loader-generic
-
-	--disable-tizen
-	--disable-gesture
-	--disable-gstreamer1
-	--enable-xinput2
-	--disable-xinput22
-	--disable-multisense
-	--enable-libmount
-	"
-# disable gstreamer:1.0 support until evas_generic_loaders has it too
+		# external lz4 support currently broken because of unstable ABI/API
+		#--enable-liblz4
+	)
 
 	enlightenment_src_configure
 }
