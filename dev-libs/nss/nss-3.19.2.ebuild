@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=5
-inherit eutils flag-o-matic multilib toolchain-funcs multilib-minimal
+inherit eutils cadb flag-o-matic multilib toolchain-funcs multilib-minimal
 
 NSPR_VER="4.10.8"
 RTM_NAME="NSS_${PV//./_}_RTM"
@@ -13,13 +13,13 @@ PEM_P="${PN}-pem-${PEM_GIT_REV}"
 
 DESCRIPTION="Mozilla's Network Security Services library that implements PKI support"
 HOMEPAGE="http://www.mozilla.org/projects/security/pki/nss/"
-SRC_URI="ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${RTM_NAME}/src/${P}.tar.gz
-	cacert? ( http://dev.gentoo.org/~anarchy/patches/${PN}-3.14.1-add_spi+cacerts_ca_certs.patch )
+SRC_URI="http://archive.mozilla.org/pub/mozilla.org/security/nss/releases/${RTM_NAME}/src/${P}.tar.gz
+	cacert? ( https://dev.gentoo.org/~anarchy/patches/${PN}-3.14.1-add_spi+cacerts_ca_certs.patch )
 	nss-pem? ( https://git.fedorahosted.org/cgit/nss-pem.git/snapshot/${PEM_P}.tar.bz2 )"
 
 LICENSE="|| ( MPL-2.0 GPL-2 LGPL-2.1 )"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
 IUSE="+cacert +nss-pem utils"
 CDEPEND=">=dev-db/sqlite-3.8.2[${MULTILIB_USEDEP}]
 	>=sys-libs/zlib-1.2.8-r1[${MULTILIB_USEDEP}]"
@@ -268,7 +268,7 @@ multilib_src_install() {
 
 	local f nssutils
 	# Always enabled because we need it for chk generation.
-	nssutils="shlibsign"
+	nssutils="certutil shlibsign"
 
 	if multilib_is_native_abi ; then
 		if use utils; then
@@ -299,6 +299,18 @@ multilib_src_install() {
 	liblist=$(printf '%s:' "${libs[@]}")
 	echo -e "PRELINK_PATH_MASK=${liblist%:}" > "${T}/90nss-${ABI}"
 	doenvd "${T}/90nss-${ABI}"
+
+	# Set NSS_DEFAULT_DB_TYPE in environment.
+	echo "NSS_DEFAULT_DB_TYPE=\"sql\"" >"${T}/90nss_default_db_type" || die
+	doenvd "${T}/90nss_default_db_type" || die
+
+	# Install the default configuration file.
+	dodir /etc/pki/nssdb
+	insinto /etc/pki/nssdb
+	doins "${FILESDIR}/pkcs11.txt"
+
+	# Install the setup-nsssysinit.sh script.
+	dobin "${FILESDIR}/setup-nsssysinit.sh"
 }
 
 pkg_postinst() {
@@ -312,6 +324,26 @@ pkg_postinst() {
 		fi
 		generate_chk "${shlibsign}" "${EROOT}"/usr/$(get_libdir)
 	}
+
+	# TODO: Upgrade any old system database.
+
+	# Install a new empty database if none exists already.
+	if [ ! -f "${EROOT}/etc/pki/nssdb/cert9.db" ]; then
+		echo > empty.txt
+		certutil -N -d "sql:${EROOT}/etc/pki/nssdb" -f empty.txt || die
+		rm empty.txt
+		einfo "An empty NSS system database has been installed, with no password."
+		einfo
+		einfo "You may wish to set a new system database password now using:"
+		einfo
+		einfo "certutil -W -d \"sql:${EROOT}/etc/pki/nssdb\""
+
+		# Set sensible permissions 0644 on the certificate database.
+		fperms 0644 "${EROOT}"/etc/pki/nssdb/*
+	fi
+
+	# Populate the certificate DB.
+	cadb_pkg_postinst nss
 
 	multilib_foreach_abi multilib_pkg_postinst
 }
