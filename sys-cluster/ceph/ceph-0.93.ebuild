@@ -14,7 +14,7 @@ if [[ $PV = *9999* ]]; then
 else
 	SRC_URI="http://ceph.com/download/${P}.tar.bz2"
 fi
-KEYWORDS="~arm ~ppc ~ppc64"
+KEYWORDS="~arm ~arm64 ~ppc ~ppc64 ~amd64 ~x86"
 
 inherit autotools eutils multilib python-any-r1 systemd udev readme.gentoo ${scm_eclass}
 
