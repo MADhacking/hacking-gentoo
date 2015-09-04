@@ -1,6 +1,74 @@
 # ChangeLog for app-emulation/xen-tools
 # Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
-# $Header: /var/cvsroot/gentoo-x86/app-emulation/xen-tools/ChangeLog,v 1.297 2015/06/16 07:09:14 ago Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/xen-tools/ChangeLog,v 1.312 2015/08/06 01:28:03 dlan Exp $
+
+  06 Aug 2015; Yixun Lan <dlan@gentoo.org> -xen-tools-4.2.5-r9.ebuild,
+  -xen-tools-4.5.1-r2.ebuild:
+  cleanup old vulnerable versions, bug 556304
+
+  05 Aug 2015; Mikle Kolyada <zlogene@gentoo.org> xen-tools-4.5.1-r3.ebuild:
+  amd64 stable wrt bug #556304
+
+  05 Aug 2015; Mikle Kolyada <zlogene@gentoo.org> xen-tools-4.2.5-r10.ebuild:
+  Mark stable wrt bug #556304
+
+*xen-tools-4.5.1-r3 (05 Aug 2015)
+*xen-tools-4.2.5-r10 (05 Aug 2015)
+
+  05 Aug 2015; Yixun Lan <dlan@gentoo.org> +xen-tools-4.2.5-r10.ebuild,
+  +xen-tools-4.5.1-r3.ebuild:
+  security bump, bug 556304, fix XSA139,140
+
+  31 Jul 2015; Yixun Lan <dlan@gentoo.org> -xen-tools-4.2.5-r8.ebuild,
+  -xen-tools-4.5.1-r1.ebuild:
+  clean vulnerable ebuilds due to security bug #555532
+
+  30 Jul 2015; Agostino Sarubbo <ago@gentoo.org> xen-tools-4.2.5-r9.ebuild:
+  Stable for x86, wrt bug #555532
+
+  30 Jul 2015; Agostino Sarubbo <ago@gentoo.org> xen-tools-4.2.5-r9.ebuild,
+  xen-tools-4.5.1-r2.ebuild:
+  Stable for amd64, wrt bug #555532
+
+  30 Jul 2015; Agostino Sarubbo <ago@gentoo.org> xen-tools-4.2.5-r9.ebuild:
+  Stable for amd64, wrt bug #555532
+
+*xen-tools-4.5.1-r2 (30 Jul 2015)
+*xen-tools-4.2.5-r9 (30 Jul 2015)
+
+  30 Jul 2015; Yixun Lan <dlan@gentoo.org> +xen-tools-4.2.5-r9.ebuild,
+  +xen-tools-4.5.1-r2.ebuild:
+  security bump, bug 555532; bump ovmf to 2015/06/29, commit
+  cb9a7ebabcd6b8a49dc0854b2f9592d732b5afbd
+
+  12 Jul 2015; Yixun Lan <dlan@gentoo.org> -xen-tools-4.2.5-r7.ebuild,
+  -xen-tools-4.5.0-r6.ebuild, -xen-tools-4.5.1.ebuild:
+  drop old vulnerables, bug 553664
+
+  10 Jul 2015; Agostino Sarubbo <ago@gentoo.org> xen-tools-4.2.5-r8.ebuild,
+  xen-tools-4.5.1-r1.ebuild:
+  Stable for amd64, wrt bug #553664
+
+  10 Jul 2015; Agostino Sarubbo <ago@gentoo.org> xen-tools-4.2.5-r8.ebuild:
+  Stable for x86, wrt bug #553664
+
+*xen-tools-4.5.1-r1 (10 Jul 2015)
+*xen-tools-4.2.5-r8 (10 Jul 2015)
+
+  10 Jul 2015; Yixun Lan <dlan@gentoo.org> +xen-tools-4.2.5-r8.ebuild,
+  +xen-tools-4.5.1-r1.ebuild:
+  security bump, XSA-137, bug 553664
+
+*xen-tools-4.5.1 (06 Jul 2015)
+
+  06 Jul 2015; Yixun Lan <dlan@gentoo.org> +xen-tools-4.5.1.ebuild,
+  files/gentoo-patches.conf:
+  bump version to 4.5.1
+
+  30 Jun 2015; Yixun Lan <dlan@gentoo.org> -xen-tools-4.2.5-r6.ebuild,
+  -xen-tools-4.4.2-r3.ebuild, -xen-tools-4.4.2-r4.ebuild,
+  -xen-tools-4.5.0-r5.ebuild:
+  clean vulnerable ebuild, drop 4.2.x series
 
   16 Jun 2015; Agostino Sarubbo <ago@gentoo.org> xen-tools-4.2.5-r7.ebuild:
   Stable for x86, wrt bug #550658
