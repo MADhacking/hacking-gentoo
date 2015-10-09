@@ -69,19 +69,15 @@ REQUIRED_USE="
 
 STRIP_MASK="/usr/lib*/rados-classes/*"
 
-PATCHES=(
-		"${FILESDIR}/ceph-glibc-20-p1.patch"
-		"${FILESDIR}/ceph-glibc-20-p2.patch"
-)
+PATCHES=("${FILESDIR}/ceph-glibc-20.patch")
 
 pkg_setup() {
 	python-any-r1_pkg_setup
 }
 
 src_prepare() {
-	if [ ! -z ${PATCHES[@]} ]; then
-		epatch ${PATCHES[@]}
-	fi
+	[[ ${PATCHES[@]} ]] && epatch "${PATCHES[@]}"
+
 	sed -e "/bin=/ s:lib:$(get_libdir):" "${FILESDIR}"/${PN}.initd \
 		> "${T}"/${PN}.initd || die
 	sed -e '/^ceph_sbindir =/s:$(exec_prefix)::' -i src/Makefile.am || die

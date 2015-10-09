@@ -1,5 +1,5 @@
 DEFINED_PHASES=configure prepare
-DEPEND=>=dev-util/nvidia-cuda-toolkit-5.5.0 >=dev-libs/jansson-2.4 >=dev-util/nvidia-cuda-sdk-5.5.0 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.14.1:1.14 >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEPEND=>=dev-util/nvidia-cuda-toolkit-5.5.0 >=dev-libs/jansson-2.4 >=dev-util/nvidia-cuda-sdk-5.5.0 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
 DESCRIPTION=A CUDA accelerated litecoin mining application based on pooler's CPU miner
 EAPI=4
 HOMEPAGE=http://github.com/cbuchner1/CudaMiner
@@ -8,5 +8,5 @@ LICENSE=GPL-3
 RDEPEND=>=dev-util/nvidia-cuda-toolkit-5.5.0 >=dev-libs/jansson-2.4
 SLOT=0
 SRC_URI=http://downloads.mad-hacking.net/software/cudaminer-20131218.zip
-_eclasses_=autotools	a9597abac7226d89ad9d010abeef6cfb	libtool	52d0e17251d04645ffaa61bfdd858944	multilib	62927b3db3a589b0806255f3a002d5d3	toolchain-funcs	42408102d713fbad60ca21349865edb4
+_eclasses_=autotools	7d16e72a943b4803ca9691b2ecf89216	libtool	7f78cd7d403808a350c9ae23f5821fb4	multilib	df4e4d5cfd3d137d0c248e1991c0e4d6	toolchain-funcs	4b8d3388c0a6e798504e20ba30b49361
 _md5_=437e93295eed1e950960106de5c0f816

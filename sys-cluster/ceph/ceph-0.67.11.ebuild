@@ -74,9 +74,8 @@ pkg_setup() {
 }
 
 src_prepare() {
-	if [ ! -z ${PATCHES[@]} ]; then
-		epatch ${PATCHES[@]}
-	fi
+	[[ ${PATCHES[@]} ]] && epatch "${PATCHES[@]}"
+
 	sed -e "/bin=/ s:lib:$(get_libdir):" "${FILESDIR}"/${PN}.initd \
 		> "${T}"/${PN}.initd || die
 	sed -e '/^ceph_sbindir =/s:$(exec_prefix)::' -i src/Makefile.am || die
