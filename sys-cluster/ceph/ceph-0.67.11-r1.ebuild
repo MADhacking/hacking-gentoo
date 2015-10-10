@@ -69,7 +69,10 @@ REQUIRED_USE="
 
 STRIP_MASK="/usr/lib*/rados-classes/*"
 
-PATCHES=("${FILESDIR}/ceph-glibc-20.patch")
+PATCHES=(
+		"${FILESDIR}/ceph-glibc-20.patch"
+		"${FILESDIR}/ceph-0.87.1-glibc-2.20.patch"
+)
 
 pkg_setup() {
 	python-any-r1_pkg_setup
