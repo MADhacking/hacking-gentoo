@@ -6,6 +6,7 @@ app-text
 dev-embedded
 dev-java
 dev-libs
+dev-nodejs
 dev-php
 dev-python
 dev-ruby

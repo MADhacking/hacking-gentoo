@@ -7,5 +7,5 @@ LICENSE=GPL-2
 RESTRICT=test
 SLOT=0
 SRC_URI=https://github.com/andikleen/tsx-tools/archive/edc6bc1de73d116e96f89ec1425db75da3d4a98b.zip
-_eclasses_=eutils	351a78113be5b393c09a2c948701ad36	multilib	df4e4d5cfd3d137d0c248e1991c0e4d6	toolchain-funcs	4b8d3388c0a6e798504e20ba30b49361
+_eclasses_=eutils	f813d23e417656bf3917483643165d5a	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85
 _md5_=7c27dbe4b65bb8805a1a151c64c6d2ec
