@@ -1,0 +1,27 @@
+--- init.d/localmount.in	2016-01-06 21:15:37.557702826 +0000
++++ init.d/localmount.in	2016-01-06 21:16:27.630349724 +0000
+@@ -33,6 +33,24 @@
+ 	if [ "$RC_UNAME" != Linux ]; then
+ 		rc=0
+ 	fi
++
++	# Remount any read-only bind-mounts so that they actually become read-only!
++	for m in `awk '/^\//   {
++		split($4,opts,",");
++		bm = ro = na = 0;
++		for (i in opts)
++		{
++			ro = ro || (opts[i] == "ro");
++			bm = bm || ((opts[i] == "bind") || (opts[i] == "rbind"));
++			na = na || (opts[i] == "noauto");
++		}
++		if (bm && ro && !na)
++			print $2;
++		}' /etc/fstab`
++	do
++		mount -o remount "${m}"
++	done
++
+ 	return $rc
+ }
+ 
