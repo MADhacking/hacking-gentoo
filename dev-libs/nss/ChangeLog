@@ -122,3 +122,29 @@
   Package-Manager: portage-2.2.20.1
   RepoMan-Options: --include-arches="ia64"
 
+*nss-3.21 (26 Nov 2015)
+
+  26 Nov 2015; Jory A. Pratt <anarchy@gentoo.org>
+  +files/nss-3.21-cacert-class3.patch, +files/nss-3.21-enable-pem.patch,
+  +files/nss-3.21-gentoo-fixup-warnings.patch,
+  +files/nss-3.21-gentoo-fixups.patch, +files/nss-3.21-pem-werror.patch,
+  +nss-3.21.ebuild:
+  basic version bump 3.21
+
+*nss-3.21-r1 (16 Dec 2015)
+
+  16 Dec 2015; Mike Frysinger <vapier@gentoo.org> metadata.xml,
+  +nss-3.21-r1.ebuild:
+  put cacert patches behind USE=cacert
+
+  25 Dec 2015; Jeroen Roovers <jer@gentoo.org>
+  +files/nss-3.21-hppa-byte_order.patch, nss-3.21-r1.ebuild:
+  Fix some definitions for HPPA.
+
+  Package-Manager: portage-2.2.26
+
+  27 Dec 2015; Mikle Kolyada <zlogene@gentoo.org> nss-3.20.1.ebuild:
+  sparc stable wrt bug #564834
+
+  Package-Manager: portage-2.2.24
+
