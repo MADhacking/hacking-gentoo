@@ -16,6 +16,7 @@ dev-libs/klibc
 dev-libs/nss
 mail-mta/postfix
 mail-mta/ssmtp
+net-misc/r8168
 media-gfx/blender
 sys-apps/fbset
 sys-apps/openrc

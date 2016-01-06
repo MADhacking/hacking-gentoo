@@ -10,5 +10,5 @@ RDEPEND=>=dev-libs/nspr-4.10 >=dev-db/sqlite-3.5 sys-libs/zlib dev-libs/openssl 
 RESTRICT=test
 SLOT=0
 SRC_URI=ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_16_RTM/src/nss-3.16.tar.gz cacert? ( http://dev.gentoo.org/~anarchy/patches/nss-3.14.1-add_spi+cacerts_ca_certs.patch ) nss-pem? ( https://git.fedorahosted.org/cgit/nss-pem.git/snapshot/nss-pem-3ade37c5c4ca5a6094e3f4b2e4591405db1867dd.tar.bz2 )
-_eclasses_=cadb	fe8dc4a35ac638a4ba572b375459422a	eutils	f813d23e417656bf3917483643165d5a	flag-o-matic	85dc1eac3c64d8141374490ed64122e5	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85
+_eclasses_=cadb	fe8dc4a35ac638a4ba572b375459422a	eutils	f20548a2f7b0128068388cd2ec26708a	flag-o-matic	85dc1eac3c64d8141374490ed64122e5	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85
 _md5_=c184b9281c106d669c1d3b01abe50456
