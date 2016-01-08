@@ -14,7 +14,7 @@ KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh
 IUSE=""
 
 RDEPEND="app-portage/gentoolkit
-		 app-portage/portage-utils
+		 <app-portage/portage-utils-0.60
 		 >=dev-libs/bash-outlogger-0.2
 		 app-admin/buildserver-client-scripts"
 
