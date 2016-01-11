@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd x86 ~x86-fbsd"
 IUSE=""
 
-RDEPEND="app-portage/gentoolkit
+RDEPEND="<app-portage/gentoolkit-0.3.1
 		 app-portage/portage-utils
 		 >=dev-libs/bash-outlogger-0.4
 		 !<app-admin/buildspace-scripts-0.15"
