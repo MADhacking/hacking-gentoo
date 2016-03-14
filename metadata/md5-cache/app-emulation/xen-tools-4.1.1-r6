@@ -9,5 +9,5 @@ LICENSE=GPL-2
 RDEPEND=dev-lang/python dev-python/lxml sys-libs/zlib hvm? ( media-libs/libsdl sys-power/iasl ) api? ( dev-libs/libxml2 net-misc/curl ) sys-apps/iproute2 net-misc/bridge-utils dev-python/pyxml >=dev-lang/ocaml-3.12.0 screen? ( app-misc/screen app-admin/logrotate ) || ( sys-fs/udev sys-apps/hotplug )
 SLOT=0
 SRC_URI=http://bits.xensource.com/oss-xen/release/4.1.1/xen-4.1.1.tar.gz http://xenbits.xensource.com/xen-extfiles/ipxe-git-v1.0.0.tar.gz
-_eclasses_=eutils	d9bd2ddd85a58e470b49ca997e255a4c	flag-o-matic	85dc1eac3c64d8141374490ed64122e5	multilib	3972ca401cf7dbb430df9995f5d8d580	python	efc1c55fc44c5b7272fc2ffba73c3e6f	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85
+_eclasses_=eutils	8982475656ba7ade9b3201397efbd612	flag-o-matic	85dc1eac3c64d8141374490ed64122e5	multilib	3972ca401cf7dbb430df9995f5d8d580	python	efc1c55fc44c5b7272fc2ffba73c3e6f	toolchain-funcs	7a212e5e01adfa4805c9978366e6ee85
 _md5_=8184d13e5f3e862763e9af75b0eec3da

@@ -18,7 +18,7 @@ IUSE=""
 APACHE2_MOD_CONF="0.7/09_${PN}"
 APACHE2_MOD_DEFINE="DEPENDS"
 
-need_apache2_2
+need_apache2
 
 src_prepare() {
 	autotools-utils_src_prepare
