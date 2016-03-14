@@ -25,7 +25,7 @@ RDEPEND="${DEPEND}"
 APACHE2_MOD_CONF="0.7/10_${PN}"
 APACHE2_MOD_DEFINE="TRANSFORM"
 
-need_apache2_2
+need_apache2
 
 src_prepare() {
 	autotools-utils_src_prepare

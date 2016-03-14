@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}"
 APACHE2_MOD_CONF="0.1/08_${PN}"
 APACHE2_MOD_DEFINE="AUTH_SUBREQUEST"
 
-need_apache2_2
+need_apache2
 
 src_prepare() {
 	autotools-utils_src_prepare
