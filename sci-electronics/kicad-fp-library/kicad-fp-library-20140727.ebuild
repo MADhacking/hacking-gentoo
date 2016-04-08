@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND=">=dev-util/cmake-2.6.4"
-RDEPEND="!<sci-electronics/kicad-20140717"
+RDEPEND=""
 
 src_install() {
 	insinto /usr/share/kicad/modules
