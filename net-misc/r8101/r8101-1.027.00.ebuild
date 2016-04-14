@@ -17,13 +17,13 @@ KEYWORDS="~amd64 ~x86"
 
 MODULE_NAMES="r8101(net:${S}/src)"
 BUILD_TARGETS="modules"
-CONFIG_CHECK="!R8169"
 
-ERROR_R8169="${P} requires Realtek 8169 PCI Gigabit Ethernet adapter (CONFIG_R8169) to be DISABLED"
+ERROR_R8169="${P} requires Realtek 8169 PCI Gigabit Ethernet adapter (CONFIG_R8169) to be DISABLED or configured as a MODULE"
 
-#src_prepare() {
-#	epatch "${FILESDIR}/${P}-build-3.10.patch"
-#}
+pkg_pretend() {
+	linux_config_exists || die "You do not appear to have configured your kernel!"
+	linux_chkconfig_builtin "R8169" && die "${ERROR_R8169}"
+}
 
 pkg_setup() {
 	linux-mod_pkg_setup
@@ -34,4 +34,7 @@ src_install() {
 	linux-mod_src_install
 	mv readme README
 	dodoc README
+
+	insinto /etc/modprobe.d/
+	doins "${FILESDIR}/r8101.conf"
 }
