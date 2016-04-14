@@ -12,7 +12,7 @@ SRC_URI="ftp://download.nvidia.com/XFree86/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~x86 ~x86-fbsd"
+KEYWORDS="-* amd64 x86 ~x86-fbsd"
 IUSE="examples gtk3"
 
 COMMON_DEPEND="
@@ -32,7 +32,7 @@ COMMON_DEPEND="
 	>=x11-libs/libvdpau-1.0"
 
 RDEPEND="${COMMON_DEPEND}
-	x11-drivers/nvidia-drivers:0/358"
+	x11-drivers/nvidia-drivers:0/361"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-proto/xproto"
