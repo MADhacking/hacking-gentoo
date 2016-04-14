@@ -30,6 +30,10 @@ pkg_setup() {
 	BUILD_PARAMS="KERNELDIR=${KV_DIR}"
 }
 
+src_prepare() {
+	epatch "${FILESDIR}/${P}-linux-4.5-compat.patch"
+}
+
 src_install() {
 	linux-mod_src_install
 	dodoc README
