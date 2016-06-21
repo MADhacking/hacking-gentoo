@@ -11,5 +11,5 @@ REQUIRED_USE=flask? ( xsm )
 RESTRICT=test
 SLOT=0
 SRC_URI=http://bits.xensource.com/oss-xen/release/4.2.0/xen-4.2.0.tar.gz
-_eclasses_=eutils	9d81603248f2ba3ec59124320d123e5e	flag-o-matic	d270fa247153df66074f795fa42dba3e	mount-boot	41ed556fa5641393d5323e421c8e5bcf	multilib	3972ca401cf7dbb430df9995f5d8d580	python-single-r1	2ebea8fbab356d63110245129a67a6dd	python-utils-r1	2e6826f6a93ad2acf904eecf5b5fb6d2	toolchain-funcs	d513d423d449877e49d99af3f7af7acb
+_eclasses_=eutils	792f83d5ec9536cb5ccef375469d8bde	flag-o-matic	d270fa247153df66074f795fa42dba3e	mount-boot	41ed556fa5641393d5323e421c8e5bcf	multilib	23ae8c186171e6476af098d2a50d0ee0	python-single-r1	2ebea8fbab356d63110245129a67a6dd	python-utils-r1	2e6826f6a93ad2acf904eecf5b5fb6d2	toolchain-funcs	d513d423d449877e49d99af3f7af7acb
 _md5_=d3d4e43834903ba11e90b94e9d9714ea
