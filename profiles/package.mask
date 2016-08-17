@@ -10,7 +10,7 @@ app-admin/update-ca-certificates
 app-emulation/xen
 app-emulation/xen-tools
 app-misc/ca-certificates
-dev-java/icedtea
+dev-java/icedtea:7
 dev-libs/efl
 dev-libs/klibc
 dev-libs/nss
