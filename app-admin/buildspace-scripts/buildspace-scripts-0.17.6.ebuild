@@ -16,7 +16,8 @@ IUSE=""
 RDEPEND=">=app-portage/gentoolkit-0.3.1
 		 app-portage/portage-utils
 		 >=dev-libs/bash-outlogger-0.2
-		 app-admin/buildserver-client-scripts"
+		 app-admin/buildserver-client-scripts
+		 app-admin/python-updater"
 
 src_install() {
 	exeinto /usr/bin

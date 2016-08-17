@@ -10,5 +10,5 @@ RDEPEND=>=dev-libs/nspr-4.10.6-r1[abi_x86_32(-)?,abi_x86_64(-)?,abi_x86_x32(-)?,
 RESTRICT=test
 SLOT=0
 SRC_URI=ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_16_1_RTM/src/nss-3.16.1.tar.gz cacert? ( http://dev.gentoo.org/~anarchy/patches/nss-3.14.1-add_spi+cacerts_ca_certs.patch ) nss-pem? ( https://git.fedorahosted.org/cgit/nss-pem.git/snapshot/nss-pem-3ade37c5c4ca5a6094e3f4b2e4591405db1867dd.tar.bz2 )
-_eclasses_=cadb	fe8dc4a35ac638a4ba572b375459422a	eutils	792f83d5ec9536cb5ccef375469d8bde	flag-o-matic	d270fa247153df66074f795fa42dba3e	multibuild	742139c87a9fa3766f0c2b155e5522bf	multilib	23ae8c186171e6476af098d2a50d0ee0	multilib-build	8fe2e81aeb36cdf8a6cc5f50443879cc	multilib-minimal	0224dee31c0f98405d572e14ad6dee65	toolchain-funcs	d513d423d449877e49d99af3f7af7acb
+_eclasses_=cadb	fe8dc4a35ac638a4ba572b375459422a	eutils	792f83d5ec9536cb5ccef375469d8bde	flag-o-matic	8632fcd33a047954f007dee9a137bdcc	multibuild	742139c87a9fa3766f0c2b155e5522bf	multilib	d062ae4ba2fc40a19c11de2ad89b6616	multilib-build	8fe2e81aeb36cdf8a6cc5f50443879cc	multilib-minimal	0224dee31c0f98405d572e14ad6dee65	toolchain-funcs	82165206dedb2075f9a0fb8f9b1f9441
 _md5_=55d6a34ffdac8368d8105ae1d2fcf301
