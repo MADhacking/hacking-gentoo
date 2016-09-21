@@ -1,5 +1,5 @@
 # ChangeLog for sys-apps/openrc
-# Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
+# Copyright 1999-2016 Gentoo Foundation; Distributed under the GPL v2
 # (auto-generated from git log)
 
 *openrc-9999 (09 Aug 2015)
@@ -192,4 +192,286 @@
   sparc stable wrt bug #567356
 
   Package-Manager: portage-2.2.24
+
+  07 Jan 2016; Justin Lecher <jlec@gentoo.org> metadata.xml:
+  Update remote-ids in metadata.xml
+
+  Signed-off-by: Justin Lecher <jlec@gentoo.org>
+
+  12 Jan 2016; William Hubbs <williamh@gentoo.org> -openrc-0.19.ebuild:
+  remove old version
+
+*openrc-0.20 (13 Jan 2016)
+
+  13 Jan 2016; William Hubbs <williamh@gentoo.org> +openrc-0.20.ebuild:
+  version bump
+
+  13 Jan 2016; William Hubbs <williamh@gentoo.org> openrc-9999.ebuild:
+  sync live ebuild
+
+*openrc-0.20.1 (14 Jan 2016)
+
+  14 Jan 2016; William Hubbs <williamh@gentoo.org> -openrc-0.20.ebuild,
+  +openrc-0.20.1.ebuild:
+  version bump
+
+*openrc-0.20.2 (14 Jan 2016)
+
+  14 Jan 2016; William Hubbs <williamh@gentoo.org> -openrc-0.20.1.ebuild,
+  +openrc-0.20.2.ebuild:
+  version bump
+
+  15 Jan 2016; Agostino Sarubbo <ago@gentoo.org> openrc-0.19.1.ebuild:
+  amd64 stable wrt bug #571696
+
+  Package-Manager: portage-2.2.26
+  RepoMan-Options: --include-arches="amd64"
+  Signed-off-by: Agostino Sarubbo <ago@gentoo.org>
+
+  17 Jan 2016; Agostino Sarubbo <ago@gentoo.org> openrc-0.19.1.ebuild:
+  ppc stable wrt bug #571696
+
+  Package-Manager: portage-2.2.26
+  RepoMan-Options: --include-arches="ppc"
+  Signed-off-by: Agostino Sarubbo <ago@gentoo.org>
+
+  18 Jan 2016; Mike Frysinger <vapier@gentoo.org> openrc-0.13.11.ebuild,
+  openrc-0.14.ebuild, openrc-0.15.ebuild, openrc-0.15.1.ebuild,
+  openrc-0.16.ebuild, openrc-0.16.1.ebuild, openrc-0.16.2.ebuild,
+  openrc-0.16.3.ebuild, openrc-0.16.4.ebuild, openrc-0.17.ebuild,
+  openrc-0.18.3.ebuild, openrc-0.18.4.ebuild, openrc-0.19.1.ebuild,
+  openrc-0.20.2.ebuild, openrc-9999.ebuild:
+  drop old glibc dep
+
+  We don't support glibc-2.3 anymore, so we don't really need to force
+  installing of glibc-2.5+.  Drop the dep to simplify.
+
+*openrc-0.20.3 (19 Jan 2016)
+
+  19 Jan 2016; William Hubbs <williamh@gentoo.org> -openrc-0.20.2.ebuild,
+  +openrc-0.20.3.ebuild:
+  version bump
+
+*openrc-0.20.4 (22 Jan 2016)
+
+  22 Jan 2016; William Hubbs <williamh@gentoo.org> -openrc-0.20.3.ebuild,
+  +openrc-0.20.4.ebuild:
+  version bump
+
+  23 Jan 2016; Markus Meier <maekke@gentoo.org> openrc-0.19.1.ebuild:
+  arm stable, bug #571696
+
+  Package-Manager: portage-2.2.27
+  RepoMan-Options: --include-arches="arm"
+
+  24 Jan 2016; Jeroen Roovers <jer@gentoo.org> openrc-0.19.1.ebuild:
+  Stable for HPPA PPC64 (bug #571696).
+
+  Package-Manager: portage-2.2.27
+  RepoMan-Options: --ignore-arches
+
+  24 Jan 2016; Michał Górny <mgorny@gentoo.org> metadata.xml:
+  Unify quoting in metadata.xml files for machine processing
+
+  Force unified quoting in all metadata.xml files since lxml does not
+  preserve original use of single and double quotes. Ensuring unified
+  quoting before the process allows distinguishing the GLEP 67-related
+  metadata.xml changes from unrelated quoting changes.
+
+  24 Jan 2016; Michał Górny <mgorny@gentoo.org> metadata.xml:
+  Replace all herds with appropriate projects (GLEP 67)
+
+  Replace all uses of herd with appropriate project maintainers, or no
+  maintainers in case of herds requested to be disbanded.
+
+  24 Jan 2016; Michał Górny <mgorny@gentoo.org> metadata.xml:
+  Set appropriate maintainer types in metadata.xml (GLEP 67)
+
+  02 Feb 2016; Tobias Klausmann <klausman@gentoo.org> openrc-0.19.1.ebuild:
+  add alpha keyword
+
+  Gentoo-Bug: 571696
+
+  Package-Manager: portage-2.2.27
+
+  14 Feb 2016; Agostino Sarubbo <ago@gentoo.org> openrc-0.19.1.ebuild:
+  x86 stable wrt bug #571696
+
+  Package-Manager: portage-2.2.26
+  RepoMan-Options: --include-arches="x86"
+  Signed-off-by: Agostino Sarubbo <ago@gentoo.org>
+
+*openrc-0.20.5 (15 Feb 2016)
+
+  15 Feb 2016; William Hubbs <williamh@gentoo.org> +openrc-0.20.5.ebuild:
+  version bump
+
+  Package-Manager: portage-2.2.26
+
+  24 Feb 2016; Steev Klimaszewski <steev@gentoo.org> openrc-0.19.1.ebuild:
+  stable 0.19.1 for arm64
+
+  Package-Manager: portage-2.2.27
+
+  05 Mar 2016; Mikle Kolyada <zlogene@gentoo.org> openrc-0.19.1.ebuild:
+  ia64/sparc stable wrt bug #571696
+
+  Package-Manager: portage-2.2.26
+
+  05 May 2016; William Hubbs <williamh@gentoo.org> openrc-9999.ebuild:
+  move live ebuild to eapi 6
+
+  Package-Manager: portage-2.2.26
+
+  12 May 2016; William Hubbs <williamh@gentoo.org> openrc-9999.ebuild:
+  install default "nonetwork" runlevel
+
+  Package-Manager: portage-2.2.28
+
+  13 May 2016; William Hubbs <williamh@gentoo.org> openrc-9999.ebuild:
+  Install supervise-daemon pam file
+
+  Package-Manager: portage-2.2.28
+
+*openrc-0.21 (24 May 2016)
+
+  24 May 2016; William Hubbs <williamh@gentoo.org> +openrc-0.21.ebuild:
+  version bump to 0.21
+
+  Package-Manager: portage-2.2.28
+
+  24 May 2016; William Hubbs <williamh@gentoo.org> openrc-9999.ebuild:
+  sync live ebuild
+
+  Package-Manager: portage-2.2.28
+
+  31 May 2016; William Hubbs <williamh@gentoo.org> -openrc-0.13.11.ebuild,
+  -openrc-0.14.ebuild, -openrc-0.15.ebuild, -openrc-0.15.1.ebuild,
+  -openrc-0.16.ebuild, -openrc-0.16.1.ebuild, -openrc-0.16.2.ebuild,
+  -openrc-0.16.3.ebuild, -openrc-0.16.4.ebuild, -openrc-0.18.3.ebuild:
+  remove many old and unstable versions
+
+  Package-Manager: portage-2.2.28
+
+  12 Jun 2016; Mike Frysinger <vapier@gentoo.org> openrc-0.19.1.ebuild:
+  mark 0.19.1 m68k/s390/sh stable
+
+*openrc-0.21.1 (28 Jun 2016)
+
+  28 Jun 2016; William Hubbs <williamh@gentoo.org> +openrc-0.21.1.ebuild:
+  version bump for 0.21.1
+
+  Package-Manager: portage-2.2.28
+
+*openrc-0.21.2 (06 Jul 2016)
+
+  06 Jul 2016; William Hubbs <williamh@gentoo.org> +openrc-0.21.2.ebuild:
+  0.21.2 version bump
+
+  Package-Manager: portage-2.2.28
+
+*openrc-0.21.3 (31 Jul 2016)
+
+  31 Jul 2016; William Hubbs <williamh@gentoo.org> +openrc-0.21.3.ebuild:
+  0.21.3 version bump
+
+  Package-Manager: portage-2.2.28
+
+  01 Aug 2016; Tobias Klausmann <klausman@gentoo.org> openrc-0.21.3.ebuild:
+  0.21.3-r0: add alpha keyword
+
+  Gentoo-Bug: 588786
+
+  12 Aug 2016; Markus Meier <maekke@gentoo.org> openrc-0.21.3.ebuild:
+  arm stable, bug #588786
+
+  Package-Manager: portage-2.3.0
+  RepoMan-Options: --include-arches="arm"
+
+  14 Aug 2016; William Hubbs <williamh@gentoo.org> openrc-0.21.3.ebuild:
+  stable 0.21.3 on amd64 for #588786
+
+  Package-Manager: portage-2.2.28
+
+  21 Aug 2016; William Hubbs <williamh@gentoo.org> openrc-0.21.3.ebuild:
+  0.21.3 - remove outdated warnings for #591540
+
+  Package-Manager: portage-2.2.28
+
+  21 Aug 2016; William Hubbs <williamh@gentoo.org> openrc-9999.ebuild:
+  sync live ebuild
+
+  Package-Manager: portage-2.2.28
+
+*openrc-0.21.4 (25 Aug 2016)
+
+  25 Aug 2016; William Hubbs <williamh@gentoo.org> +openrc-0.21.4.ebuild:
+  0.21.4 version bump
+
+  Package-Manager: portage-2.2.28
+
+*openrc-0.21.5 (30 Aug 2016)
+
+  30 Aug 2016; William Hubbs <williamh@gentoo.org> +openrc-0.21.5.ebuild:
+  0.21.5 version bump
+
+  Package-Manager: portage-2.2.28
+
+*openrc-0.21.6 (31 Aug 2016)
+
+  31 Aug 2016; William Hubbs <williamh@gentoo.org> +openrc-0.21.6.ebuild:
+  0.21.6 version bump
+
+  Package-Manager: portage-2.2.28
+
+*openrc-0.21.7 (31 Aug 2016)
+
+  31 Aug 2016; William Hubbs <williamh@gentoo.org> +openrc-0.21.7.ebuild:
+  0.21.7 version bump
+
+  Package-Manager: portage-2.2.28
+
+  31 Aug 2016; William Hubbs <williamh@gentoo.org> -openrc-0.21.ebuild,
+  -openrc-0.21.1.ebuild, -openrc-0.21.2.ebuild, -openrc-0.21.4.ebuild,
+  -openrc-0.21.5.ebuild, -openrc-0.21.6.ebuild:
+  remove unstable 0.21 series versions
+
+  Package-Manager: portage-2.2.28
+
+  31 Aug 2016; Jeroen Roovers <jer@gentoo.org> openrc-0.21.3.ebuild:
+  Stable for HPPA (bug #588786).
+
+  Package-Manager: portage-2.3.0
+  RepoMan-Options: --ignore-arches
+
+  01 Sep 2016; Jeroen Roovers <jer@gentoo.org> openrc-0.21.3.ebuild:
+  Stable for PPC64 (bug #588786).
+
+  Package-Manager: portage-2.3.0
+  RepoMan-Options: --ignore-arches
+
+  15 Sep 2016; William Hubbs <williamh@gentoo.org> -openrc-0.20.4.ebuild,
+  -openrc-0.20.5.ebuild:
+  remove unstable versions
+
+  Package-Manager: portage-2.2.28
+
+  15 Sep 2016; William Hubbs <williamh@gentoo.org> openrc-0.21.3.ebuild:
+  Stable 0.21.3 on ia64 ppc and sparc per #588786.
+
+  Package-Manager: portage-2.2.28
+
+  15 Sep 2016; William Hubbs <williamh@gentoo.org> openrc-0.21.7.ebuild:
+  stabilize 0.21.7 for #588786
+
+  After discussion on irc, it was determined by myself and axs that this is
+  a small bug fix release and can be stabilized on every arch where 0.21.3 is
+  stabilized. No one objected, so I am going ahead with this plan.
+
+  I am stabilizing this version on the following architectures:
+  alpha amd64 arm hppa ia64 ppc ppc64 sparc
+
+  I will ask x86 to stabilize 0.21.7 instead of 0.21.3.
+
+  Package-Manager: portage-2.2.28
 
