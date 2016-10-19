@@ -9,5 +9,5 @@ LICENSE=MPL-1.1
 RDEPEND=kernel_AIX? ( app-arch/deb2targz ) !<sys-apps/portage-2.1.10.41 dev-libs/openssl >=app-admin/update-ca-certificates-0.7
 SLOT=0
 SRC_URI=mirror://debian/pool/main/c/ca-certificates/ca-certificates_20111025_all.deb
-_eclasses_=cadb	fe8dc4a35ac638a4ba572b375459422a	eutils	792f83d5ec9536cb5ccef375469d8bde	multilib	d062ae4ba2fc40a19c11de2ad89b6616	toolchain-funcs	6198c04daba0e1307bd844df7d37f423
+_eclasses_=cadb	fe8dc4a35ac638a4ba572b375459422a	eutils	b83a2420b796f7c6eff682679d08fe25	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	6198c04daba0e1307bd844df7d37f423
 _md5_=308fbed4d4d40484604216b620698511
