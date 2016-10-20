@@ -15,7 +15,7 @@ IUSE=""
 
 RDEPEND=">=dev-libs/snmpd-connector-lib-0.3
 		 dev-libs/hacking-bash-lib
-		 snmp-mibs/mdraid-snmp-mib
+		 >=snmp-mibs/mdraid-snmp-mib-0.2
 		 net-analyzer/net-snmp
 		 sys-fs/mdadm"
 
