@@ -475,3 +475,49 @@
 
   Package-Manager: portage-2.2.28
 
+  22 Sep 2016; William Hubbs <williamh@gentoo.org> -openrc-0.21.3.ebuild:
+  remove 0.21.3 since 0.21.7 is going stable
+
+  Package-Manager: portage-2.2.28
+
+  22 Sep 2016; William Hubbs <williamh@gentoo.org> openrc-9999.ebuild:
+  Drop runit from dependencies for #591388
+
+  Package-Manager: portage-2.2.28
+
+  23 Sep 2016; William Hubbs <williamh@gentoo.org> openrc-9999.ebuild:
+  adjust the release src_uri to pull from github
+
+  Package-Manager: portage-2.2.28
+
+*openrc-0.22 (27 Sep 2016)
+
+  27 Sep 2016; William Hubbs <williamh@gentoo.org> +openrc-0.22.ebuild:
+  0.22 version bump
+
+  Package-Manager: portage-2.3.0
+
+*openrc-0.22.1 (01 Oct 2016)
+
+  01 Oct 2016; William Hubbs <williamh@gentoo.org> +openrc-0.22.1.ebuild:
+  0.22.1 version bump
+
+  Package-Manager: portage-2.3.0
+
+  02 Oct 2016; William Hubbs <williamh@gentoo.org> -openrc-0.22.ebuild:
+  Remove 0.22
+
+  Package-Manager: portage-2.3.0
+
+  02 Oct 2016; William Hubbs <williamh@gentoo.org> openrc-0.22.1.ebuild:
+  Add back runit dependency pending resolution for #595956
+
+  Package-Manager: portage-2.3.0
+
+*openrc-0.22.2 (06 Oct 2016)
+
+  06 Oct 2016; William Hubbs <williamh@gentoo.org> +openrc-0.22.2.ebuild:
+  0.22.2 version bump
+
+  Package-Manager: portage-2.3.0
+

@@ -64,6 +64,7 @@ src_prepare() {
 		sed -i "/^GITVER[[:space:]]*=/s:=.*:=${ver}:" mk/gitver.mk || die
 	fi
 
+	epatch "${FILESDIR}"/${PN}-0.21.3-readonly_bind_mount.patch
 	epatch "${FILESDIR}"/${PN}-0.21.3-default_runlevel.patch
 	epatch "${FILESDIR}"/${PN}-0.11.8-extra_plugin_hooks.patch
 
