@@ -10,7 +10,7 @@ OFED_RC_VER="1"
 OFED_SUFFIX="0.1.g05a9d1a"
 OFED_SNAPSHOT="1"
 
-inherit openib
+inherit autotools openib
 
 DESCRIPTION="OpenIB userspace tools"
 KEYWORDS="~amd64 ~x86 ~amd64-linux"
