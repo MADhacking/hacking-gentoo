@@ -28,6 +28,6 @@ src_prepare() {
 	
 	# Rerun autotools
     einfo "Regenerating autotools files..."
-    WANT_AUTOCONF=2.5 eautoconf
-    WANT_AUTOMAKE=1.9 eautomake
+	cd "${S}"
+	./autogen.sh
 }
