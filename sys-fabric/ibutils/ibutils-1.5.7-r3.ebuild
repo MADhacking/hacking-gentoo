@@ -25,4 +25,9 @@ block_other_ofed_versions
 
 src_prepare() {
 	epatch "${FILESDIR}/ibutils-tk-8.6.patch"
+	
+	# Rerun autotools
+    einfo "Regenerating autotools files..."
+    WANT_AUTOCONF=2.5 eautoconf
+    WANT_AUTOMAKE=1.9 eautomake
 }
