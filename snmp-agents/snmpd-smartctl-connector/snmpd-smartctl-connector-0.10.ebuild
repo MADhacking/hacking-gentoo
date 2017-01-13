@@ -10,12 +10,12 @@ SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd x86 ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd ~x86 ~x86-fbsd"
 IUSE=""
 
 RDEPEND=">=dev-libs/snmpd-connector-lib-0.3
-		 dev-libs/hacking-bash-lib
-		 >=snmp-mibs/smartctl-snmp-mib-0.2
+		 >=dev-libs/hacking-bash-lib-0.2
+		 >=snmp-mibs/smartctl-snmp-mib-0.3
 		 net-analyzer/net-snmp
 		 sys-apps/smartmontools"
 
