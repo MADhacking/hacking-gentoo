@@ -1,0 +1,13 @@
+--- Common.mk	2017-02-25 04:24:08.842300792 +0000
++++ Common.mk	2017-02-25 04:24:31.422052462 +0000
+@@ -128,8 +128,8 @@
+    TCL_INC        := -IC:/Apps/Tcl/include
+    TCL_LIBS       := -ltcl85
+ else
+-   TCL_INC        := -I/usr/include/tcl8.5
+-   TCL_LIBS       := -ltcl8.5
++   TCL_INC        := -I/usr/include/tcl8.6
++   TCL_LIBS       := -ltcl8.6
+ endif
+ 
+ #===========================================================
