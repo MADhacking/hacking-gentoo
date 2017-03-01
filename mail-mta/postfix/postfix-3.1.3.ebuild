@@ -2,45 +2,45 @@
 # Distributed under the terms of the GNU General Public License v3+
 # $Header: $
 
-EAPI=5
-inherit eutils flag-o-matic multilib pam ssl-cert systemd toolchain-funcs user versionator
+EAPI=6
+inherit flag-o-matic pam systemd toolchain-funcs user
 
-MY_PV="${PV/_pre/-}"
+MY_PV="${PV/_rc/-RC}"
 MY_SRC="${PN}-${MY_PV}"
-MY_URI="ftp://ftp.porcupine.org/mirrors/postfix-release/experimental"
-VDA_PV="2.10.0"
-VDA_P="${PN}-vda-v13-${VDA_PV}"
+MY_URI="ftp://ftp.porcupine.org/mirrors/postfix-release/official"
 RC_VER="2.7"
 
-DESCRIPTION="A fast and secure drop-in replacement for sendmail."
+DESCRIPTION="A fast and secure drop-in replacement for sendmail"
 HOMEPAGE="http://www.postfix.org/"
-SRC_URI="${MY_URI}/${MY_SRC}.tar.gz
-	vda? ( http://vda.sourceforge.net/VDA/${VDA_P}.patch ) "
+SRC_URI="${MY_URI}/${MY_SRC}.tar.gz"
 
 LICENSE="IBM"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
-IUSE="+berkdb cdb doc dovecot-sasl hardened ldap ldap-bind memcached mbox mysql nis pam postgres sasl selinux sqlite ssl vda"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
+IUSE="+berkdb cdb doc dovecot-sasl +eai hardened ldap ldap-bind libressl lmdb memcached mbox mysql nis pam postgres sasl selinux sqlite ssl"
 
 DEPEND=">=dev-libs/libpcre-3.4
 	dev-lang/perl
-	berkdb? ( >=sys-libs/db-3.2 )
-	cdb? ( || ( >=dev-db/tinycdb-0.76 >=dev-db/cdb-0.75-r1 ) )
+	berkdb? ( >=sys-libs/db-3.2:* )
+	cdb? ( || ( >=dev-db/tinycdb-0.76 >=dev-db/cdb-0.75-r4 ) )
+	eai? ( dev-libs/icu:= )
 	ldap? ( net-nds/openldap )
 	ldap-bind? ( net-nds/openldap[sasl] )
+	lmdb? ( >=dev-db/lmdb-0.9.11 )
 	mysql? ( virtual/mysql )
 	pam? ( virtual/pam )
-	postgres? ( dev-db/postgresql )
+	postgres? ( dev-db/postgresql:* )
 	sasl? (  >=dev-libs/cyrus-sasl-2 )
 	sqlite? ( dev-db/sqlite:3 )
-	ssl? ( >=dev-libs/openssl-0.9.6g )"
+	ssl? (
+		!libressl? ( dev-libs/openssl:0 )
+		libressl? ( dev-libs/libressl )
+	)"
 
 RDEPEND="${DEPEND}
-	app-admin/eselect-sendmail
 	dovecot-sasl? ( net-mail/dovecot )
 	memcached? ( net-misc/memcached )
 	net-mail/mailbase
-	selinux? ( sec-policy/selinux-postfix )
 	!mail-mta/courier
 	!mail-mta/esmtp
 	!mail-mta/exim
@@ -51,7 +51,8 @@ RDEPEND="${DEPEND}
 	!mail-mta/qmail-ldap
 	!mail-mta/sendmail
 	!mail-mta/opensmtpd
-	!net-mail/fastforward"
+	!net-mail/fastforward
+	selinux? ( sec-policy/selinux-postfix )"
 
 REQUIRED_USE="ldap-bind? ( ldap sasl )"
 
@@ -65,50 +66,59 @@ pkg_setup() {
 }
 
 src_prepare() {
-	if use vda; then
-		epatch "${DISTDIR}"/${VDA_P}.patch
-	fi
-
-	if ! use berkdb; then
-		epatch "${FILESDIR}/${PN}_no-berkdb.patch"
-	fi
-
+	default
 	sed -i -e "/^#define ALIAS_DB_MAP/s|:/etc/aliases|:/etc/mail/aliases|" \
 		src/util/sys_defs.h || die "sed failed"
-
 	# change default paths to better comply with portage standard paths
 	sed -i -e "s:/usr/local/:/usr/:g" conf/master.cf || die "sed failed"
+	eapply -p0 "${FILESDIR}/${PN}-libressl.patch"
+	eapply -p0 "${FILESDIR}/${PN}-libressl-runtime.patch"
 }
 
 src_configure() {
+	for name in CDB LDAP LMDB MYSQL PCRE PGSQL SDBM SQLITE
+	do
+		local AUXLIBS_${name}=""
+	done
+
 	# Make sure LDFLAGS get passed down to the executables.
-	local mycc="-DHAS_PCRE" mylibs="${LDFLAGS} -lpcre -lcrypt -lpthread"
+	local mycc="-DHAS_PCRE" mylibs="${LDFLAGS} -ldl"
+	AUXLIBS_PCRE="$(pcre-config --libs)"
 
 	use pam && mylibs="${mylibs} -lpam"
 
 	if use ldap; then
 		mycc="${mycc} -DHAS_LDAP"
-		mylibs="${mylibs} -lldap -llber"
+		AUXLIBS_LDAP="-lldap -llber"
 	fi
 
 	if use mysql; then
 		mycc="${mycc} -DHAS_MYSQL $(mysql_config --include)"
-		mylibs="${mylibs} $(mysql_config --libs)"
+		AUXLIBS_MYSQL="$(mysql_config --libs)"
 	fi
 
 	if use postgres; then
 		mycc="${mycc} -DHAS_PGSQL -I$(pg_config --includedir)"
-		mylibs="${mylibs} -lpq -L$(pg_config --libdir)"
+		AUXLIBS_PGSQL="-L$(pg_config --libdir) -lpq"
 	fi
 
 	if use sqlite; then
 		mycc="${mycc} -DHAS_SQLITE"
-		mylibs="${mylibs} -lsqlite3"
+		AUXLIBS_SQLITE="-lsqlite3 -lpthread"
 	fi
 
 	if use ssl; then
 		mycc="${mycc} -DUSE_TLS"
 		mylibs="${mylibs} -lssl -lcrypto"
+	fi
+
+	if use lmdb; then
+		mycc="${mycc} -DHAS_LMDB"
+		AUXLIBS_LMDB="-llmdb -lpthread"
+	fi
+
+	if ! use eai; then
+		mycc="${mycc} -DNO_EAI"
 	fi
 
 	# broken. and "in other words, not supported" by upstream.
@@ -132,33 +142,30 @@ src_configure() {
 	fi
 
 	if ! use nis; then
-		sed -i -e "s|#define HAS_NIS|//#define HAS_NIS|g" \
-			src/util/sys_defs.h || die "sed failed"
+		mycc="${mycc} -DNO_NIS"
 	fi
 
 	if ! use berkdb; then
 		mycc="${mycc} -DNO_DB"
 		if use cdb; then
 			# change default hash format from Berkeley DB to cdb
-			sed -i -e "s/hash/cdb/" src/util/sys_defs.h || die
+			mycc="${mycc} -DDEF_DB_TYPE=\\\"cdb\\\""
 		fi
 	fi
 
 	if use cdb; then
 		mycc="${mycc} -DHAS_CDB -I/usr/include/cdb"
-		CDB_LIBS=""
 		# Tinycdb is preferred.
 		if has_version dev-db/tinycdb ; then
 			einfo "Building with dev-db/tinycdb"
-			CDB_LIBS="-lcdb"
+			AUXLIBS_CDB="-lcdb"
 		else
 			einfo "Building with dev-db/cdb"
 			CDB_PATH="/usr/$(get_libdir)"
 			for i in cdb.a alloc.a buffer.a unix.a byte.a ; do
-				CDB_LIBS="${CDB_LIBS} ${CDB_PATH}/${i}"
+				AUXLIBS_CDB="${AUXLIBS_CDB} ${CDB_PATH}/${i}"
 			done
 		fi
-		mylibs="${mylibs} ${CDB_LIBS}"
 	fi
 
 	# Robin H. Johnson <robbat2@gentoo.org> 17/Nov/2006
@@ -176,7 +183,14 @@ src_configure() {
 
 	sed -i -e "/^RANLIB/s/ranlib/$(tc-getRANLIB)/g" "${S}"/makedefs
 	sed -i -e "/^AR/s/ar/$(tc-getAR)/g" "${S}"/makedefs
-	emake DEBUG="" CC="$(tc-getCC)" OPT="${CFLAGS}" CCARGS="${mycc}" AUXLIBS="${mylibs}" makefiles
+
+	emake makefiles shared=yes dynamicmaps=no pie=yes \
+		shlib_directory="/usr/$(get_libdir)/postfix/MAIL_VERSION" \
+		DEBUG="" CC="$(tc-getCC)" OPT="${CFLAGS}" CCARGS="${mycc}" AUXLIBS="${mylibs}" \
+		AUXLIBS_CDB="${AUXLIBS_CDB}" AUXLIBS_LDAP="${AUXLIBS_LDAP}" \
+		AUXLIBS_LMDB="${AUXLIBS_LMDB}" AUXLIBS_MYSQL="${AUXLIBS_MYSQL}" \
+		AUXLIBS_PCRE="${AUXLIBS_PCRE}" AUXLIBS_PGSQL="${AUXLIBS_PGSQL}" \
+		AUXLIBS_SQLITE="${AUXLIBS_SQLITE}"
 }
 
 src_install () {
@@ -184,6 +198,7 @@ src_install () {
 	use doc && myconf="readme_directory=\"/usr/share/doc/${PF}/readme\" \
 		html_directory=\"/usr/share/doc/${PF}/html\""
 
+	LD_LIBRARY_PATH="${S}/lib" \
 	/bin/sh postfix-install \
 		-non-interactive \
 		install_root="${D}" \
@@ -203,9 +218,11 @@ src_install () {
 	# Install rmail for UUCP, closes bug #19127
 	dobin auxiliary/rmail/rmail
 
-	# Install qshape tool
+	# Install qshape and posttls-finger
 	dobin auxiliary/qshape/qshape.pl
 	doman man/man1/qshape.1
+	dobin bin/posttls-finger
+	doman man/man1/posttls-finger.1
 
 	# Performance tuning tools and their manuals
 	dosbin bin/smtp-{source,sink} bin/qmqp-{source,sink}
@@ -225,6 +242,7 @@ src_install () {
 	else
 		mypostconf="home_mailbox=.maildir/"
 	fi
+	LD_LIBRARY_PATH="${S}/lib" \
 	"${D}"/usr/sbin/postconf -c "${D}"/etc/postfix \
 		-e ${mypostconf} || die "postconf failed"
 
@@ -238,7 +256,6 @@ src_install () {
 	use postgres || sed -i -e "s/postgresql //" "${D}/etc/init.d/postfix"
 
 	dodoc *README COMPATIBILITY HISTORY PORTING RELEASE_NOTES*
-	mv "${D}"/etc/postfix/{*.default,makedefs.out} "${D}"/usr/share/doc/${PF}/
 	use doc && mv "${S}"/examples "${D}"/usr/share/doc/${PF}/
 
 	pamd_mimic_system smtp auth account
@@ -252,42 +269,19 @@ src_install () {
 	insinto /usr/include/postfix
 	doins include/*.h
 
-	# Remove unnecessary files
+	# Keep config_dir clean
 	rm -f "${D}"/etc/postfix/{*LICENSE,access,aliases,canonical,generic}
 	rm -f "${D}"/etc/postfix/{header_checks,relocated,transport,virtual}
+
+	if has_version mail-mta/postfix; then
+		# let the sysadmin decide when to change the compatibility_level
+		sed -i -e /^compatibility_level/"s/^/#/" "${D}"/etc/postfix/main.cf || die
+	fi
 
 	systemd_dounit "${FILESDIR}/${PN}.service"
 }
 
-pkg_preinst() {
-	# Postfix 2.9.
-	# default for inet_protocols changed from ipv4 to all in postfix-2.9.
-	# check inet_protocols setting in main.cf and modify if necessary to prevent
-	# performance loss with useless DNS lookups and useless connection attempts.
-	[[ -d ${ROOT}/etc/postfix ]] && {
-	if [[ "$(${D}/usr/sbin/postconf -dh inet_protocols)" != "ipv4" ]]; then
-		if [[ ! -n "$(${D}/usr/sbin/postconf -c ${ROOT}/etc/postfix -n inet_protocols)" ]];
-		then
-			ewarn "\nCOMPATIBILITY: adding inet_protocols=ipv4 to main.cf."
-			ewarn "That will keep the same behaviour as previous postfix versions."
-			ewarn "Specify inet_protocols explicitly if you want to enable IPv6.\n"
-		else
-			# delete inet_protocols setting. there is already one in /etc/postfix
-			sed -i -e /inet_protocols/d "${D}"/etc/postfix/main.cf || die
-		fi
-	fi
-	}
-}
-
 pkg_postinst() {
-	# Do not install server.{key,pem) SSL certificates if they already exist
-	if use ssl && [[ ! -f "${ROOT}"/etc/ssl/postfix/server.key \
-		&& ! -f "${ROOT}"/etc/ssl/postfix/server.pem ]] ; then
-		SSL_ORGANIZATION="${SSL_ORGANIZATION:-Postfix SMTP Server}"
-		install_cert /etc/ssl/postfix/server
-		chown postfix:mail "${ROOT}"/etc/ssl/postfix/server.{key,pem}
-	fi
-
 	if [[ ! -L "${ROOT}"/usr/sbin/sendmail ]]; then
 		ewarn
 		ewarn "You do not currently have a sendmail replacement selected!"
@@ -319,19 +313,15 @@ pkg_postinst() {
 		ewarn
 	fi
 
-	if [[ $(get_version_component_range 2 ${REPLACING_VERSIONS}) -lt 9 ]]; then
-		elog "If you are using old style postfix instances by symlinking"
-		elog "startup scripts in ${ROOT}etc/init.d, please consider"
-		elog "upgrading your config for postmulti support. For more info:"
-		elog "http://www.postfix.org/MULTI_INSTANCE_README.html"
-		if ! use berkdb; then
-			ewarn "\nPostfix is installed without BerkeleyDB support."
-			ewarn "Please turn on berkdb USE flag if you need hash or"
-			ewarn "btree table lookups.\n"
+	# configure tls
+	if use ssl ; then
+		if "${EROOT}"/usr/sbin/postfix tls all-default-client; then
+			elog "To configure client side TLS settings:"
+			elog "${EROOT}"usr/sbin/postfix tls enable-client
 		fi
-		ewarn "Postfix daemons now live under /usr/libexec/postfix"
-		ewarn "Please adjust your main.cf accordingly by running"
-		ewarn "etc-update/dispatch-conf or similar and accepting the new"
-		ewarn "daemon_directory setting."
+		if "${EROOT}"/usr/sbin/postfix tls all-default-server; then
+			elog "To configure server side TLS settings:"
+			elog "${EROOT}"usr/sbin/postfix tls enable-server
+		fi
 	fi
 }

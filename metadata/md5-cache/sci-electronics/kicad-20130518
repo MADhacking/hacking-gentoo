@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install postinst postrm preinst prepare test unpack
-DEPEND=x11-libs/wxGTK:2.8[gnome,opengl,X] dev-python/wxpython:2.8[opengl] >=dev-util/cmake-2.6.4 >=dev-libs/boost-1.49[python] app-doc/doxygen sys-devel/make >=dev-util/cmake-2.8.12 >=sys-apps/sed-4
+DEPEND=x11-libs/wxGTK:2.8[gnome,opengl,X] dev-python/wxpython:2.8[opengl] >=dev-util/cmake-2.6.4 >=dev-libs/boost-1.49[python] app-doc/doxygen sys-devel/make >=dev-util/cmake-3.5.2 >=sys-apps/sed-4
 DESCRIPTION=Electronic Schematic and PCB design tools.
 EAPI=5
 HOMEPAGE=http://www.kicad-pcb.org
@@ -9,5 +9,5 @@ LICENSE=GPL-2 kicad-doc
 RDEPEND=x11-libs/wxGTK:2.8[gnome,opengl,X] dev-python/wxpython:2.8[opengl] sys-libs/zlib sci-electronics/electronics-menu
 SLOT=0
 SRC_URI=http://iut-tice.ujf-grenoble.fr/cao/kicad-sources-stable_2013-05-18_BZR4017.zip http://iut-tice.ujf-grenoble.fr/cao/kicad-2013-05-18-BZR4017-stable-UBUNTU_12.04_full_with_components_doc.tgz
-_eclasses_=cmake-utils	16e40479aefbbed67ea20779992ab90e	eutils	b83a2420b796f7c6eff682679d08fe25	fdo-mime	92d07846ea8ea54172f8c0112a47ae3d	flag-o-matic	7366202dd55cb8f018f5d450d54e7749	gnome2-utils	c6dcdf3a2c22b578b16adb945dc85c35	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	unpacker	45d07319df5f40ee6af58418b0f930be	versionator	99ae9d758cbe7cfed19170e7d48f5a9c	wxwidgets	9b34ce3ca77f4e418e8fd9951c4c1cb1	xdg-utils	e2b2bd56125ce8cf59ce30c642b59d48
+_eclasses_=cmake-utils	fa4d8052a1ccf4fbbfa76361bffebe42	eutils	017377e73405d964cd0137088cddb9c3	fdo-mime	92d07846ea8ea54172f8c0112a47ae3d	flag-o-matic	7366202dd55cb8f018f5d450d54e7749	gnome2-utils	c6dcdf3a2c22b578b16adb945dc85c35	multilib	165fc17c38d1b11dac2008280dab6e80	multiprocessing	66b3bf714f8cfc1b6494db5269b4666e	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	unpacker	45d07319df5f40ee6af58418b0f930be	versionator	99ae9d758cbe7cfed19170e7d48f5a9c	wxwidgets	9b34ce3ca77f4e418e8fd9951c4c1cb1	xdg-utils	e2b2bd56125ce8cf59ce30c642b59d48
 _md5_=7e61f9463b071a3155a1864432397cbb
