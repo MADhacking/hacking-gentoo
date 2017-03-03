@@ -1,4 +1,4 @@
-# Copyright 2012 Hacking Networked Solutions
+# Copyright 2017 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
@@ -8,7 +8,7 @@ inherit webapp eutils confutils
 
 DESCRIPTION="Poweradmin is a friendly web-based DNS administration tool for the PowerDNS server"
 HOMEPAGE="http://www.poweradmin.org/"
-SRC_URI="http://github.com/downloads/poweradmin/poweradmin/${P}.tgz"
+SRC_URI="https://github.com/poweradmin/poweradmin/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-2"
 KEYWORDS="~alpha amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd x86 ~x86-fbsd"
