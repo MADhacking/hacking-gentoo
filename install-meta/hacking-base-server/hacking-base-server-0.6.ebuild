@@ -45,11 +45,3 @@ RDEPEND="${RDEPEND}
 	puppet?				  (	app-admin/puppet )
 	rsync-backup-client?  (	install-conf/rsync-backup-client )
 	snmp?				  ( net-analyzer/net-snmp )"
-
-# Forgotten dependencies
-#
-# 	dev-libs/libgcrypt	needed by net-fs/nfs-utils
-#	dev-db/libdbi		needed by net-analyzer/rrdtool (dep of net-analyzer/net-snmp)
-RDEPEND="${RDEPEND}
-	dev-libs/libgcrypt
-	dev-db/libdbi"
