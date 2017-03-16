@@ -2,7 +2,14 @@
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
-EAPI=6
+EAPI="6"
+
+PYTHON_COMPAT=( python2_7 )
+
+inherit python-single-r1
+
+RDEPEND="${PYTHON_DEPS}"
+DEPEND="${RDEPEND}"
 
 DESCRIPTION="Google Cloud SDK"
 SLOT="0"
@@ -21,5 +28,5 @@ src_unpack() {
 
 src_install() {
 	cd "${WORKDIR}/${PN}"
-	./install.sh --disable-prompts --install-dir=${D}
+	CLOUDSDK_PYTHON="/usr/bin/python2.7" ./install.sh --disable-prompts --install-dir=${D}
 }
