@@ -26,8 +26,16 @@ src_unpack() {
 	fi
 }
 
+src_prepare() {
+	default
+    python_fix_shebang --force .
+}
+
 src_install() {
-	cd "${WORKDIR}/${PN}"
-	CLOUDSDK_PYTHON="/usr/bin/python2.7" ./install.sh --disable-prompts --install-dir=${D} || die
+	dodir ${ROOT}/usr/share/google-cloud-sdk
+	cp -R "${S}/" "${D}/usr/share/" || die "Install failed!"
+	dosym ${D}/usr/share/google-cloud-sdk/bin/gcloud /usr/bin/gcloud
+	doman ${D}/usr/share/google-cloud-sdk/help/man/man1/*.1
+	rm -rf "${D}/usr/share/google-cloud-sdk/help"
 	python_optimize "${D}"usr/share/${PN}
 }
