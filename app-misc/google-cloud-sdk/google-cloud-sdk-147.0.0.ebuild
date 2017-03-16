@@ -28,5 +28,6 @@ src_unpack() {
 
 src_install() {
 	cd "${WORKDIR}/${PN}"
-	CLOUDSDK_PYTHON="/usr/bin/python2.7" ./install.sh --disable-prompts --install-dir=${D}
+	CLOUDSDK_PYTHON="/usr/bin/python2.7" ./install.sh --disable-prompts --install-dir=${D} || die
+	python_optimize "${D}"usr/share/${PN}
 }
