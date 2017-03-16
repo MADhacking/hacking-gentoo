@@ -1,0 +1,8 @@
+DEFINED_PHASES=install unpack
+DESCRIPTION=Google Cloud SDK
+EAPI=6
+KEYWORDS=~amd64
+LICENSE=https://cloud.google.com/terms/
+SLOT=0
+SRC_URI=https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-147.0.0-linux-x86_64.tar.gz
+_md5_=d0a91cbbf01c1306ddd5d37462425dd1
