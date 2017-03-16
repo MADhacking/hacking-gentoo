@@ -10,5 +10,5 @@ RDEPEND=>=dev-libs/nspr-4.10.8[abi_x86_32(-)?,abi_x86_64(-)?,abi_x86_x32(-)?,abi
 RESTRICT=test
 SLOT=0
 SRC_URI=http://archive.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_21_RTM/src/nss-3.21.tar.gz cacert? ( https://dev.gentoo.org/~anarchy/patches/nss-3.14.1-add_spi+cacerts_ca_certs.patch ) nss-pem? ( https://dev.gentoo.org/~anarchy/dist/nss-pem-20140125.tar.bz2 )
-_eclasses_=cadb	fe8dc4a35ac638a4ba572b375459422a	eutils	017377e73405d964cd0137088cddb9c3	flag-o-matic	7366202dd55cb8f018f5d450d54e7749	multibuild	742139c87a9fa3766f0c2b155e5522bf	multilib	165fc17c38d1b11dac2008280dab6e80	multilib-build	8fe2e81aeb36cdf8a6cc5f50443879cc	multilib-minimal	0224dee31c0f98405d572e14ad6dee65	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_eclasses_=cadb	fe8dc4a35ac638a4ba572b375459422a	eutils	3c847a0129fed780bd709b98e426f89c	flag-o-matic	61cad4fb5d800b29d484b27cb033f59b	multibuild	72647e255187a1fadc81097b3657e5c3	multilib	0236be304ee52e7f179ed2f337075515	multilib-build	eed53a6313267c9fbcd35fc384bd0087	multilib-minimal	9139c3a57e077cb8e0d0f73ceb080b89	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
 _md5_=0115542c5911c2a806bdb7ba73c1fb2b

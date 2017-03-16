@@ -9,5 +9,5 @@ LICENSE=GPL-2
 RDEPEND=x11-libs/gtk+:2 gtk3? ( x11-libs/gtk+:3 ) x11-libs/libX11 x11-libs/libXext x11-libs/libXxf86vm x11-libs/gdk-pixbuf[X] media-libs/mesa x11-libs/pango[X] x11-libs/libXv x11-libs/libXrandr dev-libs/glib:2 dev-libs/jansson x11-libs/cairo >=x11-libs/libvdpau-1.0 x11-drivers/nvidia-drivers:0/361
 SLOT=0
 SRC_URI=ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-361.28.tar.bz2
-_eclasses_=eutils	017377e73405d964cd0137088cddb9c3	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_eclasses_=eutils	3c847a0129fed780bd709b98e426f89c	multilib	0236be304ee52e7f179ed2f337075515	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
 _md5_=ea4d8b56e6147c254a62e2e07090cf0e

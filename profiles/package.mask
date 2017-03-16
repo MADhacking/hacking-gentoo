@@ -9,7 +9,7 @@ app-admin/mcollective
 app-admin/update-ca-certificates
 app-emulation/xen
 app-emulation/xen-tools
-app-misc/ca-certificates
+#app-misc/ca-certificates
 dev-java/icedtea
 dev-lang/gnat-gcc
 dev-libs/efl
@@ -18,7 +18,7 @@ dev-libs/nss
 mail-mta/postfix
 mail-mta/ssmtp
 net-misc/r8168
-media-gfx/blender
+#media-gfx/blender
 sys-apps/fbset
 sys-apps/openrc
 sys-apps/openrc-runhooks-plugin
