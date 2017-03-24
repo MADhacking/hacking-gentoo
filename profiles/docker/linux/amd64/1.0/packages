@@ -23,7 +23,6 @@
 -*net-misc/iputils
 -*net-misc/rsync
 -*sys-apps/busybox
--*sys-apps/diffutils
 -*sys-apps/iproute2
 -*sys-apps/man-pages
 -*sys-apps/man-pages-posix
