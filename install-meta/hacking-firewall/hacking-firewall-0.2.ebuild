@@ -17,8 +17,8 @@ RDEPEND="${DEPEND}
 	net-dialup/ppp
 	net-dns/ddclient
 	net-firewall/hacking-vpn-tools
-	net-firewall/ipsec-tools
 	net-firewall/iptables
 	net-misc/dhcpcd
+	net-vpn/ipsec-tools
 	sys-apps/ethtool
 	sys-apps/iproute2"
