@@ -14,7 +14,7 @@ KEYWORDS="~alpha amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~spa
 IUSE=""
 
 RDEPEND="app-shells/bash
-		 net-firewall/ipsec-tools
+		 net-vpn/ipsec-tools
 		 sys-apps/grep
 		 sys-apps/iproute2
 		 sys-apps/sed
