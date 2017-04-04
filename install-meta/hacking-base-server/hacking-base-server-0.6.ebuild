@@ -39,7 +39,7 @@ RDEPEND="${RDEPEND}
 							net-fs/autofs
 							net-fs/nfs-utils )
 	hacking-certificates? ( app-misc/hacking-certificates )
-	ipsec?				  ( net-firewall/ipsec-tools )
+	ipsec?				  ( net-vpn/ipsec-tools )
 	mcollective?		  (	mcollective-plugin/mcollective-plugin-update-system
 							app-admin/mcollective-server )
 	puppet?				  (	app-admin/puppet )
