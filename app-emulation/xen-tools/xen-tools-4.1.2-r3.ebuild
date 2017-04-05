@@ -2,9 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="4"
-PYTHON_DEPEND="2"
-PYTHON_USE_WITH="xml threads"
+EAPI="5"
+
+PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_REQ_USE='xml,threads'
 
 if [[ $PV == *9999 ]]; then
 	KEYWORDS=""
@@ -20,7 +21,7 @@ else
 	S="${WORKDIR}/xen-${PV}"
 fi
 
-inherit flag-o-matic eutils multilib python toolchain-funcs ${live_eclass}
+inherit flag-o-matic eutils multilib python-single-r1 toolchain-funcs udev ${live_eclass}
 
 DESCRIPTION="Xend daemon and tools"
 HOMEPAGE="http://xen.org/"
@@ -38,8 +39,8 @@ QA_PRESTRIPPED="/usr/share/xen/qemu/openbios-ppc \
 QA_WX_LOAD=${QA_PRESTRIPPED}
 
 CDEPEND="<dev-libs/yajl-2
-	dev-python/lxml
-	dev-python/pypam
+	dev-python/lxml[${PYTHON_USEDEP}]
+	dev-python/pypam[${PYTHON_USEDEP}]
 	dev-python/pyxml
 	sys-libs/zlib
 	hvm? ( media-libs/libsdl
@@ -89,8 +90,7 @@ QA_EXECSTACK="usr/share/xen/qemu/openbios-sparc32
 RESTRICT="test"
 
 pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
+	python-single-r1_pkg_setup
 	export "CONFIG_LOMOUNT=y"
 
 	if use qemu; then

@@ -2,9 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="3"
+EAPI="5"
 
-inherit flag-o-matic eutils multilib python
+PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_REQ_USE='xml,threads'
+
+inherit flag-o-matic eutils multilib python-single-r1 toolchain-funcs udev
 
 # TPMEMUFILE=tpm_emulator-0.4.tar.gz
 
@@ -60,6 +63,7 @@ QA_EXECSTACK="usr/share/xen/qemu/openbios-sparc32
 	usr/share/xen/qemu/openbios-sparc64"
 
 pkg_setup() {
+	python-single-r1_pkg_setup
 	export "CONFIG_LOMOUNT=y"
 
 	if use ioemu; then

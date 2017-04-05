@@ -2,7 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="3"
+EAPI="5"
+
+PYTHON_COMPAT=( python{2_6,2_7} )
+PYTHON_REQ_USE='xml,threads'
 
 if [[ $PV == *9999 ]]; then
 	KEYWORDS=""
@@ -18,7 +21,7 @@ else
 	S="${WORKDIR}/xen-${PV}"
 fi
 
-inherit flag-o-matic eutils multilib python toolchain-funcs ${live_eclass}
+inherit flag-o-matic eutils multilib python-single-r1 toolchain-funcs udev ${live_eclass}
 
 DESCRIPTION="Xend daemon and tools"
 HOMEPAGE="http://xen.org/"
@@ -28,8 +31,8 @@ SLOT="0"
 IUSE="api custom-cflags debug doc flask hvm qemu pygrub screen xend"
 
 CDEPEND="dev-lang/python
-	dev-python/lxml
-	sys-libs/zlib
+	dev-python/lxml[${PYTHON_USEDEP}]
+	dev-python/pypam[${PYTHON_USEDEP}]
 	hvm? ( media-libs/libsdl
 		sys-power/iasl )
 	api? ( dev-libs/libxml2 net-misc/curl )"
@@ -75,6 +78,7 @@ QA_EXECSTACK="usr/share/xen/qemu/openbios-sparc32
 	usr/share/xen/qemu/openbios-sparc64"
 
 pkg_setup() {
+	python-single-r1_pkg_setup
 	export "CONFIG_LOMOUNT=y"
 
 	if use qemu; then
