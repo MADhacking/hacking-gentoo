@@ -5,8 +5,8 @@
 EAPI="3"
 
 DESCRIPTION="An application to update the CA certificate databases for NSS, OpenSSL and SSH."
-HOMEPAGE="http://www.mad-hacking.net/software/linux/agnostic/update-ca-certificates/index.xml"
-SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
+HOMEPAGE="https://www.mad-hacking.net/software/linux/agnostic/update-ca-certificates/index.xml"
+SRC_URI="https://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"

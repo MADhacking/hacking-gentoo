@@ -1,4 +1,4 @@
-# Copyright 2017 Hacking Networked Solutions
+# Copyright 2012 Hacking Networked Solutions
 # Distributed under the terms of the GNU General Public License v3
 # $Header: $
 
