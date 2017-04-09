@@ -343,17 +343,15 @@ pkg_postinst() {
 
 	# Install a new empty database if none exists already.
 	if [ ! -f "${EROOT}/etc/pki/nssdb/cert9.db" ]; then
-		echo > empty.txt
-		certutil -N -d "sql:${EROOT}/etc/pki/nssdb" -f empty.txt || die
-		rm empty.txt
+		certutil -N -d "sql:${ED}/etc/pki/nssdb" --empty-password || die
 		einfo "An empty NSS system database has been installed, with no password."
 		einfo
 		einfo "You may wish to set a new system database password now using:"
 		einfo
-		einfo "certutil -W -d \"sql:${EROOT}/etc/pki/nssdb\""
+		einfo "certutil -W -d \"sql:${EROOT}etc/pki/nssdb\""
 
 		# Set sensible permissions 0644 on the certificate database.
-		fperms 0644 "${EROOT}"/etc/pki/nssdb/*
+		chmod 0644 ${EROOT}/etc/pki/nssdb/*
 	fi
 
 	# Populate the certificate DB.
