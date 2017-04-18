@@ -1,0 +1,10 @@
+DEFINED_PHASES=compile install prepare
+DESCRIPTION=A 'wiring' like library for the Raspberry Pi
+EAPI=3
+HOMEPAGE=http://wiringpi.com/
+KEYWORDS=~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd ~x86 ~x86-fbsd
+LICENSE=LGPL-3
+SLOT=0
+SRC_URI=http://downloads.mad-hacking.net/software/wiringPi-2.44.tar.gz
+_eclasses_=eutils	3c847a0129fed780bd709b98e426f89c	multilib	0236be304ee52e7f179ed2f337075515	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_md5_=3d2ca2a5813ab011511b473235095e01
