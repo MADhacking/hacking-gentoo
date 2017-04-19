@@ -1,0 +1,20 @@
+--- wiringPi-2.44/gpio/Makefile	2017-04-19 22:00:26.146615164 +0100
++++ wiringPi-2.44/gpio/Makefile	2017-04-19 22:02:06.648911128 +0100
+@@ -72,13 +72,10 @@
+ .PHONY:	install
+ install: gpio
+ 	$Q echo "[Install]"
+-	$Q cp gpio		$(DESTDIR)$(PREFIX)/bin
+-ifneq ($(WIRINGPI_SUID),0)
+-	$Q chown root.root	$(DESTDIR)$(PREFIX)/bin/gpio
+-	$Q chmod 4755		$(DESTDIR)$(PREFIX)/bin/gpio
+-endif
+-	$Q mkdir -p		$(DESTDIR)$(PREFIX)/man/man1
+-	$Q cp gpio.1		$(DESTDIR)$(PREFIX)/man/man1
++	$Q install -m 0755 -d		$(DESTDIR)$(PREFIX)/bin
++	$Q install -m 4755 gpio		$(DESTDIR)$(PREFIX)/bin
++	$Q install -m 0755 -d		$(DESTDIR)$(PREFIX)/share/man/man1
++	$Q install -m 0644 gpio.1	$(DESTDIR)$(PREFIX)/share/man/man1
+ 
+ .PHONY:	install-deb
+ install-deb:	gpio

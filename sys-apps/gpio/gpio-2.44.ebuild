@@ -21,7 +21,7 @@ DEPEND="${RDEPEND}"
 MAKEDIRS="gpio"
 
 src_prepare() {
-	epatch "${FILESDIR}/gpio_Makefile.patch"
+	epatch "${FILESDIR}/2.44-gpio_Makefile.patch"
 }
 
 src_compile() {
