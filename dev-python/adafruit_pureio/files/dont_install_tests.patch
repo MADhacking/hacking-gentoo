@@ -1,0 +1,8 @@
+--- setup.py.old	2017-04-20 23:13:44.510436490 +0100
++++ setup.py	2017-04-20 23:14:07.043537210 +0100
+@@ -24,4 +24,4 @@
+       description       = 'Pure python (i.e. no native extensions) access to Linux IO including I2C and SPI.  Drop in replacement for smbus and spidev modules.',
+       license           = 'MIT',
+       classifiers       = classifiers,
+-      packages          = find_packages())
++      packages          = find_packages(exclude=('tests',)))
