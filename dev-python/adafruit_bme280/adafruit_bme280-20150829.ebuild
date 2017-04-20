@@ -14,6 +14,8 @@ DESCRIPTION="Library to provide a cross-platform GPIO interface on the Raspberry
 HOMEPAGE="https://github.com/adafruit/Adafruit_Python_BME280"
 SRC_URI="https://github.com/adafruit/Adafruit_Python_BME280/archive/${ARCHIVE_FILE}.zip -> ${P}.zip"
 
+KEYWORDS="arm"
+
 DEPEND="dev-python/adafruit_gpio[${PYTHON_USEDEP}]"
 
 S="${WORKDIR}/Adafruit_Python_BME280-${ARCHIVE_FILE}"

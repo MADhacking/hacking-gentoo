@@ -14,5 +14,7 @@ DESCRIPTION="Library to provide a cross-platform GPIO interface on the Raspberry
 HOMEPAGE="https://github.com/adafruit/Adafruit_Python_GPIO"
 SRC_URI="https://github.com/adafruit/Adafruit_Python_GPIO/archive/${ARCHIVE_FILE}.zip -> ${P}.zip"
 
+KEYWORDS="arm"
+
 S="${WORKDIR}/Adafruit_Python_GPIO-${ARCHIVE_FILE}"
 PATCHES="${FILESDIR}/dont_install_tests.patch"
