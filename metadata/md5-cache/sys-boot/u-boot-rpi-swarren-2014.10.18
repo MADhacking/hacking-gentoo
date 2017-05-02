@@ -6,5 +6,5 @@ KEYWORDS=~arm
 LICENSE=GPL-2
 SLOT=0
 SRC_URI=http://downloads.mad-hacking.net/software/u-boot-rpi-swarren-2014.10.18.tar.bz2
-_eclasses_=eutils	3c847a0129fed780bd709b98e426f89c	mount-boot	1e82d96b7a7dcb483b412497a90bb646	multilib	0236be304ee52e7f179ed2f337075515	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	e7491451996e8b54c3caeb713285b0fb	ltprune	2770eed66a9b8ef944714cd0e968182e	mount-boot	1e82d96b7a7dcb483b412497a90bb646	multilib	0236be304ee52e7f179ed2f337075515	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
 _md5_=3a5b190fd6f9fea91219497e2c386d64
