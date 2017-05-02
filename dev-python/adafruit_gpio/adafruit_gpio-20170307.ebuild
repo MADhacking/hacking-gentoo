@@ -16,7 +16,8 @@ SRC_URI="https://github.com/adafruit/Adafruit_Python_GPIO/archive/${ARCHIVE_FILE
 
 KEYWORDS="arm"
 
-DEPEND="dev-python/adafruit_pureio[${PYTHON_USEDEP}]"
+DEPEND="dev-python/adafruit_pureio[${PYTHON_USEDEP}]
+		dev-python/spidev[${PYTHON_USEDEP}]"
 
 S="${WORKDIR}/Adafruit_Python_GPIO-${ARCHIVE_FILE}"
 PATCHES="${FILESDIR}/dont_install_tests.patch"
