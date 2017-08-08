@@ -1,5 +1,0 @@
-If this is a new install you will need to follow the instructions at
-
-http://${VHOST_HOSTNAME}/${VHOST_APPDIR}/install
-
-before removing the ${VHOST_HOSTNAME}/${VHOST_APPDIR}/install directory.
