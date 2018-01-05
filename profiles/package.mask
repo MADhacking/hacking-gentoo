@@ -2,7 +2,7 @@
 app-portage/auto-patch-portage
 <app-admin/buildserver-scripts-0.7
 
-# Replaces by mcollective-client and mcollective-server.
+# Replaced by mcollective-client and mcollective-server.
 app-admin/mcollective
 
 # Masked unless overlay used in replace mode

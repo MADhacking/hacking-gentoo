@@ -73,6 +73,7 @@ PATCHES=(
 		"${FILESDIR}/ceph-glibc-20.patch"
 		"${FILESDIR}/ceph-0.87.1-glibc-2.20.patch"
 		"${FILESDIR}/ceph-boost-optionals.patch"
+		"${FILESDIR}/ceph-0.67-gcc-6.patch"
 )
 
 pkg_setup() {
