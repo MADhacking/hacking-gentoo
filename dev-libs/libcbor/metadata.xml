@@ -10,7 +10,6 @@
 		<maintainer>
 			<email>default-package-maintainer@mad-hacking.net</email>
 		</maintainer>
-		<bugs-to></bugs-to>
 		<doc>http://libcbor.readthedocs.io/en/v0.4.0/</doc>
 	</upstream>
 </pkgmetadata>
