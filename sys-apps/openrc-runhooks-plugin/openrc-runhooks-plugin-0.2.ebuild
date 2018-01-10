@@ -18,6 +18,8 @@ KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 DEPEND=">=sys-apps/openrc-0.11.8"
 RDEPEND="${DEPEND}"
 
+S="${WORKDIR}"
+
 src_prepare() {
 	autotools-utils_src_prepare
 	eautoreconf
