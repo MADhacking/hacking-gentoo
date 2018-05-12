@@ -14,7 +14,8 @@ SRC_URI="ftp://ftp.denx.de/pub/u-boot/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
-KEYWORDS="~arm"
+KEYWORDS="~arm ~arm64"
+# https://github.com/sakaki-/gentoo-on-rpi3-64bit ,also ROCK64/Pine 64bit arm Gentoo as well. 
 
 DEPEND=""
 RDEPEND="${DEPEND}"
