@@ -20,7 +20,6 @@ sys-block/iscsitarget::hacking-gentoo
 sys-boot/last-known-good::hacking-gentoo
 sys-boot/last-known-good-dracut-module::hacking-gentoo
 sys-cluster/ceph::hacking-gentoo
-sys-devel/binutils::hacking-gentoo
 sys-devel/crossdev::hacking-gentoo
 www-apache/mod_depends::hacking-gentoo
 www-apache/mod_transform::hacking-gentoo
