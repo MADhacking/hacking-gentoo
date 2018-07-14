@@ -1,9 +1,0 @@
-# Config file for /etc/init.d/pacemaker
-
-# You can specify additional rc_need and rc_use options here.
-#rc_need="net.ib0"
-#rc_use="stunnel"
-
-# When the pacemaker daemon starts should the cluster automatically
-# be re-joined or should the last state prevail (default).
-PACEMAKER_AUTO_JOIN_CLUSTER="no"
