@@ -6,20 +6,19 @@ EAPI="4"
 
 USE_RUBY="ruby19 ruby20 ruby21 ruby22 ruby23"
 
-inherit ruby-ng
+inherit systemd ruby-ng
 
 DESCRIPTION="Framework to build server orchestration or parallel job execution systems"
-HOMEPAGE="http://marionette-collective.org/"
-SRC_URI="http://downloads.puppetlabs.com/mcollective/mcollective-${PV}.tar.gz"
+HOMEPAGE="https://docs.puppet.com/mcollective/"
+SRC_URI="https://github.com/puppetlabs/marionette-collective/archive/${PV}.tar.gz -> mcollective-${PV}.tar.gz"
+S="${WORKDIR}/all/mcollective-${PV}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND=""
-RDEPEND=""
-
-ruby_add_rdepend "dev-libs/mcollective"
+RDEPEND=">=dev-libs/mcollective-${PV}"
 
 src_compile() {
 	einfo "nothing to compile"

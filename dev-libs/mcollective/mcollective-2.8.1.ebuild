@@ -9,8 +9,9 @@ USE_RUBY="ruby19 ruby20 ruby21 ruby22 ruby23"
 inherit ruby-ng
 
 DESCRIPTION="Framework to implement server orchestration or parallel job execution systems"
-HOMEPAGE="http://marionette-collective.org/"
-SRC_URI="http://downloads.puppetlabs.com/mcollective/${P}.tar.gz"
+HOMEPAGE="https://docs.puppet.com/mcollective/"
+SRC_URI="https://github.com/puppetlabs/marionette-collective/archive/${PV}.tar.gz -> mcollective-${PV}.tar.gz"
+S="${WORKDIR}/all/mcollective-${PV}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -20,7 +21,7 @@ IUSE="doc"
 DEPEND=""
 RDEPEND=""
 
-ruby_add_rdepend "dev-ruby/stomp"
+RDEPEND=">=dev-ruby/stomp-1.4.4"
 
 src_compile() {
 	einfo "nothing to compile"
