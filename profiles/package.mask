@@ -22,9 +22,6 @@ sys-block/iscsitarget
 sys-boot/last-known-good
 sys-boot/last-known-good-dracut-module
 sys-cluster/ceph
-sys-cluster/cman
-sys-cluster/libdlm
-sys-cluster/pacemaker
 sys-devel/binutils
 sys-devel/crossdev
 www-apache/mod_depends
