@@ -1,4 +1,5 @@
 # Un-mask Hacking Gentoo replacement packages.
+app-admin/puppet::hacking-gentoo
 app-admin/update-ca-certificates::hacking-gentoo
 app-emulation/xen::hacking-gentoo
 app-emulation/xen-tools::hacking-gentoo
