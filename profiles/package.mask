@@ -21,6 +21,5 @@ sys-apps/openrc-runhooks-plugin
 sys-block/iscsitarget
 sys-boot/last-known-good
 sys-boot/last-known-good-dracut-module
-sys-cluster/ceph
 www-apache/mod_depends
 www-apache/mod_transform
