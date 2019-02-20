@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="sys-cluster/ceph[cryptopp]
+RDEPEND="sys-cluster/ceph
 		sys-kernel/dracut"
 
 src_install() {
