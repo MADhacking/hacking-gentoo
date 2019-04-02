@@ -28,7 +28,7 @@ IUSE="+cryptopp debug fuse gtk +libatomic +libaio nss +radosgw static-libs +tcma
 
 CDEPEND="
 	app-arch/snappy
-	<dev-libs/boost-1.56.0:=[threads]
+	dev-libs/boost[threads]
 	dev-libs/fcgi
 	dev-libs/libaio
 	dev-libs/libedit
