@@ -1,7 +1,6 @@
-#!/sbin/runscript
-# Copyright 1999-2012 Gentoo Foundation
+#!/sbin/openrc-run
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header$
 
 # These fit the Logitech Media Server ebuild and so shouldn't need to be
 # changed; user-servicable parts go in /etc/conf.d/logitechmediaserver.
@@ -39,8 +38,6 @@ start() {
 		--cachedir=${cachedir} \
 		--prefsdir=${prefsdir} \
 		--logdir=${logdir} \
-		--audiodir=${LMS_MUSIC_DIR} \
-		--playlistdir=${LMS_PLAYLISTS_DIR} \
 		${LMS_OPTS}
 
 	eend $? "Failed to start Logitech Media Server"
