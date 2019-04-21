@@ -6,7 +6,6 @@ app-portage/auto-patch-portage
 app-admin/mcollective
 
 # Masked unless overlay used in replace mode
-app-admin/puppet
 app-admin/update-ca-certificates
 dev-java/icedtea
 dev-libs/efl
