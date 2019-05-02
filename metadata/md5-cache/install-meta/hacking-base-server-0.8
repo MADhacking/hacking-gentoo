@@ -1,0 +1,10 @@
+DEFINED_PHASES=-
+DESCRIPTION=Hacking Networked Solutions base server meta-package
+EAPI=3
+HOMEPAGE=http://www.hacking.co.uk/
+IUSE=+buildserver-client +ipsec +mcollective +puppet +rsync-backup-client +snmp
+KEYWORDS=amd64 x86
+LICENSE=GPL-3
+RDEPEND=app-admin/logrotate app-admin/sudo app-admin/syslog-ng app-editors/nano app-portage/eix app-portage/gentoolkit app-portage/portage-utils app-shells/bash-completion app-shells/gentoo-bashcomp net-analyzer/traceroute net-misc/ntp sys-apps/less sys-apps/timer_entropyd sys-fs/e2fsprogs sys-process/lsof sys-process/vixie-cron virtual/mailx buildserver-client? ( app-admin/buildserver-client-scripts net-fs/autofs net-fs/nfs-utils ) ipsec? ( net-vpn/ipsec-tools ) puppet? ( app-admin/puppet-agent ) rsync-backup-client? ( install-conf/rsync-backup-client ) snmp? ( net-analyzer/net-snmp )
+SLOT=0
+_md5_=0346eba6b0fe605edf1ee3d856cd1c2c
