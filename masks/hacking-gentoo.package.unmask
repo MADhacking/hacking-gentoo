@@ -4,7 +4,6 @@ app-admin/update-ca-certificates::hacking-gentoo
 app-emulation/xen::hacking-gentoo
 app-emulation/xen-tools::hacking-gentoo
 app-misc/ca-certificates::hacking-gentoo
-dev-java/icedtea::hacking-gentoo
 dev-libs/efl::hacking-gentoo
 dev-libs/klibc::hacking-gentoo
 dev-libs/nss::hacking-gentoo
