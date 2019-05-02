@@ -18,8 +18,7 @@ SLOT="0"
 KEYWORDS="amd64 hppa ~ppc ~sparc x86"
 
 DEPEND=""
-RDEPEND="${DEPEND}
-		 app-admin/puppet"
+RDEPEND="${DEPEND}"
 
 # @FUNCTION: puppet_src_install
 # @DESCRIPTION:
