@@ -11,7 +11,6 @@ dev-libs/efl
 dev-libs/klibc
 mail-mta/postfix
 mail-mta/ssmtp
-net-misc/r8168
 sys-apps/fbset
 sys-apps/openrc
 sys-apps/openrc-runhooks-plugin

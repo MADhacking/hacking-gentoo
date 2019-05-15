@@ -9,7 +9,6 @@ dev-libs/klibc::hacking-gentoo
 dev-ruby/awesome_nested_set::hacking-gentoo
 mail-mta/postfix::hacking-gentoo
 mail-mta/ssmtp::hacking-gentoo
-net-misc/r8168::hacking-gentoo
 media-gfx/blender::hacking-gentoo
 sys-apps/fbset::hacking-gentoo
 sys-apps/openrc::hacking-gentoo
