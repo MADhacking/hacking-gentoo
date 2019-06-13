@@ -5,7 +5,7 @@
 EAPI=5
 SLOT="0"
 
-PYTHON_COMPAT=( python3_4 )
+PYTHON_COMPAT=( python3_6 )
 inherit distutils-r1
 
 ARCHIVE_FILE="060f6d6782768b1f6a4713f369db2740e79ec61e"

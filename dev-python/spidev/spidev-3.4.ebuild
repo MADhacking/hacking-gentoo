@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Python bindings for Linux SPI access through spidev"
 HOMEPAGE="https://pypi.python.org/pypi/spidev"
-SRC_URI="https://pypi.python.org/packages/36/83/73748b6e1819b57d8e1df8090200195cdae33aaa22a49a91ded16785eedd/spidev-3.2.tar.gz"
+SRC_URI="https://files.pythonhosted.org/packages/fb/14/4c2e1640f0cb04862c76d9d76ed7c945b0f67876e503ac02f7f675fe86a0/spidev-3.4.tar.gz"
 
 KEYWORDS="arm"
 

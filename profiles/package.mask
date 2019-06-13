@@ -7,7 +7,6 @@ app-admin/mcollective
 
 # Masked unless overlay used in replace mode
 app-admin/update-ca-certificates
-dev-libs/efl
 dev-libs/klibc
 mail-mta/postfix
 mail-mta/ssmtp
