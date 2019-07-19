@@ -16,5 +16,5 @@ IUSE=""
 RDEPEND=""
 
 src_install() {
-	cp -a ${WORKDIR}/${P}/* ${D}/
+	cp -a ${WORKDIR}/* ${D}/
 }
