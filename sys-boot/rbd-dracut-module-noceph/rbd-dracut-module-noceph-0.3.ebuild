@@ -10,11 +10,11 @@ SRC_URI="http://downloads.mad-hacking.net/software/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="arm amd64 x86"
 IUSE=""
 
 RDEPEND="sys-apps/haveged
-		 sys-cluster/rbd-client-tools
+		 sys-cluster/rbd-client-tools-noceph
 		 sys-kernel/dracut
 		 sys-process/procps"
 
