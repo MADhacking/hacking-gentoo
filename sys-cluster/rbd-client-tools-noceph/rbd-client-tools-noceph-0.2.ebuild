@@ -16,5 +16,6 @@ IUSE=""
 RDEPEND=""
 
 src_install() {
+	rm ${WORKDIR}/LICENSE
 	cp -a ${WORKDIR}/* ${D}/
 }

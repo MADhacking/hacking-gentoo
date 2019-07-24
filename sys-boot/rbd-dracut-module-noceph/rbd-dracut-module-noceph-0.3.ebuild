@@ -19,5 +19,6 @@ RDEPEND="sys-apps/haveged
 		 sys-process/procps"
 
 src_install() {
+	rm ${WORKDIR}/LICENSE
 	cp -a ${WORKDIR}/* ${D}/
 }
