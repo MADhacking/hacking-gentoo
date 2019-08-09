@@ -32,9 +32,9 @@ src_prepare() {
 }
 
 src_install() {
-	dodir ${ROOT}/usr/share/google-cloud-sdk
+	dodir /usr/share/google-cloud-sdk
 	cp -R "${S}/" "${D}/usr/share/" || die "Install failed!"
-	dosym ${D}/usr/share/google-cloud-sdk/bin/gcloud /usr/bin/gcloud
+	dosym /usr/share/google-cloud-sdk/bin/gcloud /usr/bin/gcloud
 	doman ${D}/usr/share/google-cloud-sdk/help/man/man1/*.1
 	rm -rf "${D}/usr/share/google-cloud-sdk/help"
 	python_optimize "${D}"usr/share/${PN}
