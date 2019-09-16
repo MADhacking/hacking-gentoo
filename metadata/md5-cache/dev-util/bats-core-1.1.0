@@ -1,0 +1,9 @@
+DEFINED_PHASES=install test
+DESCRIPTION=An automated testing system for bash
+EAPI=7
+HOMEPAGE=https://github.com/bats-core/bats-core/
+KEYWORDS=~amd64 ~x86
+LICENSE=MIT
+SLOT=0
+SRC_URI=https://github.com/bats-core/bats-core/archive/v1.1.0.tar.gz -> bats-core-1.1.0.tar.gz
+_md5_=06004be03ca0cf33b3a04cc71539c6a3

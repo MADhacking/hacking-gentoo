@@ -10,6 +10,7 @@ dev-nodejs
 dev-php
 dev-python
 dev-ruby
+dev-util
 dev-vcs
 gnome-extra
 install-conf
