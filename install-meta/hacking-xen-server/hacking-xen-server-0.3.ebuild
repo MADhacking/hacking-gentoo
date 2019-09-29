@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}
 	snmp-agents/snmpd-smartctl-connector
 	sys-apps/gptfdisk
 	sys-apps/hdparm
-	sys-apps/lm_sensors
+	sys-apps/lm-sensors
 	sys-apps/pciutils
 	sys-apps/smartmontools
 	sys-boot/grub
