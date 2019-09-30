@@ -10,7 +10,7 @@ HOMEPAGE="http://www.hacking.co.uk/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="+buildserver-client +ipsec +mcollective +puppet +rsync-backup-client +snmp"
+IUSE="+buildserver-client +ipsec +puppet +rsync-backup-client +snmp"
 
 # Package dependencies
 #
