@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<upstream>
+		<remote-id type="github">jasonkarns/bats-assert-1</remote-id>
+	</upstream>
+	<longdescription lang="en">
+		bats-assert is a helper library providing common assertions for bats-core.
+
+		Assertions are functions that perform a test and output relevant information on failure to 
+		help debugging. They return 1 on failure and 0 otherwise. Output, formatted for readability,
+		is sent to the standard error to make assertions usable outside of @test blocks too.
+
+		Assertions testing exit code and output operate on the results of the most recent invocation
+		of run.
+	</longdescription>
+</pkgmetadata>
