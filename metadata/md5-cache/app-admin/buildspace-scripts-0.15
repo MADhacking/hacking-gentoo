@@ -2,9 +2,9 @@ DEFINED_PHASES=install
 DESCRIPTION=A collection of scripts to automatically build updated packages inside a "build-space"
 EAPI=3
 HOMEPAGE=http://www.mad-hacking.net/software/linux/gentoo/buildspace-scripts/index.xml
-KEYWORDS=~alpha amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~sparc-fbsd x86 ~x86-fbsd
+KEYWORDS=~alpha amd64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~x86-fbsd
 LICENSE=GPL-3
 RDEPEND=<app-portage/gentoolkit-0.3.1 app-portage/portage-utils >=dev-libs/bash-outlogger-0.2 app-admin/buildserver-client-scripts app-admin/python-updater
 SLOT=0
 SRC_URI=http://downloads.mad-hacking.net/software/buildspace-scripts-0.15.tar.bz2
-_md5_=a943b0019b77121ca02ca86fcc5ab0c7
+_md5_=806ba27116aa11301f98169d7ac5e24e
