@@ -2,11 +2,7 @@
 app-portage/auto-patch-portage
 <app-admin/buildserver-scripts-0.7
 
-# Replaced by mcollective-client and mcollective-server.
-app-admin/mcollective
-
 # Masked unless overlay used in replace mode
-app-admin/update-ca-certificates
 dev-libs/klibc
 mail-mta/postfix
 mail-mta/ssmtp
