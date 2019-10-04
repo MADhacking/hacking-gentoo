@@ -14,6 +14,7 @@ DEPEND="${RDEPEND}"
 DESCRIPTION="Google Cloud SDK"
 SLOT="0"
 SRC_URI="https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${P}-linux-x86_64.tar.gz"
+HOMEPAGE="https://cloud.google.com/sdk/"
 
 LICENSE="https://cloud.google.com/terms/"
 SLOT="0"
