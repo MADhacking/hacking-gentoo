@@ -3,7 +3,6 @@ app-portage/auto-patch-portage
 <app-admin/buildserver-scripts-0.7
 
 # Masked unless overlay used in replace mode
-dev-libs/klibc
 mail-mta/postfix
 mail-mta/ssmtp
 sys-apps/fbset
