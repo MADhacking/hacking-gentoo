@@ -3,11 +3,11 @@
 
 <pkgmetadata>
 	<!-- <herd>no-herd</herd> -->
-	<maintainer>
+	<maintainer type="person">
 		<email>overlay-maintainer@mad-hacking.net</email>
 	</maintainer>
 	<upstream>
-		<maintainer>
+		<maintainer type="project">
 			<email>default-package-maintainer@mad-hacking.net</email>
 		</maintainer>
 		<doc>http://www.mad-hacking.net/linux/reliability/backup/index.xml</doc>
