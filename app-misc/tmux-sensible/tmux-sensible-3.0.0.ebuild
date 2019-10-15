@@ -22,8 +22,8 @@ PATCHES=(
 src_install() {
 	einstalldocs
 
-	insinto /usr/lib/"${PN}"
-	doins *.tmux
+	exeinto /usr/lib/"${PN}"
+	doexe *.tmux
 	
 	insinto /etc/tmux.d
 	doins "${FILESDIR}/99-tmux-sensible"
