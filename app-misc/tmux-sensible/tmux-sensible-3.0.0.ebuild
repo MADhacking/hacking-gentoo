@@ -15,9 +15,16 @@ RDEPEND="app-misc/tmux"
 
 DOCS=( CHANGELOG.md LICENSE.md README.md )
 
+PATCHES=(
+	"${FILESDIR}/tmux-invalid-options.patch"
+)
+
 src_install() {
 	einstalldocs
 
 	insinto /usr/lib/"${PN}"
 	doins *.tmux
+	
+	insinto /etc/tmux.d
+	doins "${FILESDIR}/99-tmux-sensible"
 }

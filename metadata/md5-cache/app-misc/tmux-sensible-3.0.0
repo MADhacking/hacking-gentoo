@@ -7,4 +7,4 @@ LICENSE=MIT
 RDEPEND=app-misc/tmux
 SLOT=0
 SRC_URI=https://github.com/tmux-plugins/tmux-sensible/archive/v3.0.0.tar.gz -> tmux-sensible-3.0.0.tar.gz
-_md5_=786b576e70726f0c4aafdfd425b04c25
+_md5_=98c355b02d78182e5f819d1a707fdf72
