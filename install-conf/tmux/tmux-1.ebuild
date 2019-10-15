@@ -10,7 +10,10 @@ KEYWORDS="amd64 x86"
 LICENSE="MIT"
 SLOT="0"
 
-RDEPEND="app-misc/tmux-sensible"
+RDEPEND="
+    app-misc/tmux-sensible
+    app-misc/tmux-mem-cpu-load
+"
 
 S="${WORKDIR}"
 
@@ -19,5 +22,6 @@ src_install() {
 	doins "${FILESDIR}/tmux.conf"
 	
 	insinto /etc/tmux.d
+	doins "${FILESDIR}/80-mem-cpu-load"
 	doins "${FILESDIR}/98-local"
 }
