@@ -1,0 +1,9 @@
+DEFINED_PHASES=install
+DESCRIPTION=Hacking Networked Solutions wide tmux configuration
+EAPI=4
+HOMEPAGE=https://www.hacking.co.uk/
+KEYWORDS=amd64 x86
+LICENSE=MIT
+RDEPEND=app-misc/tmux-sensible
+SLOT=0
+_md5_=5f77c20cbc324b4735968247e3040fdd

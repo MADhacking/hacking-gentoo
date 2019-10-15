@@ -1,0 +1,21 @@
+# Make mouse useful in copy mode
+setw -g mouse on
+
+# Allow mouse to select which pane to use
+#set -g mouse-select-pane on
+
+# Allow xterm titles in terminal window, terminal scrolling with scrollbar
+set -g terminal-overrides "xterm*:XT:smcup@:rmcup@"
+
+# Set ability to capture on start and restore on exit window data when running an application
+setw -g alternate-screen on
+
+# Middle click to paste from the clipboard
+unbind-key MouseDown2Pane
+bind-key -n MouseDown2Pane run "tmux paste-buffer"
+
+# Drag to re-order windows
+bind-key -n MouseDrag1Status swap-window -t=
+
+# Double click on the window list to open a new window
+bind-key -n DoubleClick1Status new-window
