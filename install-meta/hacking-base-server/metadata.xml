@@ -6,10 +6,9 @@
 		<email>overlay-maintainer@mad-hacking.net</email>
 	</maintainer>
 	<use>
+		<flag name="admin-auth">Installs trusted keys for remote administration</flag>
 		<flag name="buildserver-client">Installs build-server client</flag>
-		<flag name="hacking-certificates">Installs MAD Hackig certificate bundles</flag>
 		<flag name="ipsec">Enable support of IPsec</flag>
-		<flag name="mcollective">Enable remote control using MCollective</flag>
 		<flag name="puppet">Enable remote configuration using Puppet</flag>
 		<flag name="rsync-backup-client">Installs rsync backup-client</flag>
 	</use>
